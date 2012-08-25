@@ -194,13 +194,7 @@ if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
       fi
 
       # displays summary
-      echo "Package Tar Name:        ${PACKAGE_TARNAME}"
-      echo "Git Version File:        ${GIT_VERSION_FILE}"
-      echo "Git Version Header:      ${GIT_VERSION_HEADER}"
-      echo "Git Plist Header:        ${GIT_VERSION_PREFIX_HEADER}"
-      echo "Git Package Version:     ${GPV}";
-      echo "Git Application Version: ${GAV}";
-      echo "Git Build Version:       ${GBV}";
+      echo "${GPV}";
    fi;
 fi
 
