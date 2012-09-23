@@ -38,17 +38,35 @@
 # -----------------------------------
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
-   if test -f ${srcdir}/.git/config;then
-      GPV=$(${ac_aux_dir}/git-package-version.sh "${srcdir}")
+   # git package version script location
+   GPVS=${ac_aux_dir}/git-package-version.sh
+   if test "x${1}" != "x";then
+      if test -f "${srcdir}/$1";then
+         GPVS="${srcdir}/$1"
+      fi
+   fi
+
+   # attempt to use script to determine version and fall back to cache files
+   if test -f ${srcdir}/.git/config || test -f ${srcdir}/.git;then
+      GPV=$(${GPVS} ${srcdir})
       if test "x${GPV}" != "x";then
          AC_MSG_NOTICE([using git package version ${GPV}])
       fi
-   elif test -f ${ac_aux_dir}/git-package-version;then
-      GPV=$(cat ${ac_aux_dir}/git-package-version 2> /dev/null)
-      if test "x${GPV}" != "x";then
-         AC_MSG_NOTICE([using cached git package version ${GPV}])
+   elif test -f ${srcdir}/build-aux/git-package-version.txt;then
+      GPVC=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
+   elif test -f ${srcdir}/include/git-package-version.txt;then
+      GPVC=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
+   elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
+      GPVN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
+      if test -f ${srcdir}/${GPVN}/git-package-version.txt;then
+         GPVC=$(cat ${srcdir}/${GPVN}/git-package-version.txt 2> /dev/null)
       fi
    fi
+   if test "x${GPVC}" != "x";then
+      GPV=${GPVC}
+      AC_MSG_NOTICE([using cached git package version ${GPV}])
+   fi
+   unset GPVC
 
    if test "x${GPV}" = "x";then
       AC_MSG_WARN([unable to determine package version from Git tags])
