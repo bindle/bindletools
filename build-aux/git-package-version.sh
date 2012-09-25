@@ -52,20 +52,14 @@ SCRIPT_DIR=`echo ${SCRIPT_DIR} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$/
 
 # determines top of Git directory
 GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
-if test "x${GIT_TOP_DIR}" == "x";then
+if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
    GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
 fi
-if test "x${GIT_TOP_DIR}" == "x";then
+if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
    echo "${0}: unable to determine top level of git repository." 1>&2;
    exit 0;
-fi
-
-
-# determines Git directory
-if test "x${GIT_DIR}" == "x";then
-   if test -d "${GIT_TOP_DIR}/.git" || test -f "${GIT_TOP_DIR}/.git";then
-      GIT_DIR="${GIT_TOP_DIR}/.git"
-   fi
+elif test "x${GIT_TOP_DIR}" == "x";then
+   GIT_TOP_DIR=${SRCDIR}
 fi
 
 
@@ -73,10 +67,10 @@ fi
 if test "x${SRCDIR}" == "xauto";then
    # determines root of source by root of Git repo
    SRCDIR="${GIT_TOP_DIR}"
-   if test "x${SRCDIR}" == "x";then
-      echo "${0}: unable to detect root of source directory." 1>&2;
-      exit 1;
-   fi
+fi
+if test "x${SRCDIR}" == "x";then
+   echo "${0}: unable to detect root of source directory." 1>&2;
+   exit 1;
 fi
 
 
@@ -170,8 +164,8 @@ GIT_VERSION_PREFIX_HEADER_DIR=`dirname ${GIT_VERSION_PREFIX_HEADER}`
 
 
 # reads cached version
-if test -f "${GIT_VERSION_FILE_DIR}";then
-   GCS=`cat "${GIT_VERSION_FILE_DIR}" 2> /dev/null`
+if test -f "${GIT_VERSION_FILE}";then
+   GCS=`cat "${GIT_VERSION_FILE}" 2> /dev/null`
 fi
 
 

@@ -38,13 +38,14 @@
 # -----------------------------------
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
-   # GSH - Git package version script.
-   # GVS - Git package version string (x.x.x.gbbbbb).
-   # GPV - Git package version (x.x.x).
-   # GPB - Git package build (gbbbbb).
-   # GCS - Cached git package version string.
-   # GTV - Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
-   # GPN - git package name.
+   # sets vars to known states
+   GSH="" # Git package version script.
+   GVS="" # Git package version string (x.x.x.gbbbbb).
+   GPV="" # Git package version (x.x.x).
+   GPB="" # Git package build (gbbbbb).
+   GCS="" # Cached git package version string.
+   GTV="" # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
+   GPN="" # git package name.
 
    # git package version script location
    if test "x${1}" != "x" && test -f "${srcdir}/$1";then
@@ -59,35 +60,35 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
    # attempt to use script to determine version and fall back to cache files
-   if test -f ${srcdir}/.git/config || test -f ${srcdir}/.git;then
-      GVS=$(${GSH} ${srcdir})
-   elif test -f ${srcdir}/build-aux/git-package-version.txt;then
-      GCS=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
-   elif test -f ${srcdir}/include/git-package-version.txt;then
-      GCS=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
-   elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
-      GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
-      if test -f ${srcdir}/${GPN}/git-package-version.txt;then
-         GCS=$(cat ${srcdir}/${GPN}/git-package-version.txt 2> /dev/null)
+   GVS=$(${GSH} ${srcdir} 2> /dev/null)
+   if test "x${GVS}" == "x";then
+      if test -f ${srcdir}/build-aux/git-package-version.txt;then
+         GCS=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
+      elif test -f ${srcdir}/include/git-package-version.txt;then
+         GCS=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
+      elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
+         GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
+         if test -f ${srcdir}/${GPN}/git-package-version.txt;then
+            GCS=$(cat ${srcdir}/${GPN}/git-package-version.txt 2> /dev/null)
+         fi
       fi
-   fi
-   if test "x${GCS}" != "x";then
-      GVS=${GCS}
-      AC_MSG_NOTICE([using cached git package version])
+      if test "x${GCS}" != "x";then
+         GVS=${GCS}
+         AC_MSG_NOTICE([using cached git package version])
+      fi
    fi
    unset GCS
 
-   # prints git package version
-   if test "x${GVS}" != "x";then
+   # Saves data for use in build scripts
+   if test "x${GVS}" = "x";then
+      AC_MSG_WARN([unable to determine package version from Git tags])
+   else
+      #
+      # split version string into components
       GPV=[$(echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GPB=[$(echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
       GTV=[$(echo ${GVS} |sed -e 's/.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
-   fi
-
-   if test "x${GVS}" = "x";then
-      AC_MSG_WARN([unable to determine package version from Git tags])
-   else
       #
       # set internal variables
       GIT_VERSION_SCRIPT=${GSH}
@@ -114,6 +115,15 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_DEFINE_UNQUOTED([PACKAGE_VERSION],       ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
       AC_DEFINE_UNQUOTED([VERSION],               ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
    fi
+
+   # clears vars
+   unset GSH
+   unset GVS
+   unset GPV
+   unset GPB
+   unset GCS
+   unset GTV
+   unset GPN
 ])dnl
 
 
