@@ -188,7 +188,7 @@ if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
 
       # writes git version file
       if test -d ${GIT_VERSION_FILE_DIR};then
-         echo "${GVS}" > "${GIT_VERSION_FILE}";   2>&1
+         echo "${GVS}" > "${GIT_VERSION_FILE}" 2>&1;
       fi
 
       # writes git version C header
