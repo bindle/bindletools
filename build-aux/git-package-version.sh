@@ -168,20 +168,13 @@ GIT_VERSION_FILE_DIR=`dirname ${GIT_VERSION_FILE}`
 GIT_VERSION_HEADER_DIR=`dirname ${GIT_VERSION_HEADER}`
 GIT_VERSION_PREFIX_HEADER_DIR=`dirname ${GIT_VERSION_PREFIX_HEADER}`
 
+
+# retrieve raw output of git describe
 if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
-   # retrieve raw output of git describe
    GDR=`git --git-dir=${SRCDIR}/.git describe --long --abbrev=7 HEAD 2> /dev/null`;
-
-   # calculate GPB from raw output of git describe
-   GPB=`echo ${GDR} |cut -d- -f3`;
-
-   # calculate GVS from raw output of git describe
-   GVS=`echo ${GDR} |sed -e 's/-/./g'`;
-   GVS=`echo ${GVS} |sed -e 's/^v//g'`;
-
-   # calculate GPV from GVS
-   GPV=`echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g'`;
-   GPV=`echo ${GPV} |sed -e 's/\.0$//g'`;
+   GVS=`echo ${GDR} |sed -e 's/-/./g' -e 's/^v//g'`;
+   GPV=`echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g' -e 's/\.0$//g'`;
+   GPB=`echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
 
    # write data to file and display results
    if test "x${GVS}" != "x";then
