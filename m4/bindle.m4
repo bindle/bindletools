@@ -78,14 +78,14 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       VERSION=${GPV}
       #
       # set substitution variables
-      AC_SUBST([GIT_PACKAGE_VERSION], [${GPV}])
-      AC_SUBST([PACKAGE_VERSION], [${GPV}])
-      AC_SUBST([VERSION], [${GPV}])
+      AC_SUBST([GIT_PACKAGE_VERSION],   [${GPV}])
+      AC_SUBST([PACKAGE_VERSION],       [${GPV}])
+      AC_SUBST([VERSION],               [${GPV}])
       #
       # set C/C++/Objc preprocessor macros
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION], ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([PACKAGE_VERSION], ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([VERSION], ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],   ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],       ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([VERSION],               ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
    fi
 ])dnl
 
