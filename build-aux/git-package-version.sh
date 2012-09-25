@@ -169,6 +169,12 @@ GIT_VERSION_HEADER_DIR=`dirname ${GIT_VERSION_HEADER}`
 GIT_VERSION_PREFIX_HEADER_DIR=`dirname ${GIT_VERSION_PREFIX_HEADER}`
 
 
+# reads cached version
+if test -f "${GIT_VERSION_FILE_DIR}";then
+   GCS=`cat "${GIT_VERSION_FILE_DIR}" 2> /dev/null`
+fi
+
+
 # retrieve raw output of git describe
 if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
    GDR=`git --git-dir=${SRCDIR}/.git describe --long --abbrev=7 HEAD 2> /dev/null`;
@@ -177,7 +183,7 @@ if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
    GPB=`echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
 
    # write data to file and display results
-   if test "x${GVS}" != "x";then
+   if test "x${GVS}" != "x" && test "x${GVS}" != "x${GCS}";then
       rm -f ${GIT_VERSION_FILE} ${GIT_VERSION_HEADER} ${GIT_VERSION_PREFIX_HEADER}
 
       # writes git version file
@@ -198,10 +204,18 @@ if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
          echo "#define GIT_APPLICATION_VERSION ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
          echo "#define GIT_BUILD_VERSION       ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
       fi
-
-      # displays summary
-      echo "${GVS}";
    fi;
 fi
+
+
+# displays summary
+if test "x${GVS}" != "x";then
+   echo "${GVS}";
+elif test "x${GCS}" != "x";then
+   echo "${GCS}";
+else
+   echo "${GVS}";
+fi
+
 
 # end of script
