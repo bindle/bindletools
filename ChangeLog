@@ -1,6 +1,10 @@
 
 Bindle Binaries Tools
-Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+=====================
+
+#### Development Version
+   - Updating AC_BINDLE_GIT_PACKAGE_VERSION macro to allow retrieval of
+     version, build, and version.build strings. (syzdek)
 
 #### 0.1
    - Creating first pre-alpha release of bindletools. (syzdek)
