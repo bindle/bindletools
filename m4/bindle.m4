@@ -44,6 +44,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GPV="" # Git package version (x.x.x).
    GPB="" # Git package build (gbbbbb).
    GCS="" # Cached git package version string.
+   GCF="" # Cached git file.
    GTV="" # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GPN="" # git package name.
 
@@ -59,18 +60,23 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GSH=${ac_aux_dir}/git-package-version.sh
    fi
 
+   # determine location of cache file
+   if test -f ${srcdir}/build-aux/git-package-version.txt;then
+      GCF=${srcdir}/build-aux/git-package-version.txt
+   elif test -f ${srcdir}/include/git-package-version.txt;then
+      GCF=${srcdir}/include/git-package-version.txt
+   elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
+      GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
+      if test -f ${srcdir}/${GPN}/git-package-version.txt;then
+         GCF=${srcdir}/${GPN}/git-package-version.txt
+      fi
+   fi
+
    # attempt to use script to determine version and fall back to cache files
    GVS=$(${GSH} ${srcdir} 2> /dev/null)
    if test "x${GVS}" == "x";then
-      if test -f ${srcdir}/build-aux/git-package-version.txt;then
-         GCS=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
-      elif test -f ${srcdir}/include/git-package-version.txt;then
-         GCS=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
-      elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
-         GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
-         if test -f ${srcdir}/${GPN}/git-package-version.txt;then
-            GCS=$(cat ${srcdir}/${GPN}/git-package-version.txt 2> /dev/null)
-         fi
+      if test "x${GCF}" != "x";then
+         GCS=$(cat ${GCF} 2> /dev/null)
       fi
       if test "x${GCS}" != "x";then
          GVS=${GCS}
@@ -98,6 +104,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_TARBALL_VERSION=${GTV}
       PACKAGE_VERSION=${GTV}
       VERSION=${GTV}
+      CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
       #
       # set substitution variables
       AC_SUBST([GIT_VERSION_SCRIPT],    [${GIT_VERSION_SCRIPT}])
@@ -106,6 +113,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_SUBST([GIT_PACKAGE_BUILD],     [${GIT_PACKAGE_BUILD}])
       AC_SUBST([PACKAGE_VERSION],       [${GIT_TARBALL_VERSION}])
       AC_SUBST([VERSION],               [${GIT_TARBALL_VERSION}])
+      AC_SUBST([CONFIG_STATUS_DEPENDENCIES], [${CONFIG_STATUS_DEPENDENCIES}])
       #
       # set C/C++/Objc preprocessor macros
       AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],    ["${GIT_VERSION_SCRIPT}"],  [script which determines package version and build from git repository])
