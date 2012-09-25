@@ -35,6 +35,7 @@
 #   build-aux/git-package-version.sh - determines Git version if available
 #
 
+
 # saves srcdir from command line arguments
 if test "x${1}" == "x";then
    echo "Usage: ${0} srcdir [ savedir ]" 1>&2;
@@ -43,9 +44,11 @@ if test "x${1}" == "x";then
 fi;
 SRCDIR=$1;
 
+
 # determines script directory
 SCRIPT_DIR=`dirname ${0}`
 SCRIPT_DIR=`echo ${SCRIPT_DIR} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
+
 
 # determines top of Git directory
 GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
@@ -57,12 +60,14 @@ if test "x${GIT_TOP_DIR}" == "x";then
    exit 0;
 fi
 
+
 # determines Git directory
 if test "x${GIT_DIR}" == "x";then
    if test -d "${GIT_TOP_DIR}/.git" || test -f "${GIT_TOP_DIR}/.git";then
       GIT_DIR="${GIT_TOP_DIR}/.git"
    fi
 fi
+
 
 # auto determines source directory
 if test "x${SRCDIR}" == "xauto";then
@@ -74,12 +79,14 @@ if test "x${SRCDIR}" == "xauto";then
    fi
 fi
 
+
 # determines build-aux directory
 if test -d "${SRCDIR}/build-aux";then
    BUILD_AUX="${SRCDIR}/build-aux"
 else
    BUILD_AUX="${SCRIPT_DIR}"
 fi
+
 
 # determines package tar name
 if test "x${PACKAGE_TARNAME}" == "x";then
@@ -102,6 +109,7 @@ fi
 if test "x${PACKAGE_TARNAME}" == "x";then
    PACKAGE_TARNAME=`basename "${GIT_TOP_DIR}"`
 fi
+
 
 # determines output dir
 if test "x${2}" != "x";then
@@ -134,12 +142,14 @@ else
    fi
 fi
 
+
 # clears git information
 GDR="" # Git describe output.
 GVS="" # Git package version string (x.x.x.gCCC).
 GPV="" # Git package version (x.x.x).
 GPB="" # Git package build (gCCC).
 GCS="" # Cached git package version string.
+
 
 # set default file names
 if test "x${GIT_VERSION_FILE}" == "x";then
@@ -151,6 +161,7 @@ fi
 if test "x${GIT_VERSION_PREFIX_HEADER}" == "x";then
    GIT_VERSION_PREFIX_HEADER="${OUTDIR}/git-package-version-prefix.h"
 fi
+
 
 # sets default directories
 GIT_VERSION_FILE_DIR=`dirname ${GIT_VERSION_FILE}`
