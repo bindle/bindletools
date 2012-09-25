@@ -38,54 +38,81 @@
 # -----------------------------------
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
+   # GSH - Git package version script.
+   # GVS - Git package version string (x.x.x.gbbbbb).
+   # GPV - Git package version (x.x.x).
+   # GPB - Git package build (gbbbbb).
+   # GCS - Cached git package version string.
+   # GTV - Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
+   # GPN - git package name.
+
    # git package version script location
-   GPVS=${ac_aux_dir}/git-package-version.sh
-   if test "x${1}" != "x";then
+   if test "x${1}" != "x" && test -f "${srcdir}/$1";then
       if test -f "${srcdir}/$1";then
-         GPVS="${srcdir}/$1"
+         GSH="${srcdir}/$1"
+      else
+         AC_MSG_WARN([hard coded git package version script does not exist])
       fi
+   fi
+   if test "x${GSH}" == "x";then
+      GSH=${ac_aux_dir}/git-package-version.sh
    fi
 
    # attempt to use script to determine version and fall back to cache files
    if test -f ${srcdir}/.git/config || test -f ${srcdir}/.git;then
-      GPV=$(${GPVS} ${srcdir})
-      if test "x${GPV}" != "x";then
-         AC_MSG_NOTICE([using git package version ${GPV}])
-      fi
+      GVS=$(${GSH} ${srcdir})
    elif test -f ${srcdir}/build-aux/git-package-version.txt;then
-      GPVC=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
+      GCS=$(cat ${srcdir}/build-aux/git-package-version.txt 2> /dev/null)
    elif test -f ${srcdir}/include/git-package-version.txt;then
-      GPVC=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
+      GCS=$(cat ${srcdir}/include/git-package-version.txt 2> /dev/null)
    elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
-      GPVN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
-      if test -f ${srcdir}/${GPVN}/git-package-version.txt;then
-         GPVC=$(cat ${srcdir}/${GPVN}/git-package-version.txt 2> /dev/null)
+      GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
+      if test -f ${srcdir}/${GPN}/git-package-version.txt;then
+         GCS=$(cat ${srcdir}/${GPN}/git-package-version.txt 2> /dev/null)
       fi
    fi
-   if test "x${GPVC}" != "x";then
-      GPV=${GPVC}
-      AC_MSG_NOTICE([using cached git package version ${GPV}])
+   if test "x${GCS}" != "x";then
+      GVS=${GCS}
+      AC_MSG_NOTICE([using cached git package version])
    fi
-   unset GPVC
+   unset GCS
 
-   if test "x${GPV}" = "x";then
+   # prints git package version
+   if test "x${GVS}" != "x";then
+      GPV=[$(echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
+      GPB=[$(echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
+      GTV=[$(echo ${GVS} |sed -e 's/.0.g[[:xdigit:]]\{1,\}$/.0/g')]
+      AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
+   fi
+
+   if test "x${GVS}" = "x";then
       AC_MSG_WARN([unable to determine package version from Git tags])
    else
       #
       # set internal variables
+      GIT_VERSION_SCRIPT=${GSH}
+      GIT_PACKAGE_STRING=${GVS}
       GIT_PACKAGE_VERSION=${GPV}
-      PACKAGE_VERSION=${GPV}
-      VERSION=${GPV}
+      GIT_PACKAGE_BUILD=${GPB}
+      GIT_TARBALL_VERSION=${GTV}
+      PACKAGE_VERSION=${GTV}
+      VERSION=${GTV}
       #
       # set substitution variables
-      AC_SUBST([GIT_PACKAGE_VERSION],   [${GPV}])
-      AC_SUBST([PACKAGE_VERSION],       [${GPV}])
-      AC_SUBST([VERSION],               [${GPV}])
+      AC_SUBST([GIT_VERSION_SCRIPT],    [${GIT_VERSION_SCRIPT}])
+      AC_SUBST([GIT_PACKAGE_STRING],    [${GIT_PACKAGE_STRING}])
+      AC_SUBST([GIT_PACKAGE_VERSION],   [${GIT_PACKAGE_VERSION}])
+      AC_SUBST([GIT_PACKAGE_BUILD],     [${GIT_PACKAGE_BUILD}])
+      AC_SUBST([PACKAGE_VERSION],       [${GIT_TARBALL_VERSION}])
+      AC_SUBST([VERSION],               [${GIT_TARBALL_VERSION}])
       #
       # set C/C++/Objc preprocessor macros
+      AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],    ["${GIT_VERSION_SCRIPT}"],  [script which determines package version and build from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_STRING],    ["${GIT_PACKAGE_STRING}"],  [package version and build determined from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],   ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],       ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([VERSION],               ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],     ["${GIT_PACKAGE_BUILD}"],   [package build determined from git repository])
+      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],       ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([VERSION],               ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
    fi
 ])dnl
 
