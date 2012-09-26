@@ -3,8 +3,11 @@ Bindle Binaries Tools
 =====================
 
 #### Development Version
+
+#### 0.2
    - Updating AC_BINDLE_GIT_PACKAGE_VERSION macro to allow retrieval of
      version, build, and version.build strings. (syzdek)
+   - Changing out variable names for git-package-version.sh. (syzdek)
 
 #### 0.1
    - Creating first pre-alpha release of bindletools. (syzdek)
