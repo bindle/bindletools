@@ -187,16 +187,16 @@ if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
 
       # writes git version C header
       if test -d ${GIT_VERSION_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_VERSION     \"${GVS}\""  > "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_APPLICATION_VERSION \"${GPV}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_BUILD_VERSION       \"${GPB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_STRING   \"${GVS}\""  > "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION  \"${GPV}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD    \"${GPB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
       fi
 
       # writes git version Info.plist preprocessor prefix file
       if test -d ${GIT_VERSION_PREFIX_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_VERSION     ${GVS}"  > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_APPLICATION_VERSION ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_BUILD_VERSION       ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_STRING   ${GVS}"  > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION  ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD    ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
       fi
    fi;
 fi
