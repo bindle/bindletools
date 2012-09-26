@@ -93,7 +93,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       # split version string into components
       GPV=[$(echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GPB=[$(echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
-      GTV=[$(echo ${GVS} |sed -e 's/.0.g[[:xdigit:]]\{1,\}$/.0/g')]
+      GTV=[$(echo ${GVS} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
       #
       # set internal variables
