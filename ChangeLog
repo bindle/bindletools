@@ -3,6 +3,7 @@ Bindle Binaries Tools
 =====================
 
 #### Development Version
+   - Adding shared automake include files. (syzdek)
 
 #### 0.2
    - Updating AC_BINDLE_GIT_PACKAGE_VERSION macro to allow retrieval of

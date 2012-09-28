@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
+		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A0CE16DF15E984A600AC6A2F /* git-package-version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "git-package-version.sh"; sourceTree = "<group>"; };
 		A0CE16E015E984A600AC6A2F /* git-tar-name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "git-tar-name.txt"; sourceTree = "<group>"; };
 		A0CE16E415E988DB00AC6A2F /* bindle.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = bindle.m4; sourceTree = "<group>"; };
@@ -16,7 +19,7 @@
 		A0CE16EE15E9892E00AC6A2F /* ChangeLog */ = {isa = PBXFileReference; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		A0CE16EF15E9892E00AC6A2F /* configure.ac */ = {isa = PBXFileReference; explicitFileType = text.script; path = configure.ac; sourceTree = "<group>"; };
 		A0CE16F015E9892E00AC6A2F /* COPYING */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
-		A0CE16F115E9892E00AC6A2F /* Makefile.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile.am; sourceTree = "<group>"; };
+		A0CE16F115E9892E00AC6A2F /* Makefile.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = Makefile.am; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A0CE16F415E9893E00AC6A2F /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
@@ -46,9 +49,15 @@
 				A0CE16F415E9893E00AC6A2F /* autogen.sh */,
 				A0CE16DF15E984A600AC6A2F /* git-package-version.sh */,
 				A0CE16E015E984A600AC6A2F /* git-tar-name.txt */,
+				A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */,
+				A050A3B516162EF70015528D /* makefile-subst.am */,
+				A050A3B7161633A20015528D /* makefile-version.am */,
 			);
+			indentWidth = 8;
 			path = "build-aux";
 			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
 		};
 		A0CE16E215E988DB00AC6A2F /* m4 */ = {
 			isa = PBXGroup;
