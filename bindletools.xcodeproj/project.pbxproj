@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		A016DA5F163753B0002165A5 /* bindle-gcc.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-gcc.m4"; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A0CE16DF15E984A600AC6A2F /* git-package-version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "git-package-version.sh"; sourceTree = "<group>"; };
 		A0CE16E015E984A600AC6A2F /* git-tar-name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "git-tar-name.txt"; sourceTree = "<group>"; };
-		A0CE16E415E988DB00AC6A2F /* bindle.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = bindle.m4; sourceTree = "<group>"; };
+		A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-git.m4"; sourceTree = "<group>"; };
 		A0CE16EB15E988FD00AC6A2F /* bindlize.sh.in */ = {isa = PBXFileReference; explicitFileType = text.script; path = bindlize.sh.in; sourceTree = "<group>"; };
 		A0CE16EC15E9892E00AC6A2F /* acinclude.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = acinclude.m4; sourceTree = "<group>"; };
 		A0CE16ED15E9892E00AC6A2F /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
@@ -62,7 +63,9 @@
 		A0CE16E215E988DB00AC6A2F /* m4 */ = {
 			isa = PBXGroup;
 			children = (
-				A0CE16E415E988DB00AC6A2F /* bindle.m4 */,
+				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
+				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,
+				A016DA60163753B0002165A5 /* bindle-xxd.m4 */,
 			);
 			path = m4;
 			sourceTree = "<group>";
