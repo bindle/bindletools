@@ -35,13 +35,16 @@
 #
 
 
-BUILT_SOURCES				+= include/git-package-version
+GIT_PACKAGE_VERSION_DIR			?= include
 
 
-.PHONY: include/git-package-version
+BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
 
 
-include/git-package-version:
+.PHONY: $(GIT_PACKAGE_VERSION_DIR)/git-package-version
+
+
+$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt:
 	@@GIT_VERSION_SCRIPT@ $(top_srcdir) > /dev/null 2>&1
 
 
