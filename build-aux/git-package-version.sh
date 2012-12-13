@@ -51,23 +51,16 @@ OUTDIR=$2;
 SCRIPT_DIR=`dirname ${SCRIPT} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
 
 
-# determines top of Git directory
-GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
-if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
-   GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
-fi
-if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
-   echo "${SCRIPT}: unable to determine top level of git repository." 1>&2;
-   exit 0;
-elif test "x${GIT_TOP_DIR}" == "x";then
-   GIT_TOP_DIR=${SRCDIR}
-fi
-
-
-# auto determines source directory
+# determines source directory and Git directory
 if test "x${SRCDIR}" == "xauto";then
    # determines root of source by root of Git repo
+   GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
    SRCDIR="${GIT_TOP_DIR}"
+else
+   GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
+   if test "x${GIT_TOP_DIR}" == "x";then
+      GIT_TOP_DIR=${SRCDIR}
+   fi
 fi
 if test "x${SRCDIR}" == "x";then
    echo "${SCRIPT}: unable to detect root of source directory." 1>&2;
@@ -100,9 +93,6 @@ if test "x${PACKAGE_TARNAME}" == "x";then
       echo "${SCRIPT}: WARNING: It is advised to create a \"git-tar-name.txt\"" 1>&2;
       echo "${SCRIPT}: WARNING: file containing the tar name of the package." 1>&2;
    fi
-fi
-if test "x${PACKAGE_TARNAME}" == "x";then
-   PACKAGE_TARNAME=`basename "${GIT_TOP_DIR}"`
 fi
 
 
@@ -208,7 +198,7 @@ if test "x${GVS}" != "x";then
 elif test "x${GCS}" != "x";then
    echo "${GCS}";
 else
-   echo "unknown version";
+   echo "unknown version" 1>&2;
 fi
 
 
