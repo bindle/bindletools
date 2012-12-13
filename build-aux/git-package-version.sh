@@ -160,8 +160,8 @@ fi
 
 
 # retrieve raw output of git describe
-if test -f ${SRCDIR}/.git || test -d ${SRCDIR}/.git;then
-   GDR=`git --git-dir=${SRCDIR}/.git describe --long --abbrev=7 HEAD 2> /dev/null`;
+if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
+   GDR=`git --git-dir=${GIT_TOP_DIR}/.git describe --long --abbrev=7 HEAD 2> /dev/null`;
    GVS=`echo ${GDR} |sed -e 's/-/./g' -e 's/^v//g'`;
    GPV=`echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g' -e 's/\.0$//g'`;
    GPB=`echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
