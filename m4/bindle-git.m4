@@ -47,9 +47,10 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GCF="" # Cached git file.
    GTV="" # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GPN="" # git package name.
+   GOD="" # git out directory
 
    # git package version script location
-   if test "x${1}" != "x" && test -f "${srcdir}/$1";then
+   if test "x${1}" != "x";then
       if test -f "${srcdir}/$1";then
          GSH="${srcdir}/$1"
       else
@@ -60,21 +61,40 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GSH=${ac_aux_dir}/git-package-version.sh
    fi
 
-   # determine location of cache file
-   if test -f ${srcdir}/build-aux/git-package-version.txt;then
-      GCF=${srcdir}/build-aux/git-package-version.txt
-   elif test -f ${srcdir}/include/git-package-version.txt;then
-      GCF=${srcdir}/include/git-package-version.txt
-   elif test -f ${srcdir}/build-aux/git-tar-name.txt;then
-      GPN=$(cat ${srcdir}/include/git-package-name.txt 2> /dev/null)
-      if test -f ${srcdir}/${GPN}/git-package-version.txt;then
-         GCF=${srcdir}/${GPN}/git-package-version.txt
+   # git output directory
+   if test "x${2}" != "x";then
+      if test -d "${2}";then
+         GOD="${2}"
+      elif test -d "${srcdir}/${2}";then
+         GOD="${srcdir}/${2}"
       fi
    fi
 
-   # attempt to use script to determine version and fall back to cache files
-   GVS=$(${GSH} ${srcdir} 2> /dev/null)
+   # attempt to use script to determine version
+   if test "x${GSH}" != "x";then
+      GVS=$(${GSH} "${srcdir}" "${GOD}" 2> /dev/null)
+   fi
+
+   # attempt to fall back to cache files
    if test "x${GVS}" == "x";then
+      # determines location of cache file
+      if test "x${GOD}" != "x" && test -f "${GOD}/git-package-version.txt";then
+         GCF="${GOD}/git-package-version.txt"
+         
+      elif test -f "${srcdir}/build-aux/git-package-version.txt";then
+         GCF="${srcdir}/build-aux/git-package-version.txt"
+         
+      elif test -f "${srcdir}/include/git-package-version.txt";then
+         GCF="${srcdir}/include/git-package-version.txt"
+         
+      elif test -f "${srcdir}/build-aux/git-tar-name.txt";then
+         GPN=$(cat "${srcdir}/build-aux/git-tar-name.txt" 2> /dev/null)
+         if test -f "${srcdir}/${GPN}/git-package-version.txt";then
+            GCF="${srcdir}/${GPN}/git-package-version.txt"
+         fi
+      fi
+
+      # reads cache file and saves results
       if test "x${GCF}" != "x";then
          GCS=$(cat ${GCF} 2> /dev/null)
       fi
