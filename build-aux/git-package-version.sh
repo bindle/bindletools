@@ -37,17 +37,18 @@
 
 
 # saves srcdir from command line arguments
-if test "x${1}" == "x";then
-   echo "Usage: ${0} srcdir [ savedir ]" 1>&2;
+if test "x${0}" == "x";then
+   echo "Usage: ${0} srcdir [ outdir ]" 1>&2;
    echo "Usage: ${0} auto" 1>&2;
    exit 1;
 fi;
+SCRIPT=$0
 SRCDIR=$1;
+OUTDIR=$2;
 
 
 # determines script directory
-SCRIPT_DIR=`dirname ${0}`
-SCRIPT_DIR=`echo ${SCRIPT_DIR} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
+SCRIPT_DIR=`dirname ${SCRIPT} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
 
 
 # determines top of Git directory
@@ -56,7 +57,7 @@ if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
    GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
 fi
 if test "x${GIT_TOP_DIR}" == "x" && test "x${SRCDIR}" == "xauto";then
-   echo "${0}: unable to determine top level of git repository." 1>&2;
+   echo "${SCRIPT}: unable to determine top level of git repository." 1>&2;
    exit 0;
 elif test "x${GIT_TOP_DIR}" == "x";then
    GIT_TOP_DIR=${SRCDIR}
@@ -69,7 +70,7 @@ if test "x${SRCDIR}" == "xauto";then
    SRCDIR="${GIT_TOP_DIR}"
 fi
 if test "x${SRCDIR}" == "x";then
-   echo "${0}: unable to detect root of source directory." 1>&2;
+   echo "${SCRIPT}: unable to detect root of source directory." 1>&2;
    exit 1;
 fi
 
@@ -95,9 +96,9 @@ if test "x${PACKAGE_TARNAME}" == "x";then
       fi
    fi
    if test "x${PACKAGE_TARNAME}" == "x";then
-      echo "${0}: WARNING: missing \"${BUILD_AUX}/git-tar-name.txt\"" 1>&2;
-      echo "${0}: WARNING: It is advised to create a \"git-tar-name.txt\"" 1>&2;
-      echo "${0}: WARNING: file containing the tar name of the package." 1>&2;
+      echo "${SCRIPT}: WARNING: missing \"${BUILD_AUX}/git-tar-name.txt\"" 1>&2;
+      echo "${SCRIPT}: WARNING: It is advised to create a \"git-tar-name.txt\"" 1>&2;
+      echo "${SCRIPT}: WARNING: file containing the tar name of the package." 1>&2;
    fi
 fi
 if test "x${PACKAGE_TARNAME}" == "x";then
@@ -106,10 +107,9 @@ fi
 
 
 # determines output dir
-if test "x${2}" != "x";then
-   OUTDIR="${2}"
+if test "x${OUTDIR}" != "x";then
    if test ! -d "${OUTDIR}";then
-      echo "${0}: ${OUTDIR}: directory does not exist" 1>&2;
+      echo "${SCRIPT}: ${OUTDIR}: directory does not exist" 1>&2;
       exit 1;
    fi
 else
@@ -127,10 +127,10 @@ else
 
    # use script directory for headers
    else
-      OUTDIR=`dirname ${0}`
+      OUTDIR=`dirname ${SCRIPT}`
       OUTDIR=`echo ${OUTDIR} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
       if test ! -d "${OUTDIR}";then
-         echo "${0}: unable to determine output directory." 1>&2
+         echo "${SCRIPT}: unable to determine output directory." 1>&2
          exit 1;
       fi
    fi
@@ -208,7 +208,7 @@ if test "x${GVS}" != "x";then
 elif test "x${GCS}" != "x";then
    echo "${GCS}";
 else
-   echo "${GVS}";
+   echo "unknown version";
 fi
 
 
