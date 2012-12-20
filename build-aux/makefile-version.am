@@ -36,13 +36,16 @@
 
 
 GIT_PACKAGE_VERSION_DIR			?= include
+GIT_PACKAGE_VERSION_FILES		= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.h \
+					  $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
+
+BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_FILES)
 
 
-BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
+.PHONY: $(GIT_PACKAGE_VERSION_FILES)
 
-
-.PHONY: $(GIT_PACKAGE_VERSION_DIR)/git-package-version
-
+$(GIT_PACKAGE_VERSION_DIR)/git-package-version.h:
+	@@GIT_VERSION_SCRIPT@ $(top_srcdir) > /dev/null 2>&1
 
 $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt:
 	@@GIT_VERSION_SCRIPT@ $(top_srcdir) > /dev/null 2>&1
