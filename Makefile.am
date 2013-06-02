@@ -74,8 +74,9 @@ TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= build-aux/autogen.sh \
-					  build-aux/git-package-version \
-					  build-aux/git-package-version.sh
+					  build-aux/git-package-version.sh \
+					  include/git-package-version.txt \
+					  lib/libbindle.sym
 CLEANFILES				= \
 					  $(builddir)/a.out   $(srcdir)/a.out \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
@@ -89,9 +90,10 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 
 
 # Makefile includes
-include contrib/bindletools/build-aux/makefile-autotools.am
-include contrib/bindletools/build-aux/makefile-subst.am
-include contrib/bindletools/build-aux/makefile-version.am
+GIT_PACKAGE_VERSION_DIR=include
+include $(srcdir)/build-aux/makefile-autotools.am
+include $(srcdir)/build-aux/makefile-subst.am
+include $(srcdir)/build-aux/makefile-version.am
 
 
 # custom targets
