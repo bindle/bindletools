@@ -103,7 +103,7 @@ AC_BINDLE_ENABLE_WARNINGS
 AC_CHECK_HEADERS([getopt.h], [AC_DEFINE_UNQUOTED(USE_GETOPT_LONG, 1, [Use GNU getopt_long])])
 
 # determine PACKAGE_VERSION via Git
-AC_BINDLE_GIT_PACKAGE_VERSION
+AC_BINDLE_GIT_PACKAGE_VERSION([build-aux/git-package-version.sh])
 
 # Creates outputs
 AC_CONFIG_FILES([Makefile])
