@@ -2,6 +2,9 @@
 Bindle Binaries Tools
 =====================
 
+#### devel
+   - Adding initial libbindle.la (syzdek)
+
 #### 0.3
    - Adding shared automake include files. (syzdek)
    - Cleaning up git package version logic. (syzdek)
