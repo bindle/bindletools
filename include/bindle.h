@@ -51,8 +51,8 @@
 //              //
 //////////////////
 
-size_t utf8len(uint8_t * str);
-size_t utf8nlen(uint8_t * str, size_t maxlen);
+size_t utf8len(const char * s);
+size_t utf8nlen(const char * s, size_t maxlen);
 
 
 #endif

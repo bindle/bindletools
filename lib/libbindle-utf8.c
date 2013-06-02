@@ -37,33 +37,37 @@
 #include <string.h>
 
 
-size_t utf8len(uint8_t * str)
+size_t utf8len(const char * s)
 {
-   size_t len;
-   size_t pos;
+   const uint8_t * b;
+   size_t          l;
+   size_t          p;
 
-   len = 0;
+   b = (const uint8_t *) s;
+   l = 0;
 
-   for(pos = 0; (str[pos] != 0x00); pos++)
-      if ((str[pos] & 0xC0) != 0x80)
-         len++;
+   for(p = 0; (b[p] != 0x00); p++)
+      if ((b[p] & 0xC0) != 0x80)
+         l++;
 
-   return(len);
+   return(l);
 }
 
 
-size_t utf8nlen(uint8_t * str, size_t maxlen)
+size_t utf8nlen(const char * s, size_t maxlen)
 {
-   size_t len;
-   size_t pos;
+   const uint8_t * b;
+   size_t          l;
+   size_t          p;
 
-   len = 0;
+   b = (const uint8_t *) s;
+   l = 0;
 
-   for(pos = 0; ((str[pos] != 0x00) && (pos < maxlen)); pos++)
-      if ((str[pos] & 0xC0) != 0x80)
-         len++;
+   for(p = 0; ((b[p] != 0x00) && (p < maxlen)); p++)
+      if ((b[p] & 0xC0) != 0x80)
+         l++;
 
-   return(len);
+   return(l);
 }
 
 /* end of source */
