@@ -65,7 +65,7 @@ noinst_HEADERS				=
 noinst_PROGRAMS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
-sbin_SCRIPTS				= src/bindlize.sh
+sbin_SCRIPTS				=
 
 
 # lists
@@ -95,8 +95,7 @@ include contrib/bindletools/build-aux/makefile-version.am
 
 
 # custom targets
-src/bindlize.sh: Makefile src/bindlize.sh.in
-	@$(do_subst_fn)
+.PHONY:
 
 
 # local targets
