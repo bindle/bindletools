@@ -95,7 +95,9 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 					  -version-info $(LIB_VERSION_INFO) \
 					  $(AM_LDFLAGS) \
 					  -export-symbols $(srcdir)/lib/libbindle.sym
-lib_libbindle_la_SOURCES		= lib/libbindle-utf8.c
+lib_libbindle_la_SOURCES		= \
+					  lib/libbindle-utf8.c \
+					  lib/libbindle-version.c
 
 
 # Makefile includes

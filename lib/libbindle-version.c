@@ -31,8 +31,6 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_H
-#define _BINDLE_H 1
 
 
 ///////////////
@@ -41,28 +39,83 @@
 //           //
 ///////////////
 
-#include <sys/types.h>
-#include <inttypes.h>
+#include <bindle.h>
+#include <string.h>
 
-
-//////////////////
-//              //
-//  Prototypes  //
-//              //
-//////////////////
-
-const char * bindle_build(void);
-const char * bindle_string(void);
-const char * bindle_version(void);
-int bindle_lib_version_current(void);
-int bindle_lib_version_revision(void);
-int bindle_lib_version_age(void);
-const char * bindle_lib_version_info(void);
-const char * bindle_lib_release_info(void);
-
-size_t utf8len(const char * s);
-size_t utf8nlen(const char * s, size_t maxlen);
-
-
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#else
+#include "git-package-version.h"
 #endif
+
+#ifndef LIB_VERSION_CURRENT
+#define LIB_VERSION_CURRENT -1
+#endif
+#ifndef LIB_VERSION_REVISION
+#define LIB_VERSION_REVISION -1
+#endif
+#ifndef LIB_VERSION_AGE
+#define LIB_VERSION_AGE -1
+#endif
+#ifndef LIB_VERSION_INFO
+#define LIB_VERSION_INFO NULL
+#endif
+#ifndef LIB_RELEASE_INFO
+#define LIB_RELEASE_INFO NULL
+#endif
+
+
+/////////////////
+//             //
+//  Functions  //
+//             //
+/////////////////
+
+const char * bindle_build(void)
+{
+   return(GIT_PACKAGE_BUILD);
+}
+
+
+int bindle_lib_version_current(void)
+{
+   return(LIB_VERSION_CURRENT);
+}
+
+
+int bindle_lib_version_revision(void)
+{
+   return(LIB_VERSION_REVISION);
+}
+
+
+int bindle_lib_version_age(void)
+{
+   return(LIB_VERSION_AGE);
+}
+
+
+const char * bindle_lib_version_info(void)
+{
+   return(LIB_VERSION_INFO);
+}
+
+
+const char * bindle_lib_release_info(void)
+{
+   return(LIB_RELEASE_INFO);
+}
+
+
+const char * bindle_string(void)
+{
+   return(GIT_PACKAGE_STRING);
+}
+
+
+const char * bindle_version(void)
+{
+   return(GIT_PACKAGE_VERSION);
+}
+
 /* end of source */

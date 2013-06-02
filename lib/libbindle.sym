@@ -33,6 +33,14 @@
 #
 #   lib/libbindle.m4 - exported symbols
 #
+bindle_build
+bindle_lib_version_current
+bindle_lib_version_revision
+bindle_lib_version_age
+bindle_lib_version_info
+bindle_lib_release_info
+bindle_string
+bindle_version
 utf8len
 utf8nlen
 # end of symbol export file

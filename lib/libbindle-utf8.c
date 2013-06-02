@@ -33,9 +33,21 @@
  */
 
 
+///////////////
+//           //
+//  Headers  //
+//           //
+///////////////
+
 #include <bindle.h>
 #include <string.h>
 
+
+/////////////////
+//             //
+//  Functions  //
+//             //
+/////////////////
 
 size_t utf8len(const char * s)
 {

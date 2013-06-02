@@ -53,6 +53,11 @@ AC_SUBST([LIB_VERSION_REVISION], [0])
 AC_SUBST([LIB_VERSION_AGE],      [0])
 AC_SUBST([LIB_VERSION_INFO],     [${LIB_VERSION_CURRENT}:${LIB_VERSION_REVISION}:${LIB_VERSION_AGE}])
 AC_SUBST([LIB_RELEASE_INFO],     [${LIB_VERSION_CURRENT}]) # used by Win32 DLLs
+AC_DEFINE_UNQUOTED([LIB_VERSION_CURRENT],  [${LIB_VERSION_CURRENT}],  [current version number of this API])
+AC_DEFINE_UNQUOTED([LIB_VERSION_REVISION], [${LIB_VERSION_REVISION}], [revision of the implementation of the API version])
+AC_DEFINE_UNQUOTED([LIB_VERSION_AGE],      [${LIB_VERSION_AGE}],      [seqential past API versions supported by this implementation])
+AC_DEFINE_UNQUOTED([LIB_VERSION_INFO],     ["$LIB_VERSION_INFO"],   [libtool version string])
+AC_DEFINE_UNQUOTED([LIB_RELEASE_INFO],     ["$LIB_RELEASE_INFO"],   [Win32 DLL version string])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR([build-aux/autogen.sh])
