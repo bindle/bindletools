@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'bindle-ios' target in the 'bindle-ios' project
+//
+
+#ifdef __OBJC__
+   #import <Foundation/Foundation.h>
+#endif

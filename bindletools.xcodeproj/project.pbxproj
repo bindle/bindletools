@@ -6,7 +6,32 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A01156EC175B0118008E66FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
+		A01156F7175B0122008E66FA /* libbindle-utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* libbindle-utf8.c */; };
+		A01156F8175B0122008E66FA /* libbindle-utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* libbindle-utf8.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A01156E7175B0118008E66FA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
+		A01156D2175B009E008E66FA /* libbindle-utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "libbindle-utf8.c"; sourceTree = "<group>"; };
+		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; path = libbindle.sym; sourceTree = "<group>"; };
+		A01156E1175B010C008E66FA /* libbindle-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01156E9175B0118008E66FA /* libbindle-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01156EB175B0118008E66FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A01156FA175B029D008E66FA /* bindle-xxd.m4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "bindle-xxd.m4"; sourceTree = "<group>"; };
 		A016DA5F163753B0002165A5 /* bindle-gcc.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-gcc.m4"; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
@@ -26,7 +51,59 @@
 		A0CE16F415E9893E00AC6A2F /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		A01156DE175B010C008E66FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A01156E6175B0118008E66FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A01156EC175B0118008E66FA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		A01156CC175B009E008E66FA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A01156CD175B009E008E66FA /* bindle.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		A01156D1175B009E008E66FA /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A01156D2175B009E008E66FA /* libbindle-utf8.c */,
+				A01156D3175B009E008E66FA /* libbindle.sym */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		A01156D9175B00F6008E66FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A01156E1175B010C008E66FA /* libbindle-osx.a */,
+				A01156E9175B0118008E66FA /* libbindle-ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A01156EA175B0118008E66FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A01156EB175B0118008E66FA /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A0CE16D215E9846A00AC6A2F = {
 			isa = PBXGroup;
 			children = (
@@ -39,8 +116,12 @@
 				A0CE16F215E9892E00AC6A2F /* NEWS */,
 				A0CE16F315E9892E00AC6A2F /* README */,
 				A0CE16DE15E984A600AC6A2F /* build-aux */,
+				A01156CC175B009E008E66FA /* include */,
+				A01156D1175B009E008E66FA /* lib */,
 				A0CE16E215E988DB00AC6A2F /* m4 */,
 				A0CE16EA15E988FD00AC6A2F /* src */,
+				A01156EA175B0118008E66FA /* Frameworks */,
+				A01156D9175B00F6008E66FA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,7 +146,7 @@
 			children = (
 				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
 				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,
-				A016DA60163753B0002165A5 /* bindle-xxd.m4 */,
+				A01156FA175B029D008E66FA /* bindle-xxd.m4 */,
 			);
 			path = m4;
 			sourceTree = "<group>";
@@ -79,6 +160,53 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A01156DF175B010C008E66FA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A01156E0175B010C008E66FA /* bindle-osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A01156E2175B010C008E66FA /* Build configuration list for PBXNativeTarget "bindle-osx" */;
+			buildPhases = (
+				A01156DD175B010C008E66FA /* Sources */,
+				A01156DE175B010C008E66FA /* Frameworks */,
+				A01156DF175B010C008E66FA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bindle-osx";
+			productName = "bindle-osx";
+			productReference = A01156E1175B010C008E66FA /* libbindle-osx.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A01156E8175B0118008E66FA /* bindle-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A01156F4175B0118008E66FA /* Build configuration list for PBXNativeTarget "bindle-ios" */;
+			buildPhases = (
+				A01156E5175B0118008E66FA /* Sources */,
+				A01156E6175B0118008E66FA /* Frameworks */,
+				A01156E7175B0118008E66FA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bindle-ios";
+			productName = "bindle-ios";
+			productReference = A01156E9175B0118008E66FA /* libbindle-ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A0CE16D415E9846A00AC6A2F /* Project object */ = {
@@ -94,29 +222,207 @@
 				en,
 			);
 			mainGroup = A0CE16D215E9846A00AC6A2F;
+			productRefGroup = A01156D9175B00F6008E66FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				A01156E0175B010C008E66FA /* bindle-osx */,
+				A01156E8175B0118008E66FA /* bindle-ios */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXSourcesBuildPhase section */
+		A01156DD175B010C008E66FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A01156F8175B0122008E66FA /* libbindle-utf8.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A01156E5175B0118008E66FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A01156F7175B0122008E66FA /* libbindle-utf8.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
+		A01156E3175B010C008E66FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/bindle.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A01156E4175B010C008E66FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/bindle.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A01156F5175B0118008E66FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/bindle_ios.dst;
+				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/bindle.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A01156F6175B0118008E66FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/bindle_ios.dst;
+				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/bindle.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		A0CE16D915E9846A00AC6A2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = include;
 			};
 			name = Debug;
 		};
 		A0CE16DA15E9846A00AC6A2F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = include;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A01156E2175B010C008E66FA /* Build configuration list for PBXNativeTarget "bindle-osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A01156E3175B010C008E66FA /* Debug */,
+				A01156E4175B010C008E66FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A01156F4175B0118008E66FA /* Build configuration list for PBXNativeTarget "bindle-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A01156F5175B0118008E66FA /* Debug */,
+				A01156F6175B0118008E66FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A0CE16D715E9846A00AC6A2F /* Build configuration list for PBXProject "bindletools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
