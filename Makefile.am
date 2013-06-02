@@ -56,8 +56,8 @@ DEFS					=
 # automake targets
 check_PROGRAMS				=
 doc_DATA				=
-include_HEADERS				=
-lib_LTLIBRARIES				=
+include_HEADERS				= include/bindle.h
+lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
 info_TEXINFOS				=
 noinst_LTLIBRARIES			=
@@ -87,6 +87,15 @@ CLEANFILES				= \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
+
+
+# macros for lib/libbindle.la
+lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle.sym
+lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
+					  -version-info $(LIB_VERSION_INFO) \
+					  $(AM_LDFLAGS) \
+					  -export-symbols $(srcdir)/lib/libbindle.sym
+lib_libbindle_la_SOURCES		= lib/libbindle-utf8.c
 
 
 # Makefile includes
