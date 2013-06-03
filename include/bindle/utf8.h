@@ -31,14 +31,22 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_UTF8_H
-#define _BINDLE_UTF8_H 1
+/**
+ *   @file bindle/utf8.h
+ *   Bindletools UTF-8 provides basic support for manipulating UTF-8 strings.
+ */
+#ifndef __BINDLE_UTF8_H
+#define __BINDLE_UTF8_H 1
+
 
 ///////////////
 //           //
 //  Headers  //
 //           //
 ///////////////
+#ifdef PMARK
+#pragma mark - Headers
+#endif
 
 #include <sys/types.h>
 #include <inttypes.h>
@@ -49,8 +57,30 @@
 //  Prototypes  //
 //              //
 //////////////////
+#ifdef PMARK
+#pragma mark - Prototypes
+#endif
 
+/**
+ *  Determines the length of a string contained within a buffer of unknown
+ *  buffer length.  The UTF-8 string must me NULL terminated.
+ *  @param  s  Pointer to buffer containing UTF-8 string.
+ *  @return This function returns the number of UTF-8 characters found within
+ *    the buffer if the buffer contains a valid UTF-8 string.  If the buffer
+ *    does not contain a valid UTF-8 string, the function returns -1.
+ */
 size_t utf8len(const char * s);
+
+
+/**
+ *  Determines the length of a string contained within a buffer of unknown
+ *  buffer length.  The UTF-8 string must me NULL terminated.
+ *  @param  s       Pointer to buffer containing UTF-8 string.
+ *  @param  maxlen  Length of buffer in bytes.
+ *  @return This function returns the number of UTF-8 characters found within
+ *    the buffer if the buffer contains a valid UTF-8 string.  If the buffer
+ *    does not contain a valid UTF-8 string, the function returns -1.
+ */
 size_t utf8nlen(const char * s, size_t maxlen);
 
 #endif

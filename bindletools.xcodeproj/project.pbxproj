@@ -18,6 +18,17 @@
 			name = "bindle: Git Version";
 			productName = "bindle: Git Version";
 		};
+		A0808A7D175D34000074058B /* bindle: doxygen */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A0808A80175D34000074058B /* Build configuration list for PBXAggregateTarget "bindle: doxygen" */;
+			buildPhases = (
+				A0808A81175D34050074058B /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "bindle: doxygen";
+			productName = "bindle: doxygen";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -75,6 +86,7 @@
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
+		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
 		A0CE16DF15E984A600AC6A2F /* git-package-version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "git-package-version.sh"; sourceTree = "<group>"; };
 		A0CE16E015E984A600AC6A2F /* git-tar-name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "git-tar-name.txt"; sourceTree = "<group>"; };
 		A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-git.m4"; sourceTree = "<group>"; };
@@ -153,6 +165,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A0808A82175D34A60074058B /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				A0808A83175D34BC0074058B /* Doxyfile */,
+			);
+			name = doc;
+			sourceTree = "<group>";
+		};
 		A0CE16D215E9846A00AC6A2F = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +185,7 @@
 				A0CE16F215E9892E00AC6A2F /* NEWS */,
 				A0CE16F315E9892E00AC6A2F /* README */,
 				A0CE16DE15E984A600AC6A2F /* build-aux */,
+				A0808A82175D34A60074058B /* doc */,
 				A01156CC175B009E008E66FA /* include */,
 				A01156D1175B009E008E66FA /* lib */,
 				A0CE16E215E988DB00AC6A2F /* m4 */,
@@ -274,6 +295,7 @@
 				A01156E0175B010C008E66FA /* bindle-osx */,
 				A01156E8175B0118008E66FA /* bindle-ios */,
 				A01156FE175B0DF3008E66FA /* bindle: Git Version */,
+				A0808A7D175D34000074058B /* bindle: doxygen */,
 			);
 		};
 /* End PBXProject section */
@@ -291,6 +313,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./build-aux/git-package-version.sh ${PROJECT_DIR} ${PROJECT_DIR}/include\n";
+			showEnvVarsInLog = 0;
+		};
+		A0808A81175D34050074058B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd doc && /opt/local/bin/doxygen Doxyfile\nopen /Applications/Safari.app doxygen/html/index.html";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -482,6 +518,20 @@
 			};
 			name = Release;
 		};
+		A0808A7E175D34000074058B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A0808A7F175D34000074058B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A0CE16D915E9846A00AC6A2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -525,6 +575,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A0808A80175D34000074058B /* Build configuration list for PBXAggregateTarget "bindle: doxygen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0808A7E175D34000074058B /* Debug */,
+				A0808A7F175D34000074058B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		A0CE16D715E9846A00AC6A2F /* Build configuration list for PBXProject "bindletools" */ = {
 			isa = XCConfigurationList;

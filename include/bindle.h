@@ -31,8 +31,8 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_H
-#define _BINDLE_H 1
+#ifndef __BINDLE_H
+#define __BINDLE_H 1
 
 
 ///////////////
@@ -44,14 +44,12 @@
 #include <bindle/utf8.h>
 #include <bindle/version.h>
 
-
+ 
 //////////////////
 //              //
 //  Prototypes  //
 //              //
 //////////////////
-
-
 
 
 #endif

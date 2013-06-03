@@ -31,8 +31,12 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_VERSION_H
-#define _BINDLE_VERSION_H 1
+/**
+ *  @file bindle/version.h
+ *  Bindle Tools library and API versions.
+ */
+#ifndef __BINDLE_VERSION_H
+#define __BINDLE_VERSION_H 1
 
 
 ///////////////
@@ -50,14 +54,67 @@
 //              //
 //////////////////
 
+/**
+ *  @return Returns build string of Bindle Tools library.
+ *  @see bindle_string
+ *  @see bindle_version
+ */
 const char * bindle_build(void);
+
+
+/**
+ *  @return Returns the library version and build in dot notation.
+ *  @see bindle_build
+ *  @see bindle_version
+ */
 const char * bindle_string(void);
+
+
+/**
+ *  @return Returns the library version in dot notation.
+ *  @see bindle_build
+ *  @see bindle_string
+ */
 const char * bindle_version(void);
+
+
+/**
+ *  @return Returns the library API version.
+ *  @see bindle_lib_version_revision
+ *  @see bindle_lib_version_age
+ */
 int bindle_lib_version_current(void);
+
+
+/**
+ *  @return Returns the library API revision for current version.
+ *  @see bindle_lib_version_current
+ *  @see bindle_lib_version_age
+ */
 int bindle_lib_version_revision(void);
+
+
+/**
+ *  @return Returns the library API compatibility with past revisions.
+ *  @see bindle_lib_version_current
+ *  @see bindle_lib_version_revision
+ */
 int bindle_lib_version_age(void);
+
+
+/**
+ *  @return Returns the library libtool API string.
+ *  @see bindle_lib_release_info
+ */
 const char * bindle_lib_version_info(void);
+
+
+/**
+ *  @return Returns the library DLL API string.
+ *  @see bindle_lib_version_info
+ */
 const char * bindle_lib_release_info(void);
+
 
 #endif
 /* end of source */
