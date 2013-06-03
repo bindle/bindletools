@@ -82,4 +82,53 @@ size_t utf8nlen(const char * s, size_t maxlen)
    return(l);
 }
 
+
+// UTF-8 Description Table:
+//    Bits   First       Last     Bytes   Byte 0    Byte 1    Byte 2    Byte 3    Byte 4    Byte 5
+//     7      U+0000      U+007F    1    0xxxxxxx
+//     0         N/A         N/A         10xxxxxx
+//    11      U+0080      U+07FF    2    110xxxxx  10xxxxxx
+//    16      U+0800      U+FFFF    3    1110xxxx  10xxxxxx  10xxxxxx
+//    21     U+10000    U+1FFFFF    4    11110xxx  10xxxxxx  10xxxxxx  10xxxxxx
+//    26    U+200000   U+3FFFFFF    5    111110xx  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx
+//    31   U+4000000  U+7FFFFFFF    6    1111110x  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx
+ssize_t utf8test(const char * s, size_t maxlen)
+{
+   const uint8_t * buff;
+   ssize_t         bit;
+   ssize_t         byte;
+   ssize_t         width;
+   size_t          len;
+   size_t          pos;
+
+   buff = (const uint8_t *) s;
+   len  = 0;
+
+   for(pos = 0; ((buff[pos] != 0x00) && (pos < maxlen)); pos++)
+   {
+      // determines character width (byte size)
+      width = 1;
+      for(bit = 0; ((bit < 8) && (width == 1)); bit++)
+         if (((buff[pos] << bit) & 0x8000) == 0x00)
+            width = bit;
+
+      // only continuation bytes have a calculated width of 1
+      if (width == 1)
+         return(-1);
+
+      // verify that UTF-8 string is not longer than buffer
+      if ((pos+width-1) >= maxlen)
+         return(-1);
+
+      // skip continuation bits
+      for (byte = 1; byte < width; byte++)
+         if ((buff[pos+byte] & 0xC0) != 0x80)
+            return(-1);
+
+      len++;
+   };
+
+   return(len);
+}
+
 /* end of source */
