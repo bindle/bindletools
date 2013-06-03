@@ -53,10 +53,17 @@ AM_MAKEINFOFLAGS                        = --no-split
 DEFS					=
 
 
+# custom directories
+bindleincludedir			= $(includedir)/bindle
+
+
 # automake targets
 check_PROGRAMS				=
 doc_DATA				=
 include_HEADERS				= include/bindle.h
+bindleinclude_HEADERS			= \
+					  include/bindle/utf8.h \
+					  include/bindle/version.h
 lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
 info_TEXINFOS				=

@@ -31,9 +31,8 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_H
-#define _BINDLE_H 1
-
+#ifndef _BINDLE_UTF8_H
+#define _BINDLE_UTF8_H 1
 
 ///////////////
 //           //
@@ -41,8 +40,8 @@
 //           //
 ///////////////
 
-#include <bindle/utf8.h>
-#include <bindle/version.h>
+#include <sys/types.h>
+#include <inttypes.h>
 
 
 //////////////////
@@ -51,8 +50,8 @@
 //              //
 //////////////////
 
-
-
+size_t utf8len(const char * s);
+size_t utf8nlen(const char * s, size_t maxlen);
 
 #endif
 /* end of source */

@@ -39,7 +39,7 @@
 //           //
 ///////////////
 
-#include <bindle.h>
+#include <bindle/utf8.h>
 #include <string.h>
 
 

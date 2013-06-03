@@ -31,8 +31,8 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef _BINDLE_H
-#define _BINDLE_H 1
+#ifndef _BINDLE_VERSION_H
+#define _BINDLE_VERSION_H 1
 
 
 ///////////////
@@ -41,8 +41,7 @@
 //           //
 ///////////////
 
-#include <bindle/utf8.h>
-#include <bindle/version.h>
+#include <sys/types.h>
 
 
 //////////////////
@@ -51,8 +50,14 @@
 //              //
 //////////////////
 
-
-
+const char * bindle_build(void);
+const char * bindle_string(void);
+const char * bindle_version(void);
+int bindle_lib_version_current(void);
+int bindle_lib_version_revision(void);
+int bindle_lib_version_age(void);
+const char * bindle_lib_version_info(void);
+const char * bindle_lib_release_info(void);
 
 #endif
 /* end of source */

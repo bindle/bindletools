@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A0059499175D17B700DD3266 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059497175D17B700DD3266 /* utf8.h */; };
+		A005949A175D17B700DD3266 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059498175D17B700DD3266 /* version.h */; };
+		A005949B175D18ED00DD3266 /* bindle.h in Headers */ = {isa = PBXBuildFile; fileRef = A01156CD175B009E008E66FA /* bindle.h */; };
 		A01156EC175B0118008E66FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
 		A01156F7175B0122008E66FA /* libbindle-utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* libbindle-utf8.c */; };
 		A01156F8175B0122008E66FA /* libbindle-utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* libbindle-utf8.c */; };
@@ -58,6 +61,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A0059497175D17B700DD3266 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		A0059498175D17B700DD3266 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
 		A01156D2175B009E008E66FA /* libbindle-utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "libbindle-utf8.c"; sourceTree = "<group>"; };
 		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; path = libbindle.sym; sourceTree = "<group>"; };
@@ -103,9 +108,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0059496175D179100DD3266 /* bindle */ = {
+			isa = PBXGroup;
+			children = (
+				A0059497175D17B700DD3266 /* utf8.h */,
+				A0059498175D17B700DD3266 /* version.h */,
+			);
+			path = bindle;
+			sourceTree = "<group>";
+		};
 		A01156CC175B009E008E66FA /* include */ = {
 			isa = PBXGroup;
 			children = (
+				A0059496175D179100DD3266 /* bindle */,
 				A01156CD175B009E008E66FA /* bindle.h */,
 			);
 			path = include;
@@ -191,6 +206,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0059499175D17B700DD3266 /* utf8.h in Headers */,
+				A005949A175D17B700DD3266 /* version.h in Headers */,
+				A005949B175D18ED00DD3266 /* bindle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +506,7 @@
 				A01156E4175B010C008E66FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01156F4175B0118008E66FA /* Build configuration list for PBXNativeTarget "bindle-ios" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +515,7 @@
 				A01156F6175B0118008E66FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01156FF175B0DF3008E66FA /* Build configuration list for PBXAggregateTarget "bindle: Git Version" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +524,7 @@
 				A0115701175B0DF3008E66FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0CE16D715E9846A00AC6A2F /* Build configuration list for PBXProject "bindletools" */ = {
 			isa = XCConfigurationList;
