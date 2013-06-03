@@ -69,26 +69,40 @@
  *    the buffer.
  *  @warning If the buffer is not NULL terminated, this function will overrun
  *    the buffer.
+ *  @warning This function assumes the buffer contains a valid UTF-8 string.
+ *    If the buffer does not contain a valid UTF-8 string, the resulting
+ *    value is undefined.
+ *  @see utf8test, utf8nlen
  */
 size_t utf8len(const char * s);
 
 
 /**
  *  Determines the length of a string contained within a buffer of unknown
- *  buffer length.  The UTF-8 string must me NULL terminated.
+ *  buffer length. If the UTF-8 string is shorter than the buffer, the UTF-8
+ *  string must me NULL terminated.
  *  @param  s       Pointer to buffer containing UTF-8 string.
  *  @param  maxlen  Length of buffer in bytes.
  *  @return This function returns the number of UTF-8 characters found within
  *    the buffer.
+ *  @warning This function assumes the buffer contains a valid UTF-8 string.
+ *    If the buffer does not contain a valid UTF-8 string, the resulting
+ *    value is undefined.
+ *  @see utf8test
  */
 size_t utf8nlen(const char * s, size_t maxlen);
 
 
 /**
  *  Determines if the buffer contains a valid NULL terminated UTF-8 string.
- *  @param  s  Pointer to buffer containing UTF-8 string.
+ *  @param  s       Pointer to buffer containing UTF-8 string.
+ *  @param  maxlen  Length of buffer in bytes.
  *  @return This function returns the number of UTF-8 characters found within
  *    the buffer if the buffer contains a valid UTF-8 string.
+ *  @warning If using this function to determine the length of a UTF-8 string,
+ *    this function is slower than using utf8len. However this function will
+ *    verify that the buffer contains a valid UTF-8 string.
+ *  @see utf8nlen
  */
 ssize_t utf8test(const char * s, size_t maxlen);
 
