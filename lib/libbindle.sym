@@ -43,4 +43,5 @@ bindle_string
 bindle_version
 utf8len
 utf8nlen
+utf8test
 # end of symbol export file

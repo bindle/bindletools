@@ -96,7 +96,7 @@ ssize_t utf8test(const char * s, size_t maxlen)
 {
    const uint8_t * buff;
    ssize_t         bit;
-   ssize_t         byte;
+   //ssize_t         byte;
    ssize_t         width;
    size_t          len;
    size_t          pos;
@@ -121,10 +121,13 @@ ssize_t utf8test(const char * s, size_t maxlen)
          return(-1);
 
       // skip continuation bits
-      for (byte = 1; byte < width; byte++)
-         if ((buff[pos+byte] & 0xC0) != 0x80)
-            return(-1);
-
+//      for (byte = 1; byte < width; byte++)
+//      {
+//         pos++;
+//         if ((buff[pos] & 0xC0) != 0x80)
+//            return(-1);
+//      };
+      
       len++;
    };
 

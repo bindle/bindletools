@@ -43,7 +43,7 @@ DIST_SUBDIRS				=
 
 # Global flags
 AM_LIBS					=
-AM_LDFLAGS				=
+AM_LDFLAGS				= -L$(top_builddir)/lib
 AM_CFLAGS				= -O2 $(CFLAGS_WARNINGS)
 AM_CXXFLAGS				= -O2 @AM_CXXFLAGS@
 AM_OBJCFLAGS				= -O2 @AM_OBJCFLAGS@
@@ -69,7 +69,8 @@ man_MANS				=
 info_TEXINFOS				=
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
-noinst_PROGRAMS				=
+noinst_PROGRAMS				= tests/utf8test
+noinst_SCRIPTS				= tests/utf8test-ascii.sh
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
@@ -77,13 +78,16 @@ sbin_SCRIPTS				=
 
 # lists
 BUILT_SOURCES				=
-TESTS					=
+TESTS					= tests/utf8test-ascii.sh
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= build-aux/autogen.sh \
 					  build-aux/git-package-version.sh \
 					  include/git-package-version.txt \
-					  lib/libbindle.sym
+					  lib/libbindle.sym \
+					  tests/utf8test.sh \
+					  tests/utf8test-ascii.sh \
+					  tests/utf8test-ascii.txt
 CLEANFILES				= \
 					  $(builddir)/a.out   $(srcdir)/a.out \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
@@ -105,6 +109,11 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 lib_libbindle_la_SOURCES		= \
 					  lib/libbindle-utf8.c \
 					  lib/libbindle-version.c
+
+
+# macros for tests/utf8test
+tests_utf8test_DEPENDENCIES		= lib/libbindle.la
+tests_utf8test_LDADD			= -lbindle
 
 
 # Makefile includes
