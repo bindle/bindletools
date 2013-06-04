@@ -96,7 +96,7 @@ ssize_t utf8test(const char * s, size_t maxlen)
 {
    const uint8_t * buff;
    ssize_t         bit;
-   //ssize_t         byte;
+   ssize_t         byte;
    ssize_t         width;
    size_t          len;
    size_t          pos;
@@ -109,7 +109,7 @@ ssize_t utf8test(const char * s, size_t maxlen)
       // determines character width (byte size)
       width = 1;
       for(bit = 0; ((bit < 8) && (width == 1)); bit++)
-         if (((buff[pos] << bit) & 0x8000) == 0x00)
+         if (((buff[pos] << bit) & 0x80) == 0x00)
             width = bit;
 
       // only continuation bytes have a calculated width of 1
@@ -117,16 +117,16 @@ ssize_t utf8test(const char * s, size_t maxlen)
          return(-1);
 
       // verify that UTF-8 string is not longer than buffer
-      if ((pos+width-1) >= maxlen)
+      if ((pos+width) >= maxlen)
          return(-1);
 
       // skip continuation bits
-//      for (byte = 1; byte < width; byte++)
-//      {
-//         pos++;
-//         if ((buff[pos] & 0xC0) != 0x80)
-//            return(-1);
-//      };
+      for (byte = 1; byte < width; byte++)
+      {
+         pos++;
+         if ((buff[pos] & 0xC0) != 0x80)
+            return(-1);
+      };
       
       len++;
    };
