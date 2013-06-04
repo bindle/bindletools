@@ -96,7 +96,7 @@ EXTRA_DIST				= build-aux/autogen.sh \
 					  build-aux/git-package-version.sh \
 					  include/git-package-version.txt \
 					  lib/libbindle.sym \
-					  tests/utf8test.sh
+					  tests/utf8test.sh \
 					  $(noinst_DATA)
 CLEANFILES				= \
 					  $(builddir)/a.out   $(srcdir)/a.out \
