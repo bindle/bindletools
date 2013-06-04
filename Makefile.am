@@ -94,8 +94,14 @@ XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= build-aux/autogen.sh \
 					  build-aux/git-package-version.sh \
+					  build-aux/makefile-autotools.am \
+					  build-aux/makefile-subst.am \
+					  build-aux/makefile-version.am \
 					  include/git-package-version.txt \
 					  lib/libbindle.sym \
+					  m4/bindle-gcc.m4 \
+					  m4/bindle-git.m4 \
+					  m4/bindle-xxd.m4 \
 					  tests/utf8test.sh \
 					  $(noinst_DATA)
 CLEANFILES				= \
