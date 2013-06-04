@@ -67,10 +67,21 @@ bindleinclude_HEADERS			= \
 lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
 info_TEXINFOS				=
+noinst_DATA				= tests/utf8test-ascii.txt \
+					  tests/utf8test-invalid-continuation.txt \
+					  tests/utf8test-invalid-length.txt \
+					  tests/utf8test-mixed.txt \
+					  tests/utf8test-null.txt \
+					  tests/utf8test-utf8.txt
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
 noinst_PROGRAMS				= tests/utf8test
-noinst_SCRIPTS				= tests/utf8test-ascii.sh
+noinst_SCRIPTS				= tests/utf8test-ascii.sh \
+					  tests/utf8test-invalid-continuation.sh \
+					  tests/utf8test-invalid-length.sh \
+					  tests/utf8test-mixed.sh \
+					  tests/utf8test-null.sh \
+					  tests/utf8test-utf8.sh
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
@@ -78,16 +89,15 @@ sbin_SCRIPTS				=
 
 # lists
 BUILT_SOURCES				=
-TESTS					= tests/utf8test-ascii.sh
+TESTS					= $(noinst_SCRIPTS)
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= build-aux/autogen.sh \
 					  build-aux/git-package-version.sh \
 					  include/git-package-version.txt \
 					  lib/libbindle.sym \
-					  tests/utf8test.sh \
-					  tests/utf8test-ascii.sh \
-					  tests/utf8test-ascii.txt
+					  tests/utf8test.sh
+					  $(noinst_DATA)
 CLEANFILES				= \
 					  $(builddir)/a.out   $(srcdir)/a.out \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
@@ -95,6 +105,7 @@ CLEANFILES				= \
 					  $(man_MANS) \
 					  $(bin_SCRIPTS) \
 					  $(sbin_SCRIPTS) \
+					  $(noinst_SCRIPTS) \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
@@ -126,6 +137,12 @@ include $(srcdir)/build-aux/makefile-version.am
 # custom targets
 .PHONY:
 
+tests/utf8test-%.sh: Makefile tests/utf8test.sh
+	@rm -f $(@)
+	@mkdir -p tests
+	cp $(top_srcdir)/tests/utf8test.sh $(@)
+	@chmod 755 $(@)
+	
 
 # local targets
 install-exec-local:

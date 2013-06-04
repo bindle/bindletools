@@ -107,9 +107,13 @@
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
 		A0808A8C175D4B930074058B /* utf8test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8test.c; sourceTree = "<group>"; };
-		A0808A8D175D5BB20074058B /* utf8test-ascii.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "utf8test-ascii.sh"; sourceTree = "<group>"; };
 		A0808A8E175D5BB20074058B /* utf8test-ascii.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-ascii.txt"; sourceTree = "<group>"; };
 		A0808A8F175D5BFA0074058B /* utf8test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = utf8test.sh; sourceTree = "<group>"; };
+		A0B5366E175DE1C9004828AA /* utf8test-invalid-continuation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-invalid-continuation.txt"; sourceTree = "<group>"; };
+		A0B5366F175DE1C9004828AA /* utf8test-invalid-length.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-invalid-length.txt"; sourceTree = "<group>"; };
+		A0B53670175DE1C9004828AA /* utf8test-mixed.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-mixed.txt"; sourceTree = "<group>"; };
+		A0B53671175DE1C9004828AA /* utf8test-null.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-null.txt"; sourceTree = "<group>"; };
+		A0B53672175DE1C9004828AA /* utf8test-utf8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-utf8.txt"; sourceTree = "<group>"; };
 		A0CE16DF15E984A600AC6A2F /* git-package-version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "git-package-version.sh"; sourceTree = "<group>"; };
 		A0CE16E015E984A600AC6A2F /* git-tar-name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "git-tar-name.txt"; sourceTree = "<group>"; };
 		A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-git.m4"; sourceTree = "<group>"; };
@@ -201,8 +205,12 @@
 			children = (
 				A0808A8C175D4B930074058B /* utf8test.c */,
 				A0808A8F175D5BFA0074058B /* utf8test.sh */,
-				A0808A8D175D5BB20074058B /* utf8test-ascii.sh */,
 				A0808A8E175D5BB20074058B /* utf8test-ascii.txt */,
+				A0B5366E175DE1C9004828AA /* utf8test-invalid-continuation.txt */,
+				A0B5366F175DE1C9004828AA /* utf8test-invalid-length.txt */,
+				A0B53670175DE1C9004828AA /* utf8test-mixed.txt */,
+				A0B53671175DE1C9004828AA /* utf8test-null.txt */,
+				A0B53672175DE1C9004828AA /* utf8test-utf8.txt */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -652,6 +660,7 @@
 				A0808A7F175D34000074058B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0808A85175D4A6C0074058B /* Build configuration list for PBXAggregateTarget "bindle: open docs" */ = {
 			isa = XCConfigurationList;
@@ -660,6 +669,7 @@
 				A0808A87175D4A6C0074058B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0CE16D715E9846A00AC6A2F /* Build configuration list for PBXProject "bindletools" */ = {
 			isa = XCConfigurationList;
