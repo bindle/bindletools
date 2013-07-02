@@ -5,4 +5,5 @@
 /Makefile.old
 /blib/
 /inc
+/lib/Bindle/Version.pm
 /pm_to_blib

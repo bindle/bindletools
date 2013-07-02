@@ -95,7 +95,7 @@ PERL_FILES				= lib/perl-bindletools/Changes \
 					  lib/perl-bindletools/Makefile.PL \
 					  lib/perl-bindletools/README \
 					  lib/perl-bindletools/lib/Bindle/CGI.pm \
-					  lib/perl-bindletools/lib/Bindle/Version.pm \
+					  lib/perl-bindletools/lib/Bindle/Version.pm.in \
 					  lib/perl-bindletools/src/vars.pl \
 					  lib/perl-bindletools/t/CGI.t \
 					  lib/perl-bindletools/t/Version.t
@@ -121,6 +121,8 @@ CLEANFILES				= \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
 					  config.h.in~ $(srcdir)/config.h.in~ \
 					  lib/perl-bindletools/built-by-make \
+					  lib/perl-bindletools/lib/Bindle/Version.pm \
+					  $(srcdir)/lib/perl-bindletools/lib/Bindle/Version.pm \
 					  $(man_MANS) \
 					  $(bin_SCRIPTS) \
 					  $(sbin_SCRIPTS) \
@@ -163,7 +165,12 @@ tests/utf8test-%.sh: Makefile tests/utf8test.sh
 	@chmod 755 $(@)
 
 
-lib/perl-bindletools/Makefile: $(PERL_FILES)
+lib/perl-bindletools/lib/Bindle/Version.pm: Makefile lib/perl-bindletools/lib/Bindle/Version.pm.in
+	chmod -R u+w $(srcdir)/lib/perl-bindletools
+	@$(do_subst_dt)
+	@mv lib/perl-bindletools/lib/Bindle/Version.pm $(srcdir)/lib/perl-bindletools/lib/Bindle/Version.pm
+
+lib/perl-bindletools/Makefile: $(PERL_FILES) lib/perl-bindletools/lib/Bindle/Version.pm
 	chmod -R u+w $(srcdir)/lib/perl-bindletools
 	cd $(srcdir)/lib/perl-bindletools && $(PERL) Makefile.PL
 	touch $(srcdir)/lib/perl-bindletools

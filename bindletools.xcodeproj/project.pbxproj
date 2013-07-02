@@ -110,7 +110,7 @@
 		A07A07CF17829812006884FC /* Makefile.PL */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = Makefile.PL; sourceTree = "<group>"; };
 		A07A07D017829812006884FC /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A07A07D317829812006884FC /* CGI.pm */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = CGI.pm; sourceTree = "<group>"; };
-		A07A07D417829812006884FC /* Version.pm */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = Version.pm; sourceTree = "<group>"; };
+		A07A07D417829812006884FC /* Version.pm.in */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = Version.pm.in; sourceTree = "<group>"; };
 		A07A07D617829812006884FC /* CGI.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = CGI.t; sourceTree = "<group>"; };
 		A07A07D817829CE0006884FC /* Version.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = Version.t; sourceTree = "<group>"; };
 		A07A07DA1782B903006884FC /* vars.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = vars.pl; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				A07A07D317829812006884FC /* CGI.pm */,
-				A07A07D417829812006884FC /* Version.pm */,
+				A07A07D417829812006884FC /* Version.pm.in */,
 			);
 			path = Bindle;
 			sourceTree = "<group>";
