@@ -166,6 +166,19 @@ if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
    GPV=`echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g' -e 's/\.0$//g'`;
    GPB=`echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
 
+   # generate numeric version
+   GNV=`echo ${GPV} |cut -d. -f1`;
+   NUM=`echo ${GPV} |cut -d. -f2`;
+   if test "x${NUM}" == "x";then
+      NUM=0;
+   fi
+   GNV=`printf "${GNV}.%03i" ${NUM}`
+   NUM=`echo ${GPV} |cut -d. -f3`;
+   if test "x${NUM}" == "x";then
+      NUM=0;
+   fi
+   GNV=`printf "${GNV}%03i" ${NUM}`
+
    # write data to file and display results
    if test "x${GVS}" != "x" && test "x${GVS}" != "x${GCS}";then
       rm -f ${GIT_VERSION_FILE} ${GIT_VERSION_HEADER} ${GIT_VERSION_PREFIX_HEADER}
@@ -177,16 +190,18 @@ if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
 
       # writes git version C header
       if test -d ${GIT_VERSION_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_STRING   \"${GVS}\""  > "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION  \"${GPV}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_BUILD    \"${GPB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_STRING           \"${GVS}\""  > "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          \"${GPV}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_NUMERIC_VERSION  ${GNV}"     >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD            \"${GPB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
       fi
 
       # writes git version Info.plist preprocessor prefix file
       if test -d ${GIT_VERSION_PREFIX_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_STRING   ${GVS}"  > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION  ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_BUILD    ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_STRING           ${GVS}"  > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_NUMERIC_VERSION  ${GNV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD            ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
       fi
    fi;
 fi

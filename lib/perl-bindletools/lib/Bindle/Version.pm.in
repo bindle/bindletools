@@ -49,7 +49,7 @@ our @ISA                = qw(Exporter);
 our @EXPORT_OK          = qw();
 our %EXPORT_TAGS        = qw();
 our @EXPORT             = qw();
-our $VERSION            = '@PACKAGE_VERSION@';
+our $VERSION            = '@GIT_PACKAGE_NUMERIC_VERSION@';
 
 
 # end of module

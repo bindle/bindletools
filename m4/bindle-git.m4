@@ -116,32 +116,52 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GTV=[$(echo ${GVS} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
       #
+      # generate numeric version
+      GNV=[$(echo ${GPV} |cut -d. -f1)];
+      NUM=[$(echo ${GPV} |cut -d. -f2)];
+      if test "x${NUM}" == "x";then
+         NUM=0;
+      fi
+      GNV=[$(printf "${GNV}.%03i" ${NUM})]
+      NUM=[$(echo ${GPV} |cut -d. -f3)]
+      if test "x${NUM}" == "x";then
+         NUM=0;
+      fi
+      GNV=[$(printf "${GNV}%03i" ${NUM})]
+      AC_MSG_NOTICE([using git numeric version ${GNV}])
+      #
       # set internal variables
       GIT_VERSION_SCRIPT=${GSH}
       GIT_PACKAGE_STRING=${GVS}
       GIT_PACKAGE_VERSION=${GPV}
+      GIT_PACKAGE_NUMERIC_VERSION=${GNV}
       GIT_PACKAGE_BUILD=${GPB}
       GIT_TARBALL_VERSION=${GTV}
       PACKAGE_VERSION=${GTV}
+      PACKAGE_NUMERIC_VERSION=${GNV}
       VERSION=${GTV}
       CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
       #
       # set substitution variables
-      AC_SUBST([GIT_VERSION_SCRIPT],    [${GIT_VERSION_SCRIPT}])
-      AC_SUBST([GIT_PACKAGE_STRING],    [${GIT_PACKAGE_STRING}])
-      AC_SUBST([GIT_PACKAGE_VERSION],   [${GIT_PACKAGE_VERSION}])
-      AC_SUBST([GIT_PACKAGE_BUILD],     [${GIT_PACKAGE_BUILD}])
-      AC_SUBST([PACKAGE_VERSION],       [${GIT_TARBALL_VERSION}])
-      AC_SUBST([VERSION],               [${GIT_TARBALL_VERSION}])
-      AC_SUBST([CONFIG_STATUS_DEPENDENCIES], [${CONFIG_STATUS_DEPENDENCIES}])
+      AC_SUBST([GIT_VERSION_SCRIPT],            [${GIT_VERSION_SCRIPT}])
+      AC_SUBST([GIT_PACKAGE_STRING],            [${GIT_PACKAGE_STRING}])
+      AC_SUBST([GIT_PACKAGE_VERSION],           [${GIT_PACKAGE_VERSION}])
+      AC_SUBST([GIT_PACKAGE_NUMERIC_VERSION],   [${GIT_PACKAGE_NUMERIC_VERSION}])
+      AC_SUBST([GIT_PACKAGE_BUILD],             [${GIT_PACKAGE_BUILD}])
+      AC_SUBST([PACKAGE_VERSION],               [${PACKAGE_VERSION}])
+      AC_SUBST([PACKAGE_NUMERIC_VERSION],       [${PACKAGE_NUMERIC_VERSION}])
+      AC_SUBST([VERSION],                       [${VERSION}])
+      AC_SUBST([CONFIG_STATUS_DEPENDENCIES],    [${CONFIG_STATUS_DEPENDENCIES}])
       #
       # set C/C++/Objc preprocessor macros
-      AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],    ["${GIT_VERSION_SCRIPT}"],  [script which determines package version and build from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_STRING],    ["${GIT_PACKAGE_STRING}"],  [package version and build determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],   ["${GIT_PACKAGE_VERSION}"], [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],     ["${GIT_PACKAGE_BUILD}"],   [package build determined from git repository])
-      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],       ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
-      AC_DEFINE_UNQUOTED([VERSION],               ["${GIT_TARBALL_VERSION}"], [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],          ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_STRING],          ["${GIT_PACKAGE_STRING}"],          [package version and build determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],         ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_NUMERIC_VERSION], ["${GIT_PACKAGE_NUMERIC_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],           ["${GIT_PACKAGE_BUILD}"],           [package build determined from git repository])
+      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],             ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([PACKAGE_NUMERIC_VERSION],     ["${PACKAGE_NUMERIC_VERSION}"],     [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([VERSION],                     ["${VERSION}"],                     [package version and optionally build determined from git repository])
    fi
 
    # clears vars

@@ -45,6 +45,7 @@ do_subst = sed \
 	-e 's,[@]GIT_VERSION_SCRIPT[@],$(GIT_VERSION_SCRIPT),g' \
 	-e 's,[@]GIT_PACKAGE_STRING[@],$(GIT_PACKAGE_STRING),g' \
 	-e 's,[@]GIT_PACKAGE_VERSION[@],$(GIT_PACKAGE_VERSION),g' \
+	-e 's,[@]GIT_PACKAGE_NUMERIC_VERSION[@],$(GIT_PACKAGE_NUMERIC_VERSION),g' \
 	-e 's,[@]GIT_PACKAGE_BUILD[@],$(GIT_PACKAGE_BUILD),g' \
 	-e 's,[@]RELEASE_MONTH[@],$(RELEASE_MONTH),g' \
 	-e 's,[@]INSTALL[@],$(INSTALL),g' \
