@@ -4,6 +4,8 @@ Bindle Binaries Tools
 
 #### devel
    - Adding initial libbindle.la (syzdek)
+   - Adding perl module Bindle::CGI (syzdek)
+   - Adding support for numeric Git package versions. (syzdek)
 
 #### 0.3
    - Adding shared automake include files. (syzdek)
