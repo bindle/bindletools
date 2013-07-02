@@ -1,0 +1,8 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/CGI.t
+t/Version.t
+lib/Bindle/CGI.pm
+lib/Bindle/Version.pm

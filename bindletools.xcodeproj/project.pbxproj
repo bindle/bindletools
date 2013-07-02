@@ -105,6 +105,15 @@
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
+		A07A07CD17829812006884FC /* Changes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Changes; sourceTree = "<group>"; };
+		A07A07CE17829812006884FC /* MANIFEST */ = {isa = PBXFileReference; lastKnownFileType = text; path = MANIFEST; sourceTree = "<group>"; };
+		A07A07CF17829812006884FC /* Makefile.PL */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = Makefile.PL; sourceTree = "<group>"; };
+		A07A07D017829812006884FC /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A07A07D317829812006884FC /* CGI.pm */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = CGI.pm; sourceTree = "<group>"; };
+		A07A07D417829812006884FC /* Version.pm */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = Version.pm; sourceTree = "<group>"; };
+		A07A07D617829812006884FC /* CGI.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = CGI.t; sourceTree = "<group>"; };
+		A07A07D817829CE0006884FC /* Version.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = Version.t; sourceTree = "<group>"; };
+		A07A07DA1782B903006884FC /* vars.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = vars.pl; sourceTree = "<group>"; };
 		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
 		A0808A8C175D4B930074058B /* utf8test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8test.c; sourceTree = "<group>"; };
 		A0808A8E175D5BB20074058B /* utf8test-ascii.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-ascii.txt"; sourceTree = "<group>"; };
@@ -171,6 +180,7 @@
 				A01156D3175B009E008E66FA /* libbindle.sym */,
 				A01156D2175B009E008E66FA /* libbindle-utf8.c */,
 				A01156FB175B0764008E66FA /* libbindle-version.c */,
+				A07A07CB17829812006884FC /* perl-bindletools */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -190,6 +200,54 @@
 				A01156EB175B0118008E66FA /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A07A07CB17829812006884FC /* perl-bindletools */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07CD17829812006884FC /* Changes */,
+				A07A07CE17829812006884FC /* MANIFEST */,
+				A07A07CF17829812006884FC /* Makefile.PL */,
+				A07A07D017829812006884FC /* README */,
+				A07A07D117829812006884FC /* lib */,
+				A07A07D91782B903006884FC /* src */,
+				A07A07D517829812006884FC /* t */,
+			);
+			path = "perl-bindletools";
+			sourceTree = "<group>";
+		};
+		A07A07D117829812006884FC /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07D217829812006884FC /* Bindle */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		A07A07D217829812006884FC /* Bindle */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07D317829812006884FC /* CGI.pm */,
+				A07A07D417829812006884FC /* Version.pm */,
+			);
+			path = Bindle;
+			sourceTree = "<group>";
+		};
+		A07A07D517829812006884FC /* t */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07D617829812006884FC /* CGI.t */,
+				A07A07D817829CE0006884FC /* Version.t */,
+			);
+			path = t;
+			sourceTree = "<group>";
+		};
+		A07A07D91782B903006884FC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07DA1782B903006884FC /* vars.pl */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		A0808A82175D34A60074058B /* doc */ = {
