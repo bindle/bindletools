@@ -468,6 +468,8 @@ sub test_cgi(;$)
    {
       if ($path_info[0] =~ /^style.css$/)
       {
+         printf("Content-type: text/css; charset=UTF-8\n");
+         printf("\n");
          return(Bindle::CGI->test_css());
       };
    };
@@ -641,13 +643,7 @@ sub test_cgi(;$)
 
 sub test_css()
 {
-
-   printf("Content-type: text/css; charset=UTF-8\n");
-   printf("\n");
-
    print <<EOF;
-
-
 body
 {
 	margin:      0 0 0 0;
