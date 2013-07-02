@@ -65,6 +65,8 @@ our $ERRSTR             = "";
 # |              |
 # +-=-=-=-=-=-=-=+
 
+sub combine_form_data();
+sub get_form_data();
 sub get_parsed_env();
 sub get_parsed_http_cookie();
 sub get_parsed_path_info();
@@ -86,6 +88,57 @@ sub test_form_fields();
 # |  Functions  |
 # |             |
 # +-=-=-=-=-=-=-+
+
+sub combine_form_data()
+{
+   my $self = shift;
+   my $ref;
+   my $key;
+
+   $self->{'form'} = {};
+
+   # combines http_cookie
+   if (($self->{'http_cookie'}))
+   {
+      $ref = $self->{'cookie'};
+      foreach $key (keys(%$ref))
+      {
+         $self->{'form'}->{$key} = $ref->{$key};
+      };
+   };
+
+   # combines query_string
+   if (($self->{'query_string'}))
+   {
+      $ref = $self->{'query_string'};
+      foreach $key (keys(%$ref))
+      {
+         $self->{'form'}->{$key} = $ref->{$key};
+      };
+   };
+
+   # combines post data
+   if (($self->{'post_data'}))
+   {
+      $ref = $self->{'post_data'};
+      foreach $key (keys(%$ref))
+      {
+         $self->{'form'}->{$key} = $ref->{$key};
+      };
+   };
+
+   return;
+}
+
+
+sub get_form_data()
+{
+   my $self = shift;
+   my $ref;
+   $ref = $self->{'form'};
+   return(%$ref);
+}
+
 
 sub get_parsed_env()
 {
@@ -172,22 +225,7 @@ sub init(%)
    $self->parse_path_info($env->{'PATH_INFO'});
 
    # combines form data sources
-   $self->{'form'} = {};
-   $ref = $self->{'cookie'};
-   foreach $key (keys(%$ref))
-   {
-      $self->{'form'}->{$key} = $ref->{$key};
-   };
-   $ref = $self->{'query_string'};
-   foreach $key (keys(%$ref))
-   {
-      $self->{'form'}->{$key} = $ref->{$key};
-   };
-   $ref = $self->{'post_data'};
-   foreach $key (keys(%$ref))
-   {
-      $self->{'form'}->{$key} = $ref->{$key};
-   };
+   $self->combine_form_data();
 
    return($self);
 };
@@ -246,6 +284,7 @@ sub parse_http_cookie(;$)
       if ((blessed($self)))
       {
          $self->{'http_cookie'} = $data;
+         $self->combine_form_data();
       };
       return($data);
    };
@@ -269,6 +308,7 @@ sub parse_http_cookie(;$)
    if ((blessed($self)))
    {
       $self->{'http_cookie'} = $data;
+      $self->combine_form_data();
    };
 
    return($data);
@@ -407,6 +447,7 @@ sub parse_query_string(;$)
       if ((blessed($self)))
       {
          $self->{'query_string'} = $data;
+         $self->combine_form_data();
       };
       return($data);
    };
@@ -429,6 +470,7 @@ sub parse_query_string(;$)
    if ((blessed($self)))
    {
       $self->{'query_string'} = $data;
+      $self->combine_form_data();
    };
 
    return($data);
