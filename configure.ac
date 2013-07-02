@@ -103,6 +103,7 @@ LT_INIT(dlopen disable-fast-install win32-dll)
 
 # custom configure options
 AC_BINDLE_ENABLE_WARNINGS
+AC_BINDLE_WITH_PERL
 
 # enables getopt_long if header and functions were found
 AC_CHECK_HEADERS([getopt.h], [AC_DEFINE_UNQUOTED(USE_GETOPT_LONG, 1, [Use GNU getopt_long])])

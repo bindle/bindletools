@@ -114,6 +114,7 @@
 		A07A07D617829812006884FC /* CGI.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = CGI.t; sourceTree = "<group>"; };
 		A07A07D817829CE0006884FC /* Version.t */ = {isa = PBXFileReference; explicitFileType = text.script.perl; path = Version.t; sourceTree = "<group>"; };
 		A07A07DA1782B903006884FC /* vars.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = vars.pl; sourceTree = "<group>"; };
+		A07A07DB1782BC14006884FC /* bindle-perl.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-perl.m4"; sourceTree = "<group>"; };
 		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
 		A0808A8C175D4B930074058B /* utf8test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8test.c; sourceTree = "<group>"; };
 		A0808A8E175D5BB20074058B /* utf8test-ascii.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "utf8test-ascii.txt"; sourceTree = "<group>"; };
@@ -316,6 +317,7 @@
 			children = (
 				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
 				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,
+				A07A07DB1782BC14006884FC /* bindle-perl.m4 */,
 				A01156FA175B029D008E66FA /* bindle-xxd.m4 */,
 			);
 			path = m4;
