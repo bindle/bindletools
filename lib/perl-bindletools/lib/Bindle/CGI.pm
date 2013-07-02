@@ -41,7 +41,6 @@ package Bindle::CGI;
 # +-=-=-=-=-=-+
 
 use                     5.008;
-use CGI::Carp           qw(fatalsToBrowser);
 use Scalar::Util        qw(tainted blessed);
 use strict;
 use warnings;
