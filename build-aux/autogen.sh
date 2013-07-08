@@ -35,14 +35,59 @@
 #   build-aux/autogen.sh - runs GNU Autotools to create build environment
 #
 
-AUTOGENNAME=`basename ${0}` || exit $?
-AUTOSRCDIR=`dirname ${0}`   || exit $?
-AUTOSRCDIR=${AUTOSRCDIR}/..
+AUTOGENNAME="`basename ${0}`" || exit $?
+if test "x${1}" == "x";then
+   echo "${AUTOGENNAME}: automatically determining source directory"
+
+   # use base directory as starting point
+   AUTOSRCDIR="`dirname ${0}`"                  || exit $?
+   AUTOSRCDIR="`git rev-parse --show-toplevel`" || exit 1
+
+   # loop while .git/ is just a file which implies the working directory
+   # is a submodule.
+   while test -f "${AUTOSRCDIR}/.git";do
+      AUTOSRCDIR="${AUTOSRCDIR}/.."
+      AUTOSRCDIR="`git rev-parse --show-toplevel`" || exit 1
+   done
+
+   # verifies that a source directory was defined
+   if test "x${AUTOSRCDIR}" == "x";then
+      echo "${AUTOGENNAME}: unable to determine source directory" 1>&2
+      exit 1;
+   fi
+
+   # verifies that a source directory contains a root repository
+   if test ! -d "${AUTOSRCDIR}/.git";then
+      echo "${AUTOGENNAME}: unable to determine source directory" 1>&2
+      exit 1;
+   fi
+
+   # verifies that
+   if test ! -f "${AUTOSRCDIR}/Makefile.am" || \
+      test ! -f "${AUTOSRCDIR}/acinclude.m4" ||
+      test ! -f "${AUTOSRCDIR}/configure.ac";then
+      echo "${AUTOGENNAME}: unable to find required files." 1>&2
+      exit 1;
+   fi
+else
+   AUTOSRCDIR="${1}"
+fi
+echo "${AUTOGENNAME}: using source directory \"${AUTOSRCDIR}\""
+
+# checks for required files
+echo "${AUTOGENNAME}: checking for required files"
+if test ! -f "${AUTOSRCDIR}/Makefile.am" || \
+   test ! -f "${AUTOSRCDIR}/acinclude.m4" ||
+   test ! -f "${AUTOSRCDIR}/configure.ac";then
+   echo "${AUTOGENNAME}: unable to find required files." 1>&2
+   exit 1;
+fi
 
 echo "${AUTOGENNAME}: running \"autoreconf -i -f -I m4 ${AUTOSRCDIR}\""
-autoreconf -i -f -I m4 ${AUTOSRCDIR} || exit $?
+autoreconf -i -f -I m4 "${AUTOSRCDIR}" || exit $?
 
-echo "${AUTOGENNAME}: removing temp files"
-rm -rf ${AUTOSRCDIR}/autom4te.cache || exit $?
+
+echo "${AUTOGENNAME}: rm -rf \"${AUTOSRCDIR}/autom4te.cache\""
+rm -rf "${AUTOSRCDIR}/autom4te.cache" || exit $?
 
 # end of script
