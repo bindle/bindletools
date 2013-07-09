@@ -157,7 +157,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],          ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_STRING],          ["${GIT_PACKAGE_STRING}"],          [package version and build determined from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],         ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_NUMERIC_VERSION], ["${GIT_PACKAGE_NUMERIC_VERSION}"], [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_NUMERIC_VERSION], [${GIT_PACKAGE_NUMERIC_VERSION}f],  [package version determined from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],           ["${GIT_PACKAGE_BUILD}"],           [package build determined from git repository])
       AC_DEFINE_UNQUOTED([PACKAGE_VERSION],             ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
       AC_DEFINE_UNQUOTED([PACKAGE_NUMERIC_VERSION],     ["${PACKAGE_NUMERIC_VERSION}"],     [package version and optionally build determined from git repository])
