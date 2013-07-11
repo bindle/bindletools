@@ -89,6 +89,8 @@
 		A01156FA175B029D008E66FA /* bindle-xxd.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-xxd.m4"; sourceTree = "<group>"; };
 		A01156FB175B0764008E66FA /* libbindle-version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "libbindle-version.c"; sourceTree = "<group>"; };
 		A016DA5F163753B0002165A5 /* bindle-gcc.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-gcc.m4"; sourceTree = "<group>"; };
+		A01B9E2D178E3A4700A04BBA /* bindle-postgresql.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-postgresql.m4"; sourceTree = "<group>"; };
+		A01B9E2F178EEF5200A04BBA /* bindle-sqlite3.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-sqlite3.m4"; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
@@ -313,10 +315,12 @@
 		A0CE16E215E988DB00AC6A2F /* m4 */ = {
 			isa = PBXGroup;
 			children = (
-				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
 				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,
+				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
 				A0C48D8A178B8D0D00938EDD /* bindle-libtool.m4 */,
 				A07A07DB1782BC14006884FC /* bindle-perl.m4 */,
+				A01B9E2D178E3A4700A04BBA /* bindle-postgresql.m4 */,
+				A01B9E2F178EEF5200A04BBA /* bindle-sqlite3.m4 */,
 				A01156FA175B029D008E66FA /* bindle-xxd.m4 */,
 			);
 			path = m4;
