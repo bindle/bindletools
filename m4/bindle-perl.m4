@@ -45,20 +45,44 @@ AC_DEFUN([AC_BINDLE_WITH_PERL],[dnl
    # display options
    withval=""
    AC_ARG_WITH(
-      perl,
-      [AS_HELP_STRING([--with-perl=PATH], [Search for PERL program in PATH.])],
-      [ PERL_PATH=$withval ],
-      [ PERL_PATH=$withval ]
+      perl-path,
+      [AS_HELP_STRING([--with-perl-path=PATH], [Search for PERL program in PATH.])],
+      [ WITH_PERL_PATH=$withval ],
+      [ WITH_PERL_PATH=$withval ]
    )
+   AC_ARG_VAR(PERL,    [perl interpreter])
+   AC_ARG_VAR(PERLDOC, [perldoc utility])
 
-   # checks for perl
-   unset PERL
-   if test "x${PERL_PATH}" == "x" || \
-      test "x${PERL_PATH}" == "xno" || \
-      test "x${PERL_PATH}" == "xyes";then
-      PERL_PATH="${PATH}"
+   # checks for perl-path
+   PERL_PATH="${PATH}"
+   if test "x${WITH_PERL_PATH}" != "x" && \
+      test "x${WITH_PERL_PATH}" != "xno" && \
+      test "x${WITH_PERL_PATH}" != "xyes";then
+      PERL_PATH="${WITH_PERL_PATH}"
    fi
-   AC_PATH_PROG([PERL],    [perl],    [no], [$PERL_PATH])
+
+   # search for perl
+   SEARCH_PROG="perl"
+   SEARCH_PATH="${PERL_PATH}"
+   if test "x${PERL}" != "x";then
+      SEARCH_PROG="`dirname ${PERL}`"
+      SEARCH_PATH="`basedir ${PERL}`"
+      if test "x${SEARCH_PATH}" == "x.";then
+         SEARCH_PATH="${PERL_PATH}"
+      fi
+   fi
+   AC_PATH_PROG([PERL], [${SEARCH_PROG}], [no], [${SEARCH_PATH}])
+
+   # search for perldoc
+   SEARCH_PROG="perldoc"
+   SEARCH_PATH="${PERL_PATH}"
+   if test "x${PERLDOC}" != "x";then
+      SEARCH_PROG="`dirname ${PERL}`"
+      SEARCH_PATH="`basedir ${PERLDOC}`"
+      if test "x${SEARCH_PATH}" == "x.";then
+         SEARCH_PATH="${PERL_PATH}"
+      fi
+   fi
    AC_PATH_PROG([PERLDOC], [perldoc], [no], [$PERL_PATH])
 
    # determine if perl binaries were found

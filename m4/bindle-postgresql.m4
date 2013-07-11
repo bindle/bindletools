@@ -43,92 +43,86 @@ AC_DEFUN([AC_BINDLE_WITH_POSTGRESQL],[dnl
    # prerequists
    AC_REQUIRE([AC_PROG_CC])
 
-   # saves old parameters
-   OLD_CFLAGS=${CFLAGS}
-   OLD_CPPFLAGS=${CPPFLAGS}
-   OLD_LDFLAGS=${LDFLAGS}
-   OLD_LIBS=${LIBS}
-
    # set initial values
    HAVE_POSTGRESQL="yes"
    POSTGRESQL_CFLAGS=""
    POSTGRESQL_CPPFLAGS=""
    POSTGRESQL_LDFLAGS=""
    POSTGRESQL_LIBS=""
+   POSTGRESQL_PATH="${PATH}"
 
    # display options
    withval=""
    AC_ARG_WITH(
-      pg-config,
-      [AS_HELP_STRING([--with-pg-config=PROG], [Search for PostgreSQL pg_config in PROG.])],
-      [ WITH_PG_CONFIG=$withval ],
-      [ WITH_PG_CONFIG=$withval ]
+      pg-includedir,
+      [AS_HELP_STRING([--with-pg-includedir=DIR], [Search for PostgreSQL headers in DIR.])],
+      [ WITH_PG_INCLUDEDIR=$withval ],
+      [ WITH_PG_INCLUDEDIR=$withval ]
    )
    withval=""
    AC_ARG_WITH(
-      psql,
-      [AS_HELP_STRING([--with-psql=PROG], [Search for PostgreSQL CLI client in PROG.])],
-      [ WITH_PSQL=$withval ],
-      [ WITH_PSQL=$withval ]
+      pg-libdir,
+      [AS_HELP_STRING([--with-pg-libdir=DIR], [Search for PostgreSQL libraries in DIR.])],
+      [ WITH_PG_LIBDIR=$withval ],
+      [ WITH_PG_LIBDIR=$withval ]
+   )
+   withval=""
+   AC_ARG_WITH(
+      pg-path,
+      [AS_HELP_STRING([--with-pg-path=PATH], [Search for PostgreSQL utilities in PATH.])],
+      [ WITH_PG_PATH=$withval ],
+      [ WITH_PG_PATH=$withval ]
    )
 
-   # checks for pg_config
-   if test "x${WITH_PG_CONFIG}" == "x" || \
-      test "x${WITH_PG_CONFIG}" == "xno" || \
-      test "x${WITH_PG_CONFIG}" == "xyes";then
-      AC_PATH_PROG([PG_CONFIG], [pg_config], [])
-   else
-      PG_CONFIG_PROG=`basename ${WITH_PG_CONFIG}`
-      PG_CONFIG_DIR=`dirname ${WITH_PG_CONFIG}`
-      if test "x${PG_CONFIG_DIR}" == "x.";then
-         PG_CONFIG_DIR=${PATH}
-      fi
-      AC_PATH_PROG([PG_CONFIG], [${PG_CONFIG_PROG}], [], [${PG_CONFIG_DIR}])
-   fi
-   if test "x${PG_CONFIG}" == "x";then
-      HAVE_POSTGRESQL="no"
+   # checks for pg-includedir
+   if test "x${WITH_PG_INCLUDEDIR}" != "x" && \
+      test "x${WITH_PG_INCLUDEDIR}" != "xno" && \
+      test "x${WITH_PG_INCLUDEDIR}" != "xyes";then
+      POSTGRESQL_CPPFLAGS="-I${WITH_PG_INCLUDEDIR}"
    fi
 
-   # checks for psql
-   if test "x${WITH_PSQL}" == "x" || \
-      test "x${WITH_PSQL}" == "xno" || \
-      test "x${WITH_PSQL}" == "xyes";then
-      AC_PATH_PROG([PSQL], [psql], [])
-   else
-      PSQL_PROG=`basename ${WITH_PSQL}`
-      PSQL_DIR=`dirname ${WITH_PSQL}`
-      if test "x${PG_CONFIG_DIR}" == "x.";then
-         PSQL_DIR=${PATH}
-      fi
-      AC_PATH_PROG([PSQL], [${PSQL_PROG}], [], [${PSQL_DIR}])
-   fi
-   if test "x${PSQL}" == "x";then
-      HAVE_POSTGRESQL="no"
+   # checks for pg-libdir
+   if test "x${WITH_PG_LIBDIR}" != "x" && \
+      test "x${WITH_PG_LIBDIR}" != "xno" && \
+      test "x${WITH_PG_LIBDIR}" != "xyes";then
+      POSTGRESQL_LDLAGS="-L${WITH_PG_LIBDIR}"
    fi
 
-   if test "x${HAVE_POSTGRESQL}" == "xyes";then
-      POSTGRESQL_CFLAGS="`${PG_CONFIG} --cflags`"
-      POSTGRESQL_CPPFLAGS="-I`${PG_CONFIG} --includedir` `${PG_CONFIG} --cppflags`"
-      POSTGRESQL_LDFLAGS="-L`${PG_CONFIG} --libdir` `${PG_CONFIG} --ldflags`"
-      POSTGRESQL_LIBS="`${PG_CONFIG} --libs |sed -e 's/-lpgport//g'`"
-
-      CFLAGS="${POSTGRESQL_CFLAGS}"
-      CPPFLAGS="${POSTGRESQL_CPPFLAGS}"
-      LDFLAGS="${POSTGRESQL_LDFLAGS}"
-      LIBS="${POSTGRESQL_LIBS}"
-
-      AC_CHECK_HEADERS([libpq-fe.h],         [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQclear],        [pq], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQconnectdb],    [pq], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQerrorMessage], [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQexec],         [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQfinish],       [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQgetvalue],     [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQnfields],      [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQntuples],      [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQstatus],       [pg], [], [HAVE_POSTGRESQL="no"])
-      AC_SEARCH_LIBS([PQresultStatus], [pg], [], [HAVE_POSTGRESQL="no"])
+   # checks for pg-path
+   if test "x${WITH_PG_PATH}" != "x" && \
+      test "x${WITH_PG_PATH}" != "xno" && \
+      test "x${WITH_PG_PATH}" != "xyes";then
+      POSTGRESQL_PATH="${WITH_PG_PATH}"
    fi
+
+   # checks for utilities
+   AC_PATH_PROG([PG_CONFIG], [pg_config], [pg_config], [${POSTGRESQL_PATH}])
+   AC_PATH_PROG([PSQL],      [psql],      [psql],      [${POSTGRESQL_PATH}])
+
+   # saves old parameters
+   OLD_CFLAGS=${CFLAGS}
+   OLD_CPPFLAGS=${CPPFLAGS}
+   OLD_LDFLAGS=${LDFLAGS}
+   OLD_LIBS=${LIBS}
+
+   # set new compile flags
+   CFLAGS="${OLD_CFLAGS} ${POSTGRESQL_CFLAGS}"
+   CPPFLAGS="${OLD_CPPFLAGS} ${POSTGRESQL_CPPFLAGS}"
+   LDFLAGS="${OLD_LDFLAGS} ${POSTGRESQL_LDFLAGS}"
+   LIBS="${OLD_LIBS} ${POSTGRESQL_LIBS}"
+
+   # check for headers and library
+   AC_CHECK_HEADERS([libpq-fe.h],         [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQclear],        [pq], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQconnectdb],    [pq], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQerrorMessage], [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQexec],         [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQfinish],       [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQgetvalue],     [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQnfields],      [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQntuples],      [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQstatus],       [pg], [], [HAVE_POSTGRESQL="no"])
+   AC_SEARCH_LIBS([PQresultStatus], [pg], [], [HAVE_POSTGRESQL="no"])
 
    # Apply substitution
    AC_SUBST([HAVE_POSTGRESQL],     [${HAVE_POSTGRESQL}])

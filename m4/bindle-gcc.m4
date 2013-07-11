@@ -125,7 +125,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wunknown-pragmas"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wuninitialized"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmultichar"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wundef"
+      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wundef"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wendif-labels"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wshadow"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlarger-than-4096"
