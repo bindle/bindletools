@@ -56,18 +56,26 @@ AC_DEFUN([AC_BINDLE_WITH_PERL],[dnl
    if test "x${PERL_PATH}" == "x" || \
       test "x${PERL_PATH}" == "xno" || \
       test "x${PERL_PATH}" == "xyes";then
-      AC_PATH_PROG([PERL], [perl], [no])
-      $PERL_PATH=""
-   else
-      AC_PATH_PROG([PERL], [perl], [no], [$PERL_PATH])
+      PERL_PATH="${PATH}"
    fi
-   AC_SUBST(PERL_PATH, "$PERL_PATH")
+   AC_PATH_PROG([PERL],    [perl],    [no], [$PERL_PATH])
+   AC_PATH_PROG([PERLDOC], [perldoc], [no], [$PERL_PATH])
+
+   # determine if perl binaries were found
+   HAVE_PERL="yes"
+   if test "x${PERL}" == "xno";then
+      HAVE_PERL="no"
+   fi
+   if test "x${PERLDOC}" == "xno";then
+      HAVE_PERL="no"
+   fi
+   AC_SUBST([HAVE_PERL])
 
    # runs specified response
-   if test "x${PERL}" == "xno" && test "x${2}" != "x";then
+   if test "x${HAVE_PERL}" == "xno" && test "x${2}" != "x";then
       :
       $2
-   elif test "x${PERL}" != "xno" && test "x${1}" != "x";then
+   elif test "x${HAVE_PERL}" != "xno" && test "x${1}" != "x";then
       :
       $1
    fi
