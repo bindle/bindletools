@@ -8,6 +8,9 @@ Bindle Binaries Tools
    - Adding support for numeric Git package versions. (syzdek)
    - Adding convenience macro for specifing Libtool version info in in the
      configure.ac. (syzdek)
+   - Adding autoconf macro for finding PostgreSQL library and headers. (syzdek)
+   - Adding autoconf macro for finding SQLite3 library and headers. (syzdek)
+   - Adding autoconf macro for finding Perl binaries. (syzdek)
 
 #### 0.3
    - Adding shared automake include files. (syzdek)
