@@ -31,7 +31,7 @@
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_END@
 #
-#   m4/bindle.m4 - m4 macros used by configure.ac
+#   m4/bindle-sqlite3.m4 - m4 macros for finding SQLite3 client library.
 #
 
 

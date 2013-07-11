@@ -31,7 +31,8 @@
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_END@
 #
-#   m4/bindle.m4 - m4 macros used by configure.ac
+#   m4/bindle-postgresql.m4 - m4 macros for find PostgreSQL client library
+#                             and CLI utility.
 #
 
 
