@@ -172,12 +172,12 @@ if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
    if test "x${NUM}" == "x";then
       NUM=0;
    fi
-   GNV=`printf "${GNV}.%03i" ${NUM}`
+   GNV=`printf "${GNV}.%02i" ${NUM}`
    NUM=`echo ${GPV} |cut -d. -f3`;
    if test "x${NUM}" == "x";then
       NUM=0;
    fi
-   GNV=`printf "${GNV}%03i" ${NUM}`
+   GNV=`printf "${GNV}%04i" ${NUM}`
 
    # write data to file and display results
    if test "x${GVS}" != "x" && test "x${GVS}" != "x${GCS}";then
