@@ -39,15 +39,15 @@
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # sets vars to known states
-   GSH="" # Git package version script.
-   GVS="" # Git package version string (x.x.x.gbbbbb).
-   GPV="" # Git package version (x.x.x).
-   GPB="" # Git package build (gbbbbb).
-   GCS="" # Cached git package version string.
-   GCF="" # Cached git file.
-   GTV="" # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
-   GPN="" # git package name.
-   GOD="" # git out directory
+   GSH=""   # Git package version script.
+   GPVB=""  # Git package version build (x.x.x.gbbbbb).
+   GPV=""   # Git package version (x.x.x).
+   GPB=""   # Git package build (gbbbbb).
+   GCS=""   # Cached git package version string.
+   GCF=""   # Cached git file.
+   GTV=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
+   GPN=""   # git package name.
+   GOD=""   # git out directory
 
    # git package version script location
    if test "x${1}" != "x";then
@@ -72,11 +72,11 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # attempt to use script to determine version
    if test "x${GSH}" != "x";then
-      GVS=$(${GSH} "${srcdir}" "${GOD}" 2> /dev/null)
+      GPVB=$(${GSH} "${srcdir}" "${GOD}" 2> /dev/null)
    fi
 
    # attempt to fall back to cache files
-   if test "x${GVS}" == "x";then
+   if test "x${GPVB}" == "x";then
       # determines location of cache file
       if test "x${GOD}" != "x" && test -f "${GOD}/git-package-version.txt";then
          GCF="${GOD}/git-package-version.txt"
@@ -99,74 +99,72 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
          GCS=$(cat ${GCF} 2> /dev/null)
       fi
       if test "x${GCS}" != "x";then
-         GVS=${GCS}
+         GPVB=${GCS}
          AC_MSG_NOTICE([using cached git package version])
       fi
    fi
    unset GCS
 
    # Saves data for use in build scripts
-   if test "x${GVS}" = "x";then
+   if test "x${GPVB}" = "x";then
       AC_MSG_WARN([unable to determine package version from Git tags])
    else
       #
       # split version string into components
-      GPV=[$(echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
-      GPB=[$(echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
-      GTV=[$(echo ${GVS} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
+      GPV=[$(echo ${GPVB} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
+      GPB=[$(echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
+      GTV=[$(echo ${GPVB} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
       #
       # generate numeric version
-      GNV=[$(echo ${GPV} |cut -d. -f1)];
+      GPVN=[$(echo ${GPV} |cut -d. -f1)];
       NUM=[$(echo ${GPV} |cut -d. -f2)];
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
-      GNV=[$(printf "${GNV}.%03i" ${NUM})]
+      GPVN=[$(printf "${GPVN}.%02i" ${NUM})]
       NUM=[$(echo ${GPV} |cut -d. -f3)]
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
-      GNV=[$(printf "${GNV}%03i" ${NUM})]
-      AC_MSG_NOTICE([using git numeric version ${GNV}])
+      GPVN=[$(printf "${GPVN}%04i" ${NUM})]
+      AC_MSG_NOTICE([using git numeric version ${GPVN}])
       #
       # set internal variables
       GIT_VERSION_SCRIPT=${GSH}
-      GIT_PACKAGE_STRING=${GVS}
       GIT_PACKAGE_VERSION=${GPV}
-      GIT_PACKAGE_NUMERIC_VERSION=${GNV}
+      GIT_PACKAGE_VERSION_BUILD=${GPVB}
+      GIT_PACKAGE_VERSION_NUMBER=${GPVN}
       GIT_PACKAGE_BUILD=${GPB}
       GIT_TARBALL_VERSION=${GTV}
       PACKAGE_VERSION=${GTV}
-      PACKAGE_NUMERIC_VERSION=${GNV}
+      PACKAGE_NUMERIC_VERSION=${GPVN}
       VERSION=${GTV}
       CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
       #
       # set substitution variables
       AC_SUBST([GIT_VERSION_SCRIPT],            [${GIT_VERSION_SCRIPT}])
-      AC_SUBST([GIT_PACKAGE_STRING],            [${GIT_PACKAGE_STRING}])
       AC_SUBST([GIT_PACKAGE_VERSION],           [${GIT_PACKAGE_VERSION}])
-      AC_SUBST([GIT_PACKAGE_NUMERIC_VERSION],   [${GIT_PACKAGE_NUMERIC_VERSION}])
+      AC_SUBST([GIT_PACKAGE_VERSION_BUILD],     [${GIT_PACKAGE_VERSION_BUILD}])
+      AC_SUBST([GIT_PACKAGE_VERSION_NUMBER],    [${GIT_PACKAGE_VERSION_NUMBER}])
       AC_SUBST([GIT_PACKAGE_BUILD],             [${GIT_PACKAGE_BUILD}])
       AC_SUBST([PACKAGE_VERSION],               [${PACKAGE_VERSION}])
-      AC_SUBST([PACKAGE_NUMERIC_VERSION],       [${PACKAGE_NUMERIC_VERSION}])
       AC_SUBST([VERSION],                       [${VERSION}])
       AC_SUBST([CONFIG_STATUS_DEPENDENCIES],    [${CONFIG_STATUS_DEPENDENCIES}])
       #
       # set C/C++/Objc preprocessor macros
       AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],          ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_STRING],          ["${GIT_PACKAGE_STRING}"],          [package version and build determined from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],         ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_NUMERIC_VERSION], [${GIT_PACKAGE_NUMERIC_VERSION}f],  [package version determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_BUILD],   ["${GIT_PACKAGE_VERSION_BUILD}"],   [package version and build determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_NUMBER],  [${GIT_PACKAGE_VERSION_NUMBER}f],   [package version number determined from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],           ["${GIT_PACKAGE_BUILD}"],           [package build determined from git repository])
       AC_DEFINE_UNQUOTED([PACKAGE_VERSION],             ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
-      AC_DEFINE_UNQUOTED([PACKAGE_NUMERIC_VERSION],     ["${PACKAGE_NUMERIC_VERSION}"],     [package version and optionally build determined from git repository])
       AC_DEFINE_UNQUOTED([VERSION],                     ["${VERSION}"],                     [package version and optionally build determined from git repository])
    fi
 
    # clears vars
    unset GSH
-   unset GVS
+   unset GPVB
    unset GPV
    unset GPB
    unset GCS

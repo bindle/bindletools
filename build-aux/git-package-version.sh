@@ -128,11 +128,11 @@ fi
 
 
 # clears git information
-GDR="" # Git describe output.
-GVS="" # Git package version string (x.x.x.gCCC).
-GPV="" # Git package version (x.x.x).
-GPB="" # Git package build (gCCC).
-GCS="" # Cached git package version string.
+GDR=""  # Git describe output.
+GPVB="" # Git package version build (x.x.x.gCCC).
+GPV=""  # Git package version (x.x.x).
+GPB=""  # Git package build (gCCC).
+GCS=""  # Cached git package version string.
 
 
 # set default file names
@@ -162,54 +162,54 @@ fi
 # retrieve raw output of git describe
 if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
    GDR=`git --git-dir=${GIT_TOP_DIR}/.git describe --long --abbrev=7 HEAD 2> /dev/null`;
-   GVS=`echo ${GDR} |sed -e 's/-/./g' -e 's/^v//g'`;
-   GPV=`echo ${GVS} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g' -e 's/\.0$//g'`;
-   GPB=`echo ${GVS} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
+   GPVB=`echo ${GDR} |sed -e 's/-/./g' -e 's/^v//g'`;
+   GPV=`echo ${GPVB} |sed -e 's/\.g[[:xdigit:]]\{0,\}$//g' -e 's/\.0$//g'`;
+   GPB=`echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g'`;
 
    # generate numeric version
-   GNV=`echo ${GPV} |cut -d. -f1`;
+   GPVN=`echo ${GPV} |cut -d. -f1`;
    NUM=`echo ${GPV} |cut -d. -f2`;
    if test "x${NUM}" == "x";then
       NUM=0;
    fi
-   GNV=`printf "${GNV}.%02i" ${NUM}`
+   GPVN=`printf "${GPVN}.%02i" ${NUM}`
    NUM=`echo ${GPV} |cut -d. -f3`;
    if test "x${NUM}" == "x";then
       NUM=0;
    fi
-   GNV=`printf "${GNV}%04i" ${NUM}`
+   GPVN=`printf "${GPVN}%04i" ${NUM}`
 
    # write data to file and display results
-   if test "x${GVS}" != "x" && test "x${GVS}" != "x${GCS}";then
+   if test "x${GPVB}" != "x" && test "x${GPVB}" != "x${GCS}";then
       rm -f ${GIT_VERSION_FILE} ${GIT_VERSION_HEADER} ${GIT_VERSION_PREFIX_HEADER}
 
       # writes git version file
       if test -d ${GIT_VERSION_FILE_DIR};then
-         echo "${GVS}" > "${GIT_VERSION_FILE}" 2>&1;
+         echo "${GPVB}" > "${GIT_VERSION_FILE}" 2>&1;
       fi
 
       # writes git version C header
       if test -d ${GIT_VERSION_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_STRING           \"${GVS}\""  > "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION          \"${GPV}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_NUMERIC_VERSION  ${GNV}"     >> "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_BUILD            \"${GPB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          \"${GPV}\""  >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_BUILD    \"${GPVB}\""   > "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_NUMBER   ${GPVN}"     >> "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD            \"${GPB}\""  >> "${GIT_VERSION_HEADER}" 2>&1;
       fi
 
       # writes git version Info.plist preprocessor prefix file
       if test -d ${GIT_VERSION_PREFIX_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_STRING           ${GVS}"  > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION          ${GPV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_NUMERIC_VERSION  ${GNV}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_BUILD            ${GPB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          ${GPV}"  >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_BUILD    ${GPVB}"   > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_NUMBER   ${GPVN}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_BUILD            ${GPB}"  >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
       fi
    fi;
 fi
 
 
 # displays summary
-if test "x${GVS}" != "x";then
-   echo "${GVS}";
+if test "x${GPVB}" != "x";then
+   echo "${GPVB}";
 elif test "x${GCS}" != "x";then
    echo "${GCS}";
 else
