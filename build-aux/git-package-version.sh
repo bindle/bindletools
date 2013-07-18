@@ -190,16 +190,16 @@ if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
 
       # writes git version C header
       if test -d ${GIT_VERSION_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_VERSION          \"${GPV}\""  >> "${GIT_VERSION_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION_BUILD    \"${GPVB}\""   > "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          \"${GPV}\""   > "${GIT_VERSION_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_BUILD    \"${GPVB}\"" >> "${GIT_VERSION_HEADER}" 2>&1;
          echo "#define GIT_PACKAGE_VERSION_NUMBER   ${GPVN}"     >> "${GIT_VERSION_HEADER}" 2>&1;
          echo "#define GIT_PACKAGE_BUILD            \"${GPB}\""  >> "${GIT_VERSION_HEADER}" 2>&1;
       fi
 
       # writes git version Info.plist preprocessor prefix file
       if test -d ${GIT_VERSION_PREFIX_HEADER_DIR};then
-         echo "#define GIT_PACKAGE_VERSION          ${GPV}"  >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
-         echo "#define GIT_PACKAGE_VERSION_BUILD    ${GPVB}"   > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION          ${GPV}"   > "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
+         echo "#define GIT_PACKAGE_VERSION_BUILD    ${GPVB}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
          echo "#define GIT_PACKAGE_VERSION_NUMBER   ${GPVN}" >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
          echo "#define GIT_PACKAGE_BUILD            ${GPB}"  >> "${GIT_VERSION_PREFIX_HEADER}" 2>&1;
       fi
