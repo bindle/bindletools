@@ -109,7 +109,7 @@ const char * bindle_lib_release_info(void)
 
 const char * bindle_string(void)
 {
-   return(GIT_PACKAGE_STRING);
+   return(GIT_PACKAGE_VERSION_BUILD);
 }
 
 
