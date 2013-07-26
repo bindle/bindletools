@@ -42,6 +42,7 @@
 ///////////////
 
 #include <bindle/utf8.h>
+#include <bindle/regex.h>
 #include <bindle/version.h>
 
  

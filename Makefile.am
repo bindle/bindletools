@@ -63,6 +63,7 @@ doc_DATA				=
 include_HEADERS				= include/bindle.h
 bindleinclude_HEADERS			= \
 					  include/bindle/utf8.h \
+					  include/bindle/regex.h \
 					  include/bindle/version.h
 lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
