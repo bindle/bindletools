@@ -152,7 +152,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnested-externs"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wenum-clash"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winline"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlong-long"
+      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlong-long"
    fi
 
    # creates test source code
