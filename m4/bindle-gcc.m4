@@ -99,7 +99,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list=" ${ac_bindle_warnings_list} -Werror"
    fi
    if test "x${USE_STRICTWARNINGS}" == "xyes";then
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu99"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
       #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wtraditional"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpragma-once"
