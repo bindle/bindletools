@@ -47,7 +47,7 @@ AM_LDFLAGS				= -L$(top_builddir)/lib
 AM_CFLAGS				= -O2 $(CFLAGS_WARNINGS)
 AM_CXXFLAGS				= -O2 @AM_CXXFLAGS@
 AM_OBJCFLAGS				= -O2 @AM_OBJCFLAGS@
-AM_CPPFLAGS				= -O2 -UPMARK -DHAVE_CONFIG_H=1 -I$(top_builddir)/include -I$(top_srcdir)/include -DSYSCONFDIR="\"$(sysconfdir)\""
+AM_CPPFLAGS				= -O2 -UPMARK -DHAVE_CONFIG_H=1 -I$(top_builddir)/include -I$(top_srcdir)/include
 ACLOCAL_AMFLAGS				= -I m4 -W all -W error
 AM_MAKEINFOFLAGS                        = --no-split
 DEFS					=
@@ -69,7 +69,6 @@ lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
 info_TEXINFOS				=
 noinst_DATA				= \
-					  lib/perl-bindletools/built-by-make \
 					  tests/utf8test-ascii.txt \
 					  tests/utf8test-invalid-continuation.txt \
 					  tests/utf8test-invalid-length.txt \
@@ -104,12 +103,7 @@ BUILT_SOURCES				=
 TESTS					= $(noinst_SCRIPTS)
 XFAIL_TESTS				=
 EXTRA_MANS				=
-EXTRA_DIST				= build-aux/autogen.sh \
-					  build-aux/git-package-version.sh \
-					  build-aux/makefile-autotools.am \
-					  build-aux/makefile-subst.am \
-					  build-aux/makefile-version.am \
-					  include/git-package-version.txt \
+EXTRA_DIST				= \
 					  lib/libbindle.sym \
 					  m4/bindle-gcc.m4 \
 					  m4/bindle-git.m4 \
@@ -155,9 +149,9 @@ tests_utf8test_LDADD			= -lbindle
 
 # Makefile includes
 GIT_PACKAGE_VERSION_DIR=include
-include $(srcdir)/build-aux/makefile-autotools.am
-include $(srcdir)/build-aux/makefile-subst.am
-include $(srcdir)/build-aux/makefile-version.am
+include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-autotools.am
+include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-subst.am
+include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-version.am
 
 
 # custom targets

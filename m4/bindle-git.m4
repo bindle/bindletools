@@ -34,7 +34,7 @@
 #   m4/bindle.m4 - m4 macros used by configure.ac
 #
 
-# AC_DMS_BINDLE_PACKAGE_VERSION()
+# AC_BINDLE_GIT_PACKAGE_VERSION(script, outdir)
 # -----------------------------------
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
@@ -50,7 +50,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GOD=""   # git out directory
 
    # git package version script location
-   if test "x${1}" != "x";then
+   if test "x$1" != "x";then
       if test -f "${srcdir}/$1";then
          GSH="${srcdir}/$1"
       else
@@ -62,7 +62,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
    # git output directory
-   if test "x${2}" != "x";then
+   if test "x$2" != "x";then
       if test -d "${2}";then
          GOD="${2}"
       elif test -d "${srcdir}/${2}";then

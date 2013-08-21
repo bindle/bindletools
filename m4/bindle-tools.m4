@@ -1,6 +1,6 @@
 #
 #   Bindle Binaries Tools
-#   Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+#   Copyright (C) 2011 Bindle Binaries <syzdek@bindlebinaries.com>.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -31,39 +31,31 @@
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_END@
 #
-#   contrib/makefile-version.am
+#   m4/bindle.m4 - m4 macros used by configure.ac
 #
 
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
+# AC_BINDLE(srcdir)
+# -----------------------------------
+AC_DEFUN([AC_BINDLE],[dnl
 
+   # determines location of Bindle Tools directory
+   bindletools_srcdir=""
+   AC_MSG_CHECKING([for location of Bindle Tools directory])
+   if test "x$1" != "x" && test -f "$srcdir/$1/build-aux/git-package-version.sh";then
+      bindletools_srcdir=$1
+   elif test -f "$srcdir/build-aux/git-package-version.sh";then
+      bindletools_srcdir=.
+   elif test -d "$srcdir/contrib/bindletools/build-aux/git-package-version.sh";then
+      bindletools_srcdir=contrib/bindletools
+   fi
+   if test "x$bindletools_srcdir" == "x";then
+      AC_MSG_RESULT([not found])
+      AC_MSG_ERROR([Unable to determine location of bindletools directory.])
+   fi
+   AC_MSG_RESULT([$bindletools_srcdir])
+   AC_SUBST([bindletools_srcdir], [$bindletools_srcdir])
 
-GIT_PACKAGE_VERSION_DIR			?= include
+])dnl
 
-
-GIT_PACKAGE_VERSION_FILES		 = $(GIT_PACKAGE_VERSION_DIR)/git-package-version.h
-GIT_PACKAGE_VERSION_FILES		+= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
-
-
-BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_FILES)
-
-
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/git-package-version.sh
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-version.am
-EXTRA_DIST				+= $(GIT_PACKAGE_VERSION_FILES)
-EXTRA_DIST				+= build-aux/git-tar-name.txt
-
-
-.PHONY: $(GIT_PACKAGE_VERSION_FILES)
-
-$(GIT_PACKAGE_VERSION_DIR)/git-package-version.h:
-	@@GIT_VERSION_SCRIPT@ $(top_srcdir) > /dev/null 2>&1
-
-$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt:
-	@@GIT_VERSION_SCRIPT@ $(top_srcdir) > /dev/null 2>&1
-
-
-# end of automake file
+# end of m4 file
