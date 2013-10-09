@@ -36,6 +36,7 @@
 #
 
 AUTOGENNAME="`basename ${0}`" || exit $?
+BINDLEDIR="`dirname ${0}`" || exit 1
 if test "x${1}" == "x";then
    echo "${AUTOGENNAME}: automatically determining source directory"
 
@@ -89,5 +90,23 @@ autoreconf -i -f -I m4 -W all -W error "${AUTOSRCDIR}" || exit $?
 
 echo "${AUTOGENNAME}: rm -rf \"${AUTOSRCDIR}/autom4te.cache\""
 rm -rf "${AUTOSRCDIR}/autom4te.cache" || exit $?
+
+
+if test -d "${AUTOSRCDIR}/build-aux";then
+   if test ! -f "${AUTOSRCDIR}/build-aux/autogen.sh";then
+      echo "${AUTOGENNAME}: installing autogen.sh script"
+      cp "${BINDLEDIR}/autogen.sh" "${AUTOSRCDIR}/build-aux/autogen.sh" || exit 1;
+      chmod 755 "${BINDLEDIR}/autogen.sh" || exit 1
+   else
+      if test -f "${BINDLEDIR}/autogen.sh";then
+         diff "${BINDLEDIR}/autogen.sh" "${AUTOSRCDIR}/build-aux/autogen.sh" > /dev/null 2> /dev/null
+         if test $? -ne 0;then
+            echo "${AUTOGENNAME}: updating autogen.sh script"
+            cp "${BINDLEDIR}/autogen.sh" "${AUTOSRCDIR}/build-aux/autogen.sh" || exit 1;
+            chmod 755 "${BINDLEDIR}/autogen.sh" || exit 1
+         fi
+      fi
+   fi
+fi
 
 # end of script

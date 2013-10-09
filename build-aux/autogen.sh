@@ -1,6 +1,7 @@
+#!/bin/sh
 #
 #   Bindle Binaries Tools
-#   Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+#   Copyright (C) 2013 Bindle Binaries <syzdek@bindlebinaries.com>.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -31,28 +32,26 @@
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_END@
 #
-#   contrib/makefile-autotools.am
+#   build-aux/autogen.sh - runs GNU Autotools to create build environment
 #
 
-BINDLETOOLS_CONDITIONAL			= loaded
+AUTOGENNAME="`basename ${0}`" || exit $?
+SRCDIR=`dirname ${0}`
 
+git rev-parse --show-toplevel > /dev/null 2>&1
+if test $? -eq 0;then
+   echo "${AUTOGENNAME}: initializing git modules"
+   git submodule init || exit 1;
 
-ACLOCAL_AMFLAGS				?=
-ACLOCAL_AMFLAGS				+= -I $(bindletools_srcdir)/m4
+   #git submodule --recursive update || exit 1;
+fi
 
+if test -f "${SRCDIR}/../contrib/bindletools/build-aux/bindle-autogen.sh";then
+   echo "${AUTOGENNAME}: running bindle-autogen.sh"
+   "${SRCDIR}/../contrib/bindletools/build-aux/bindle-autogen.sh" $@ || exit 1
+elif test -f "${SRCDIR}/build-aux/bindle-autogen.sh";then
+   echo "${AUTOGENNAME}: running bindle-autogen.sh"
+   "${SRCDIR}/build-aux/bindle-autogen.sh" $@ || exit 1
+fi
 
-BUILT_SOURCES				?=
-
-
-EXTRA_DIST				?=
-EXTRA_DIST				+= $(bindletools_srcdir)/COPYING
-EXTRA_DIST				+= $(bindletools_srcdir)/README
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/autogen.sh
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/bindle-autogen.sh
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-bindle.am
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-subst.am
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-version.am
-
-
-# end of automake file
-
+# end of script
