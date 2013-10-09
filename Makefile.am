@@ -154,14 +154,40 @@ include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-subst.am
 include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-version.am
 
 
+# substitution routine
+make_utf8check = \
+		echo "cp tests/utf8test.sh $(@)"; \
+		mkdir -p `dirname ${@}` || exit 1; \
+		rm -f $(@) || exit 1; \
+		cp $(top_srcdir)/tests/utf8test.sh $(@) || exit 1; \
+		chmod 0755 ${@}
+
+
 # custom targets
 .PHONY: install-perl
 
-tests/utf8test-%.sh: Makefile tests/utf8test.sh
-	@rm -f $(@)
-	@mkdir -p tests
-	cp $(top_srcdir)/tests/utf8test.sh $(@)
-	@chmod 755 $(@)
+tests/utf8test-ascii.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
+
+
+tests/utf8test-invalid-continuation.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
+
+
+tests/utf8test-invalid-length.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
+
+
+tests/utf8test-mixed.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
+
+
+tests/utf8test-null.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
+
+
+tests/utf8test-utf8.sh: Makefile tests/utf8test.sh
+	@$(make_utf8check)
 
 
 lib/perl-bindletools/lib/Bindle/Version.pm: Makefile lib/perl-bindletools/lib/Bindle/Version.pm.in
