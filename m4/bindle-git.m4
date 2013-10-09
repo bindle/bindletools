@@ -70,6 +70,11 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       fi
    fi
 
+   # sets bindletools directory
+   BINDLEDIR=`dirname ${GSH}`
+   BINDLEDIR=`dirname ${BINDLEDIR}`
+   AC_REQUIRE([AC_BINDLE])
+
    # attempt to use script to determine version
    if test "x${GSH}" != "x";then
       GPVB=$(${GSH} "${srcdir}" "${GOD}" 2> /dev/null)

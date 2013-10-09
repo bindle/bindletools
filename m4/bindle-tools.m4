@@ -37,16 +37,18 @@
 
 # AC_BINDLE(srcdir)
 # -----------------------------------
-AC_DEFUN([AC_BINDLE],[dnl
+AC_DEFUN_ONCE([AC_BINDLE],[dnl
 
    # determines location of Bindle Tools directory
    bindletools_srcdir=""
    AC_MSG_CHECKING([for location of Bindle Tools directory])
    if test "x$1" != "x" && test -f "$srcdir/$1/build-aux/git-package-version.sh";then
       bindletools_srcdir=$1
+   elif test "x$BINDLEDIR" != "x" && test -f "$BINDLEDIR/build-aux/git-package-version.sh";then
+      bindletools_srcdir=$BINDLEDIR
    elif test -f "$srcdir/build-aux/git-package-version.sh";then
       bindletools_srcdir=.
-   elif test -d "$srcdir/contrib/bindletools/build-aux/git-package-version.sh";then
+   elif test -f "$srcdir/contrib/bindletools/build-aux/git-package-version.sh";then
       bindletools_srcdir=contrib/bindletools
    fi
    if test "x$bindletools_srcdir" == "x";then
