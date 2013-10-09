@@ -83,8 +83,8 @@ if test ! -f "${AUTOSRCDIR}/Makefile.am" || \
    exit 1;
 fi
 
-echo "${AUTOGENNAME}: running \"autoreconf -i -f -I m4 ${AUTOSRCDIR}\""
-autoreconf -i -f -I m4 "${AUTOSRCDIR}" || exit $?
+echo "${AUTOGENNAME}: running \"autoreconf -i -f -I m4 -W all -W error ${AUTOSRCDIR}\""
+autoreconf -i -f -I m4 -W all -W error "${AUTOSRCDIR}" || exit $?
 
 
 echo "${AUTOGENNAME}: rm -rf \"${AUTOSRCDIR}/autom4te.cache\""
