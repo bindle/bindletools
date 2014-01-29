@@ -119,6 +119,9 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GPV=[$(echo ${GPVB} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GPB=[$(echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
       GTV=[$(echo ${GPVB} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
+      GMAJ=[$(echo ${GPVB} |cut -d. -f1)]
+      GMIN=[$(echo ${GPVB} |cut -d. -f2)]
+      GPAT=[$(echo ${GPVB} |cut -d. -f3)]
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
       #
       # generate numeric version
@@ -138,6 +141,9 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       # set internal variables
       GIT_VERSION_SCRIPT=${GSH}
       GIT_PACKAGE_VERSION=${GPV}
+      GIT_PACKAGE_MAJOR=${GMAJ}
+      GIT_PACKAGE_MINOR=${GMIN}
+      GIT_PACKAGE_PATCH=${GPAT}
       GIT_PACKAGE_VERSION_BUILD=${GPVB}
       GIT_PACKAGE_VERSION_NUMBER=${GPVN}
       GIT_PACKAGE_BUILD=${GPB}
@@ -150,6 +156,9 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       # set substitution variables
       AC_SUBST([GIT_VERSION_SCRIPT],            [${GIT_VERSION_SCRIPT}])
       AC_SUBST([GIT_PACKAGE_VERSION],           [${GIT_PACKAGE_VERSION}])
+      AC_SUBST([GIT_PACKAGE_MAJOR],             [${GIT_PACKAGE_MAJOR}])
+      AC_SUBST([GIT_PACKAGE_MINOR],             [${GIT_PACKAGE_MINOR}])
+      AC_SUBST([GIT_PACKAGE_PATCH],             [${GIT_PACKAGE_PATCH}])
       AC_SUBST([GIT_PACKAGE_VERSION_BUILD],     [${GIT_PACKAGE_VERSION_BUILD}])
       AC_SUBST([GIT_PACKAGE_VERSION_NUMBER],    [${GIT_PACKAGE_VERSION_NUMBER}])
       AC_SUBST([GIT_PACKAGE_BUILD],             [${GIT_PACKAGE_BUILD}])
@@ -158,13 +167,16 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_SUBST([CONFIG_STATUS_DEPENDENCIES],    [${CONFIG_STATUS_DEPENDENCIES}])
       #
       # set C/C++/Objc preprocessor macros
-      AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],          ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],         ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_BUILD],   ["${GIT_PACKAGE_VERSION_BUILD}"],   [package version and build determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_NUMBER],  [${GIT_PACKAGE_VERSION_NUMBER}f],   [package version number determined from git repository])
-      AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],           ["${GIT_PACKAGE_BUILD}"],           [package build determined from git repository])
-      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],             ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
-      AC_DEFINE_UNQUOTED([VERSION],                     ["${VERSION}"],                     [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],           ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],          ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository (x.y.z)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_BUILD],    ["${GIT_PACKAGE_VERSION_BUILD}"],   [package version and build determined from git repository (x.y.z.b)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_MAJOR],            [${GIT_PACKAGE_MAJOR}],             [package major version from git repository (x)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_MINOR],            [${GIT_PACKAGE_MINOR}],             [package minor version from git repository (y)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_PATCH],            [${GIT_PACKAGE_PATCH}],             [package patch version from git repository (z)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION_NUMBER],   [${GIT_PACKAGE_VERSION_NUMBER}f],   [package version number determined from git repository (xx.yyzzzz)])
+      AC_DEFINE_UNQUOTED([GIT_PACKAGE_BUILD],            ["${GIT_PACKAGE_BUILD}"],           [package build determined from git repository (b)])
+      AC_DEFINE_UNQUOTED([PACKAGE_VERSION],              ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
+      AC_DEFINE_UNQUOTED([VERSION],                      ["${VERSION}"],                     [package version and optionally build determined from git repository])
    fi
 
    # clears vars
