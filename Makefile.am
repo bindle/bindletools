@@ -69,21 +69,21 @@ lib_LTLIBRARIES				= lib/libbindle.la
 man_MANS				=
 info_TEXINFOS				=
 noinst_DATA				= \
-					  tests/utf8test-ascii.txt \
-					  tests/utf8test-invalid-continuation.txt \
-					  tests/utf8test-invalid-length.txt \
-					  tests/utf8test-mixed.txt \
-					  tests/utf8test-null.txt \
-					  tests/utf8test-utf8.txt
+					  tests/utf8/ascii.txt \
+					  tests/utf8/invalid-continuation.txt \
+					  tests/utf8/invalid-length.txt \
+					  tests/utf8/mixed.txt \
+					  tests/utf8/null.txt \
+					  tests/utf8/utf8.txt
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
-noinst_PROGRAMS				= tests/utf8test
-noinst_SCRIPTS				= tests/utf8test-ascii.sh \
-					  tests/utf8test-invalid-continuation.sh \
-					  tests/utf8test-invalid-length.sh \
-					  tests/utf8test-mixed.sh \
-					  tests/utf8test-null.sh \
-					  tests/utf8test-utf8.sh
+noinst_PROGRAMS				= tests/utf8/utf8test
+noinst_SCRIPTS				= tests/utf8/ascii.sh \
+					  tests/utf8/invalid-continuation.sh \
+					  tests/utf8/invalid-length.sh \
+					  tests/utf8/mixed.sh \
+					  tests/utf8/null.sh \
+					  tests/utf8/utf8.sh
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
@@ -104,7 +104,7 @@ TESTS					= $(noinst_SCRIPTS)
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= \
-					  lib/libbindle.sym \
+					  lib/libbindle/libbindle.sym \
 					  m4/bindle-gcc.m4 \
 					  m4/bindle-git.m4 \
 					  m4/bindle-libtool.m4 \
@@ -112,7 +112,7 @@ EXTRA_DIST				= \
 					  m4/bindle-postgresql.m4 \
 					  m4/bindle-sqlite3.m4 \
 					  m4/bindle-xxd.m4 \
-					  tests/utf8test.sh \
+					  tests/utf8/utf8test.sh \
 					  $(PERL_FILES) \
 					  $(noinst_DATA)
 CLEANFILES				= \
@@ -132,19 +132,19 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings --with-perl=$(PERL_PATH)
 
 
 # macros for lib/libbindle.la
-lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle.sym
+lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym
 lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 					  -version-info $(LIB_VERSION_INFO) \
 					  $(AM_LDFLAGS) \
-					  -export-symbols $(srcdir)/lib/libbindle.sym
+					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
 lib_libbindle_la_SOURCES		= \
-					  lib/libbindle-utf8.c \
-					  lib/libbindle-version.c
+					  lib/libbindle/utf8.c \
+					  lib/libbindle/version.c
 
 
 # macros for tests/utf8test
-tests_utf8test_DEPENDENCIES		= lib/libbindle.la
-tests_utf8test_LDADD			= -lbindle
+tests_utf8_utf8test_DEPENDENCIES	= lib/libbindle.la
+tests_utf8_utf8test_LDADD		= -lbindle
 
 
 # Makefile includes
@@ -156,37 +156,37 @@ include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-version.am
 
 # substitution routine
 make_utf8check = \
-		echo "cp tests/utf8test.sh $(@)"; \
+		echo "cp tests/utf8/utf8test.sh $(@)"; \
 		mkdir -p `dirname ${@}` || exit 1; \
 		rm -f $(@) || exit 1; \
-		cp $(top_srcdir)/tests/utf8test.sh $(@) || exit 1; \
+		cp $(top_srcdir)/tests/utf8/utf8test.sh $(@) || exit 1; \
 		chmod 0755 ${@}
 
 
 # custom targets
 .PHONY: install-perl
 
-tests/utf8test-ascii.sh: Makefile tests/utf8test.sh
+tests/utf8/ascii.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-tests/utf8test-invalid-continuation.sh: Makefile tests/utf8test.sh
+tests/utf8/invalid-continuation.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-tests/utf8test-invalid-length.sh: Makefile tests/utf8test.sh
+tests/utf8/invalid-length.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-tests/utf8test-mixed.sh: Makefile tests/utf8test.sh
+tests/utf8/mixed.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-tests/utf8test-null.sh: Makefile tests/utf8test.sh
+tests/utf8/null.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-tests/utf8test-utf8.sh: Makefile tests/utf8test.sh
+tests/utf8/utf8.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
