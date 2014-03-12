@@ -116,7 +116,7 @@ int main (int argc, char * argv[])
    diff     = bol - buff;
    buff_len = sb.st_size - diff + 1;
 
-   result = utf8test(bol, buff_len);
+   result = bindle_utf8test(bol, buff_len);
    fprintf(stderr, "%s: buff length: %lu\n", argv[1],    buff_len);
    fprintf(stderr, "%s: buff diff:   %lu\n", argv[1],    diff);
    fprintf(stderr, "%s: expected:    %li\n", argv[1],    expected);
@@ -124,7 +124,7 @@ int main (int argc, char * argv[])
    fprintf(stderr, "%s: string:      \"%s\"\n", argv[1], bol);
 
    // tests string
-   if ((result = utf8test(bol, buff_len)) != expected)
+   if ((result = bindle_utf8test(bol, buff_len)) != expected)
    {
       return(1);
    };

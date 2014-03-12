@@ -74,7 +74,7 @@
  *    value is undefined.
  *  @see utf8test, utf8nlen
  */
-size_t utf8len(const char * s);
+size_t bindle_utf8len(const char * s);
 
 
 /**
@@ -90,7 +90,7 @@ size_t utf8len(const char * s);
  *    value is undefined.
  *  @see utf8test
  */
-size_t utf8nlen(const char * s, size_t maxlen);
+size_t bindle_utf8nlen(const char * s, size_t maxlen);
 
 
 /**
@@ -104,7 +104,7 @@ size_t utf8nlen(const char * s, size_t maxlen);
  *    verify that the buffer contains a valid UTF-8 string.
  *  @see utf8nlen
  */
-ssize_t utf8test(const char * s, size_t maxlen);
+ssize_t bindle_utf8test(const char * s, size_t maxlen);
 
 
 #endif

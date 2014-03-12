@@ -49,7 +49,7 @@
 //             //
 /////////////////
 
-size_t utf8len(const char * s)
+size_t bindle_utf8len(const char * s)
 {
    const uint8_t * b;
    size_t          l;
@@ -66,7 +66,7 @@ size_t utf8len(const char * s)
 }
 
 
-size_t utf8nlen(const char * s, size_t maxlen)
+size_t bindle_utf8nlen(const char * s, size_t maxlen)
 {
    const uint8_t * b;
    size_t          l;
@@ -92,7 +92,7 @@ size_t utf8nlen(const char * s, size_t maxlen)
 //    21     U+10000    U+1FFFFF    4    11110xxx  10xxxxxx  10xxxxxx  10xxxxxx
 //    26    U+200000   U+3FFFFFF    5    111110xx  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx
 //    31   U+4000000  U+7FFFFFFF    6    1111110x  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx  10xxxxxx
-ssize_t utf8test(const char * s, size_t maxlen)
+ssize_t bindle_utf8test(const char * s, size_t maxlen)
 {
    const uint8_t * buff;
    ssize_t         bit;

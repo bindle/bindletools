@@ -41,7 +41,9 @@ bindle_lib_version_info
 bindle_lib_release_info
 bindle_string
 bindle_version
-utf8len
-utf8nlen
-utf8test
+#
+# UTF8 functions
+bindle_utf8len
+bindle_utf8nlen
+bindle_utf8test
 # end of symbol export file
