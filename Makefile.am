@@ -228,7 +228,7 @@ uninstall-local:
 clean-local:
 	test -f $(srcdir)/lib/perl-bindletools/Makefile \
 	   && { cd $(srcdir)/lib/perl-bindletools && $(MAKE) distclean; } \
-	   || { cd $(srcdir)/lib/perl-bindletools; }
+	   || { cd $(srcdir); }
 
 distclean-local:
 	rm -fR $(srcdir)/autom4te.cache
