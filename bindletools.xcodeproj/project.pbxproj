@@ -437,7 +437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "open /Applications/Safari.app doxygen/html/index.html";
+			shellScript = "open /Applications/Safari.app doc/doxygen/html/index.html";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
