@@ -151,8 +151,8 @@
 		A0059496175D179100DD3266 /* bindle */ = {
 			isa = PBXGroup;
 			children = (
-				A0059497175D17B700DD3266 /* utf8.h */,
 				A0C4C65317A2812F008E856D /* regex.h */,
+				A0059497175D17B700DD3266 /* utf8.h */,
 				A0059498175D17B700DD3266 /* version.h */,
 			);
 			path = bindle;
