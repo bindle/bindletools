@@ -1,6 +1,6 @@
 /*
  *  Bindle Binaries Tools
- *  Copyright (C) 2013 Bindle Binaries <syzdek@bindlebinaries.com>.
+ *  Copyright (C) 2014 Bindle Binaries <syzdek@bindlebinaries.com>.
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_START@
  *
@@ -31,8 +31,12 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef __BINDLE_H
-#define __BINDLE_H 1
+/**
+ *   @file bindle/errno.h
+ *   Bindletools error reporting functions
+ */
+#ifndef __BINDLE_ERRNO_H
+#define __BINDLE_ERRNO_H 1
 
 
 ///////////////
@@ -40,13 +44,30 @@
 //  Headers  //
 //           //
 ///////////////
+#ifdef __BINDLE_PMARK
+#pragma mark - Headers
+#endif
 
-#include <bindle/errno.h>
-#include <bindle/fd.h>
-#include <bindle/utf8.h>
-#include <bindle/regex.h>
-#include <bindle/version.h>
+#include <sys/types.h>
+#include <inttypes.h>
 
+#include <bindle/cdefs.h>
+
+
+//////////////////
+//              //
+//  Prototypes  //
+//              //
+//////////////////
+#ifdef __BINDLE_PMARK
+#pragma mark - Prototypes
+#endif
+
+/**
+ *  This function returns the error value set in errno.
+ *  @return The error value set in errno.
+ */
+_BINDLE_F int bindle_errno(void);
 
 #endif
 /* end of source */

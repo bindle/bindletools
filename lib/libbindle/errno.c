@@ -1,6 +1,6 @@
 /*
  *  Bindle Binaries Tools
- *  Copyright (C) 2013 Bindle Binaries <syzdek@bindlebinaries.com>.
+ *  Copyright (C) 2014 Bindle Binaries <syzdek@bindlebinaries.com>.
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_START@
  *
@@ -31,9 +31,7 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#ifndef __BINDLE_H
-#define __BINDLE_H 1
-
+#define __LIB_LIBBINDLE_ERRNO_C 1
 
 ///////////////
 //           //
@@ -41,12 +39,25 @@
 //           //
 ///////////////
 
-#include <bindle/errno.h>
-#include <bindle/fd.h>
-#include <bindle/utf8.h>
-#include <bindle/regex.h>
-#include <bindle/version.h>
-
-
+#ifdef HAVE_CONFIG_H
+#include "config.h"
 #endif
+
+#include <bindle/errno.h>
+
+#include <errno.h>
+
+
+/////////////////
+//             //
+//  Functions  //
+//             //
+/////////////////
+
+int bindle_errno(void)
+{
+   return(errno);
+}
+
+
 /* end of source */

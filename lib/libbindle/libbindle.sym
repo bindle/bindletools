@@ -42,6 +42,16 @@ bindle_lib_release_info
 bindle_string
 bindle_version
 #
+# Error functions
+bindle_errno
+#
+# file parsing functions
+bindle_fd
+bindle_fdclose
+bindle_fdopen
+bindle_fdgetline
+bindle_fdpopclose
+#
 # UTF8 functions
 bindle_utf8len
 bindle_utf8nlen
