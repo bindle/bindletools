@@ -206,6 +206,15 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
          cur->lcur = cur->lnum;
          return(cur->boffset);
 
+         case '\r':
+         if ((opts & BINDLE_FD_OSTRIP_CR) == 0)
+            break;
+         for(pos = cur->boffset+1; pos < cur->blen; pos++)
+            cur->buff[pos-1] = cur->buff[pos];
+         cur->blen--;
+         cur->boffset--;
+         break;
+
          default:
          break;
       };

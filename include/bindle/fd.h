@@ -66,6 +66,7 @@
 
 #define BINDLE_FD_ONEWLINE    0x01     ///< Allow lines to be wrapped with "\\\n"
 #define BINDLE_FD_OLDIFSTYLE  0x02     ///< Allow wrapped lines using LDIF style line continuation
+#define BINDLE_FD_OSTRIP_CR   0x04     ///< Strip carriage returns from line
 
 #define BINDLE_FD_BUFF_SIZE   256ULL   ///< buffer size used to parse lines
 
