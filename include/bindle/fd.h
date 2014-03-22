@@ -140,6 +140,10 @@ _BINDLE_F bindlefd * bindle_fdopen(bindlefd * stck, const char * filename);
  *  @param  opts      Reference to the stack.
  *  @return Returns length of line on success, returns -1 on error and sets
  *          errno.
+ *  @warning This function is not optimized. It is intended to be used at
+ *           the startup of an application/daemon. This function would needs
+ *           to be refactored before it would be advisable to use in a
+ *           frequently used loop (such as the event loop for a daemon).
  *  @see bindle_fdopen
  */
 _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
