@@ -44,21 +44,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A01156EC175B0118008E66FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
-		A01156F7175B0122008E66FA /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
-		A01156FD175B0764008E66FA /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
-		A02F597818D0F6B700D375B3 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
-		A02F597C18D1112E00D375B3 /* errno.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* errno.c */; };
+		A060930018DF8FD100434E5C /* fdtest.c in Sources */ = {isa = PBXBuildFile; fileRef = A06092F218DF7A7500434E5C /* fdtest.c */; };
+		A0EE9F2418DFE15600CF8788 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
+		A0EE9F4618DFE18500CF8788 /* errno.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* errno.c */; };
+		A0EE9F4718DFE18600CF8788 /* errno.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* errno.c */; };
+		A0EE9F4818DFE18900CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
+		A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
+		A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
+		A0EE9F4B18DFE18D00CF8788 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
+		A0EE9F4C18DFE19100CF8788 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
+		A0EE9F4D18DFE19200CF8788 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
+		A0EE9F5018DFE1EC00CF8788 /* libbindle-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A0115705175B0E11008E66FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A01156FE175B0DF3008E66FA;
-			remoteInfo = "bindle: Git Version";
-		};
 		A0808A88175D4A750074058B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
@@ -66,13 +65,29 @@
 			remoteGlobalIDString = A0808A7D175D34000074058B;
 			remoteInfo = "bindle: doxygen";
 		};
+		A0EE9F4E18DFE1E700CF8788 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A0EE9F1A18DFE10F00CF8788;
+			remoteInfo = "bindle-osx";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A01156E7175B0118008E66FA /* CopyFiles */ = {
+		A06092F518DF8FC000434E5C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		A0EE9F2118DFE15600CF8788 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
 			);
@@ -86,7 +101,6 @@
 		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
 		A01156D2175B009E008E66FA /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utf8.c; path = lib/libbindle/utf8.c; sourceTree = SOURCE_ROOT; };
 		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; name = libbindle.sym; path = lib/libbindle/libbindle.sym; sourceTree = SOURCE_ROOT; };
-		A01156E9175B0118008E66FA /* libbindle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbindle.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01156EB175B0118008E66FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A01156FA175B029D008E66FA /* bindle-xxd.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-xxd.m4"; sourceTree = "<group>"; };
 		A01156FB175B0764008E66FA /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = version.c; path = lib/libbindle/version.c; sourceTree = SOURCE_ROOT; };
@@ -102,6 +116,8 @@
 		A02F597B18D1112E00D375B3 /* errno.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = errno.c; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
+		A06092F218DF7A7500434E5C /* fdtest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fdtest.c; path = tests/fd/fdtest.c; sourceTree = SOURCE_ROOT; };
+		A06092F718DF8FC000434E5C /* fdtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fdtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A07A07CD17829812006884FC /* Changes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Changes; sourceTree = "<group>"; };
 		A07A07CE17829812006884FC /* MANIFEST */ = {isa = PBXFileReference; lastKnownFileType = text; path = MANIFEST; sourceTree = "<group>"; };
@@ -141,14 +157,38 @@
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A0CE16F415E9893E00AC6A2F /* bindle-autogen.sh */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = text.script.sh; path = "bindle-autogen.sh"; sourceTree = "<group>"; tabWidth = 3; usesTabs = 0; };
+		A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0EE9F3318DFE15700CF8788 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		A0EE9F5118DFF94000CF8788 /* simple.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = simple.txt; sourceTree = "<group>"; };
+		A0EE9F5218DFFBB100CF8788 /* crlf.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = crlf.sh; sourceTree = "<group>"; };
+		A0EE9F5318DFFBB100CF8788 /* crlf.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = crlf.txt; sourceTree = "<group>"; };
+		A0EE9F5418E0035100CF8788 /* simple.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = simple.sh; sourceTree = "<group>"; };
+		A0EE9F5518E008E200CF8788 /* escnl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = escnl.sh; sourceTree = "<group>"; };
+		A0EE9F5618E008E200CF8788 /* escnl.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = escnl.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A01156E6175B0118008E66FA /* Frameworks */ = {
+		A06092F418DF8FC000434E5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01156EC175B0118008E66FA /* Foundation.framework in Frameworks */,
+				A0EE9F5018DFE1EC00CF8788 /* libbindle-osx.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0EE9F1818DFE10F00CF8788 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0EE9F2018DFE15600CF8788 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0EE9F2418DFE15600CF8788 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +229,9 @@
 		A01156D9175B00F6008E66FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A01156E9175B0118008E66FA /* libbindle.a */,
+				A06092F718DF8FC000434E5C /* fdtest */,
+				A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */,
+				A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +242,7 @@
 				A01156EB175B0118008E66FA /* Foundation.framework */,
 				A0C329CC178BC4B300E32E25 /* Cocoa.framework */,
 				A0C329E1178BC4B300E32E25 /* XCTest.framework */,
+				A0EE9F3318DFE15700CF8788 /* UIKit.framework */,
 				A0C329CE178BC4B300E32E25 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -231,6 +274,21 @@
 			);
 			path = utf8;
 			sourceTree = "<group>";
+		};
+		A06092F118DE10F400434E5C /* fd */ = {
+			isa = PBXGroup;
+			children = (
+				A06092F218DF7A7500434E5C /* fdtest.c */,
+				A0EE9F5218DFFBB100CF8788 /* crlf.sh */,
+				A0EE9F5318DFFBB100CF8788 /* crlf.txt */,
+				A0EE9F5518E008E200CF8788 /* escnl.sh */,
+				A0EE9F5618E008E200CF8788 /* escnl.txt */,
+				A0EE9F5418E0035100CF8788 /* simple.sh */,
+				A0EE9F5118DFF94000CF8788 /* simple.txt */,
+			);
+			name = fd;
+			path = tests/fd;
+			sourceTree = SOURCE_ROOT;
 		};
 		A07A07CB17829812006884FC /* perl-bindletools */ = {
 			isa = PBXGroup;
@@ -291,6 +349,7 @@
 		A0808A8B175D4B640074058B /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				A06092F118DE10F400434E5C /* fd */,
 				A03E2F4918CE80BE007DDFC6 /* utf8 */,
 			);
 			path = tests;
@@ -362,23 +421,67 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		A0EE9F1918DFE10F00CF8788 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		A01156E8175B0118008E66FA /* bindle */ = {
+		A06092F618DF8FC000434E5C /* fdtest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A01156F4175B0118008E66FA /* Build configuration list for PBXNativeTarget "bindle" */;
+			buildConfigurationList = A06092FD18DF8FC000434E5C /* Build configuration list for PBXNativeTarget "fdtest" */;
 			buildPhases = (
-				A01156E5175B0118008E66FA /* Sources */,
-				A01156E6175B0118008E66FA /* Frameworks */,
-				A01156E7175B0118008E66FA /* CopyFiles */,
+				A06092F318DF8FC000434E5C /* Sources */,
+				A06092F418DF8FC000434E5C /* Frameworks */,
+				A06092F518DF8FC000434E5C /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A0115706175B0E11008E66FA /* PBXTargetDependency */,
+				A0EE9F4F18DFE1E700CF8788 /* PBXTargetDependency */,
 			);
-			name = bindle;
+			name = fdtest;
+			productName = fdtest;
+			productReference = A06092F718DF8FC000434E5C /* fdtest */;
+			productType = "com.apple.product-type.tool";
+		};
+		A0EE9F1A18DFE10F00CF8788 /* bindle-osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0EE9F1E18DFE10F00CF8788 /* Build configuration list for PBXNativeTarget "bindle-osx" */;
+			buildPhases = (
+				A0EE9F1718DFE10F00CF8788 /* Sources */,
+				A0EE9F1818DFE10F00CF8788 /* Frameworks */,
+				A0EE9F1918DFE10F00CF8788 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bindle-osx";
+			productName = "bindle-osx";
+			productReference = A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A0EE9F2218DFE15600CF8788 /* bindle-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0EE9F4018DFE15700CF8788 /* Build configuration list for PBXNativeTarget "bindle-ios" */;
+			buildPhases = (
+				A0EE9F1F18DFE15600CF8788 /* Sources */,
+				A0EE9F2018DFE15600CF8788 /* Frameworks */,
+				A0EE9F2118DFE15600CF8788 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bindle-ios";
 			productName = "bindle-ios";
-			productReference = A01156E9175B0118008E66FA /* libbindle.a */;
+			productReference = A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -401,10 +504,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A01156E8175B0118008E66FA /* bindle */,
+				A0EE9F2218DFE15600CF8788 /* bindle-ios */,
+				A0EE9F1A18DFE10F00CF8788 /* bindle-osx */,
 				A01156FE175B0DF3008E66FA /* bindle: Git Version */,
 				A0808A7D175D34000074058B /* bindle: doxygen */,
 				A0808A84175D4A6C0074058B /* bindle: open docs */,
+				A06092F618DF8FC000434E5C /* fdtest */,
 			);
 		};
 /* End PBXProject section */
@@ -455,102 +560,52 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A01156E5175B0118008E66FA /* Sources */ = {
+		A06092F318DF8FC000434E5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01156F7175B0122008E66FA /* utf8.c in Sources */,
-				A01156FD175B0764008E66FA /* version.c in Sources */,
-				A02F597C18D1112E00D375B3 /* errno.c in Sources */,
-				A02F597818D0F6B700D375B3 /* fd.c in Sources */,
+				A060930018DF8FD100434E5C /* fdtest.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0EE9F1718DFE10F00CF8788 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0EE9F4C18DFE19100CF8788 /* version.c in Sources */,
+				A0EE9F4B18DFE18D00CF8788 /* utf8.c in Sources */,
+				A0EE9F4718DFE18600CF8788 /* errno.c in Sources */,
+				A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0EE9F1F18DFE15600CF8788 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0EE9F4D18DFE19200CF8788 /* version.c in Sources */,
+				A0EE9F4818DFE18900CF8788 /* fd.c in Sources */,
+				A0EE9F4618DFE18500CF8788 /* errno.c in Sources */,
+				A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A0115706175B0E11008E66FA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A01156FE175B0DF3008E66FA /* bindle: Git Version */;
-			targetProxy = A0115705175B0E11008E66FA /* PBXContainerItemProxy */;
-		};
 		A0808A89175D4A750074058B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A0808A7D175D34000074058B /* bindle: doxygen */;
 			targetProxy = A0808A88175D4A750074058B /* PBXContainerItemProxy */;
 		};
+		A0EE9F4F18DFE1E700CF8788 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A0EE9F1A18DFE10F00CF8788 /* bindle-osx */;
+			targetProxy = A0EE9F4E18DFE1E700CF8788 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A01156F5175B0118008E66FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/bindle.dst;
-				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = include/bindle.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A01156F6175B0118008E66FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/bindle.dst;
-				EXPORTED_SYMBOLS_FILE = lib/libbindle.sym;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = include/bindle.pch;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		A0115700175B0DF3008E66FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -562,6 +617,78 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A06092FE18DF8FC000434E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A06092FF18DF8FC000434E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -607,23 +734,175 @@
 			};
 			name = Release;
 		};
+		A0EE9F1C18DFE10F00CF8788 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A0EE9F1D18DFE10F00CF8788 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A0EE9F4118DFE15700CF8788 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/bindle_ios.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A0EE9F4218DFE15700CF8788 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/bindle_ios.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A01156F4175B0118008E66FA /* Build configuration list for PBXNativeTarget "bindle" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A01156F5175B0118008E66FA /* Debug */,
-				A01156F6175B0118008E66FA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A01156FF175B0DF3008E66FA /* Build configuration list for PBXAggregateTarget "bindle: Git Version" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0115700175B0DF3008E66FA /* Debug */,
 				A0115701175B0DF3008E66FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A06092FD18DF8FC000434E5C /* Build configuration list for PBXNativeTarget "fdtest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A06092FE18DF8FC000434E5C /* Debug */,
+				A06092FF18DF8FC000434E5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -654,6 +933,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A0EE9F1E18DFE10F00CF8788 /* Build configuration list for PBXNativeTarget "bindle-osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0EE9F1C18DFE10F00CF8788 /* Debug */,
+				A0EE9F1D18DFE10F00CF8788 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A0EE9F4018DFE15700CF8788 /* Build configuration list for PBXNativeTarget "bindle-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0EE9F4118DFE15700CF8788 /* Debug */,
+				A0EE9F4218DFE15700CF8788 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

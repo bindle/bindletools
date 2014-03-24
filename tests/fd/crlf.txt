@@ -1,0 +1,5 @@
+This data file has DOS line endings (i.e. <CRLF> or "\r\n").
+Only carriage returns at the end of the file should be stripped
+when processing files.
+
+P.S. The should also be stripped if the line is empty.

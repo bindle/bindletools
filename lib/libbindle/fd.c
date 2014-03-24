@@ -119,8 +119,9 @@ inline bindlefd * bindle_fdalloc(void)
       return(NULL);
    memset(bfd, 0, sizeof(bindlefd));
 
-   bfd->fd  = -1;
-   bfd->ptr = bfd;
+   bfd->fd     = -1;
+   bfd->ptr    = bfd;
+   bfd->bsize  = sizeof(bfd->buff);
 
    return(bfd);
 }
@@ -175,16 +176,20 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 
    // attempt to fill buffer from file
    if ((len = read(cur->fd, &cur->buff[cur->blen], (cur->bsize - cur->blen - 1))) == -1)
+   {
+      *linep = NULL;
       return(-1);
+   };
    cur->blen += len;
 
-   // look for EOL
+   // loop through file
    for(cur->boffset = 0; cur->boffset < cur->blen; cur->boffset++)
    {
+      // parse individual characters to find EOL
       switch(cur->buff[cur->boffset])
       {
          case '\\':
-         if (  ((opts & BINDLE_FD_ONEWLINE) == 0) ||
+         if (  ((opts & BINDLE_FD_OESC_NL) == 0) ||
                ((cur->boffset + 1) >= cur->blen) )
             break;
          if (cur->buff[cur->boffset+1] != '\n')
@@ -198,12 +203,11 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 
          case '\n':
          cur->buff[cur->boffset] = '\0';
-         if ((linenump))
-            *linenump = cur->lcur;
-         *linep = cur->buff;
          cur->boffset++;
          cur->lnum++;
-         cur->lcur = cur->lnum;
+         if ((linenump))
+            *linenump = cur->lnum;
+         *linep = cur->buff;
          return(cur->boffset);
 
          case '\r':
@@ -218,9 +222,30 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
          default:
          break;
       };
+
+      // attempt to fill buffer from file
+      if ((cur->bsize - 1) < cur->blen)
+      {
+         if ((len = read(cur->fd, &cur->buff[cur->blen], (cur->bsize - cur->blen - 1))) == -1)
+         {
+            *linep = NULL;
+            return(-1);
+         };
+         cur->blen += len;
+      };
    };
 
-   errno = EFBIG;
+   if ((linenump))
+      *linenump = cur->lnum;
+
+   if (cur->blen == 0)
+   {
+      *linep = NULL;
+      return(0);
+   };
+
+   *linep = NULL;
+   errno  = EFBIG;
 
    return(-1);
 }

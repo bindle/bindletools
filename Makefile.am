@@ -80,7 +80,8 @@ noinst_DATA				= \
 					  tests/utf8/utf8.txt
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
-noinst_PROGRAMS				= tests/utf8/utf8test
+noinst_PROGRAMS				= tests/fd/fdtest \
+					  tests/utf8/utf8test
 noinst_SCRIPTS				= tests/utf8/ascii.sh \
 					  tests/utf8/invalid-continuation.sh \
 					  tests/utf8/invalid-length.sh \
@@ -103,7 +104,10 @@ PERL_FILES				= lib/perl-bindletools/Changes \
 					  lib/perl-bindletools/t/CGI.t \
 					  lib/perl-bindletools/t/Version.t
 BUILT_SOURCES				=
-TESTS					= $(noinst_SCRIPTS)
+TESTS					= $(noinst_SCRIPTS) \
+					  tests/fd/crlf.sh \
+					  tests/fd/escnl.sh \
+					  tests/fd/simple.sh
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= \
@@ -115,6 +119,12 @@ EXTRA_DIST				= \
 					  m4/bindle-postgresql.m4 \
 					  m4/bindle-sqlite3.m4 \
 					  m4/bindle-xxd.m4 \
+					  tests/fd/crlf.sh \
+					  tests/fd/crlf.txt \
+					  tests/fd/escnl.sh \
+					  tests/fd/escnl.txt \
+					  tests/fd/simple.sh \
+					  tests/fd/simple.txt \
 					  tests/utf8/utf8test.sh \
 					  $(PERL_FILES) \
 					  $(noinst_DATA)
@@ -150,6 +160,11 @@ lib_libbindle_la_SOURCES		= \
 # macros for tests/utf8test
 tests_utf8_utf8test_DEPENDENCIES	= lib/libbindle.la
 tests_utf8_utf8test_LDADD		= -lbindle
+
+
+# macros for tests/fd/fdtest
+tests_fd_fdtest_DEPENDENCIES		= lib/libbindle.la
+tests_fd_fdtest_LDADD			= -lbindle
 
 
 # Makefile includes

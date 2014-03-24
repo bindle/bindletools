@@ -1,0 +1,6 @@
+This file provides test data for verifing that line extensions with \
+escaped newlines are able to properly wrap lines.
+This does however each extended line should not exceed the 256 byte \
+limit.
+For example, this file (if processing escaped newlines) should appear \
+to only have three lines.
