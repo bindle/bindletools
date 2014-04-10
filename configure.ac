@@ -110,7 +110,7 @@ AC_OUTPUT
 
 # Show local config
 AC_MSG_NOTICE([ ])
-AC_MSG_NOTICE([   Bindle Binaries Tools])
+AC_MSG_NOTICE([   Bindle Binaries Tools ($PACKAGE_VERSION)])
 AC_MSG_NOTICE([ ])
 AC_MSG_NOTICE([   Please send suggestions to:   $PACKAGE_BUGREPORT])
 AC_MSG_NOTICE([ ])
