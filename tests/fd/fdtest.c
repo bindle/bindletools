@@ -128,7 +128,7 @@ int main(int argc, char * argv[])
          break;
 
          case 'e':
-         fdopts |= BINDLE_FD_OESC_NL;
+         fdopts |= BINDLE_FD_ESC_NEWLINE;
          break;
 
          case 'f':
@@ -144,7 +144,7 @@ int main(int argc, char * argv[])
          break;
 
          case 'l':
-         fdopts |= BINDLE_FD_OLDIFSTYLE;
+         fdopts |= BINDLE_FD_LDIF_STYLE;
          break;
 
          case 'R':
@@ -152,7 +152,7 @@ int main(int argc, char * argv[])
          break;
 
          case 'r':
-         fdopts |= BINDLE_FD_OSTRIP_CR;
+         fdopts |= BINDLE_FD_STRIP_CR;
          break;
 
          case 'V':

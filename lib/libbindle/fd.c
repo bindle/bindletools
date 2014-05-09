@@ -189,7 +189,7 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
       switch(cur->buff[cur->boffset])
       {
          case '\\':
-         if (  ((opts & BINDLE_FD_OESC_NL) == 0) ||
+         if (  ((opts & BINDLE_FD_ESC_NEWLINE) == 0) ||
                ((cur->boffset + 1) >= cur->blen) )
             break;
          if (cur->buff[cur->boffset+1] != '\n')
@@ -211,7 +211,7 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
          return(cur->boffset);
 
          case '\r':
-         if ((opts & BINDLE_FD_OSTRIP_CR) == 0)
+         if ((opts & BINDLE_FD_STRIP_CR) == 0)
             break;
          for(pos = cur->boffset+1; pos < cur->blen; pos++)
             cur->buff[pos-1] = cur->buff[pos];
