@@ -67,7 +67,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    enableval=""
    AC_ARG_ENABLE(
       strictwarnings,
-      [AS_HELP_STRING([--enable-strictwarnings], [disable compiler warnings])],
+      [AS_HELP_STRING([--enable-strictwarnings], [enable additional compiler warnings])],
       [ ESTRICTWARNINGS=$enableval ],
       [ ESTRICTWARNINGS=$enableval ]
    )
