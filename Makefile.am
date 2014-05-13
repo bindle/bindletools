@@ -112,6 +112,7 @@ XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= \
 					  lib/libbindle/libbindle.sym \
+					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \
 					  m4/bindle-git.m4 \
 					  m4/bindle-libtool.m4 \

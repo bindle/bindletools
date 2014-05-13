@@ -171,6 +171,7 @@
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A0CE16F415E9893E00AC6A2F /* bindle-autogen.sh */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = text.script.sh; path = "bindle-autogen.sh"; sourceTree = "<group>"; tabWidth = 3; usesTabs = 0; };
+		A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-fd-poller.m4"; sourceTree = "<group>"; };
 		A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EE9F3318DFE15700CF8788 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -421,6 +422,7 @@
 		A0CE16E215E988DB00AC6A2F /* m4 */ = {
 			isa = PBXGroup;
 			children = (
+				A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */,
 				A01F700117C5061500C4789F /* bindle-tools.m4 */,
 				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,
 				A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */,
