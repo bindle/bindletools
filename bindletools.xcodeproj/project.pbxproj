@@ -65,6 +65,20 @@
 			remoteGlobalIDString = A0808A7D175D34000074058B;
 			remoteInfo = "bindle: doxygen";
 		};
+		A0CF1B4A1921DF5F00E5C668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A01156FE175B0DF3008E66FA;
+			remoteInfo = "bindle: Git Version";
+		};
+		A0CF1B4C1921DF6400E5C668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A01156FE175B0DF3008E66FA;
+			remoteInfo = "bindle: Git Version";
+		};
 		A0EE9F4E18DFE1E700CF8788 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
@@ -461,6 +475,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A0CF1B4B1921DF5F00E5C668 /* PBXTargetDependency */,
 			);
 			name = "bindle-osx";
 			productName = "bindle-osx";
@@ -478,6 +493,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A0CF1B4D1921DF6400E5C668 /* PBXTargetDependency */,
 			);
 			name = "bindle-ios";
 			productName = "bindle-ios";
@@ -597,6 +613,16 @@
 			isa = PBXTargetDependency;
 			target = A0808A7D175D34000074058B /* bindle: doxygen */;
 			targetProxy = A0808A88175D4A750074058B /* PBXContainerItemProxy */;
+		};
+		A0CF1B4B1921DF5F00E5C668 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A01156FE175B0DF3008E66FA /* bindle: Git Version */;
+			targetProxy = A0CF1B4A1921DF5F00E5C668 /* PBXContainerItemProxy */;
+		};
+		A0CF1B4D1921DF6400E5C668 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A01156FE175B0DF3008E66FA /* bindle: Git Version */;
+			targetProxy = A0CF1B4C1921DF6400E5C668 /* PBXContainerItemProxy */;
 		};
 		A0EE9F4F18DFE1E700CF8788 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -941,6 +967,7 @@
 				A0EE9F1D18DFE10F00CF8788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0EE9F4018DFE15700CF8788 /* Build configuration list for PBXNativeTarget "bindle-ios" */ = {
 			isa = XCConfigurationList;
@@ -949,6 +976,7 @@
 				A0EE9F4218DFE15700CF8788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
