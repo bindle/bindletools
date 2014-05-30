@@ -35,12 +35,6 @@
 #
 
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
-
-
 GIT_PACKAGE_VERSION_DIR			?= include
 
 
@@ -51,8 +45,8 @@ GIT_PACKAGE_VERSION_FILES		+= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
 BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_FILES)
 
 
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/git-package-version.sh
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-version.am
+EXTRA_DIST				+= %reldir%/git-package-version.sh
+EXTRA_DIST				+= %reldir%/makefile-version.am
 EXTRA_DIST				+= $(GIT_PACKAGE_VERSION_FILES)
 EXTRA_DIST				+= build-aux/git-tar-name.txt
 

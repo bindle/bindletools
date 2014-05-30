@@ -34,13 +34,8 @@
 #   contrib/makefile-subst.am
 #
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
 
-
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-subst.am
+EXTRA_DIST				+= %reldir%/makefile-subst.am
 
 
 # define directory locations for CPP
