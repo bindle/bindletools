@@ -41,7 +41,8 @@ EXTRA_DIST				+= %reldir%/makefile-autotools.am
 
 
 autoreconf:
-	autoreconf -i -f $(ACLOCAL_AMFLAGS) $(top_srcdir)
+	autoscan $(top_srcdir)
+	autoreconf -m -i -f $(ACLOCAL_AMFLAGS) $(top_srcdir)
 
 
 # end of automake file
