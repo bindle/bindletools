@@ -35,7 +35,7 @@
 #
 
 
-EXTRA_DIST				+= %reldir%/makefile-subst.am
+EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-subst.am
 
 
 # define directory locations for CPP

@@ -35,7 +35,7 @@
 #
 
 
-EXTRA_DIST				+= %reldir%/makefile-autotools.am
+EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-autotools.am
 
 .PHONY: autoreconf
 
