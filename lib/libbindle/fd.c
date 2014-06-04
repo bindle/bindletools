@@ -78,6 +78,7 @@ struct bindle_fd_struct
    size_t           lnum;        ///< Line count
    size_t           lcur;        ///< current line count
    struct stat      sb;          ///< stat() buffer of file
+   char           * name;        ///< name of file
    bindlefd       * ptr;         ///< pointer to next item in circular stack
 };
 
@@ -101,6 +102,9 @@ bindlefd * bindle_fdpop(bindlefd * bfd);
 //  Functions  //
 //             //
 /////////////////
+#ifdef __BINDLE_PMARK
+#pragma mark - Functions
+#endif
 
 int bindle_fd(bindlefd * bfd)
 {
@@ -144,6 +148,7 @@ inline void bindle_fdfree(bindlefd * bfd)
       close(bfd->fd);
    bfd->fd = -1;
 
+   free(bfd->name);
    free(bfd);
 
    return;
@@ -260,6 +265,12 @@ bindlefd * bindle_fdopen(bindlefd * stck, const char * filename)
 
    if ((bfd = bindle_fdalloc()) == NULL)
       return(NULL);
+
+   if ((bfd->name = strdup(filename)) == NULL)
+   {
+      bindle_fdfree(bfd);
+      return(NULL);
+   };
 
    if (stat(filename, &bfd->sb) == -1)
    {

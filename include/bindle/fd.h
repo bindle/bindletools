@@ -67,6 +67,9 @@
 #define BINDLE_FD_ESC_NEWLINE     0x01     ///< Allow lines to be wrapped with "\\\n"
 #define BINDLE_FD_LDIF_STYLE      0x02     ///< Allow wrapped lines using LDIF style line continuation
 #define BINDLE_FD_STRIP_CR        0x04     ///< Strip carriage returns from line
+#define BINDLE_FD_C_COMMENTS      0x08     ///< Strip C comments
+#define BINDLE_FD_CPP_COMMENTS    0x10     ///< Strip C++ comments
+#define BINDLE_FD_SH_COMMENTS     0x20     ///< Strip shell comments
 
 #define BINDLE_FD_BUFF_SIZE   256ULL   ///< buffer size used to parse lines
 
@@ -106,7 +109,7 @@ typedef struct bindle_fd_struct  bindlefd;
  *  Return file descriptor for file in top of stack
  *  @param  bfd       Reference to the stack.
  *  @return Returns the file descriptor of the top file in the stack.
- *  @see bindle_fdopen
+ *  @see bindle_fdopen, bindle_fdname
  */
 _BINDLE_F int bindle_fd(bindlefd * bfd);
 
@@ -127,7 +130,7 @@ _BINDLE_F void bindle_fdclose(bindlefd * bfd);
  *  @return Upon successful completetion, this function returns the reference
  *          to the file stack and the file reference at the top of the stack.
  *          If an error occurs, NULL is returned and errno is set.
- *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno
+ *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno, bindle_fdname
  */
 _BINDLE_F bindlefd * bindle_fdopen(bindlefd * stck, const char * filename);
 
@@ -148,6 +151,16 @@ _BINDLE_F bindlefd * bindle_fdopen(bindlefd * stck, const char * filename);
  */
 _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts);
+
+
+/**
+ *  Opens a UTF-8/ASCII file for parsing.
+ *  @param  stck      Pointer existing file stack.
+ *  @return Upon successful completetion, this function returns a reference
+ *          to the name of the top file on the stack.
+ *  @see bindle_fdopen, bindle_fd, bindle_errno
+ */
+_BINDLE_F const char * bindle_fdname(bindlefd * stck);
 
 
 /**
