@@ -64,8 +64,8 @@
 #pragma mark - Definitions
 #endif
 
-#define BINDLE_FD_STRIP_CR        0x04    ///< Strip carriage returns from line
-#define BINDLE_FD_BUFF_SIZE   256ULL      ///< default buffer size used to parse lines
+#define BINDLE_FD_STRIP_CR       0x04     ///< Strip carriage returns from line
+#define BINDLE_FD_BUFF_SIZE      256ULL   ///< default buffer size used to parse lines
 
 
 //////////////////
