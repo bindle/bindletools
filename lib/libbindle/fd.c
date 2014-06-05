@@ -81,18 +81,6 @@ struct bindle_fd_struct
 };
 
 
-//////////////////
-//              //
-//  Prototypes  //
-//              //
-//////////////////
-#ifdef __BINDLE_PMARK
-#pragma mark - Prototypes
-#endif
-
-bindlefd * bindle_fdalloc(size_t len);
-
-
 /////////////////
 //             //
 //  Functions  //
@@ -101,27 +89,6 @@ bindlefd * bindle_fdalloc(size_t len);
 #ifdef __BINDLE_PMARK
 #pragma mark - Functions
 #endif
-
-inline bindlefd * bindle_fdalloc(size_t len)
-{
-   bindlefd * bfd;
-
-   if ((bfd = malloc(sizeof(bindlefd))) == NULL)
-      return(NULL);
-   memset(bfd, 0, sizeof(bindlefd));
-
-   if ((bfd->buff = calloc(1, len)) == NULL)
-   {
-      bindle_fdclose(bfd);
-      return(NULL);
-   };
-
-   bfd->fd     = -1;
-   bfd->bsize  = len;
-
-   return(bfd);
-}
-
 
 void bindle_fdclose(bindlefd * bfd)
 {
@@ -236,8 +203,17 @@ bindlefd * bindle_fdopen(const char * filename)
 
    assert(filename != NULL);
 
-   if ((bfd = bindle_fdalloc(128)) == NULL)
+   if ((bfd = malloc(sizeof(bindlefd))) == NULL)
       return(NULL);
+   bzero(bfd, sizeof(bindlefd));
+   bfd->fd = -1;
+
+   if ((bfd->buff = calloc(1, BINDLE_FD_BUFF_SIZE)) == NULL)
+   {
+      bindle_fdclose(bfd);
+      return(NULL);
+   };
+   bfd->bsize = BINDLE_FD_BUFF_SIZE;
 
    if ((bfd->name = strdup(filename)) == NULL)
    {
