@@ -49,8 +49,10 @@ bindle_errno
 bindle_fdclose
 bindle_fdopen
 bindle_fdgetline
+bindle_fdlinenumber
 bindle_fdresize
 bindle_fdsize
+bindle_fdstat
 #
 # UTF8 functions
 bindle_utf8len

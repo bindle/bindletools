@@ -223,6 +223,13 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 }
 
 
+size_t bindle_fdlinenumber(bindlefd * bfd)
+{
+   assert(bfd != NULL);
+   return(bfd->lnum);
+}
+
+
 bindlefd * bindle_fdopen(const char * filename)
 {
    bindlefd * bfd;
@@ -272,6 +279,14 @@ size_t bindle_fdsize(bindlefd * bfd)
 {
    assert(bfd != NULL);
    return(bfd->bsize);
+}
+
+
+size_t bindle_fdstat(bindlefd * bfd, struct stat * buf)
+{
+   assert(bfd != NULL);
+   assert(buf != NULL);
+   return(fstat(bfd->fd, buf));
 }
 
 

@@ -50,6 +50,7 @@
 #endif
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <inttypes.h>
 
 #include <bindle/cdefs.h>
@@ -123,7 +124,7 @@ _BINDLE_F void bindle_fdclose(bindlefd * bfd);
  *  @return Upon successful completetion, this function returns the reference
  *          to the file stack and the file reference at the top of the stack.
  *          If an error occurs, NULL is returned and errno is set.
- *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno, bindle_fdname
+ *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno, bindle_fdname, bindle_fdstat
  */
 _BINDLE_F bindlefd * bindle_fdopen(const char * filename);
 
@@ -144,6 +145,15 @@ _BINDLE_F bindlefd * bindle_fdopen(const char * filename);
  */
 _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts);
+
+
+/**
+ *  Returns the number of the current line within the file.
+ *  @param  bfd       Pointer existing file stack.
+ *  @return Returns the number of the current line within the file.
+ *  @see bindle_fdopen
+ */
+_BINDLE_F size_t bindle_fdlinenumber(bindlefd * bfd);
 
 
 /**
@@ -174,6 +184,17 @@ _BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size);
  *  @see bindle_fdopen, bindle_fdresize
  */
 _BINDLE_F size_t bindle_fdsize(bindlefd * bfd);
+
+
+/**
+ *  Obtains information about the file
+ *  @param  bfd       Pointer existing file stack.
+ *  @param  buf       pointer to a stat structure as defined
+ *  @return Upon successful completion a value of 0 is returned. Otherwise, a
+ *          value of -1 is returned and errno is set to indicate the error.
+ *  @see bindle_fdopen
+ */
+_BINDLE_F size_t bindle_fdstat(bindlefd * bfd, struct stat * buf);
 
 
 #endif
