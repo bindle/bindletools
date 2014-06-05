@@ -64,14 +64,8 @@
 #pragma mark - Definitions
 #endif
 
-#define BINDLE_FD_ESC_NEWLINE     0x01     ///< Allow lines to be wrapped with "\\\n"
-#define BINDLE_FD_LDIF_STYLE      0x02     ///< Allow wrapped lines using LDIF style line continuation
-#define BINDLE_FD_STRIP_CR        0x04     ///< Strip carriage returns from line
-#define BINDLE_FD_C_COMMENTS      0x08     ///< Strip C comments
-#define BINDLE_FD_CPP_COMMENTS    0x10     ///< Strip C++ comments
-#define BINDLE_FD_SH_COMMENTS     0x20     ///< Strip shell comments
-
-#define BINDLE_FD_BUFF_SIZE   256ULL   ///< buffer size used to parse lines
+#define BINDLE_FD_STRIP_CR        0x04    ///< Strip carriage returns from line
+#define BINDLE_FD_BUFF_SIZE   256ULL      ///< default buffer size used to parse lines
 
 
 //////////////////
@@ -125,14 +119,13 @@ _BINDLE_F void bindle_fdclose(bindlefd * bfd);
 
 /**
  *  Opens a UTF-8/ASCII file for parsing.
- *  @param  stck      Pointer existing file stack.
  *  @param  filename  Reference to path of file to append to the stack.
  *  @return Upon successful completetion, this function returns the reference
  *          to the file stack and the file reference at the top of the stack.
  *          If an error occurs, NULL is returned and errno is set.
  *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno, bindle_fdname
  */
-_BINDLE_F bindlefd * bindle_fdopen(bindlefd * stck, const char * filename);
+_BINDLE_F bindlefd * bindle_fdopen(const char * filename);
 
 
 /**
@@ -164,13 +157,24 @@ _BINDLE_F const char * bindle_fdname(bindlefd * stck);
 
 
 /**
- *  Closes the file at the top of the stack
+ *  Reads next line from file.
  *  @param  bfd       Reference to the stack.
- *  @return Returns 1 on success. Returns 0 if only base file remains in the
- *          stack.
- *  @see bindle_fdopen
+ *  @param  size      Change buffer to size.
+ *  @return Returns length of buffer on success, returns -1 on error and sets
+ *          errno.
+ *  @see bindle_fdopen, bindle_fdsize
  */
-_BINDLE_F int bindle_fdpopclose(bindlefd * bfd);
+_BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size);
+
+
+/**
+ *  Retrieves current buffer size.
+ *  @param  bfd       Reference to the stack.
+ *  @return Returns the size of the buffer in bytes.
+ *  @see bindle_fdopen, bindle_fdresize
+ */
+_BINDLE_F size_t bindle_fdsize(bindlefd * bfd);
+
 
 #endif
 /* end of source */

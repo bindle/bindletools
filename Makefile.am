@@ -106,7 +106,6 @@ PERL_FILES				= lib/perl-bindletools/Changes \
 BUILT_SOURCES				=
 TESTS					= $(noinst_SCRIPTS) \
 					  tests/fd/crlf.sh \
-					  tests/fd/escnl.sh \
 					  tests/fd/simple.sh
 XFAIL_TESTS				=
 EXTRA_MANS				=
@@ -121,8 +120,6 @@ EXTRA_DIST				= \
 					  m4/bindle-xxd.m4 \
 					  tests/fd/crlf.sh \
 					  tests/fd/crlf.txt \
-					  tests/fd/escnl.sh \
-					  tests/fd/escnl.txt \
 					  tests/fd/simple.sh \
 					  tests/fd/simple.txt \
 					  tests/utf8/utf8test.sh \

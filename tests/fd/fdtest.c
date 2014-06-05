@@ -101,7 +101,7 @@ int main(int argc, char * argv[])
    ssize_t        len;
    const char   * line;
 
-   static char   short_opt[] = "CefhLlRrVw";
+   static char   short_opt[] = "CfhLRrVw";
    static struct option long_opt[] =
    {
       {"help",          no_argument, 0, 'h'},
@@ -113,7 +113,6 @@ int main(int argc, char * argv[])
    logopts = 0;
    rline   = 0;
    lline   = 0;
-   chars   = 0;
 
    while((c = getopt_long(argc, argv, short_opt, long_opt, &opt_index)) != -1)
    {
@@ -127,10 +126,6 @@ int main(int argc, char * argv[])
          logopts |= FDTEST_LOG_CHARS;
          break;
 
-         case 'e':
-         fdopts |= BINDLE_FD_ESC_NEWLINE;
-         break;
-
          case 'f':
          logopts |= FDTEST_LOG_FILE;
          break;
@@ -141,10 +136,6 @@ int main(int argc, char * argv[])
 
          case 'L':
          logopts |= FDTEST_LOG_LOGICAL;
-         break;
-
-         case 'l':
-         fdopts |= BINDLE_FD_LDIF_STYLE;
          break;
 
          case 'R':
@@ -177,9 +168,15 @@ int main(int argc, char * argv[])
    };
    logopts = (logopts == 0) ? FDTEST_LOG_REAL : logopts;
 
-   if ((bfd = bindle_fdopen(NULL, argv[optind])) == NULL)
+   if ((bfd = bindle_fdopen(argv[optind])) == NULL)
    {
       perror("bindle_fdopen()");
+      return(1);
+   };
+
+   if (bindle_fdresize(bfd, 1024) == -1)
+   {
+      perror("bindle_fdresize()");
       return(1);
    };
 
@@ -217,11 +214,9 @@ void my_usage(const char * prog_name)
 {
    printf("Usage: %s [OPTIONS] file\n"
          "  -C                        print parsed characters\n"
-         "  -e                        use escape for line wrap\n"
          "  -f                        print file with line numbers\n"
          "  -h, --help                print this help and exit\n"
          "  -L                        print number of logical lines in file\n"
-         "  -l                        use LDIF style line wrap\n"
          "  -R                        print number of real lines in file\n"
          "  _r                        strip carriage returns\n"
          "  -V, --version             print version number and exit\n"

@@ -164,8 +164,6 @@
 		A0EE9F5218DFFBB100CF8788 /* crlf.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = crlf.sh; sourceTree = "<group>"; };
 		A0EE9F5318DFFBB100CF8788 /* crlf.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = crlf.txt; sourceTree = "<group>"; };
 		A0EE9F5418E0035100CF8788 /* simple.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = simple.sh; sourceTree = "<group>"; };
-		A0EE9F5518E008E200CF8788 /* escnl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = escnl.sh; sourceTree = "<group>"; };
-		A0EE9F5618E008E200CF8788 /* escnl.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = escnl.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,8 +279,6 @@
 				A06092F218DF7A7500434E5C /* fdtest.c */,
 				A0EE9F5218DFFBB100CF8788 /* crlf.sh */,
 				A0EE9F5318DFFBB100CF8788 /* crlf.txt */,
-				A0EE9F5518E008E200CF8788 /* escnl.sh */,
-				A0EE9F5618E008E200CF8788 /* escnl.txt */,
 				A0EE9F5418E0035100CF8788 /* simple.sh */,
 				A0EE9F5118DFF94000CF8788 /* simple.txt */,
 			);

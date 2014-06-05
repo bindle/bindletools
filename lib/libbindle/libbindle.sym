@@ -46,11 +46,11 @@ bindle_version
 bindle_errno
 #
 # file parsing functions
-bindle_fd
 bindle_fdclose
 bindle_fdopen
 bindle_fdgetline
-bindle_fdpopclose
+bindle_fdresize
+bindle_fdsize
 #
 # UTF8 functions
 bindle_utf8len

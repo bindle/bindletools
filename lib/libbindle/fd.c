@@ -71,15 +71,13 @@
 struct bindle_fd_struct
 {
    int              fd;
-   char             buff[BINDLE_FD_BUFF_SIZE];
+   char           * buff;
    size_t           bsize;       ///< Buffer size
    size_t           blen;        ///< Buffer length (amount of data stored)
    size_t           boffset;     ///< Buffer offset of EOL
    size_t           lnum;        ///< Line count
    size_t           lcur;        ///< current line count
-   struct stat      sb;          ///< stat() buffer of file
    char           * name;        ///< name of file
-   bindlefd       * ptr;         ///< pointer to next item in circular stack
 };
 
 
@@ -92,9 +90,7 @@ struct bindle_fd_struct
 #pragma mark - Prototypes
 #endif
 
-bindlefd * bindle_fdalloc(void);
-void bindle_fdfree(bindlefd * bfd);
-bindlefd * bindle_fdpop(bindlefd * bfd);
+bindlefd * bindle_fdalloc(size_t len);
 
 
 /////////////////
@@ -106,16 +102,7 @@ bindlefd * bindle_fdpop(bindlefd * bfd);
 #pragma mark - Functions
 #endif
 
-int bindle_fd(bindlefd * bfd)
-{
-   assert(bfd != NULL);
-   if (bfd->ptr == NULL)
-      return(bfd->fd);
-   return(bfd->ptr->fd);
-}
-
-
-inline bindlefd * bindle_fdalloc(void)
+inline bindlefd * bindle_fdalloc(size_t len)
 {
    bindlefd * bfd;
 
@@ -123,9 +110,14 @@ inline bindlefd * bindle_fdalloc(void)
       return(NULL);
    memset(bfd, 0, sizeof(bindlefd));
 
+   if ((bfd->buff = calloc(1, len)) == NULL)
+   {
+      bindle_fdclose(bfd);
+      return(NULL);
+   };
+
    bfd->fd     = -1;
-   bfd->ptr    = bfd;
-   bfd->bsize  = sizeof(bfd->buff);
+   bfd->bsize  = len;
 
    return(bfd);
 }
@@ -134,20 +126,11 @@ inline bindlefd * bindle_fdalloc(void)
 void bindle_fdclose(bindlefd * bfd)
 {
    assert(bfd);
-   while(bindle_fdpopclose(bfd) > 0);
-   bindle_fdfree(bfd);
-   return;
-}
-
-
-inline void bindle_fdfree(bindlefd * bfd)
-{
-   assert(bfd != NULL);
 
    if (bfd->fd != -1)
       close(bfd->fd);
-   bfd->fd = -1;
 
+   free(bfd->buff);
    free(bfd->name);
    free(bfd);
 
@@ -158,7 +141,6 @@ inline void bindle_fdfree(bindlefd * bfd)
 ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts)
 {
-   bindlefd  * cur;
    size_t      offset;
    size_t      pos;
    ssize_t     len;
@@ -167,61 +149,46 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 
    errno = 0;
 
-   cur = bfd->ptr;
-
    // shift buffer to the left (erasing current line)
-   if (cur->boffset != 0)
+   if (bfd->boffset != 0)
    {
-      offset = cur->blen - cur->boffset;
+      offset = bfd->blen - bfd->boffset;
       for(pos = 0; pos < offset; pos++)
-         cur->buff[pos] = cur->buff[pos + cur->boffset];
+         bfd->buff[pos] = bfd->buff[pos + bfd->boffset];
    };
-   cur->blen    -= cur->boffset;
-   cur->boffset  = 0;
+   bfd->blen    -= bfd->boffset;
+   bfd->boffset  = 0;
 
    // attempt to fill buffer from file
-   if ((len = read(cur->fd, &cur->buff[cur->blen], (cur->bsize - cur->blen - 1))) == -1)
+   if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
    {
       *linep = NULL;
       return(-1);
    };
-   cur->blen += len;
+   bfd->blen += len;
 
    // loop through file
-   for(cur->boffset = 0; cur->boffset < cur->blen; cur->boffset++)
+   for(bfd->boffset = 0; bfd->boffset < bfd->blen; bfd->boffset++)
    {
       // parse individual characters to find EOL
-      switch(cur->buff[cur->boffset])
+      switch(bfd->buff[bfd->boffset])
       {
-         case '\\':
-         if (  ((opts & BINDLE_FD_ESC_NEWLINE) == 0) ||
-               ((cur->boffset + 1) >= cur->blen) )
-            break;
-         if (cur->buff[cur->boffset+1] != '\n')
-            break;
-         for(pos = cur->boffset+2; pos < cur->blen; pos++)
-            cur->buff[pos-2] = cur->buff[pos];
-         cur->blen    -= 2;
-         cur->boffset -= 2;
-         cur->lnum++;
-         break;
-
          case '\n':
-         cur->buff[cur->boffset] = '\0';
-         cur->boffset++;
-         cur->lnum++;
+         bfd->buff[bfd->boffset] = '\0';
+         bfd->boffset++;
+         bfd->lnum++;
          if ((linenump))
-            *linenump = cur->lnum;
-         *linep = cur->buff;
-         return(cur->boffset);
+            *linenump = bfd->lnum;
+         *linep = bfd->buff;
+         return(bfd->boffset);
 
          case '\r':
          if ((opts & BINDLE_FD_STRIP_CR) == 0)
             break;
-         for(pos = cur->boffset+1; pos < cur->blen; pos++)
-            cur->buff[pos-1] = cur->buff[pos];
-         cur->blen--;
-         cur->boffset--;
+         for(pos = bfd->boffset+1; pos < bfd->blen; pos++)
+            bfd->buff[pos-1] = bfd->buff[pos];
+         bfd->blen--;
+         bfd->boffset--;
          break;
 
          default:
@@ -229,21 +196,21 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
       };
 
       // attempt to fill buffer from file
-      if ((cur->bsize - 1) < cur->blen)
+      if ((bfd->bsize - 1) < bfd->blen)
       {
-         if ((len = read(cur->fd, &cur->buff[cur->blen], (cur->bsize - cur->blen - 1))) == -1)
+         if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
          {
             *linep = NULL;
             return(-1);
          };
-         cur->blen += len;
+         bfd->blen += len;
       };
    };
 
    if ((linenump))
-      *linenump = cur->lnum;
+      *linenump = bfd->lnum;
 
-   if (cur->blen == 0)
+   if (bfd->blen == 0)
    {
       *linep = NULL;
       return(0);
@@ -256,77 +223,55 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 }
 
 
-bindlefd * bindle_fdopen(bindlefd * stck, const char * filename)
+bindlefd * bindle_fdopen(const char * filename)
 {
    bindlefd * bfd;
-   bindlefd * cur;
 
    assert(filename != NULL);
 
-   if ((bfd = bindle_fdalloc()) == NULL)
+   if ((bfd = bindle_fdalloc(128)) == NULL)
       return(NULL);
 
    if ((bfd->name = strdup(filename)) == NULL)
    {
-      bindle_fdfree(bfd);
-      return(NULL);
-   };
-
-   if (stat(filename, &bfd->sb) == -1)
-   {
-      bindle_fdfree(bfd);
+      bindle_fdclose(bfd);
       return(NULL);
    };
 
    if ((bfd->fd = open(filename, O_RDONLY)) == -1)
    {
-      bindle_fdfree(bfd);
+      bindle_fdclose(bfd);
       return(NULL);
    };
-
-   if (stck == NULL)
-      return(bfd);
-
-   bfd->ptr = stck->ptr;
-   cur = bfd;
-   while(cur != stck)
-   {
-      cur = cur->ptr;
-      if (  (cur->sb.st_ino == bfd->sb.st_ino) &&
-            (cur->sb.st_dev == bfd->sb.st_dev) )
-      {
-         errno = ELOOP;
-         bindle_fdfree(bfd);
-         return(NULL);
-      };
-   };
-
-   stck->ptr = bfd;
 
    return(bfd);
 }
 
 
-inline bindlefd * bindle_fdpop(bindlefd * bfd)
+ssize_t bindle_fdresize(bindlefd * bfd, size_t size)
 {
-   bindlefd * cur;
+   void * ptr;
+
    assert(bfd != NULL);
-   if (bfd->ptr == bfd)
-      return(NULL);
-   cur       = bfd->ptr;
-   bfd->ptr = cur->ptr;
-   return(cur);
+
+   if (size == bfd->bsize)
+      return(0);
+
+   if ((ptr = realloc(bfd->buff, size)) == NULL)
+      return(-1);
+   bfd->buff      = ptr;
+   bfd->bsize     = size;
+   bfd->blen      = (bfd->blen > size)    ? size : bfd->blen;
+   bfd->boffset   = (bfd->boffset > size) ? size : bfd->boffset;
+
+   return(0);
 }
 
 
-int bindle_fdpopclose(bindlefd * bfd)
+size_t bindle_fdsize(bindlefd * bfd)
 {
-   bindlefd * cur;
    assert(bfd != NULL);
-   if ((cur = bindle_fdpop(bfd)) == NULL)
-      return(0);
-   bindle_fdfree(cur);
-   return(1);
+   return(bfd->bsize);
 }
 
 
