@@ -35,6 +35,11 @@
  *   @file bindle/fd.h
  *   Bindletools file functions provide basic support for parsing ASCII/UTF-8
  *   text files.
+ *
+ *   @defgroup fd File Parsing Functions
+ *   @brief  Bindletools file functions provide basic support for parsing
+ *   ASCII/UTF-8 text files.
+ *   @{
  */
 #ifndef __BINDLE_FD_H
 #define __BINDLE_FD_H 1
@@ -78,6 +83,7 @@
 #pragma mark - Data Types
 #endif
 
+/// Bindle file descriptor state.
 typedef struct bindle_fd_struct  bindlefd;
 
 
@@ -101,47 +107,48 @@ typedef struct bindle_fd_struct  bindlefd;
 #endif
 
 /**
- *  Return file descriptor for file in top of stack
- *  @param  bfd       Reference to the stack.
- *  @return Returns the file descriptor of the top file in the stack.
- *  @see bindle_fdopen, bindle_fdname
- */
-_BINDLE_F int bindle_fd(bindlefd * bfd);
-
-
-/**
  *  Destroys an UTF-8/ASCII file stack and frees the stack's resources.
- *  @param  bfd       Reference to the stack.
- *  @return This function does not return any value.
- *  @see bindle_fdopen, bindle_fd
+ *  @param[in]    bfd         Reference to the stack.
+ *
+ *  @return    This function does not return any value.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F void bindle_fdclose(bindlefd * bfd);
 
 
 /**
  *  Opens a UTF-8/ASCII file for parsing.
- *  @param  filename  Reference to path of file to append to the stack.
- *  @return Upon successful completetion, this function returns the reference
- *          to the file stack and the file reference at the top of the stack.
- *          If an error occurs, NULL is returned and errno is set.
- *  @see bindle_fdclose, bindle_fd, bindle_fdpopclose, bindle_errno, bindle_fdname, bindle_fdstat
+ *  @param[in]    filename    Reference to path of file to append to the stack.
+ *
+ *  @return    Upon successful completetion, this function returns the
+ *             reference to the file stack and the file reference at the top
+ *             of the stack. If an error occurs, NULL is returned and errno is
+ *             set.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F bindlefd * bindle_fdopen(const char * filename);
 
 
 /**
  *  Reads next line from file.
- *  @param  bfd       Reference to the stack.
- *  @param  linep     Reference to the stack.
- *  @param  linenump  Reference to the stack.
- *  @param  opts      Reference to the stack.
- *  @return Returns length of line on success, returns -1 on error and sets
- *          errno.
- *  @warning This function is not optimized. It is intended to be used at
- *           the startup of an application/daemon. This function would needs
- *           to be refactored before it would be advisable to use in a
- *           frequently used loop (such as the event loop for a daemon).
- *  @see bindle_fdopen
+ *  @param[in]    bfd         Reference to the stack.
+ *  @param[out]   linep       Reference to the stack.
+ *  @param[out]   linenump    Reference to the stack.
+ *  @param[in]    opts        Reference to the stack.
+ *
+ *  @return    Returns length of line on success, returns -1 on error and
+ *             sets errno.
+ *  @warning   This function is not optimized. It is intended to be used at
+ *             the startup of an application/daemon. This function would needs
+ *             to be refactored before it would be advisable to use in a
+ *             frequently used loop (such as the event loop for a daemon).
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts);
@@ -149,53 +156,69 @@ _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 
 /**
  *  Returns the number of the current line within the file.
- *  @param  bfd       Pointer existing file stack.
- *  @return Returns the number of the current line within the file.
- *  @see bindle_fdopen
+ *  @param[in]    bfd         Pointer existing file stack.
+ *
+ *  @return    Returns the number of the current line within the file.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdlinenumber(bindlefd * bfd);
 
 
 /**
  *  Opens a UTF-8/ASCII file for parsing.
- *  @param  stck      Pointer existing file stack.
- *  @return Upon successful completetion, this function returns a reference
- *          to the name of the top file on the stack.
- *  @see bindle_fdopen, bindle_fd, bindle_errno
+ *  @param[in]    bfd         Pointer existing file stack.
+ *
+ *  @return    Upon successful completetion, this function returns a reference
+ *             to the name of the top file on the stack.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
-_BINDLE_F const char * bindle_fdname(bindlefd * stck);
+_BINDLE_F const char * bindle_fdname(bindlefd * bfd);
 
 
 /**
- *  Reads next line from file.
- *  @param  bfd       Reference to the stack.
- *  @param  size      Change buffer to size.
- *  @return Returns length of buffer on success, returns -1 on error and sets
- *          errno.
- *  @see bindle_fdopen, bindle_fdsize
+ *  Changes the size of the working buffer.
+ *  @param[in]    bfd         Reference to the stack.
+ *  @param[in]    size        Change buffer to size.
+ *
+ *  @return    Returns length of buffer on success, returns -1 on error and
+ *             sets errno.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size);
 
 
 /**
  *  Retrieves current buffer size.
- *  @param  bfd       Reference to the stack.
- *  @return Returns the size of the buffer in bytes.
- *  @see bindle_fdopen, bindle_fdresize
+ *  @param[in]    bfd         Reference to the stack.
+ *
+ *  @return    Returns the size of the buffer in bytes.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdsize(bindlefd * bfd);
 
 
 /**
  *  Obtains information about the file
- *  @param  bfd       Pointer existing file stack.
- *  @param  buf       pointer to a stat structure as defined
- *  @return Upon successful completion a value of 0 is returned. Otherwise, a
- *          value of -1 is returned and errno is set to indicate the error.
- *  @see bindle_fdopen
+ *  @param[in]    bfd         Pointer existing file stack.
+ *  @param[out]   buf         pointer to a stat structure as defined
+ *
+ *  @return    Upon successful completion a value of 0 is returned. Otherwise,
+ *             a value of -1 is returned and errno is set to indicate the error.
+ *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
+ *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
+ *             bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdstat(bindlefd * bfd, struct stat * buf);
 
 
+/// @}
 #endif
 /* end of source */
