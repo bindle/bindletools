@@ -98,7 +98,7 @@ void bindle_perror(const char * s)
    {
       if (s[0] != '\0')
       {
-         fprintf(stderr, "%s\n", s, bindle_strerror(errno));
+         fprintf(stderr, "%s\n", s);
          return;
       };
    };
