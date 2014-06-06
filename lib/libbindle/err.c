@@ -48,6 +48,19 @@
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
+#include <assert.h>
+
+
+//////////////////
+//              //
+//  Prototypes  //
+//              //
+//////////////////
+#ifdef __BINDLE_PMARK
+#pragma mark - Prototypes
+#endif
+
+const char * bindle_errlist(int errnum);
 
 
 /////////////////
@@ -55,6 +68,18 @@
 //  Functions  //
 //             //
 /////////////////
+
+const char * bindle_errlist(int errnum)
+{
+   switch(errnum)
+   {
+      case BINDLE_SUCCESS:    return("success");
+      case BINDLE_EOF:        return("end of file");
+      default:                break;
+   };
+   return(NULL);
+}
+
 
 int bindle_errno(void)
 {
@@ -64,20 +89,53 @@ int bindle_errno(void)
 
 void bindle_perror(const char * s)
 {
-   perror(s);
+   if (errno > 0)
+   {
+      perror(s);
+      return;
+   };
+   if (s != NULL)
+   {
+      if (s[0] != '\0')
+      {
+         fprintf(stderr, "%s\n", s, bindle_strerror(errno));
+         return;
+      };
+   };
+   fprintf(stderr, "%s: %s\n", s, bindle_strerror(errno));
    return;
 }
 
 
 char * bindle_strerror(int errnum)
 {
-   return(strerror(errnum));
+   static char strerrbuf[80];
+   if (errnum > 0)
+      return(strerror(errnum));
+   bindle_strerror_r(errnum, strerrbuf, sizeof(strerrbuf));
+   return(strerrbuf);
 }
 
 
 int bindle_strerror_r(int errnum, char * strerrbuf, size_t buflen)
 {
-   return(strerror_r(errnum, strerrbuf, buflen));
+   const char * str;
+   assert(strerrbuf != NULL);
+   if (errnum > 0)
+      return(strerror_r(errnum, strerrbuf, buflen));
+   if ((str = bindle_errlist(errnum)) == NULL)
+   {
+      snprintf(strerrbuf, buflen, "unknown error: %i", errnum);
+      return(EINVAL);
+   };
+   strncpy(strerrbuf, str, buflen);
+   if (strerrbuf[buflen-1] != '\0')
+   {
+      strerrbuf[buflen-1] = '\0';
+      return(ERANGE);
+   };
+   strerrbuf[buflen-1] = '\0';
+   return(0);
 }
 
 
