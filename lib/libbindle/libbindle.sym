@@ -35,6 +35,9 @@
 #
 # lib/libbindle/errno.h
 bindle_errno
+bindle_perror
+bindle_strerror
+bindle_strerror_r
 #
 # lib/libbindle/fd.h
 bindle_fdclose

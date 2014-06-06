@@ -68,6 +68,9 @@
  *  @return The error value set in errno.
  */
 _BINDLE_F int bindle_errno(void);
+_BINDLE_F void bindle_perror(const char * s);
+_BINDLE_F char * bindle_strerror(int errnum);
+_BINDLE_F int bindle_strerror_r(int errnum, char * strerrbuf, size_t buflen);
 
 #endif
 /* end of source */

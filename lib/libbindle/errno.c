@@ -46,6 +46,8 @@
 #include <bindle/errno.h>
 
 #include <errno.h>
+#include <string.h>
+#include <stdio.h>
 
 
 /////////////////
@@ -57,6 +59,25 @@
 int bindle_errno(void)
 {
    return(errno);
+}
+
+
+void bindle_perror(const char * s)
+{
+   perror(s);
+   return;
+}
+
+
+char * bindle_strerror(int errnum)
+{
+   return(strerror(errnum));
+}
+
+
+int bindle_strerror_r(int errnum, char * strerrbuf, size_t buflen)
+{
+   return(strerror_r(errnum, strerrbuf, buflen));
 }
 
 
