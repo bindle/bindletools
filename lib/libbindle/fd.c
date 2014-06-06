@@ -129,7 +129,8 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    // attempt to fill buffer from file
    if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
    {
-      *linep = NULL;
+      if (linep != NULL)
+         *linep = NULL;
       return(-1);
    };
    bfd->blen += len;
@@ -146,7 +147,8 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
          bfd->lnum++;
          if ((linenump))
             *linenump = bfd->lnum;
-         *linep = bfd->buff;
+         if (linep != NULL)
+            *linep = bfd->buff;
          return(bfd->boffset);
 
          case '\r':
@@ -167,7 +169,8 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
       {
          if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
          {
-            *linep = NULL;
+            if (linep != NULL)
+               *linep = NULL;
             return(-1);
          };
          bfd->blen += len;
@@ -177,13 +180,12 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    if ((linenump))
       *linenump = bfd->lnum;
 
-   if (bfd->blen == 0)
-   {
+   if (linep != NULL)
       *linep = NULL;
-      return(0);
-   };
 
-   *linep = NULL;
+   if (bfd->blen == 0)
+      return(0);
+
    errno  = EFBIG;
 
    return(-1);
