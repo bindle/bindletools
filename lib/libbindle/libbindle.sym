@@ -33,7 +33,7 @@
 #
 #   lib/libbindle.m4 - exported symbols
 #
-# lib/libbindle/errno.h
+# lib/libbindle/err.h
 bindle_errno
 bindle_perror
 bindle_strerror

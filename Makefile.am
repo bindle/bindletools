@@ -63,7 +63,7 @@ doc_DATA				=
 include_HEADERS				= include/bindle.h
 bindleinclude_HEADERS			= \
 					  include/bindle/cdefs.h \
-					  include/bindle/errno.h \
+					  include/bindle/err.h \
 					  include/bindle/fd.h \
 					  include/bindle/utf8.h \
 					  include/bindle/regex.h \
@@ -148,7 +148,7 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 					  $(AM_LDFLAGS) \
 					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
 lib_libbindle_la_SOURCES		= \
-					  lib/libbindle/errno.c \
+					  lib/libbindle/err.c \
 					  lib/libbindle/fd.c \
 					  lib/libbindle/utf8.c \
 					  lib/libbindle/version.c

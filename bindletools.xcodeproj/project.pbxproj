@@ -46,8 +46,8 @@
 /* Begin PBXBuildFile section */
 		A060930018DF8FD100434E5C /* fdtest.c in Sources */ = {isa = PBXBuildFile; fileRef = A06092F218DF7A7500434E5C /* fdtest.c */; };
 		A0EE9F2418DFE15600CF8788 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
-		A0EE9F4618DFE18500CF8788 /* errno.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* errno.c */; };
-		A0EE9F4718DFE18600CF8788 /* errno.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* errno.c */; };
+		A0EE9F4618DFE18500CF8788 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
+		A0EE9F4718DFE18600CF8788 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
 		A0EE9F4818DFE18900CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
 		A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
 		A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
@@ -112,8 +112,8 @@
 		A02F597618D0F6AD00D375B3 /* fd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fd.h; sourceTree = "<group>"; };
 		A02F597718D0F6B700D375B3 /* fd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fd.c; sourceTree = "<group>"; };
 		A02F597918D10A5E00D375B3 /* cdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdefs.h; sourceTree = "<group>"; };
-		A02F597A18D1108D00D375B3 /* errno.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = errno.h; sourceTree = "<group>"; };
-		A02F597B18D1112E00D375B3 /* errno.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = errno.c; sourceTree = "<group>"; };
+		A02F597A18D1108D00D375B3 /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
+		A02F597B18D1112E00D375B3 /* err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = err.c; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A06092F218DF7A7500434E5C /* fdtest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fdtest.c; path = tests/fd/fdtest.c; sourceTree = SOURCE_ROOT; };
@@ -197,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				A02F597918D10A5E00D375B3 /* cdefs.h */,
-				A02F597A18D1108D00D375B3 /* errno.h */,
+				A02F597A18D1108D00D375B3 /* err.h */,
 				A02F597618D0F6AD00D375B3 /* fd.h */,
 				A0C4C65317A2812F008E856D /* regex.h */,
 				A0059497175D17B700DD3266 /* utf8.h */,
@@ -250,7 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				A01156D3175B009E008E66FA /* libbindle.sym */,
-				A02F597B18D1112E00D375B3 /* errno.c */,
+				A02F597B18D1112E00D375B3 /* err.c */,
 				A02F597718D0F6B700D375B3 /* fd.c */,
 				A01156D2175B009E008E66FA /* utf8.c */,
 				A01156FB175B0764008E66FA /* version.c */,
@@ -570,7 +570,7 @@
 			files = (
 				A0EE9F4C18DFE19100CF8788 /* version.c in Sources */,
 				A0EE9F4B18DFE18D00CF8788 /* utf8.c in Sources */,
-				A0EE9F4718DFE18600CF8788 /* errno.c in Sources */,
+				A0EE9F4718DFE18600CF8788 /* err.c in Sources */,
 				A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +581,7 @@
 			files = (
 				A0EE9F4D18DFE19200CF8788 /* version.c in Sources */,
 				A0EE9F4818DFE18900CF8788 /* fd.c in Sources */,
-				A0EE9F4618DFE18500CF8788 /* errno.c in Sources */,
+				A0EE9F4618DFE18500CF8788 /* err.c in Sources */,
 				A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

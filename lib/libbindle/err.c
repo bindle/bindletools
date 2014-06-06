@@ -31,7 +31,7 @@
  *
  *  @BINDLE_BINARIES_BSD_LICENSE_END@
  */
-#define __LIB_LIBBINDLE_ERRNO_C 1
+#define __LIB_LIBBINDLE_ERR_C 1
 
 ///////////////
 //           //
@@ -43,7 +43,7 @@
 #include "config.h"
 #endif
 
-#include <bindle/errno.h>
+#include <bindle/err.h>
 
 #include <errno.h>
 #include <string.h>
