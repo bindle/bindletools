@@ -174,7 +174,7 @@ int main(int argc, char * argv[])
       return(1);
    };
 
-   if (bindle_fdresize(bfd, 1024) == -1)
+   if (bindle_fdresize(bfd, 1024, NULL) == -1)
    {
       perror("bindle_fdresize()");
       return(1);

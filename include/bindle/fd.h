@@ -190,7 +190,7 @@ _BINDLE_F const char * bindle_fdname(bindlefd * bfd);
  *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
  *             bindle_fdstat
  */
-_BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size);
+_BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf);
 
 
 /**

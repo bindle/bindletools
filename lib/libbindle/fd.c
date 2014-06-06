@@ -231,11 +231,14 @@ bindlefd * bindle_fdopen(const char * filename)
 }
 
 
-ssize_t bindle_fdresize(bindlefd * bfd, size_t size)
+ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
 {
    void * ptr;
 
    assert(bfd != NULL);
+
+   if (pbuf != NULL)
+      *pbuf = bfd->buff;
 
    if (size == bfd->bsize)
       return(0);
@@ -246,6 +249,9 @@ ssize_t bindle_fdresize(bindlefd * bfd, size_t size)
    bfd->bsize     = size;
    bfd->blen      = (bfd->blen > size)    ? size : bfd->blen;
    bfd->boffset   = (bfd->boffset > size) ? size : bfd->boffset;
+
+   if (pbuf != NULL)
+      *pbuf = bfd->buff;
 
    return(0);
 }
