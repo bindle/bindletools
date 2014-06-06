@@ -33,19 +33,10 @@
 #
 #   lib/libbindle.m4 - exported symbols
 #
-bindle_build
-bindle_lib_version_current
-bindle_lib_version_revision
-bindle_lib_version_age
-bindle_lib_version_info
-bindle_lib_release_info
-bindle_string
-bindle_version
-#
-# Error functions
+# lib/libbindle/errno.h
 bindle_errno
 #
-# file parsing functions
+# lib/libbindle/fd.h
 bindle_fdclose
 bindle_fdopen
 bindle_fdgetline
@@ -54,8 +45,18 @@ bindle_fdresize
 bindle_fdsize
 bindle_fdstat
 #
-# UTF8 functions
+# lib/libbindle/utf8.h
 bindle_utf8len
 bindle_utf8nlen
 bindle_utf8test
+#
+# lib/libbindle/version.h
+bindle_build
+bindle_lib_version_current
+bindle_lib_version_revision
+bindle_lib_version_age
+bindle_lib_version_info
+bindle_lib_release_info
+bindle_string
+bindle_version
 # end of symbol export file
