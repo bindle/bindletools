@@ -183,6 +183,7 @@ _BINDLE_F const char * bindle_fdname(bindlefd * bfd);
  *  Changes the size of the working buffer.
  *  @param[in]    bfd         Reference to the stack.
  *  @param[in]    size        Change buffer to size.
+ *  @param[out]   pbuf        will be populated with pointer to internal buffer
  *
  *  @return    Returns length of buffer on success, returns -1 on error and
  *             sets errno.
