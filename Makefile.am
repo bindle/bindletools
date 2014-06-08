@@ -65,6 +65,7 @@ bindleinclude_HEADERS			= \
 					  include/bindle/cdefs.h \
 					  include/bindle/err.h \
 					  include/bindle/fd.h \
+					  include/bindle/log.h \
 					  include/bindle/utf8.h \
 					  include/bindle/regex.h \
 					  include/bindle/version.h
@@ -150,6 +151,7 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 lib_libbindle_la_SOURCES		= \
 					  lib/libbindle/err.c \
 					  lib/libbindle/fd.c \
+					  lib/libbindle/log.c \
 					  lib/libbindle/utf8.c \
 					  lib/libbindle/version.c
 
