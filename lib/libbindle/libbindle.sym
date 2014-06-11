@@ -41,6 +41,7 @@ bindle_strerror_r
 #
 # lib/libbindle/fd.h
 bindle_fdclose
+bindle_fderrno
 bindle_fdopen
 bindle_fdgetline
 bindle_fdlinenumber

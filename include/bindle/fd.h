@@ -111,26 +111,40 @@ typedef struct bindle_fd_struct  bindlefd;
  *  @param[in]    bfd         Reference to the stack.
  *
  *  @return    This function does not return any value.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F void bindle_fdclose(bindlefd * bfd);
 
 
 /**
+ *  Returns last error that occurred on file descriptor.
+ *  @param[in]    bfd         Reference to the stack.
+ *
+ *  @return    Returns last error that occurred on file descriptor.
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat,
+ *             bindle_perror
+ */
+_BINDLE_F int bindle_fderrno(bindlefd * bfd);
+
+
+/**
  *  Opens a UTF-8/ASCII file for parsing.
+ *  @param[out]   pbfd        Reference to pointer used to store allocated bindlefd struct.
  *  @param[in]    filename    Reference to path of file to append to the stack.
  *
  *  @return    Upon successful completetion, this function returns the
  *             reference to the file stack and the file reference at the top
  *             of the stack. If an error occurs, NULL is returned and errno is
  *             set.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
-_BINDLE_F bindlefd * bindle_fdopen(const char * filename);
+_BINDLE_F int bindle_fdopen(bindlefd ** pbfd, const char * filename);
 
 
 /**
@@ -146,9 +160,9 @@ _BINDLE_F bindlefd * bindle_fdopen(const char * filename);
  *             the startup of an application/daemon. This function would needs
  *             to be refactored before it would be advisable to use in a
  *             frequently used loop (such as the event loop for a daemon).
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts);
@@ -159,9 +173,9 @@ _BINDLE_F ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
  *  @param[in]    bfd         Pointer existing file stack.
  *
  *  @return    Returns the number of the current line within the file.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdlinenumber(bindlefd * bfd);
 
@@ -172,9 +186,9 @@ _BINDLE_F size_t bindle_fdlinenumber(bindlefd * bfd);
  *
  *  @return    Upon successful completetion, this function returns a reference
  *             to the name of the top file on the stack.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F const char * bindle_fdname(bindlefd * bfd);
 
@@ -187,11 +201,11 @@ _BINDLE_F const char * bindle_fdname(bindlefd * bfd);
  *
  *  @return    Returns length of buffer on success, returns -1 on error and
  *             sets errno.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
-_BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf);
+_BINDLE_F int bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf);
 
 
 /**
@@ -199,9 +213,9 @@ _BINDLE_F ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf);
  *  @param[in]    bfd         Reference to the stack.
  *
  *  @return    Returns the size of the buffer in bytes.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdsize(bindlefd * bfd);
 
@@ -213,9 +227,9 @@ _BINDLE_F size_t bindle_fdsize(bindlefd * bfd);
  *
  *  @return    Upon successful completion a value of 0 is returned. Otherwise,
  *             a value of -1 is returned and errno is set to indicate the error.
- *  @see       bindle_fdclose, bindle_fdgetline, bindle_fdlinenumber,
- *             bindle_fdname, bindle_fdopen, bindle_fdresize, bindle_fdsize,
- *             bindle_fdstat
+ *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
+ *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
+ *             bindle_fdresize, bindle_fdsize, bindle_fdstat
  */
 _BINDLE_F size_t bindle_fdstat(bindlefd * bfd, struct stat * buf);
 

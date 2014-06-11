@@ -44,6 +44,7 @@
 #endif
 
 #include <bindle/fd.h>
+#include <bindle/err.h>
 
 #include <string.h>
 #include <errno.h>
@@ -71,6 +72,7 @@
 struct bindle_fd_struct
 {
    int              fd;
+   int              err;
    char           * buff;
    size_t           bsize;       ///< Buffer size
    size_t           blen;        ///< Buffer length (amount of data stored)
@@ -92,7 +94,8 @@ struct bindle_fd_struct
 
 void bindle_fdclose(bindlefd * bfd)
 {
-   assert(bfd);
+   if (bfd == NULL)
+      return;
 
    if (bfd->fd != -1)
       close(bfd->fd);
@@ -105,6 +108,13 @@ void bindle_fdclose(bindlefd * bfd)
 }
 
 
+int bindle_fderrno(bindlefd * bfd)
+{
+   assert(bfd != NULL);
+   return(bfd->err);
+}
+
+
 ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    size_t * linenump, int opts)
 {
@@ -114,7 +124,8 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
 
    assert(bfd  != NULL);
 
-   errno = 0;
+   if (linep != NULL)
+      *linep = NULL;
 
    // shift buffer to the left (erasing current line)
    if (bfd->boffset != 0)
@@ -129,8 +140,7 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    // attempt to fill buffer from file
    if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
    {
-      if (linep != NULL)
-         *linep = NULL;
+      bfd->err = errno;
       return(-1);
    };
    bfd->blen += len;
@@ -145,7 +155,7 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
          bfd->buff[bfd->boffset] = '\0';
          bfd->boffset++;
          bfd->lnum++;
-         if ((linenump))
+         if (linenump != NULL)
             *linenump = bfd->lnum;
          if (linep != NULL)
             *linep = bfd->buff;
@@ -169,8 +179,7 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
       {
          if ((len = read(bfd->fd, &bfd->buff[bfd->blen], (bfd->bsize - bfd->blen - 1))) == -1)
          {
-            if (linep != NULL)
-               *linep = NULL;
+            bfd->err = errno;
             return(-1);
          };
          bfd->blen += len;
@@ -180,13 +189,15 @@ ssize_t bindle_fdgetline(bindlefd * bfd, const char ** linep,
    if ((linenump))
       *linenump = bfd->lnum;
 
-   if (linep != NULL)
-      *linep = NULL;
-
    if (bfd->blen == 0)
+   {
+      errno    = BINDLE_EOF;
+      bfd->err = errno;
       return(0);
+   };
 
-   errno  = EFBIG;
+   errno    = EFBIG;
+   bfd->err = errno;
 
    return(-1);
 }
@@ -199,41 +210,44 @@ size_t bindle_fdlinenumber(bindlefd * bfd)
 }
 
 
-bindlefd * bindle_fdopen(const char * filename)
+int bindle_fdopen(bindlefd ** pbfd, const char * filename)
 {
    bindlefd * bfd;
 
+   assert(pbfd     != NULL);
    assert(filename != NULL);
 
    if ((bfd = malloc(sizeof(bindlefd))) == NULL)
-      return(NULL);
+      return(errno);
    bzero(bfd, sizeof(bindlefd));
    bfd->fd = -1;
 
    if ((bfd->buff = calloc(1, BINDLE_FD_BUFF_SIZE)) == NULL)
    {
       bindle_fdclose(bfd);
-      return(NULL);
+      return(errno);
    };
    bfd->bsize = BINDLE_FD_BUFF_SIZE;
 
    if ((bfd->name = strdup(filename)) == NULL)
    {
       bindle_fdclose(bfd);
-      return(NULL);
+      return(errno);
    };
 
    if ((bfd->fd = open(filename, O_RDONLY)) == -1)
    {
       bindle_fdclose(bfd);
-      return(NULL);
+      return(errno);
    };
 
-   return(bfd);
+   *pbfd = bfd;
+
+   return(BINDLE_SUCCESS);
 }
 
 
-ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
+int bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
 {
    void * ptr;
 
@@ -243,10 +257,10 @@ ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
       *pbuf = bfd->buff;
 
    if (size == bfd->bsize)
-      return(0);
+      return(BINDLE_SUCCESS);
 
    if ((ptr = realloc(bfd->buff, size)) == NULL)
-      return(-1);
+      return(errno);
    bfd->buff      = ptr;
    bfd->bsize     = size;
    bfd->blen      = (bfd->blen > size)    ? size : bfd->blen;
@@ -255,7 +269,7 @@ ssize_t bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
    if (pbuf != NULL)
       *pbuf = bfd->buff;
 
-   return(0);
+   return(BINDLE_SUCCESS);
 }
 
 
