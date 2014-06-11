@@ -74,11 +74,12 @@ struct bindle_fd_struct
    int              fd;
    int              err;
    char           * buff;
+   char           * mem;
+   size_t           msize;       ///< Buffer size
    size_t           bsize;       ///< Buffer size
    size_t           blen;        ///< Buffer length (amount of data stored)
    size_t           boffset;     ///< Buffer offset of EOL
    size_t           lnum;        ///< Line count
-   size_t           lcur;        ///< current line count
    char           * name;        ///< name of file
 };
 
@@ -100,7 +101,7 @@ void bindle_fdclose(bindlefd * bfd)
    if (bfd->fd != -1)
       close(bfd->fd);
 
-   free(bfd->buff);
+   free(bfd->mem);
    free(bfd->name);
    free(bfd);
 
@@ -222,12 +223,14 @@ int bindle_fdopen(bindlefd ** pbfd, const char * filename)
    bzero(bfd, sizeof(bindlefd));
    bfd->fd = -1;
 
-   if ((bfd->buff = calloc(1, BINDLE_FD_BUFF_SIZE)) == NULL)
+   if ((bfd->mem = calloc(1, BINDLE_FD_BUFF_SIZE)) == NULL)
    {
       bindle_fdclose(bfd);
       return(errno);
    };
-   bfd->bsize = BINDLE_FD_BUFF_SIZE;
+   bfd->buff  = bfd->mem;
+   bfd->msize = BINDLE_FD_BUFF_SIZE;
+   bfd->bsize = bfd->msize;
 
    if ((bfd->name = strdup(filename)) == NULL)
    {
@@ -247,27 +250,57 @@ int bindle_fdopen(bindlefd ** pbfd, const char * filename)
 }
 
 
-int bindle_fdresize(bindlefd * bfd, size_t size, char ** pbuf)
+int bindle_fdreset(bindlefd * bfd)
+{
+   assert(bfd != NULL);
+
+   bfd->blen      = 0;
+   bfd->boffset   = 0;
+   bfd->lnum      = 0;
+
+   return(0);
+}
+
+
+int bindle_fdresize(bindlefd * bfd, size_t size)
 {
    void * ptr;
 
-   assert(bfd != NULL);
+   assert(bfd  != NULL);
 
-   if (pbuf != NULL)
-      *pbuf = bfd->buff;
+   if (size == 0)
+      size = BINDLE_FD_BUFF_SIZE;
 
-   if (size == bfd->bsize)
-      return(BINDLE_SUCCESS);
+   bindle_fdreset(bfd);
 
-   if ((ptr = realloc(bfd->buff, size)) == NULL)
+   if ((ptr = realloc(bfd->mem, size)) == NULL)
       return(errno);
-   bfd->buff      = ptr;
-   bfd->bsize     = size;
-   bfd->blen      = (bfd->blen > size)    ? size : bfd->blen;
-   bfd->boffset   = (bfd->boffset > size) ? size : bfd->boffset;
 
-   if (pbuf != NULL)
-      *pbuf = bfd->buff;
+   bfd->mem       = ptr;
+   bfd->buff      = bfd->mem;
+   bfd->msize     = size;
+   bfd->bsize     = bfd->msize;
+
+   bzero(bfd->mem, bfd->msize);
+
+   return(BINDLE_SUCCESS);
+}
+
+
+int bindle_fdsetbuffer(bindlefd * bfd, char * buff, size_t size)
+{
+   assert(bfd  != NULL);
+   assert(size != 0);
+
+   bindle_fdreset(bfd);
+
+   if (buff == NULL)
+      return(bindle_fdresize(bfd, size));
+
+   free(bfd->mem);
+   bfd->mem    = NULL;
+   bfd->msize  = size;
+   bfd->buff   = buff;
 
    return(BINDLE_SUCCESS);
 }

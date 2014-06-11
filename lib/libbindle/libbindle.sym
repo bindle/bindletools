@@ -45,7 +45,9 @@ bindle_fderrno
 bindle_fdopen
 bindle_fdgetline
 bindle_fdlinenumber
+bindle_fdreset
 bindle_fdresize
+bindle_fdsetbuffer
 bindle_fdsize
 bindle_fdstat
 #

@@ -44,6 +44,7 @@
 #endif
 
 #include <bindle/fd.h>
+#include <bindle/err.h>
 
 #include <stdio.h>
 #include <getopt.h>
@@ -94,6 +95,7 @@ int main(int argc, char * argv[])
    int            opt_index;
    int            fdopts;
    int            logopts;
+   int            err;
    bindlefd     * bfd;
    size_t         lline;
    size_t         rline;
@@ -168,13 +170,13 @@ int main(int argc, char * argv[])
    };
    logopts = (logopts == 0) ? FDTEST_LOG_REAL : logopts;
 
-   if ((bfd = bindle_fdopen(argv[optind])) == NULL)
+   if ((err = bindle_fdopen(&bfd, argv[optind])) != BINDLE_SUCCESS)
    {
       perror("bindle_fdopen()");
       return(1);
    };
 
-   if (bindle_fdresize(bfd, 1024, NULL) == -1)
+   if (bindle_fdresize(bfd, 1024) != BINDLE_SUCCESS)
    {
       perror("bindle_fdresize()");
       return(1);
