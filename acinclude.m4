@@ -34,5 +34,25 @@
 #   acinclude.m4 - custom m4 macros used by configure.ac
 #
 
+# AC_BINDLETOOLS_LIBRARY()
+# -----------------------------------
+AC_DEFUN([AC_BINDLETOOLS_LIBRARY],[dnl
+
+   enableval=""
+   AC_ARG_ENABLE(
+      libbindle,
+      [AS_HELP_STRING([--enable-libbindle], [install library (default: no)])],
+      [ ELIBBINDLE=$enableval ],
+      [ ELIBBINDLE=$enableval ]
+   )
+
+   ENABLE_LIBBINDLE=no
+   if test "x${ELIBBINDLE}" = "xyes";then
+      ENABLE_LIBBINDLETOOLS=${ELIBBINDLE}
+   fi
+
+   AM_CONDITIONAL([ENABLE_LIBBINDLE], [test "${ENABLE_LIBBINDLE}" == "yes"])
+])dnl
+
 
 # end of m4 file

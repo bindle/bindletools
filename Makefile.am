@@ -70,7 +70,7 @@ bindleinclude_HEADERS			= \
 					  include/bindle/utf8.h \
 					  include/bindle/regex.h \
 					  include/bindle/version.h
-lib_LTLIBRARIES				= lib/libbindle.la
+lib_LTLIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=
 noinst_DATA				= \
@@ -135,7 +135,31 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 
 
 # macros for lib/libbindle.la
-lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym $(bindleinclude_HEADERS)
+if ENABLE_LIBBINDLE
+lib_LTLIBRARIES				+= lib/libbindle.la
+include_HEADERS				+= include/bindle.h
+bindleinclude_HEADERS			+= include/bindle/cdefs.h
+bindleinclude_HEADERS			+= include/bindle/cnf.h
+bindleinclude_HEADERS			+= include/bindle/err.h
+bindleinclude_HEADERS			+= include/bindle/fd.h
+bindleinclude_HEADERS			+= include/bindle/log.h
+bindleinclude_HEADERS			+= include/bindle/utf8.h
+bindleinclude_HEADERS			+= include/bindle/regex.h
+bindleinclude_HEADERS			+= include/bindle/version.h
+else
+noinst_HEADERS				+= include/bindle.h
+noinst_LTLIBRARIES			+= lib/libbindle.la
+noinst_HEADERS				+= include/bindle.h
+noinst_HEADERS				+= include/bindle/cdefs.h
+noinst_HEADERS				+= include/bindle/cnf.h
+noinst_HEADERS				+= include/bindle/err.h
+noinst_HEADERS				+= include/bindle/fd.h
+noinst_HEADERS				+= include/bindle/log.h
+noinst_HEADERS				+= include/bindle/utf8.h
+noinst_HEADERS				+= include/bindle/regex.h
+noinst_HEADERS				+= include/bindle/version.h
+endif
+lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym $(noinst_HEADERS) $(include_HEADERS) $(bindleinclude_HEADERS)
 lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 					  -version-info $(LIB_VERSION_INFO) \
 					  $(AM_LDFLAGS) \
