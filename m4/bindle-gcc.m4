@@ -67,7 +67,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    enableval=""
    AC_ARG_ENABLE(
       strictwarnings,
-      [AS_HELP_STRING([--enable-strictwarnings], [disable compiler warnings])],
+      [AS_HELP_STRING([--enable-strictwarnings], [enable additional compiler warnings])],
       [ ESTRICTWARNINGS=$enableval ],
       [ ESTRICTWARNINGS=$enableval ]
    )
@@ -102,7 +102,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
       #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wtraditional"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpragma-once"
+      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpragma-once"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wextra-tokens"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnewline-eof"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wsequence-point"
@@ -150,7 +150,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpacked"
       #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpadded"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnested-externs"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wenum-clash"
+      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wenum-clash"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winline"
       #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlong-long"
    fi

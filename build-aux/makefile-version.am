@@ -35,12 +35,6 @@
 #
 
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
-
-
 GIT_PACKAGE_VERSION_DIR			?= include
 
 

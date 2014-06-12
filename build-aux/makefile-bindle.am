@@ -34,9 +34,6 @@
 #   contrib/makefile-autotools.am
 #
 
-BINDLETOOLS_CONDITIONAL			= loaded
-
-
 ACLOCAL_AMFLAGS				?=
 ACLOCAL_AMFLAGS				+= -I $(bindletools_srcdir)/m4
 
@@ -47,11 +44,7 @@ BUILT_SOURCES				?=
 EXTRA_DIST				?=
 EXTRA_DIST				+= $(bindletools_srcdir)/COPYING
 EXTRA_DIST				+= $(bindletools_srcdir)/README
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/autogen.sh
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/bindle-autogen.sh
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-bindle.am
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-subst.am
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-version.am
 
 
 # end of automake file

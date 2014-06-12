@@ -34,11 +34,6 @@
 #   contrib/makefile-subst.am
 #
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
-
 
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-subst.am
 
@@ -76,11 +71,11 @@ AM_CPPFLAGS				+= -DTOP_SRCDIR="\"$(abs_top_srcdir)\""
 
 # substitution routine
 do_subst = sed \
-	-e 's,[@]SHELL[@],@SHELL@,g' \
-	-e 's,[@]PACKAGE_VERSION[@],@PACKAGE_VERSION@,g' \
-	-e 's![@]PACKAGE_NAME[@]!@PACKAGE_NAME@!g' \
-	-e 's,[@]PACKAGE_TARNAME[@],@PACKAGE_TARNAME@,g' \
-	-e 's,[@]PACKAGE_BUGREPORT[@],@PACKAGE_BUGREPORT@,g' \
+	-e 's,[@]SHELL[@],$(SHELL),g' \
+	-e 's,[@]PACKAGE_VERSION[@],$(PACKAGE_VERSION),g' \
+	-e 's![@]PACKAGE_NAME[@]!$(PACKAGE_NAME)!g' \
+	-e 's,[@]PACKAGE_TARNAME[@],$(PACKAGE_TARNAME),g' \
+	-e 's,[@]PACKAGE_BUGREPORT[@],$(PACKAGE_BUGREPORT),g' \
 	-e 's,[@]GIT_VERSION_SCRIPT[@],$(GIT_VERSION_SCRIPT),g' \
 	-e 's,[@]GIT_PACKAGE_VERSION[@],$(GIT_PACKAGE_VERSION),g' \
 	-e 's,[@]GIT_PACKAGE_VERSION_BUILD[@],$(GIT_PACKAGE_VERSION_BUILD),g' \

@@ -34,10 +34,6 @@
 #   contrib/makefile-autotools.am
 #
 
-# load Bindle Tools file
-ifneq ($(BINDLETOOLS_CONDITIONAL),loaded)
-include $(srcdir)/$(bindletools_srcdir)/build-aux/makefile-bindle.am
-endif
 
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-autotools.am
 
@@ -45,7 +41,8 @@ EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-autotools.am
 
 
 autoreconf:
-	autoreconf -i -f $(ACLOCAL_AMFLAGS) $(top_srcdir)
+	autoscan $(top_srcdir)
+	autoreconf -m -i -f $(ACLOCAL_AMFLAGS) $(top_srcdir)
 
 
 # end of automake file
