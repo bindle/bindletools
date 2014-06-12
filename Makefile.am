@@ -113,7 +113,7 @@ TESTS					= $(noinst_SCRIPTS) \
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= \
-					  build-aux/autogen.sh \
+					  autogen.sh \
 					  lib/libbindle/libbindle.sym \
 					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \

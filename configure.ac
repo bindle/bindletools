@@ -53,7 +53,7 @@ AC_SUBST([RELEASE_MONTH],["September 2012"])
 AC_BINDLE_LIBTOOL_VERSION_INFO(0, 0, 0)
 
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_SRCDIR([build-aux/autogen.sh])
+AC_CONFIG_SRCDIR([build-aux/makefile-bindle.am])
 #AC_CONFIG_LIBOBJ_DIR(compat)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])

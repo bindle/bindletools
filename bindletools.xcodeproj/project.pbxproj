@@ -227,7 +227,6 @@
 		A0CE16F115E9892E00AC6A2F /* Makefile.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = Makefile.am; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		A0CE16F415E9893E00AC6A2F /* bindle-autogen.sh */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = text.script.sh; path = "bindle-autogen.sh"; sourceTree = "<group>"; tabWidth = 3; usesTabs = 0; };
 		A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-fd-poller.m4"; sourceTree = "<group>"; };
 		A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -481,7 +480,6 @@
 		A0CE16DE15E984A600AC6A2F /* build-aux */ = {
 			isa = PBXGroup;
 			children = (
-				A0CE16F415E9893E00AC6A2F /* bindle-autogen.sh */,
 				A0CE16DF15E984A600AC6A2F /* git-package-version.sh */,
 				A0CE16E015E984A600AC6A2F /* git-tar-name.txt */,
 				A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */,
