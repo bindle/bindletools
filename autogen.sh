@@ -36,6 +36,7 @@
 #   autogen.sh - runs GNU Autotools to create build environment
 #
 
+echo "running ${0} ..."
 AUTOGENNAME="`basename ${0}`" || exit 1
 SRCDIR="`dirname ${0}`"
 
@@ -72,6 +73,10 @@ autoreconf -v -i -f -Wall \
 
 # makes build directory
 mkdir -p ${SRCDIR}/build
+
+
+# add newline to create visual separation
+echo " "
 
 
 # end of script
