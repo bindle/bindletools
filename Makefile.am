@@ -97,15 +97,6 @@ sbin_SCRIPTS				=
 
 
 # lists
-PERL_FILES				= lib/perl-bindletools/Changes \
-					  lib/perl-bindletools/MANIFEST \
-					  lib/perl-bindletools/Makefile.PL \
-					  lib/perl-bindletools/README \
-					  lib/perl-bindletools/lib/Bindle/CGI.pm \
-					  lib/perl-bindletools/lib/Bindle/Version.pm.in \
-					  lib/perl-bindletools/src/vars.pl \
-					  lib/perl-bindletools/t/CGI.t \
-					  lib/perl-bindletools/t/Version.t
 BUILT_SOURCES				=
 TESTS					= $(noinst_SCRIPTS) \
 					  tests/fd/crlf.sh \
@@ -134,16 +125,13 @@ CLEANFILES				= \
 					  $(builddir)/a.out   $(srcdir)/a.out \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
 					  config.h.in~ $(srcdir)/config.h.in~ \
-					  lib/perl-bindletools/built-by-make \
-					  lib/perl-bindletools/lib/Bindle/Version.pm \
-					  $(srcdir)/lib/perl-bindletools/lib/Bindle/Version.pm \
 					  $(man_MANS) \
 					  $(bin_SCRIPTS) \
 					  $(sbin_SCRIPTS) \
 					  $(noinst_SCRIPTS) \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
-DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings --with-perl=$(PERL_PATH)
+DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 
 
 # macros for lib/libbindle.la
@@ -193,7 +181,7 @@ make_utf8check = \
 
 
 # custom targets
-.PHONY: install-perl
+.PHONY:
 
 tests/utf8/ascii.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
@@ -219,45 +207,14 @@ tests/utf8/utf8.sh: Makefile tests/utf8/utf8test.sh
 	@$(make_utf8check)
 
 
-lib/perl-bindletools/lib/Bindle/Version.pm: Makefile lib/perl-bindletools/lib/Bindle/Version.pm.in
-	chmod -R u+w $(srcdir)/lib/perl-bindletools
-	@$(do_subst_dt)
-	@mv lib/perl-bindletools/lib/Bindle/Version.pm $(srcdir)/lib/perl-bindletools/lib/Bindle/Version.pm
-
-lib/perl-bindletools/Makefile: $(PERL_FILES) lib/perl-bindletools/lib/Bindle/Version.pm
-	chmod -R u+w $(srcdir)/lib/perl-bindletools
-	cd $(srcdir)/lib/perl-bindletools && $(PERL) Makefile.PL
-	touch $(srcdir)/lib/perl-bindletools
-
-
-lib/perl-bindletools/built-by-make: lib/perl-bindletools/Makefile
-	rm -f $(@)
-	chmod -R u+w $(srcdir)/lib/perl-bindletools
-	cd $(srcdir)/lib/perl-bindletools && $(MAKE) test
-	mkdir -p `dirname $(@)`
-	touch $(@)
-
-
-perl-install: lib/perl-bindletools/built-by-make
-	cd $(srcdir)/lib/perl-bindletools && make install
-
-
 # local targets
 install-exec-local:
 
 install-data-local:
-	@echo "*******************************************************"
-	@echo "*                                                     *"
-	@echo "*  To install perl module, type: 'make perl-install'  *"
-	@echo "*                                                     *"
-	@echo "*******************************************************"
 
 uninstall-local:
 
 clean-local:
-	test -f $(srcdir)/lib/perl-bindletools/Makefile \
-	   && { cd $(srcdir)/lib/perl-bindletools && $(MAKE) distclean; } \
-	   || { cd $(srcdir); }
 
 distclean-local:
 	rm -fR $(srcdir)/autom4te.cache
