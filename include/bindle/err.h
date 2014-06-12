@@ -67,6 +67,7 @@
 
 #define BINDLE_SUCCESS     0        ///< success
 #define BINDLE_EOF         -10      ///< end of file
+#define BINDLE_UNTERM      -11      ///< unterminated quoted string
 
 
 //////////////////

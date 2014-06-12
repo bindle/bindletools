@@ -33,6 +33,11 @@
 #
 #   lib/libbindle.m4 - exported symbols
 #
+# lib/libbindle/cnf.h
+bindle_cnfclose
+bindle_cnfopen
+bindle_cnfread
+#
 # lib/libbindle/err.h
 bindle_errno
 bindle_perror
@@ -50,6 +55,10 @@ bindle_fdresize
 bindle_fdsetbuffer
 bindle_fdsize
 bindle_fdstat
+#
+# lib/libbindle/log.h
+bindle_basename
+bindle_dirname
 #
 # lib/libbindle/utf8.h
 bindle_utf8len

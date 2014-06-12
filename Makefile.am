@@ -63,6 +63,7 @@ doc_DATA				=
 include_HEADERS				= include/bindle.h
 bindleinclude_HEADERS			= \
 					  include/bindle/cdefs.h \
+					  include/bindle/cnf.h \
 					  include/bindle/err.h \
 					  include/bindle/fd.h \
 					  include/bindle/log.h \
@@ -81,7 +82,8 @@ noinst_DATA				= \
 					  tests/utf8/utf8.txt
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
-noinst_PROGRAMS				= tests/fd/fdtest \
+noinst_PROGRAMS				= tests/cnf/cnftest \
+					  tests/fd/fdtest \
 					  tests/utf8/utf8test
 noinst_SCRIPTS				= tests/utf8/ascii.sh \
 					  tests/utf8/invalid-continuation.sh \
@@ -143,17 +145,23 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings --with-perl=$(PERL_PATH)
 
 
 # macros for lib/libbindle.la
-lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym
+lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym $(bindleinclude_HEADERS)
 lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
 					  -version-info $(LIB_VERSION_INFO) \
 					  $(AM_LDFLAGS) \
 					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
 lib_libbindle_la_SOURCES		= \
+					  lib/libbindle/cnf.c \
 					  lib/libbindle/err.c \
 					  lib/libbindle/fd.c \
 					  lib/libbindle/log.c \
 					  lib/libbindle/utf8.c \
 					  lib/libbindle/version.c
+
+
+# macros for tests/cnf/cnftest
+tests_cnf_cnftest_DEPENDENCIES		= lib/libbindle.la
+tests_cnf_cnftest_LDADD			= -lbindle
 
 
 # macros for tests/utf8test

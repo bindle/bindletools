@@ -75,6 +75,7 @@ const char * bindle_errlist(int errnum)
    {
       case BINDLE_SUCCESS:    return("success");
       case BINDLE_EOF:        return("end of file");
+      case BINDLE_UNTERM:     return("unterminated quoted string");
       default:                break;
    };
    return(NULL);
