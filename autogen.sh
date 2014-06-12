@@ -71,7 +71,7 @@ autoreconf -v -i -f -Wall \
 
 
 # makes build directory
-mkdir -p ${SRCDIR}}/build
+mkdir -p ${SRCDIR}/build
 
 
 # end of script
