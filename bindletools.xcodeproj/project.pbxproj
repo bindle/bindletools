@@ -166,6 +166,7 @@
 		A00F6E9E194278C5003CC8C2 /* cnftest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cnftest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00F6EB319427C46003CC8C2 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
 		A00F6EB619427C61003CC8C2 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		A00F6EB81949715C003CC8C2 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
 		A01156D2175B009E008E66FA /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utf8.c; path = lib/libbindle/utf8.c; sourceTree = SOURCE_ROOT; };
 		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; name = libbindle.sym; path = lib/libbindle/libbindle.sym; sourceTree = SOURCE_ROOT; };
@@ -459,6 +460,7 @@
 			children = (
 				A0CE16EC15E9892E00AC6A2F /* acinclude.m4 */,
 				A0CE16ED15E9892E00AC6A2F /* AUTHORS */,
+				A00F6EB81949715C003CC8C2 /* autogen.sh */,
 				A0CE16EE15E9892E00AC6A2F /* ChangeLog */,
 				A0CE16EF15E9892E00AC6A2F /* configure.ac */,
 				A0CE16F015E9892E00AC6A2F /* COPYING */,
@@ -1133,6 +1135,7 @@
 				A00F6EA6194278C5003CC8C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A00F6EAC19427939003CC8C2 /* Build configuration list for PBXAggregateTarget "bindle: tests" */ = {
 			isa = XCConfigurationList;
@@ -1141,6 +1144,7 @@
 				A00F6EAE19427939003CC8C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01156FF175B0DF3008E66FA /* Build configuration list for PBXAggregateTarget "bindle: Git Version" */ = {
 			isa = XCConfigurationList;
