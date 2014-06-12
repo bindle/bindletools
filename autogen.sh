@@ -53,9 +53,11 @@ done
 
 # updates git repository
 if test -d ${SRCDIR}/.git || test -f ${SRCDIR}/.git;then
-   $(cd ${SRCDIR}; git submodule init)                              || exit 1
-   $(cd ${SRCDIR}; git submodule sync)                              || exit 1
-   $(cd ${SRCDIR}; git submodule update --init --recursive --merge) || exit 1
+   cd ${SRCDIR}
+   git submodule init                              || exit 1
+   git submodule sync                              || exit 1
+   git submodule update --init --recursive --merge || exit 1
+   cd -
 fi
 
 
