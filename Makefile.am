@@ -166,9 +166,11 @@ tests_fd_fdtest_LDADD			= -lbindle
 
 # Makefile includes
 GIT_PACKAGE_VERSION_DIR=include
-include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-autotools.am
-include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-subst.am
-include $(srcdir)/@bindletools_srcdir@/build-aux/makefile-version.am
+SUBST_EXPRESSIONS =
+include $(srcdir)/build-aux/makefile-bindle.am
+include $(srcdir)/build-aux/makefile-autotools.am
+include $(srcdir)/build-aux/makefile-subst.am
+include $(srcdir)/build-aux/makefile-version.am
 
 
 # substitution routine
