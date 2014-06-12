@@ -41,8 +41,10 @@
 //           //
 ///////////////
 
-#include <bindle/errno.h>
+#include <bindle/cnf.h>
+#include <bindle/err.h>
 #include <bindle/fd.h>
+#include <bindle/log.h>
 #include <bindle/utf8.h>
 #include <bindle/regex.h>
 #include <bindle/version.h>
