@@ -60,16 +60,8 @@ bindleincludedir			= $(includedir)/bindle
 # automake targets
 check_PROGRAMS				=
 doc_DATA				=
-include_HEADERS				= include/bindle.h
-bindleinclude_HEADERS			= \
-					  include/bindle/cdefs.h \
-					  include/bindle/cnf.h \
-					  include/bindle/err.h \
-					  include/bindle/fd.h \
-					  include/bindle/log.h \
-					  include/bindle/utf8.h \
-					  include/bindle/regex.h \
-					  include/bindle/version.h
+include_HEADERS				=
+bindleinclude_HEADERS			=
 lib_LTLIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=
