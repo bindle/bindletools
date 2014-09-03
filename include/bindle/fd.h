@@ -110,7 +110,6 @@ typedef struct bindle_fd_struct  bindlefd;
  *  Destroys an UTF-8/ASCII file stack and frees the stack's resources.
  *  @param[in]    bfd         Reference to the stack.
  *
- *  @return    This function does not return any value.
  *  @see       bindle_fdclose, bindle_fderrno, bindle_fdgetline,
  *             bindle_fdlinenumber, bindle_fdname, bindle_fdopen,
  *             bindle_fdresize, bindle_fdsize, bindle_fdstat

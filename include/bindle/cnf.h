@@ -115,7 +115,6 @@ typedef struct bindle_cnf_struct  bindlecnf;
  *  Destroys an UTF-8/ASCII configuration file reference.
  *  @param[in]    bcnf        Reference to the configuration handle.
  *
- *  @return    This function does not return any value.
  *  @see       bindle_cnfopen, bindle_cnfopen, bindle_cnfread,
  */
 _BINDLE_F void bindle_cnfclose(bindlecnf * bcnf);
@@ -138,9 +137,9 @@ _BINDLE_F int bindle_cnfopen(bindlecnf ** pbcnf, const char * filename,
 /**
  *  Reads a line from the configuration
  *  @param[in]    bcnf        Reference to the configuration handle.
- *  @param[out]   pargv
- *  @param[out]   pargc
- *  @param[out]   plinec
+ *  @param[out]   pargv       to be written
+ *  @param[out]   pargc       to be written
+ *  @param[out]   plinec      to be written
  *
  *  @return    Upon successful completetion, this function returns 0,
  *             otherwise an error code is returned.

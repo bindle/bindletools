@@ -97,8 +97,6 @@ _BINDLE_F int bindle_errno(void);
  *                            colon and space (``: ''); otherwise, only the
  *                            error message string is printed.
  *
- *  @return    Upon successful completetion, this function returns 0. If the
- *             error number was not recoginized, the function returns EINVAL.
  *  @see       bindle_errno, bindle_perror, bindle_strerror, bindle_strerror_r
  */
 _BINDLE_F void bindle_perror(const char * s);
