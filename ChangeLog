@@ -3,6 +3,7 @@ Bindle Binaries Tools
 =====================
 
 #### devel
+   - Removing call to contrib/bindletools/autogen.sh (syzdek)
 
 #### 0.4
    - Adding pre/post hooks to autogen.sh (syzdek)
