@@ -2,7 +2,7 @@
 Bindle Binaries Tools
 =====================
 
-#### devel
+#### 0.4
    - Adding pre/post hooks to autogen.sh (syzdek)
    - Adding initial libbindle.la (syzdek)
    - Adding perl module Bindle::CGI (syzdek)
