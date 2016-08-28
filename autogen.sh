@@ -75,6 +75,12 @@ if test -f ${SRCDIR}/contrib/bindletools/m4/bindle-gcc.m4;then
 fi
 
 
+# perform pre-hook
+if test -f ${SRCDIR}/build-aux/autogen-pre-hook.sh;then
+   . ${SRCDIR}/build-aux/autogen-pre-hook.sh
+fi
+
+
 # Performs some useful checks
 autoscan ${SRCDIR} || exit 1
 
@@ -85,6 +91,12 @@ autoreconf -v -i -f -Wall \
    -m \
    ${SRCDIR} \
    || exit 1
+
+
+# perform post-hook
+if test -f ${SRCDIR}/build-aux/autogen-post-hook.sh;then
+   . ${SRCDIR}/build-aux/autogen-post-hook.sh
+fi
 
 
 # makes build directory
