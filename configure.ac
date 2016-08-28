@@ -42,16 +42,7 @@ AC_INIT([Bindle Binaries Tools],[0.2],[syzdek@bindlebinaries.com],[bindletools])
 
 AC_SUBST([RELEASE_MONTH],["September 2012"])
 
-# Version Info:
-#    Current    -- the current version number of this API
-#    Revision   -- the revision of the implementation of the API version
-#    Age        -- How many seqential past API versions is supported by
-#                  this implementation
-# Format => Current:Revision:Age
-# Convenience macro:
-#    AC_BINDLE_LIBTOOL_VERSION_INFO(current, revision, age)
-AC_BINDLE_LIBTOOL_VERSION_INFO(0, 0, 0)
-
+# directory locations
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR([build-aux/makefile-bindle.am])
 #AC_CONFIG_LIBOBJ_DIR(compat)
@@ -74,6 +65,16 @@ AM_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_USE_SYSTEM_EXTENSIONS # replaces AC_AIX AC_GNU_SOURCE AC_MINIX
 AC_C_BIGENDIAN
+
+# Version Info:
+#    Current    -- the current version number of this API
+#    Revision   -- the revision of the implementation of the API version
+#    Age        -- How many seqential past API versions is supported by
+#                  this implementation
+# Format => Current:Revision:Age
+# Convenience macro:
+#    AC_BINDLE_LIBTOOL_VERSION_INFO(current, revision, age)
+AC_BINDLE_LIBTOOL_VERSION_INFO(0, 0, 0)
 
 # binary locations
 AC_PROG_INSTALL
