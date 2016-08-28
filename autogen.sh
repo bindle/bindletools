@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #   Bindle Binaries Tools
-#   Copyright (c) 2014, Bindle Binaries
+#   Copyright (c) 2014, 2016 Bindle Binaries
 #   All rights reserved.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
@@ -36,7 +36,6 @@
 #   autogen.sh - runs GNU Autotools to create build environment
 #
 
-echo "running ${0} ..."
 AUTOGENNAME="`basename ${0}`" || exit 1
 SRCDIR="`dirname ${0}`"
 
@@ -57,6 +56,21 @@ if test -d ${SRCDIR}/.git || test -f ${SRCDIR}/.git;then
    git submodule init                              || exit 1
    git submodule sync                              || exit 1
    git submodule update --init --recursive --merge || exit 1
+   cd -
+fi
+
+
+# generates files for bindletools
+if test -x ${SRCDIR}/contrib/bindletools/autogen.sh;then
+   ${SRCDIR}/contrib/bindletools/autogen.sh || exit 1
+fi
+
+
+# symlinks Bindle Tools M4 macros
+if test -f ${SRCDIR}/contrib/bindletools/m4/bindle-gcc.m4;then
+   cd ${SRCDIR}/m4
+   rm -f ./bindle*.m4 || exit 1
+   ln -s ../contrib/bindletools/m4/bindle*.m4 ./
    cd -
 fi
 
