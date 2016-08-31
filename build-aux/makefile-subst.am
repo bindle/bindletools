@@ -56,6 +56,7 @@ AM_CPPFLAGS				+= -DLOCALEDIR="\"$(localedir)\""
 AM_CPPFLAGS				+= -DLOCALSTATEDIR="\"$(localstatedir)\""
 AM_CPPFLAGS				+= -DMANDIR="\"$(mandir)\""
 AM_CPPFLAGS				+= -DPDFDIR="\"$(pdfdir)\""
+AM_CPPFLAGS				+= -DPKGCONFDIR="\"$(sysconfdir)/$(PACKAGE_TARNAME)\""
 AM_CPPFLAGS				+= -DPKGDATADIR="\"$(pkgdatadir)\""
 AM_CPPFLAGS				+= -DPKGINCLUDEDIR="\"$(pkgincludedir)\""
 AM_CPPFLAGS				+= -DPKGLIBDIR="\"$(pkglibdir)\""
@@ -109,6 +110,7 @@ do_subst = sed \
 	-e 's,[@]mandir[@],$(mandir),g' \
 	-e 's,[@]oldincludedir[@],$(oldincludedir),g' \
 	-e 's,[@]pdfdir[@],$(pdfdir),g' \
+	-e 's,[@]pkgconfdir[@],$(pkgdatadir)/$(PACKAGE_TARNAME),g' \
 	-e 's,[@]pkgdatadir[@],$(pkgdatadir),g' \
 	-e 's,[@]pkgincludedir[@],$(pkgincludedir),g' \
 	-e 's,[@]pkglibdir[@],$(pkglibdir),g' \
