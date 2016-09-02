@@ -188,6 +188,7 @@
 		A06092F218DF7A7500434E5C /* fdtest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fdtest.c; path = tests/fd/fdtest.c; sourceTree = SOURCE_ROOT; };
 		A06092F718DF8FC000434E5C /* fdtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fdtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
+		A06FDB1E1D7A02D200995468 /* bindle-doxygen.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = "bindle-doxygen.m4"; sourceTree = "<group>"; };
 		A07A07CD17829812006884FC /* Changes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Changes; sourceTree = "<group>"; };
 		A07A07CE17829812006884FC /* MANIFEST */ = {isa = PBXFileReference; lastKnownFileType = text; path = MANIFEST; sourceTree = "<group>"; };
 		A07A07CF17829812006884FC /* Makefile.PL */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = Makefile.PL; sourceTree = "<group>"; };
@@ -496,6 +497,7 @@
 		A0CE16E215E988DB00AC6A2F /* m4 */ = {
 			isa = PBXGroup;
 			children = (
+				A06FDB1E1D7A02D200995468 /* bindle-doxygen.m4 */,
 				A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */,
 				A01F700117C5061500C4789F /* bindle-tools.m4 */,
 				A016DA5F163753B0002165A5 /* bindle-gcc.m4 */,

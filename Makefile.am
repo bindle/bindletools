@@ -98,6 +98,7 @@ EXTRA_MANS				=
 EXTRA_DIST				= \
 					  autogen.sh \
 					  lib/libbindle/libbindle.sym \
+					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \
 					  m4/bindle-git.m4 \
