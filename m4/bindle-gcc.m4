@@ -93,39 +93,24 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
 
    # list of args
    ac_bindle_warnings_list=""
-   if test "x${USE_WARNINGS}" == "xyes";then
-      ac_bindle_warnings_list=" ${ac_bindle_warnings_list} -W"
-      ac_bindle_warnings_list=" ${ac_bindle_warnings_list} -Wall"
-      ac_bindle_warnings_list=" ${ac_bindle_warnings_list} -Werror"
-   fi
    if test "x${USE_STRICTWARNINGS}" == "xyes";then
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wtraditional"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpragma-once"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wextra-tokens"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnewline-eof"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wsequence-point"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wextra"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Werror"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Weverything"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-unused-macros"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-reserved-id-macro"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-format-nonliteral"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-disabled-macro-expansion"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wdiv-by-zero"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wfloat-equal"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wdisabled-optimization"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wchar-subscripts"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wcomment"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wformat"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wimplicit"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wimplicit-function-declaration"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmain"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmissing-braces"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wparentheses"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wreturn-type"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wswitch"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wswitch-default"   # for some reason any call to memset() fails with this flag
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wtrigraphs"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wunused"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wunknown-pragmas"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wuninitialized"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmultichar"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wundef"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wendif-labels"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wshadow"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlarger-than-4096"
@@ -134,12 +119,9 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wcast-qual"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wcast-align"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wwrite-strings"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wconversion" # prototypes with "short" or "unsigned short" cause warning: passing argument ?? with different width due to prototype
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wsign-compare"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Waggregate-return"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wshorten-64-to-32"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wstrict-prototypes"
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wstrict-aliasing"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmissing-prototypes"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmissing-declarations"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wmissing-noreturn"
@@ -148,25 +130,34 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wunreachable-code"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winvalid-pch"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpacked"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpadded"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wpadded"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnested-externs"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wenum-clash"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winline"
-      #ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wlong-long"
+   elif test "x${USE_WARNINGS}" == "xyes";then
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Werror"
+   elif test "x${USE_WARNINGS}" != "xno";then
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
    fi
 
    # creates test source code
-   AC_LANG_CONFTEST(
-      [AC_LANG_PROGRAM(
-         [[int main(void);]],
-         [[return(0);]]
-      )])
+   ac_bindle_warnsource=${ac_aux_dir}/bindletest-gccwarnings.c
+   if test ! -f ${ac_bindle_warnsource};then
+      AC_LANG_CONFTEST(
+         [AC_LANG_PROGRAM(
+            [[int main(void);]],
+            [[//return(0);]]
+         )])
+      ac_bindle_warnsource=configtest.c
+   fi
 
    # loops throough options
    CFLAGS_WARNINGS=""
    for ac_bindle_warning in ${ac_bindle_warnings_list};do
       AC_MSG_CHECKING(for gcc flag ${ac_bindle_warning})
-      ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} conftest.c -o conftest.o > /dev/null 2>&1
+      ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} ${ac_bindle_warnsource} -o conftest.o > /dev/null 2>&1
       if test "x$?" == "x0";then
          CFLAGS_WARNINGS="${CFLAGS_WARNINGS} ${ac_bindle_warning}"
          AC_MSG_RESULT(yes)
