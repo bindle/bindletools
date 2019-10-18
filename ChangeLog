@@ -7,6 +7,7 @@ Bindle Binaries Tools
    - Adding autoconf checks for Doxygen. (syzdek)
    - Updating Autoconf checks for GCC warnings. (syzdek)
    - Adding PKGCONFDIR keyword to substitution macros and targets. (syzdek)
+   - Adding ability to customize AC_BINDLE_ENABLE_WARNINGS() (syzdek)
 
 #### 0.4
    - Adding pre/post hooks to autogen.sh (syzdek)
