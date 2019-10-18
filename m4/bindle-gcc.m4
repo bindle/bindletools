@@ -143,21 +143,17 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    fi
 
    # creates test source code
-   ac_bindle_warnsource=${ac_aux_dir}/bindletest-gccwarnings.c
-   if test ! -f ${ac_bindle_warnsource};then
-      AC_LANG_CONFTEST(
-         [AC_LANG_PROGRAM(
-            [[int main(void);]],
-            [[//return(0);]]
-         )])
-      ac_bindle_warnsource=configtest.c
-   fi
+   AC_LANG_CONFTEST(
+     [AC_LANG_PROGRAM(
+        [[int main(void);]],
+        [[return(0);]]
+     )])
 
    # loops throough options
    CFLAGS_WARNINGS=""
    for ac_bindle_warning in ${ac_bindle_warnings_list};do
       AC_MSG_CHECKING(for gcc flag ${ac_bindle_warning})
-      ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} ${ac_bindle_warnsource} -o conftest.o > /dev/null 2>&1
+      ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} conftest.c -o conftest.o > /dev/null 2>&1
       if test "x$?" == "x0";then
          CFLAGS_WARNINGS="${CFLAGS_WARNINGS} ${ac_bindle_warning}"
          AC_MSG_RESULT(yes)
