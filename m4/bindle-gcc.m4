@@ -35,12 +35,16 @@
 #
 
 
-# AC_BINDLE_ENABLE_WARNINGS()
+# AC_BINDLE_ENABLE_WARNINGS([extra warnings], [exclude warnings])
 # ______________________________________________________________________________
 AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
 
    # prerequists
    AC_REQUIRE([AC_PROG_CC])
+
+   # saves arguments
+   ac_bindle_warnings_list=" $1 "
+   ac_bindle_warnings_exclude=" $2 "
 
    # sets compiler
    if test "x${CC}" == "x";then
@@ -92,7 +96,6 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    fi
 
    # list of args
-   ac_bindle_warnings_list=""
    if test "x${USE_STRICTWARNINGS}" == "xyes";then
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
@@ -163,12 +166,16 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    CFLAGS_WARNINGS=""
    for ac_bindle_warning in ${ac_bindle_warnings_list};do
       AC_MSG_CHECKING(for gcc flag ${ac_bindle_warning})
-      ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} conftest.c -o conftest.o > /dev/null 2>&1
-      if test "x$?" == "x0";then
-         CFLAGS_WARNINGS="${CFLAGS_WARNINGS} ${ac_bindle_warning}"
-         AC_MSG_RESULT(yes)
+      if test "x${ac_bindle_warnings_exclude}" != "x${ac_bindle_warnings_exclude% ${ac_bindle_warning} }";then
+         AC_MSG_RESULT(skipping)
       else
-         AC_MSG_RESULT(no)
+         ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} conftest.c -o conftest.o > /dev/null 2>&1
+         if test "x$?" == "x0";then
+            CFLAGS_WARNINGS="${CFLAGS_WARNINGS} ${ac_bindle_warning}"
+            AC_MSG_RESULT(yes)
+         else
+            AC_MSG_RESULT(no)
+         fi
       fi
    done
 
