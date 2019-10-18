@@ -143,11 +143,21 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    fi
 
    # creates test source code
-   AC_LANG_CONFTEST(
-     [AC_LANG_PROGRAM(
-        [[int main(void);]],
-        [[return(0);]]
-     )])
+   if test -f "${srcdir}/${ac_aux_dir}/bindletest-gccwarnings.c";then
+      cp \
+         "${srcdir}/${ac_aux_dir}/bindletest-gccwarnings.c" \
+         conftest.c
+   elif test -f "${srcdir}/${bindletools_srcdir}/build-aux/bindletest-gccwarnings.c";then
+      cp \
+         "${srcdir}/${bindletools_srcdir}/build-aux/bindletest-gccwarnings.c" \
+         conftest.c
+   else
+      AC_LANG_CONFTEST(
+         [AC_LANG_PROGRAM(
+            [[int main(void);]],
+            [[//return(0);]]
+         )])
+   fi
 
    # loops throough options
    CFLAGS_WARNINGS=""
@@ -161,6 +171,9 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
          AC_MSG_RESULT(no)
       fi
    done
+
+   # cleans up files
+   rm -f conftest.c
 
    # export variables
    AC_SUBST(CFLAGS_WARNINGS, "$CFLAGS_WARNINGS")
