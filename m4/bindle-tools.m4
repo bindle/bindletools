@@ -39,6 +39,10 @@
 # -----------------------------------
 AC_DEFUN_ONCE([AC_BINDLE],[dnl
 
+   AC_REQUIRE([AC_PROG_INSTALL])
+   AC_REQUIRE([AC_PROG_MKDIR_P])
+   AC_REQUIRE([AC_PROG_SED])
+
    # determines location of Bindle Tools directory
    bindletools_srcdir=""
    AC_MSG_CHECKING([for location of Bindle Tools directory])
