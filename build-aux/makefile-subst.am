@@ -71,7 +71,7 @@ AM_CPPFLAGS				+= -DTOP_SRCDIR="\"$(abs_top_srcdir)\""
 
 
 # substitution routine
-do_subst = sed \
+do_subst = $(SED) \
 	-e 's,[@]SHELL[@],$(SHELL),g' \
 	-e 's,[@]PACKAGE_VERSION[@],$(PACKAGE_VERSION),g' \
 	-e 's![@]PACKAGE_NAME[@]!$(PACKAGE_NAME)!g' \
@@ -123,16 +123,17 @@ do_subst = sed \
 	-e 's,[@]top_builddir[@],$(abs_top_builddir),g' \
 	-e 's,[@]top_srcdir[@],$(abs_top_srcdir),g' \
 	$(SUBST_EXPRESSIONS)
-do_subst_fn = \
-		echo "do_subst < ${@}.in > ${@}"; \
-		mkdir -p `dirname ${@}` || exit 1; \
-		${do_subst} < $(srcdir)/${@}.in > ${@} || exit 1; \
-		chmod 0755 ${@}
-do_subst_dt = \
-		echo "do_subst < ${@}.in > ${@}"; \
-		mkdir -p `dirname ${@}` || exit 1; \
-		${do_subst} < $(srcdir)/${@}.in > ${@} || exit 1; \
-		chmod 0644 ${@}
+do_subst_common = \
+		@if test "x$(V)" == "x0";then \
+			echo "  SED      $(@)"; \
+		else \
+			echo "do_subst < ${@}.in > ${@}"; \
+		fi; \
+		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
+		$(do_subst) < "$(srcdir)/$(@).in" > "$(@)" || exit 1; \
+		touch "$(@)"
+do_subst_fn =   $(do_subst_common); chmod 0755 "$(@)"
+do_subst_dt =   $(do_subst_common); chmod 0644 "$(@)"
 
 
 # end of automake file
