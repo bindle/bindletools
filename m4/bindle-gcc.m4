@@ -43,7 +43,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    AC_REQUIRE([AC_PROG_CC])
 
    # saves arguments
-   ac_bindle_warnings_list=" $1 "
+   ac_bindle_warnings_additions=" $1 "
    ac_bindle_warnings_exclude=" $2 "
 
    # sets compiler
@@ -96,6 +96,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    fi
 
    # list of args
+   ac_bindle_warnings_list=""
    if test "x${USE_STRICTWARNINGS}" == "xyes";then
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
@@ -144,6 +145,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
    fi
+   ac_bindle_warnings_list="${ac_bindle_warnings_list} ${ac_bindle_warnings_additions}"
 
    # creates test source code
    if test -f "${srcdir}/${ac_aux_dir}/bindletest-gccwarnings.c";then
