@@ -138,4 +138,15 @@ do_subst_fn =   $(do_subst_common); chmod 0755 "$(@)"
 do_subst_dt =   $(do_subst_common); chmod 0644 "$(@)"
 
 
+do_subst_files = \
+		@if test "x$(V)" == "x0";then \
+			echo "  SED      $(@)"; \
+		else \
+			echo "do_subst $(patsubst Makefile,,$(+)) > ${@}"; \
+		fi; \
+		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
+		$(do_subst) $(patsubst Makefile,,$(+)) > "$(@)" || exit 1; \
+		touch "$(@)"
+
+
 # end of automake file
