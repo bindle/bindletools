@@ -149,4 +149,14 @@ do_subst_files = \
 		touch "$(@)"
 
 
+do_cat =        @if test "x$(V)" == "x0";then \
+			echo "  CAT      $(@)"; \
+		else \
+			echo "cat $(patsubst Makefile,,$(+)) > ${@}"; \
+		fi; \
+		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
+		cat $(patsubst Makefile,,$(+)) > "$(@)" || exit 1; \
+		touch "$(@)"
+
+
 # end of automake file
