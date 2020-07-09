@@ -147,6 +147,8 @@ do_subst_files = \
 		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
 		$(do_subst) $(patsubst Makefile,,$(+)) > "$(@)" || exit 1; \
 		touch "$(@)"
+do_subst_files_fn = $(do_subst_files); chmod 0755 "$(@)"
+do_subst_files_dt = $(do_subst_files); chmod 0644 "$(@)"
 
 
 do_cat =        @if test "x$(V)" == "x0";then \
@@ -157,6 +159,8 @@ do_cat =        @if test "x$(V)" == "x0";then \
 		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
 		cat $(patsubst Makefile,,$(+)) > "$(@)" || exit 1; \
 		touch "$(@)"
+do_cat_fn = $(do_cat); chmod 0755 "$(@)"
+do_cat_dt = $(do_cat); chmod 0644 "$(@)"
 
 
 # end of automake file
