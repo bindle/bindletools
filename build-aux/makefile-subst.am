@@ -123,6 +123,8 @@ do_subst = $(SED) \
 	-e 's,[@]top_builddir[@],$(abs_top_builddir),g' \
 	-e 's,[@]top_srcdir[@],$(abs_top_srcdir),g' \
 	$(SUBST_EXPRESSIONS)
+
+
 do_subst_common = \
 		@if test "x$(V)" == "x0";then \
 			echo "  SED      $(@)"; \
