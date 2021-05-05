@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #   Bindle Binaries Tools
-#   Copyright (c) 2012, Bindle Binaries
+#   Copyright (c) 2012, 2021 Bindle Binaries
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -59,7 +59,11 @@ if test "x${SRCDIR}" == "xauto";then
    GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
    SRCDIR="${GIT_TOP_DIR}"
 else
-   GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
+   if test ! -d "${SRCDIR}";then
+      echo "${SCRIPT}: specified source directory does not exist." 1>&2;
+      exit 1;
+   fi
+   GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && pwd; )`
    if test "x${GIT_TOP_DIR}" == "x";then
       GIT_TOP_DIR=${SRCDIR}
    fi
