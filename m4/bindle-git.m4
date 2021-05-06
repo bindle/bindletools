@@ -43,7 +43,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GIT_PACKAGE_VERSION_BUILD=""  # Git package version build (x.x.x.gbbbbb).
    GPV=""   # Git package version (x.x.x).
    GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
-   GCS=""   # Cached git package version string.
+   GIT_CACHED_STRING=""   # Cached git package version string.
    GCF=""   # Cached git file.
    GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GPN=""   # git package name.
@@ -101,14 +101,13 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
       # reads cache file and saves results
       if test "x${GCF}" != "x";then
-         GCS=$(cat ${GCF} 2> /dev/null)
+         GIT_CACHED_STRING=$(cat ${GCF} 2> /dev/null)
       fi
-      if test "x${GCS}" != "x";then
-         GIT_PACKAGE_VERSION_BUILD=${GCS}
+      if test "x${GIT_CACHED_STRING}" != "x";then
+         GIT_PACKAGE_VERSION_BUILD=${GIT_CACHED_STRING}
          AC_MSG_NOTICE([using cached git package version])
       fi
    fi
-   unset GCS
 
    # Saves data for use in build scripts
    if test "x${GIT_PACKAGE_VERSION_BUILD}" = "x";then
@@ -173,7 +172,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # clears vars
    unset GPV
-   unset GCS
+   unset GIT_CACHED_STRING
    unset GPN
 ])dnl
 
