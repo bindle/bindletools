@@ -39,7 +39,7 @@
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # sets vars to known states
-   GSH=""   # Git package version script.
+   GIT_VERSION_SCRIPT=""   # Git package version script.
    GIT_PACKAGE_VERSION_BUILD=""  # Git package version build (x.x.x.gbbbbb).
    GPV=""   # Git package version (x.x.x).
    GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
@@ -52,13 +52,13 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    # git package version script location
    if test "x$1" != "x";then
       if test -f "${srcdir}/$1";then
-         GSH="${srcdir}/$1"
+         GIT_VERSION_SCRIPT="${srcdir}/$1"
       else
          AC_MSG_WARN([hard coded git package version script does not exist])
       fi
    fi
-   if test "x${GSH}" == "x";then
-      GSH=${ac_aux_dir}/git-package-version.sh
+   if test "x${GIT_VERSION_SCRIPT}" == "x";then
+      GIT_VERSION_SCRIPT=${ac_aux_dir}/git-package-version.sh
    fi
 
    # git output directory
@@ -71,13 +71,13 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
    # sets bindletools directory
-   BINDLEDIR=`dirname ${GSH}`
+   BINDLEDIR=`dirname ${GIT_VERSION_SCRIPT}`
    BINDLEDIR=`dirname ${BINDLEDIR}`
    AC_REQUIRE([AC_BINDLE])
 
    # attempt to use script to determine version
-   if test "x${GSH}" != "x";then
-      GIT_PACKAGE_VERSION_BUILD=$(${GSH} "${srcdir}" "${GOD}" 2> /dev/null)
+   if test "x${GIT_VERSION_SCRIPT}" != "x";then
+      GIT_PACKAGE_VERSION_BUILD=$(${GIT_VERSION_SCRIPT} "${srcdir}" "${GOD}" 2> /dev/null)
    fi
 
    # attempt to fall back to cache files
@@ -139,7 +139,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_MSG_NOTICE([using git numeric version ${GIT_PACKAGE_VERSION_NUMBER}])
       #
       # set internal variables
-      GIT_VERSION_SCRIPT=${GSH}
       GIT_PACKAGE_VERSION=${GPV}
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
@@ -173,7 +172,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
    # clears vars
-   unset GSH
    unset GPV
    unset GCS
    unset GPN
