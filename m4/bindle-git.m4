@@ -125,18 +125,18 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
       #
       # generate numeric version
-      GPVN=[$(echo ${GPV} |cut -d. -f1)];
+      GIT_PACKAGE_VERSION_NUMBER=[$(echo ${GPV} |cut -d. -f1)];
       NUM=[$(echo ${GPV} |cut -d. -f2)];
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
-      GPVN=[$(printf "${GPVN}.%02i" ${NUM})]
+      GIT_PACKAGE_VERSION_NUMBER=[$(printf "${GIT_PACKAGE_VERSION_NUMBER}.%02i" ${NUM})]
       NUM=[$(echo ${GPV} |cut -d. -f3)]
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
-      GPVN=[$(printf "${GPVN}%04i" ${NUM})]
-      AC_MSG_NOTICE([using git numeric version ${GPVN}])
+      GIT_PACKAGE_VERSION_NUMBER=[$(printf "${GIT_PACKAGE_VERSION_NUMBER}%04i" ${NUM})]
+      AC_MSG_NOTICE([using git numeric version ${GIT_PACKAGE_VERSION_NUMBER}])
       #
       # set internal variables
       GIT_VERSION_SCRIPT=${GSH}
@@ -145,11 +145,10 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_PACKAGE_MINOR=${GMIN}
       GIT_PACKAGE_PATCH=${GPAT}
       GIT_PACKAGE_VERSION_BUILD=${GPVB}
-      GIT_PACKAGE_VERSION_NUMBER=${GPVN}
       GIT_PACKAGE_BUILD=${GPB}
       GIT_TARBALL_VERSION=${GTV}
       PACKAGE_VERSION=${GTV}
-      PACKAGE_NUMERIC_VERSION=${GPVN}
+      PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GTV}
       CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
       #
