@@ -44,7 +44,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GPV=""   # Git package version (x.x.x).
    GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
    GIT_CACHED_STRING=""   # Cached git package version string.
-   GCF=""   # Cached git file.
+   GIT_CACHE_FILE=""   # Cached git file.
    GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GPN=""   # git package name.
    GOD=""   # git out directory
@@ -84,24 +84,24 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    if test "x${GIT_PACKAGE_VERSION_BUILD}" == "x";then
       # determines location of cache file
       if test "x${GOD}" != "x" && test -f "${GOD}/git-package-version.txt";then
-         GCF="${GOD}/git-package-version.txt"
+         GIT_CACHE_FILE="${GOD}/git-package-version.txt"
          
       elif test -f "${srcdir}/build-aux/git-package-version.txt";then
-         GCF="${srcdir}/build-aux/git-package-version.txt"
+         GIT_CACHE_FILE="${srcdir}/build-aux/git-package-version.txt"
          
       elif test -f "${srcdir}/include/git-package-version.txt";then
-         GCF="${srcdir}/include/git-package-version.txt"
+         GIT_CACHE_FILE="${srcdir}/include/git-package-version.txt"
          
       elif test -f "${srcdir}/build-aux/git-tar-name.txt";then
          GPN=$(cat "${srcdir}/build-aux/git-tar-name.txt" 2> /dev/null)
          if test -f "${srcdir}/${GPN}/git-package-version.txt";then
-            GCF="${srcdir}/${GPN}/git-package-version.txt"
+            GIT_CACHE_FILE="${srcdir}/${GPN}/git-package-version.txt"
          fi
       fi
 
       # reads cache file and saves results
-      if test "x${GCF}" != "x";then
-         GIT_CACHED_STRING=$(cat ${GCF} 2> /dev/null)
+      if test "x${GIT_CACHE_FILE}" != "x";then
+         GIT_CACHED_STRING=$(cat ${GIT_CACHE_FILE} 2> /dev/null)
       fi
       if test "x${GIT_CACHED_STRING}" != "x";then
          GIT_PACKAGE_VERSION_BUILD=${GIT_CACHED_STRING}
@@ -142,7 +142,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GIT_TARBALL_VERSION}
-      CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
+      CONFIG_STATUS_DEPENDENCIES="${GIT_CACHE_FILE} ${CONFIG_STATUS_DEPENDENCIES}"
       #
       # set substitution variables
       AC_SUBST([GIT_VERSION_SCRIPT],            [${GIT_VERSION_SCRIPT}])
