@@ -46,7 +46,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GIT_CACHED_STRING=""   # Cached git package version string.
    GIT_CACHE_FILE=""   # Cached git file.
    GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
-   GPN=""   # git package name.
+   GIT_PACKAGE_NAME=""   # git package name.
    GOD=""   # git out directory
 
    # git package version script location
@@ -93,9 +93,9 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
          GIT_CACHE_FILE="${srcdir}/include/git-package-version.txt"
          
       elif test -f "${srcdir}/build-aux/git-tar-name.txt";then
-         GPN=$(cat "${srcdir}/build-aux/git-tar-name.txt" 2> /dev/null)
-         if test -f "${srcdir}/${GPN}/git-package-version.txt";then
-            GIT_CACHE_FILE="${srcdir}/${GPN}/git-package-version.txt"
+         GIT_PACKAGE_NAME=$(cat "${srcdir}/build-aux/git-tar-name.txt" 2> /dev/null)
+         if test -f "${srcdir}/${GIT_PACKAGE_NAME}/git-package-version.txt";then
+            GIT_CACHE_FILE="${srcdir}/${GIT_PACKAGE_NAME}/git-package-version.txt"
          fi
       fi
 
@@ -172,7 +172,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # clears vars
    unset GIT_CACHED_STRING
-   unset GPN
+   unset GIT_PACKAGE_NAME
 ])dnl
 
 # end of m4 file
