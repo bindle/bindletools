@@ -41,7 +41,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    # sets vars to known states
    GIT_VERSION_SCRIPT=""   # Git package version script.
    GIT_PACKAGE_VERSION_BUILD=""  # Git package version build (x.x.x.gbbbbb).
-   GPV=""   # Git package version (x.x.x).
+   GIT_PACKAGE_VERSION=""   # Git package version (x.x.x).
    GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
    GIT_CACHED_STRING=""   # Cached git package version string.
    GIT_CACHE_FILE=""   # Cached git file.
@@ -115,22 +115,22 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    else
       #
       # split version string into components
-      GPV=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
+      GIT_PACKAGE_VERSION=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GIT_PACKAGE_BUILD=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
       GIT_TARBALL_VERSION=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       GIT_PACKAGE_MAJOR=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |cut -d. -f1)]
       GIT_PACKAGE_MINOR=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |cut -d. -f2)]
       GIT_PACKAGE_PATCH=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |cut -d. -f3)]
-      AC_MSG_NOTICE([using git package version ${GPV} (${GIT_PACKAGE_BUILD})])
+      AC_MSG_NOTICE([using git package version ${GIT_PACKAGE_VERSION} (${GIT_PACKAGE_BUILD})])
       #
       # generate numeric version
-      GIT_PACKAGE_VERSION_NUMBER=[$(echo ${GPV} |cut -d. -f1)];
-      NUM=[$(echo ${GPV} |cut -d. -f2)];
+      GIT_PACKAGE_VERSION_NUMBER=[$(echo ${GIT_PACKAGE_VERSION} |cut -d. -f1)];
+      NUM=[$(echo ${GIT_PACKAGE_VERSION} |cut -d. -f2)];
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
       GIT_PACKAGE_VERSION_NUMBER=[$(printf "${GIT_PACKAGE_VERSION_NUMBER}.%02i" ${NUM})]
-      NUM=[$(echo ${GPV} |cut -d. -f3)]
+      NUM=[$(echo ${GIT_PACKAGE_VERSION} |cut -d. -f3)]
       if test "x${NUM}" == "x";then
          NUM=0;
       fi
@@ -138,7 +138,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_MSG_NOTICE([using git numeric version ${GIT_PACKAGE_VERSION_NUMBER}])
       #
       # set internal variables
-      GIT_PACKAGE_VERSION=${GPV}
+      GIT_PACKAGE_VERSION=${GIT_PACKAGE_VERSION}
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GIT_TARBALL_VERSION}
@@ -171,7 +171,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
    # clears vars
-   unset GPV
    unset GIT_CACHED_STRING
    unset GPN
 ])dnl
