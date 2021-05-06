@@ -45,7 +45,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GPB=""   # Git package build (gbbbbb).
    GCS=""   # Cached git package version string.
    GCF=""   # Cached git file.
-   GTV=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
+   GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GPN=""   # git package name.
    GOD=""   # git out directory
 
@@ -118,7 +118,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       # split version string into components
       GPV=[$(echo ${GPVB} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GPB=[$(echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
-      GTV=[$(echo ${GPVB} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
+      GIT_TARBALL_VERSION=[$(echo ${GPVB} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       GMAJ=[$(echo ${GPVB} |cut -d. -f1)]
       GMIN=[$(echo ${GPVB} |cut -d. -f2)]
       GPAT=[$(echo ${GPVB} |cut -d. -f3)]
@@ -146,10 +146,9 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_PACKAGE_PATCH=${GPAT}
       GIT_PACKAGE_VERSION_BUILD=${GPVB}
       GIT_PACKAGE_BUILD=${GPB}
-      GIT_TARBALL_VERSION=${GTV}
-      PACKAGE_VERSION=${GTV}
+      PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
-      VERSION=${GTV}
+      VERSION=${GIT_TARBALL_VERSION}
       CONFIG_STATUS_DEPENDENCIES="${GCF} ${CONFIG_STATUS_DEPENDENCIES}"
       #
       # set substitution variables
@@ -184,7 +183,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    unset GPV
    unset GPB
    unset GCS
-   unset GTV
    unset GPN
 ])dnl
 
