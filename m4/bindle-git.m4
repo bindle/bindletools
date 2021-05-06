@@ -42,7 +42,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GSH=""   # Git package version script.
    GPVB=""  # Git package version build (x.x.x.gbbbbb).
    GPV=""   # Git package version (x.x.x).
-   GPB=""   # Git package build (gbbbbb).
+   GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
    GCS=""   # Cached git package version string.
    GCF=""   # Cached git file.
    GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
@@ -117,12 +117,12 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       #
       # split version string into components
       GPV=[$(echo ${GPVB} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
-      GPB=[$(echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
+      GIT_PACKAGE_BUILD=[$(echo ${GPVB} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
       GIT_TARBALL_VERSION=[$(echo ${GPVB} |sed -e 's/\.0.g[[:xdigit:]]\{1,\}$/.0/g')]
       GMAJ=[$(echo ${GPVB} |cut -d. -f1)]
       GMIN=[$(echo ${GPVB} |cut -d. -f2)]
       GPAT=[$(echo ${GPVB} |cut -d. -f3)]
-      AC_MSG_NOTICE([using git package version ${GPV} (${GPB})])
+      AC_MSG_NOTICE([using git package version ${GPV} (${GIT_PACKAGE_BUILD})])
       #
       # generate numeric version
       GIT_PACKAGE_VERSION_NUMBER=[$(echo ${GPV} |cut -d. -f1)];
@@ -145,7 +145,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_PACKAGE_MINOR=${GMIN}
       GIT_PACKAGE_PATCH=${GPAT}
       GIT_PACKAGE_VERSION_BUILD=${GPVB}
-      GIT_PACKAGE_BUILD=${GPB}
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GIT_TARBALL_VERSION}
@@ -181,7 +180,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    unset GSH
    unset GPVB
    unset GPV
-   unset GPB
    unset GCS
    unset GPN
 ])dnl
