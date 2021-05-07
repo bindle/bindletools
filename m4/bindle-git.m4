@@ -34,7 +34,7 @@
 #   m4/bindle.m4 - m4 macros used by configure.ac
 #
 
-# AC_BINDLE_GIT_PACKAGE_VERSION(script, outdir)
+# AC_BINDLE_GIT_PACKAGE_VERSION(script)
 # -----------------------------------
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
@@ -47,7 +47,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    GIT_CACHE_FILE=""             # Cached git file.
    GIT_TARBALL_VERSION=""        # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
    GIT_PACKAGE_NAME=""           # git package name.
-   GIT_OUTPUT_DIR=""             # git out directory
 
 
    # git package version script location
@@ -63,16 +62,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
 
-   # git output directory
-   if test "x$2" != "x";then
-      if test -d "${2}";then
-         GIT_OUTPUT_DIR="${2}"
-      elif test -d "${srcdir}/${2}";then
-         GIT_OUTPUT_DIR="${srcdir}/${2}"
-      fi
-   fi
-
-
    # sets bindletools directory
    BINDLEDIR=`dirname ${GIT_VERSION_SCRIPT}`
    BINDLEDIR=`dirname ${BINDLEDIR}`
@@ -81,17 +70,14 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # attempt to use script to determine version
    if test "x${GIT_VERSION_SCRIPT}" != "x";then
-      GIT_PACKAGE_VERSION_BUILD=$(${GIT_VERSION_SCRIPT} "${srcdir}" "${GIT_OUTPUT_DIR}" 2> /dev/null)
+      GIT_PACKAGE_VERSION_BUILD=$(${GIT_VERSION_SCRIPT} "${srcdir}" 2> /dev/null)
    fi
 
 
    # attempt to fall back to cache files
    if test "x${GIT_PACKAGE_VERSION_BUILD}" == "x";then
       # determines location of cache file
-      if test "x${GIT_OUTPUT_DIR}" != "x" && test -f "${GIT_OUTPUT_DIR}/git-package-version.txt";then
-         GIT_CACHE_FILE="${GIT_OUTPUT_DIR}/git-package-version.txt"
-         
-      elif test -f "${srcdir}/build-aux/git-package-version.txt";then
+      if test -f "${srcdir}/build-aux/git-package-version.txt";then
          GIT_CACHE_FILE="${srcdir}/build-aux/git-package-version.txt"
          
       elif test -f "${srcdir}/include/git-package-version.txt";then
