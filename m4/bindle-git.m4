@@ -74,6 +74,25 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    fi
 
 
+   # determines git head ref file
+   GIT_PACKAGE_REF_FILE=""
+   if test "x${GIT_PACKAGE_VERSION_BUILD}" != "x";then
+      GIT_PACKAGE_REF=""
+      GIT_PACKAGE_DIR=""
+      if test -d "${srcdir}/.git";then
+         GIT_PACKAGE_DIR="$(cd "${srcdir}/.git" && pwd)"
+      fi
+      if test "x${GIT_PACKAGE_DIR}" != "x";then
+         GIT_PACKAGE_REF="$(git --git-dir="${GIT_PACKAGE_DIR}" rev-parse --abbrev-ref HEAD 2> /dev/null)"
+      fi
+      if test "x${GIT_PACKAGE_REF}" != "x";then
+         GIT_PACKAGE_REF_FILE="${GIT_PACKAGE_DIR}/refs/heads/${GIT_PACKAGE_REF}"
+      fi
+      unset GIT_PACKAGE_REF
+      unset GIT_PACKAGE_DIR
+   fi
+
+
    # attempt to fall back to cache files
    if test "x${GIT_PACKAGE_VERSION_BUILD}" == "x";then
       # determines location of cache file
@@ -147,6 +166,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_SUBST([PACKAGE_VERSION],                        [${PACKAGE_VERSION}])
       AC_SUBST([VERSION],                                [${VERSION}])
       AC_SUBST([CONFIG_STATUS_DEPENDENCIES],             ['$(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt'])
+      AC_SUBST([GIT_PACKAGE_REF_FILE],                   [${GIT_PACKAGE_REF_FILE}])
 
 
       # set C/C++/Objc preprocessor macros
