@@ -39,14 +39,13 @@ PROG_NAME=`basename ${0}`
 
 # saves srcdir from command line arguments
 if test "x${1}" == "x";then
-   echo "Usage: ${PROG_NAME} srcdir [ outdir ]" 1>&2;
+   echo "Usage: ${PROG_NAME} srcdir" 1>&2;
    echo "Usage: ${PROG_NAME} auto" 1>&2;
    echo " " 1>&2;
    exit 1;
 fi;
 SCRIPT=$0
 SRCDIR=$1;
-OUTDIR=$2;
 
 
 # determines script directory
@@ -103,12 +102,6 @@ fi
 
 
 # determines output dir
-if test "x${OUTDIR}" != "x";then
-   if test ! -d "${OUTDIR}";then
-      echo "${SCRIPT}: ${OUTDIR}: directory does not exist" 1>&2;
-      exit 1;
-   fi
-else
    # attempt "srcdir/include" for headers
    if test -d "${SRCDIR}/include";then
       OUTDIR="${SRCDIR}/include"
@@ -121,7 +114,6 @@ else
    else
       OUTDIR="${SRCDIR}"
    fi
-fi
 
 
 # clears git information
