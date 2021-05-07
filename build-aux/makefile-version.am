@@ -38,8 +38,8 @@
 GIT_PACKAGE_VERSION_DIR			?= include
 
 
-GIT_PACKAGE_VERSION_FILES		 = $(GIT_PACKAGE_VERSION_DIR)/git-package-version.h
-GIT_PACKAGE_VERSION_FILES		+= $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
+GIT_PACKAGE_VERSION_FILES		 = $(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.h
+GIT_PACKAGE_VERSION_FILES		+= $(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
 
 
 BUILT_SOURCES				+= $(GIT_PACKAGE_VERSION_FILES)
@@ -53,14 +53,12 @@ EXTRA_DIST				+= build-aux/git-tar-name.txt
 
 .PHONY: git-package-script-run
 
-git-package-script-run:
+$(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.h: $(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt
+	@touch $(@)
+
+$(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt: $(GIT_PACKAGE_REF_FILE)
 	@$(GIT_VERSION_SCRIPT) $(top_srcdir) > /dev/null 2> /dev/null
-
-$(GIT_PACKAGE_VERSION_DIR)/git-package-version.h: git-package-script-run
-	@touch $(top_srcdir)/${@}
-
-$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt: git-package-script-run
-	@touch $(top_srcdir)/${@}
+	@touch $(@)
 
 
 # end of automake file
