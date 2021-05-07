@@ -77,17 +77,14 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
    # attempt to fall back to cache files
    if test "x${GIT_PACKAGE_VERSION_BUILD}" == "x";then
       # determines location of cache file
-      if test -f "${srcdir}/build-aux/git-package-version.txt";then
-         GIT_CACHE_FILE="${srcdir}/build-aux/git-package-version.txt"
-         
-      elif test -f "${srcdir}/include/git-package-version.txt";then
+      if test -f "${srcdir}/include/git-package-version.txt";then
          GIT_CACHE_FILE="${srcdir}/include/git-package-version.txt"
          
-      elif test -f "${srcdir}/build-aux/git-tar-name.txt";then
-         GIT_PACKAGE_NAME=$(cat "${srcdir}/build-aux/git-tar-name.txt" 2> /dev/null)
-         if test -f "${srcdir}/${GIT_PACKAGE_NAME}/git-package-version.txt";then
-            GIT_CACHE_FILE="${srcdir}/${GIT_PACKAGE_NAME}/git-package-version.txt"
-         fi
+      elif test -f "${srcdir}/build-aux/git-package-version.txt";then
+         GIT_CACHE_FILE="${srcdir}/build-aux/git-package-version.txt"
+         
+      elif test -f "${srcdir}/git-package-version.txt";then
+         GIT_CACHE_FILE="${srcdir}/git-package-version.txt"
       fi
 
       # reads cache file and saves results

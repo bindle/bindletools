@@ -113,22 +113,13 @@ else
    if test -d "${SRCDIR}/include";then
       OUTDIR="${SRCDIR}/include"
 
-   # attempt "srcdir/PackageName" for headers
-   elif test -d "${SRCDIR}/${PACKAGE_TARNAME}";then
-      OUTDIR="${SRCDIR}/${PACKAGE_TARNAME}"
-
    # attempt "srcdir/build-aux" for headers
    elif test -d "${SRCDIR}/build-aux";then
       OUTDIR="${SRCDIR}/build-aux"
 
-   # use script directory for headers
+   # use "srcdir" for headers
    else
-      OUTDIR=`dirname ${SCRIPT}`
-      OUTDIR=`echo ${OUTDIR} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//g'`
-      if test ! -d "${OUTDIR}";then
-         echo "${SCRIPT}: unable to determine output directory." 1>&2
-         exit 1;
-      fi
+      OUTDIR="${SRCDIR}"
    fi
 fi
 
