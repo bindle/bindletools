@@ -163,4 +163,16 @@ do_cat_fn = $(do_cat); chmod 0755 "$(@)"
 do_cat_dt = $(do_cat); chmod 0644 "$(@)"
 
 
+do_copy =	@if test "x$(V)" == "x0";then \
+			echo "  COPY     $(@)"; \
+		else \
+			echo "cp $(patsubst Makefile,,$(+)) $(@)"; \
+		fi; \
+		$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
+		cp $(patsubst Makefile,,$(+)) "$(@)" || exit 1; \
+		touch "$(@)"
+do_copy_fn = $(do_copy); chmod 0755 "$(@)"
+do_copy_dt = $(do_copy); chmod 0644 "$(@)"
+
+
 # end of automake file
