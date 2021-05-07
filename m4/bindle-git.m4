@@ -133,7 +133,6 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GIT_TARBALL_VERSION}
-      CONFIG_STATUS_DEPENDENCIES="${GIT_CACHE_FILE} ${CONFIG_STATUS_DEPENDENCIES}"
 
 
       # set substitution variables
@@ -147,7 +146,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_SUBST([GIT_PACKAGE_BUILD],                      [${GIT_PACKAGE_BUILD}])
       AC_SUBST([PACKAGE_VERSION],                        [${PACKAGE_VERSION}])
       AC_SUBST([VERSION],                                [${VERSION}])
-      AC_SUBST([CONFIG_STATUS_DEPENDENCIES],             [${CONFIG_STATUS_DEPENDENCIES}])
+      AC_SUBST([CONFIG_STATUS_DEPENDENCIES],             ['$(top_srcdir)/$(GIT_PACKAGE_VERSION_DIR)/git-package-version.txt'])
 
 
       # set C/C++/Objc preprocessor macros
