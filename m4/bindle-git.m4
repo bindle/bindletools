@@ -39,15 +39,16 @@
 AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
 
    # sets vars to known states
-   GIT_VERSION_SCRIPT=""   # Git package version script.
+   GIT_VERSION_SCRIPT=""         # Git package version script.
    GIT_PACKAGE_VERSION_BUILD=""  # Git package version build (x.x.x.gbbbbb).
-   GIT_PACKAGE_VERSION=""   # Git package version (x.x.x).
-   GIT_PACKAGE_BUILD=""   # Git package build (gbbbbb).
-   GIT_CACHED_STRING=""   # Cached git package version string.
-   GIT_CACHE_FILE=""   # Cached git file.
-   GIT_TARBALL_VERSION=""   # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
-   GIT_PACKAGE_NAME=""   # git package name.
-   GIT_OUTPUT_DIR=""   # git out directory
+   GIT_PACKAGE_VERSION=""        # Git package version (x.x.x).
+   GIT_PACKAGE_BUILD=""          # Git package build (gbbbbb).
+   GIT_CACHED_STRING=""          # Cached git package version string.
+   GIT_CACHE_FILE=""             # Cached git file.
+   GIT_TARBALL_VERSION=""        # Git Tarball Version (x.x.0 or x.x.x.gbbbbb).
+   GIT_PACKAGE_NAME=""           # git package name.
+   GIT_OUTPUT_DIR=""             # git out directory
+
 
    # git package version script location
    if test "x$1" != "x";then
@@ -61,6 +62,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_VERSION_SCRIPT=${ac_aux_dir}/git-package-version.sh
    fi
 
+
    # git output directory
    if test "x$2" != "x";then
       if test -d "${2}";then
@@ -70,15 +72,18 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       fi
    fi
 
+
    # sets bindletools directory
    BINDLEDIR=`dirname ${GIT_VERSION_SCRIPT}`
    BINDLEDIR=`dirname ${BINDLEDIR}`
    AC_REQUIRE([AC_BINDLE])
 
+
    # attempt to use script to determine version
    if test "x${GIT_VERSION_SCRIPT}" != "x";then
       GIT_PACKAGE_VERSION_BUILD=$(${GIT_VERSION_SCRIPT} "${srcdir}" "${GIT_OUTPUT_DIR}" 2> /dev/null)
    fi
+
 
    # attempt to fall back to cache files
    if test "x${GIT_PACKAGE_VERSION_BUILD}" == "x";then
@@ -109,11 +114,12 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       fi
    fi
 
+
    # Saves data for use in build scripts
    if test "x${GIT_PACKAGE_VERSION_BUILD}" = "x";then
       AC_MSG_WARN([unable to determine package version from Git tags])
    else
-      #
+
       # split version string into components
       GIT_PACKAGE_VERSION=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/\.g[[:xdigit:]]\{1,\}$//g')]
       GIT_PACKAGE_BUILD=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |sed -e 's/.*\.\(g[[:xdigit:]]\{1,\}\)$/\1/g')]
@@ -122,7 +128,8 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       GIT_PACKAGE_MINOR=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |cut -d. -f2)]
       GIT_PACKAGE_PATCH=[$(echo ${GIT_PACKAGE_VERSION_BUILD} |cut -d. -f3)]
       AC_MSG_NOTICE([using git package version ${GIT_PACKAGE_VERSION} (${GIT_PACKAGE_BUILD})])
-      #
+
+
       # generate numeric version
       GIT_PACKAGE_VERSION_NUMBER=[$(echo ${GIT_PACKAGE_VERSION} |cut -d. -f1)];
       NUM=[$(echo ${GIT_PACKAGE_VERSION} |cut -d. -f2)];
@@ -136,27 +143,30 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       fi
       GIT_PACKAGE_VERSION_NUMBER=[$(printf "${GIT_PACKAGE_VERSION_NUMBER}%04i" ${NUM})]
       AC_MSG_NOTICE([using git numeric version ${GIT_PACKAGE_VERSION_NUMBER}])
-      #
+
+
       # set internal variables
       GIT_PACKAGE_VERSION=${GIT_PACKAGE_VERSION}
       PACKAGE_VERSION=${GIT_TARBALL_VERSION}
       PACKAGE_NUMERIC_VERSION=${GIT_PACKAGE_VERSION_NUMBER}
       VERSION=${GIT_TARBALL_VERSION}
       CONFIG_STATUS_DEPENDENCIES="${GIT_CACHE_FILE} ${CONFIG_STATUS_DEPENDENCIES}"
-      #
+
+
       # set substitution variables
-      AC_SUBST([GIT_VERSION_SCRIPT],            [${GIT_VERSION_SCRIPT}])
-      AC_SUBST([GIT_PACKAGE_VERSION],           [${GIT_PACKAGE_VERSION}])
-      AC_SUBST([GIT_PACKAGE_MAJOR],             [${GIT_PACKAGE_MAJOR}])
-      AC_SUBST([GIT_PACKAGE_MINOR],             [${GIT_PACKAGE_MINOR}])
-      AC_SUBST([GIT_PACKAGE_PATCH],             [${GIT_PACKAGE_PATCH}])
-      AC_SUBST([GIT_PACKAGE_VERSION_BUILD],     [${GIT_PACKAGE_VERSION_BUILD}])
-      AC_SUBST([GIT_PACKAGE_VERSION_NUMBER],    [${GIT_PACKAGE_VERSION_NUMBER}])
-      AC_SUBST([GIT_PACKAGE_BUILD],             [${GIT_PACKAGE_BUILD}])
-      AC_SUBST([PACKAGE_VERSION],               [${PACKAGE_VERSION}])
-      AC_SUBST([VERSION],                       [${VERSION}])
-      AC_SUBST([CONFIG_STATUS_DEPENDENCIES],    [${CONFIG_STATUS_DEPENDENCIES}])
-      #
+      AC_SUBST([GIT_VERSION_SCRIPT],                     [${GIT_VERSION_SCRIPT}])
+      AC_SUBST([GIT_PACKAGE_VERSION],                    [${GIT_PACKAGE_VERSION}])
+      AC_SUBST([GIT_PACKAGE_MAJOR],                      [${GIT_PACKAGE_MAJOR}])
+      AC_SUBST([GIT_PACKAGE_MINOR],                      [${GIT_PACKAGE_MINOR}])
+      AC_SUBST([GIT_PACKAGE_PATCH],                      [${GIT_PACKAGE_PATCH}])
+      AC_SUBST([GIT_PACKAGE_VERSION_BUILD],              [${GIT_PACKAGE_VERSION_BUILD}])
+      AC_SUBST([GIT_PACKAGE_VERSION_NUMBER],             [${GIT_PACKAGE_VERSION_NUMBER}])
+      AC_SUBST([GIT_PACKAGE_BUILD],                      [${GIT_PACKAGE_BUILD}])
+      AC_SUBST([PACKAGE_VERSION],                        [${PACKAGE_VERSION}])
+      AC_SUBST([VERSION],                                [${VERSION}])
+      AC_SUBST([CONFIG_STATUS_DEPENDENCIES],             [${CONFIG_STATUS_DEPENDENCIES}])
+
+
       # set C/C++/Objc preprocessor macros
       AC_DEFINE_UNQUOTED([GIT_VERSION_SCRIPT],           ["${GIT_VERSION_SCRIPT}"],          [script which determines package version and build from git repository])
       AC_DEFINE_UNQUOTED([GIT_PACKAGE_VERSION],          ["${GIT_PACKAGE_VERSION}"],         [package version determined from git repository (x.y.z)])
@@ -169,6 +179,7 @@ AC_DEFUN([AC_BINDLE_GIT_PACKAGE_VERSION],[dnl
       AC_DEFINE_UNQUOTED([PACKAGE_VERSION],              ["${PACKAGE_VERSION}"],             [package version and optionally build determined from git repository])
       AC_DEFINE_UNQUOTED([VERSION],                      ["${VERSION}"],                     [package version and optionally build determined from git repository])
    fi
+
 
    # clears vars
    unset GIT_CACHED_STRING
