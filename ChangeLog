@@ -8,6 +8,11 @@ Bindle Binaries Tools
    - Updating Autoconf checks for GCC warnings. (syzdek)
    - Adding PKGCONFDIR keyword to substitution macros and targets. (syzdek)
    - Adding ability to customize AC_BINDLE_ENABLE_WARNINGS() (syzdek)
+   - Cleaning up macro variable names in bindle-git.m4 (syzdek)
+   - Updating automake targets to support V=0 (syzdek)
+   - Adding automake do_subst_files macro (syzdek)
+   - Adding automake do_cat macro (syzdek)
+   - Fixing CONFIG_STATUS_DEPENDENCIES in bindle-git.m4 (syzdek)
 
 #### 0.4
    - Adding pre/post hooks to autogen.sh (syzdek)
