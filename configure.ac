@@ -1,6 +1,6 @@
 #
 #   Bindle Binaries Tools
-#   Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+#   Copyright (C) 2012, 2021 Bindle Binaries <syzdek@bindlebinaries.com>.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -36,11 +36,11 @@
 
 AC_PREREQ([2.65])
 
-AC_COPYRIGHT([Copyright (c) 2012, 2016 Bindle Binaries <syzdek@bindlebinaries.com>.])
-AC_REVISION(0.4)
-AC_INIT([Bindle Binaries Tools],[0.4],[syzdek@bindlebinaries.com],[bindletools])
+AC_COPYRIGHT([Copyright (c) 2012, 2016, 2021 Bindle Binaries <syzdek@bindlebinaries.com>.])
+AC_REVISION(0.5)
+AC_INIT([Bindle Binaries Tools],[0.5],[syzdek@bindlebinaries.com],[bindletools])
 
-AC_SUBST([RELEASE_MONTH],["August 2016"])
+AC_SUBST([RELEASE_MONTH],["August 2021"])
 
 # directory locations
 AC_CONFIG_AUX_DIR([build-aux])
