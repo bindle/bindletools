@@ -87,6 +87,7 @@ AC_CHECK_TOOLS(STRIP,   strip gstrip,   [AC_MSG_ERROR([missing binutil "strip"])
 
 # shell programs
 AC_PROG_AWK
+AC_PROG_CPP
 AC_PROG_EGREP
 AC_PROG_FGREP
 AM_PROG_LEX
@@ -125,6 +126,8 @@ AC_CHECK_FUNCS([strtol],         [], [AC_MSG_ERROR([missing required functions])
 # enables getopt_long if header and functions were found
 AC_CHECK_HEADERS([fcntl.h],      [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([getopt.h],     [], [AC_MSG_ERROR([missing required headers])])
+AC_CHECK_HEADERS([inttypes.h],   [], [AC_MSG_ERROR([missing required headers])])
+AC_CHECK_HEADERS([unistd.h],     [], [AC_MSG_ERROR([missing required headers])])
 
 # initiates bindle tools macros
 AC_BINDLE(contrib/bindletools)
