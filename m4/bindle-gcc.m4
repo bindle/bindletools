@@ -88,11 +88,11 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       USE_WARNINGS=no
       USE_STRICTWARNINGS=no
    fi
-   if test "x${EDEBUG}" != "xno";then
+   if test "x${EDEBUG}" != "xyes";then
+      USE_DEBUG=no
+   else
       USE_DEBUG=yes
       AC_DEFINE_UNQUOTED(USE_DEBUG, 1, [Use debug messages])
-   else
-      USE_DEBUG=no
    fi
 
    # list of args
