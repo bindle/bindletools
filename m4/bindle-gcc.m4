@@ -35,7 +35,7 @@
 #
 
 
-# AC_BINDLE_ENABLE_WARNINGS([extra warnings], [exclude warnings])
+# AC_BINDLE_ENABLE_WARNINGS([extra warnings], [exclude warnings], [value of -std])
 # ______________________________________________________________________________
 AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
 
@@ -45,12 +45,18 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    # saves arguments
    ac_bindle_warnings_additions=" $1 "
    ac_bindle_warnings_exclude=" $2 "
+   ac_bindle_warnings_std="$3"
 
    # sets compiler
    if test "x${CC}" == "x";then
       ac_bindle_cc=cc;
    else
       ac_bindle_cc=${CC};
+   fi
+
+   # sets default for -std
+   if test "x${ac_bindle_warnings_std}" == "x";then
+      ac_bindle_warnings_std=gnu11
    fi
 
    # display options
@@ -98,7 +104,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
    # list of args
    ac_bindle_warnings_list=""
    if test "x${USE_STRICTWARNINGS}" == "xyes";then
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=${ac_bindle_warnings_std}"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -pedantic"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
@@ -139,7 +145,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winline"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} ${ac_bindle_warnings_additions}"
    elif test "x${USE_WARNINGS}" == "xyes";then
-      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=gnu11"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=${ac_bindle_warnings_std}"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Werror"
