@@ -138,6 +138,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wnested-externs"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Winline"
    elif test "x${USE_WARNINGS}" == "xyes";then
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -std=c11"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -W"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wall"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Werror"
