@@ -111,10 +111,12 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wextra"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Werror"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Weverything"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wunknown-warning"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-unused-macros"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-reserved-id-macro"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-format-nonliteral"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wno-disabled-macro-expansion"
+      ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wabi"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wdiv-by-zero"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wfloat-equal"
       ac_bindle_warnings_list="${ac_bindle_warnings_list} -Wdisabled-optimization"
@@ -179,7 +181,7 @@ AC_DEFUN([AC_BINDLE_ENABLE_WARNINGS],[dnl
       if test "x${ac_bindle_warnings_exclude}" != "x${ac_bindle_warnings_exclude% ${ac_bindle_warning} }";then
          AC_MSG_RESULT(skipping)
       else
-         ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} conftest.c -o conftest.o > /dev/null 2>&1
+         ${ac_bindle_cc} ${CFLAGS_WARNINGS} ${ac_bindle_warning} -Werror conftest.c -o conftest.o > /dev/null 2>&1
          if test "x$?" == "x0";then
             CFLAGS_WARNINGS="${CFLAGS_WARNINGS} ${ac_bindle_warning}"
             AC_MSG_RESULT(yes)
