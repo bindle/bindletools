@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #   Bindle Binaries Tools
-#   Copyright (c) 2012, 2021 Bindle Binaries
+#   Copyright (c) 2012, 2021, 2022 David M. Syzdek
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -38,7 +38,7 @@
 PROG_NAME=`basename ${0}`
 
 # saves srcdir from command line arguments
-if test "x${1}" == "x";then
+if test "x${1}" = "x";then
    echo "Usage: ${PROG_NAME} srcdir" 1>&2;
    echo "Usage: ${PROG_NAME} auto" 1>&2;
    echo " " 1>&2;
@@ -53,7 +53,7 @@ SCRIPT_DIR=`dirname ${SCRIPT} |sed -e 's/build-aux\/.*$/build-aux/g' -e 's/\/$//
 
 
 # determines source directory and Git directory
-if test "x${SRCDIR}" == "xauto";then
+if test "x${SRCDIR}" = "xauto";then
    # determines root of source by root of Git repo
    GIT_TOP_DIR=`git rev-parse --show-toplevel 2> /dev/null`
    SRCDIR="${GIT_TOP_DIR}"
@@ -63,11 +63,11 @@ else
       exit 1;
    fi
    GIT_TOP_DIR=`( cd ${SRCDIR} 2> /dev/null && pwd; )`
-   if test "x${GIT_TOP_DIR}" == "x";then
+   if test "x${GIT_TOP_DIR}" = "x";then
       GIT_TOP_DIR=${SRCDIR}
    fi
 fi
-if test "x${SRCDIR}" == "x";then
+if test "x${SRCDIR}" = "x";then
    echo "${SCRIPT}: unable to detect root of source directory." 1>&2;
    exit 1;
 fi
@@ -82,18 +82,18 @@ fi
 
 
 # determines package tar name
-if test "x${PACKAGE_TARNAME}" == "x";then
+if test "x${PACKAGE_TARNAME}" = "x";then
    if test -f "${BUILD_AUX}/git-tar-name.txt";then
       PACKAGE_TARNAME=`cat "${BUILD_AUX}/git-tar-name.txt" 2> /dev/null`
    elif test -f "${SRCDIR}/git-tar-name.txt";then
       PACKAGE_TARNAME=`cat "${SRCDIR}/git-tar-name.txt" 2> /dev/null`
    elif test -f "${SCRIPT_DIR}/git-tar-name.txt";then
       TMP=`( cd ${SCRIPT_DIR} 2> /dev/null && git rev-parse --show-toplevel 2> /dev/null; )`
-      if test "x${TMP}" == "x{GIT_TOP_DIR}";then
+      if test "x${TMP}" = "x{GIT_TOP_DIR}";then
          PACKAGE_TARNAME=`cat "${SCRIPT_DIR}/git-tar-name.txt" 2> /dev/null`
       fi
    fi
-   if test "x${PACKAGE_TARNAME}" == "x";then
+   if test "x${PACKAGE_TARNAME}" = "x";then
       echo "${SCRIPT}: WARNING: missing \"${BUILD_AUX}/git-tar-name.txt\"" 1>&2;
       echo "${SCRIPT}: WARNING: It is advised to create a \"git-tar-name.txt\"" 1>&2;
       echo "${SCRIPT}: WARNING: file containing the tar name of the package." 1>&2;
@@ -125,13 +125,13 @@ GCS=""  # Cached git package version string.
 
 
 # set default file names
-if test "x${GIT_VERSION_FILE}" == "x";then
+if test "x${GIT_VERSION_FILE}" = "x";then
    GIT_VERSION_FILE="${OUTDIR}/git-package-version.txt"
 fi
-if test "x${GIT_VERSION_HEADER}" == "x";then
+if test "x${GIT_VERSION_HEADER}" = "x";then
    GIT_VERSION_HEADER="${OUTDIR}/git-package-version.h"
 fi
-if test "x${GIT_VERSION_PREFIX_HEADER}" == "x";then
+if test "x${GIT_VERSION_PREFIX_HEADER}" = "x";then
    GIT_VERSION_PREFIX_HEADER="${OUTDIR}/git-package-version-prefix.h"
 fi
 
@@ -158,12 +158,12 @@ if test -f ${GIT_TOP_DIR}/.git || test -d ${GIT_TOP_DIR}/.git;then
    # generate numeric version
    GPVN=`echo ${GPV} |cut -d. -f1`;
    NUM=`echo ${GPV} |cut -d. -f2`;
-   if test "x${NUM}" == "x";then
+   if test "x${NUM}" = "x";then
       NUM=0;
    fi
    GPVN=`printf "${GPVN}.%02i" ${NUM}`
    NUM=`echo ${GPV} |cut -d. -f3`;
-   if test "x${NUM}" == "x";then
+   if test "x${NUM}" = "x";then
       NUM=0;
    fi
    GPVN=`printf "${GPVN}%04i" ${NUM}`
