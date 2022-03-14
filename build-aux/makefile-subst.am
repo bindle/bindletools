@@ -113,7 +113,7 @@ do_subst = $(SED) \
 	-e 's,[@]mandir[@],$(mandir),g' \
 	-e 's,[@]oldincludedir[@],$(oldincludedir),g' \
 	-e 's,[@]pdfdir[@],$(pdfdir),g' \
-	-e 's,[@]pkgconfdir[@],$(pkgdatadir)/$(PACKAGE_TARNAME),g' \
+	-e 's,[@]pkgconfdir[@],$(sysconfdir)/$(PACKAGE_TARNAME),g' \
 	-e 's,[@]pkgdatadir[@],$(pkgdatadir),g' \
 	-e 's,[@]pkgincludedir[@],$(pkgincludedir),g' \
 	-e 's,[@]pkglibdir[@],$(pkglibdir),g' \
