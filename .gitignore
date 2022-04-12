@@ -4,6 +4,9 @@
 *.o
 *.pbxuser
 *.swp
+*.sublime-project
+*.sublime-workspace
+*.xcodeproj
 .DS_Store
 .deps
 .dirstamp
@@ -13,8 +16,8 @@
 /Makefile.in
 /build-aux/git-package-version
 /libtool
-/bindleadmin-*.tar.*
-/bindleadmin-*.zip
+/bindletools-*.tar.*
+/bindletools-*.zip
 a.out
 aclocal.m4
 autom4te.cache
