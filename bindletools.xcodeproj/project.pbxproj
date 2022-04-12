@@ -7,170 +7,57 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A00F6EAB19427939003CC8C2 /* bindle: tests */ = {
+		A044CD92280625E300BFE7C3 /* All Programs */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A00F6EAC19427939003CC8C2 /* Build configuration list for PBXAggregateTarget "bindle: tests" */;
+			buildConfigurationList = A044CD93280625E300BFE7C3 /* Build configuration list for PBXAggregateTarget "All Programs" */;
 			buildPhases = (
 			);
 			dependencies = (
-				A00F6EB019427945003CC8C2 /* PBXTargetDependency */,
-				A00F6EB219427945003CC8C2 /* PBXTargetDependency */,
+				A044CD97280625EE00BFE7C3 /* PBXTargetDependency */,
 			);
-			name = "bindle: tests";
-			productName = "bindle: tests";
-		};
-		A01156FE175B0DF3008E66FA /* bindle: Git Version */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A01156FF175B0DF3008E66FA /* Build configuration list for PBXAggregateTarget "bindle: Git Version" */;
-			buildPhases = (
-				A0115702175B0DFA008E66FA /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = "bindle: Git Version";
-			productName = "bindle: Git Version";
-		};
-		A0808A7D175D34000074058B /* bindle: doxygen */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A0808A80175D34000074058B /* Build configuration list for PBXAggregateTarget "bindle: doxygen" */;
-			buildPhases = (
-				A0808A81175D34050074058B /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = "bindle: doxygen";
-			productName = "bindle: doxygen";
-		};
-		A0808A84175D4A6C0074058B /* bindle: open docs */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A0808A85175D4A6C0074058B /* Build configuration list for PBXAggregateTarget "bindle: open docs" */;
-			buildPhases = (
-				A0808A8A175D4A770074058B /* ShellScript */,
-			);
-			dependencies = (
-				A0808A89175D4A750074058B /* PBXTargetDependency */,
-			);
-			name = "bindle: open docs";
-			productName = "bindle: open docs";
+			name = "All Programs";
+			productName = "All Programs";
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A00F6EA7194278D6003CC8C2 /* cnftest.c in Sources */ = {isa = PBXBuildFile; fileRef = A00F6E99194278A6003CC8C2 /* cnftest.c */; };
-		A00F6EAA19427919003CC8C2 /* libbindle-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */; };
-		A00F6EB419427C46003CC8C2 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = A00F6EB319427C46003CC8C2 /* log.c */; };
-		A00F6EB519427C46003CC8C2 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = A00F6EB319427C46003CC8C2 /* log.c */; };
-		A00F6EB719427C61003CC8C2 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = A00F6EB619427C61003CC8C2 /* log.h */; };
-		A060930018DF8FD100434E5C /* fdtest.c in Sources */ = {isa = PBXBuildFile; fileRef = A06092F218DF7A7500434E5C /* fdtest.c */; };
-		A0B6A3EF191CBDD4000636B2 /* cnf.c in Sources */ = {isa = PBXBuildFile; fileRef = A0B6A3EE191CBDD4000636B2 /* cnf.c */; };
-		A0B6A3F0191CBDD4000636B2 /* cnf.c in Sources */ = {isa = PBXBuildFile; fileRef = A0B6A3EE191CBDD4000636B2 /* cnf.c */; };
-		A0B6A3F2191CBECB000636B2 /* cnf.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B6A3F1191CBECB000636B2 /* cnf.h */; };
-		A0EE9F2418DFE15600CF8788 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01156EB175B0118008E66FA /* Foundation.framework */; };
-		A0EE9F4618DFE18500CF8788 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
-		A0EE9F4718DFE18600CF8788 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
-		A0EE9F4818DFE18900CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
-		A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
-		A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
-		A0EE9F4B18DFE18D00CF8788 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
-		A0EE9F4C18DFE19100CF8788 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
-		A0EE9F4D18DFE19200CF8788 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
-		A0EE9F5018DFE1EC00CF8788 /* libbindle-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */; };
+		A044CD982806266600BFE7C3 /* bindle.h in Headers */ = {isa = PBXBuildFile; fileRef = A01156CD175B009E008E66FA /* bindle.h */; };
+		A044CD992806266C00BFE7C3 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597A18D1108D00D375B3 /* err.h */; };
+		A044CD9A2806266C00BFE7C3 /* regex.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C4C65317A2812F008E856D /* regex.h */; };
+		A044CD9B2806266C00BFE7C3 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = A00F6EB619427C61003CC8C2 /* log.h */; };
+		A044CD9C2806266C00BFE7C3 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059498175D17B700DD3266 /* version.h */; };
+		A044CD9D2806266C00BFE7C3 /* cdefs.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597918D10A5E00D375B3 /* cdefs.h */; };
+		A044CD9E2806266C00BFE7C3 /* cnf.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B6A3F1191CBECB000636B2 /* cnf.h */; };
+		A044CD9F2806266C00BFE7C3 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059497175D17B700DD3266 /* utf8.h */; };
+		A044CDA02806266C00BFE7C3 /* fd.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597618D0F6AD00D375B3 /* fd.h */; };
+		A044CDA12806267900BFE7C3 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = A00F6EB319427C46003CC8C2 /* log.c */; };
+		A044CDA22806267900BFE7C3 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
+		A044CDA32806267900BFE7C3 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
+		A044CDA42806267900BFE7C3 /* cnf.c in Sources */ = {isa = PBXBuildFile; fileRef = A0B6A3EE191CBDD4000636B2 /* cnf.c */; };
+		A044CDA52806267900BFE7C3 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
+		A044CDA62806267900BFE7C3 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A00F6EA819427914003CC8C2 /* PBXContainerItemProxy */ = {
+		A044CD96280625EE00BFE7C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A0EE9F1A18DFE10F00CF8788;
-			remoteInfo = "bindle-osx";
-		};
-		A00F6EAF19427945003CC8C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A06092F618DF8FC000434E5C;
-			remoteInfo = fdtest;
-		};
-		A00F6EB119427945003CC8C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A00F6E9D194278C5003CC8C2;
-			remoteInfo = cnftest;
-		};
-		A0808A88175D4A750074058B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0808A7D175D34000074058B;
-			remoteInfo = "bindle: doxygen";
-		};
-		A0CF1B4A1921DF5F00E5C668 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A01156FE175B0DF3008E66FA;
-			remoteInfo = "bindle: Git Version";
-		};
-		A0CF1B4C1921DF6400E5C668 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A01156FE175B0DF3008E66FA;
-			remoteInfo = "bindle: Git Version";
-		};
-		A0EE9F4E18DFE1E700CF8788 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0CE16D415E9846A00AC6A2F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0EE9F1A18DFE10F00CF8788;
-			remoteInfo = "bindle-osx";
+			remoteGlobalIDString = A044CD8D280625D600BFE7C3;
+			remoteInfo = libbindle;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A00F6E9C194278C5003CC8C2 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		A06092F518DF8FC000434E5C /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		A0EE9F2118DFE15600CF8788 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A0059497175D17B700DD3266 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
 		A0059498175D17B700DD3266 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		A00F6E99194278A6003CC8C2 /* cnftest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnftest.c; sourceTree = "<group>"; };
-		A00F6E9E194278C5003CC8C2 /* cnftest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cnftest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00F6EB319427C46003CC8C2 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
 		A00F6EB619427C61003CC8C2 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		A00F6EB81949715C003CC8C2 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
 		A01156D2175B009E008E66FA /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utf8.c; path = lib/libbindle/utf8.c; sourceTree = SOURCE_ROOT; };
 		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; name = libbindle.sym; path = lib/libbindle/libbindle.sym; sourceTree = SOURCE_ROOT; };
-		A01156EB175B0118008E66FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A01156FA175B029D008E66FA /* bindle-xxd.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-xxd.m4"; sourceTree = "<group>"; };
 		A01156FB175B0764008E66FA /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = version.c; path = lib/libbindle/version.c; sourceTree = SOURCE_ROOT; };
 		A016DA5F163753B0002165A5 /* bindle-gcc.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-gcc.m4"; sourceTree = "<group>"; };
@@ -183,10 +70,10 @@
 		A02F597918D10A5E00D375B3 /* cdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdefs.h; sourceTree = "<group>"; };
 		A02F597A18D1108D00D375B3 /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
 		A02F597B18D1112E00D375B3 /* err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = err.c; sourceTree = "<group>"; };
+		A044CD8E280625D600BFE7C3 /* liblibbindle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibbindle.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A06092F218DF7A7500434E5C /* fdtest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fdtest.c; path = tests/fd/fdtest.c; sourceTree = SOURCE_ROOT; };
-		A06092F718DF8FC000434E5C /* fdtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fdtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A06FDB1E1D7A02D200995468 /* bindle-doxygen.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = "bindle-doxygen.m4"; sourceTree = "<group>"; };
 		A07A07CD17829812006884FC /* Changes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Changes; sourceTree = "<group>"; };
@@ -210,11 +97,6 @@
 		A0B53672175DE1C9004828AA /* utf8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = utf8.txt; sourceTree = "<group>"; };
 		A0B6A3EE191CBDD4000636B2 /* cnf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cnf.c; sourceTree = "<group>"; };
 		A0B6A3F1191CBECB000636B2 /* cnf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cnf.h; sourceTree = "<group>"; };
-		A0C329CC178BC4B300E32E25 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		A0C329CF178BC4B300E32E25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A0C329D0178BC4B300E32E25 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		A0C329D1178BC4B300E32E25 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		A0C329E1178BC4B300E32E25 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A0C48D8A178B8D0D00938EDD /* bindle-libtool.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-libtool.m4"; sourceTree = "<group>"; };
 		A0C4C65317A2812F008E856D /* regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regex.h; sourceTree = "<group>"; };
 		A0CE16DF15E984A600AC6A2F /* git-package-version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "git-package-version.sh"; sourceTree = "<group>"; };
@@ -229,9 +111,6 @@
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-fd-poller.m4"; sourceTree = "<group>"; };
-		A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbindle-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0EE9F3318DFE15700CF8788 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A0EE9F5118DFF94000CF8788 /* simple.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = simple.txt; sourceTree = "<group>"; };
 		A0EE9F5218DFFBB100CF8788 /* crlf.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = crlf.sh; sourceTree = "<group>"; };
 		A0EE9F5318DFFBB100CF8788 /* crlf.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = crlf.txt; sourceTree = "<group>"; };
@@ -239,34 +118,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A00F6E9B194278C5003CC8C2 /* Frameworks */ = {
+		A044CD8C280625D600BFE7C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00F6EAA19427919003CC8C2 /* libbindle-osx.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A06092F418DF8FC000434E5C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0EE9F5018DFE1EC00CF8788 /* libbindle-osx.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0EE9F1818DFE10F00CF8788 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0EE9F2018DFE15600CF8788 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0EE9F2418DFE15600CF8788 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,10 +172,7 @@
 		A01156D9175B00F6008E66FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A06092F718DF8FC000434E5C /* fdtest */,
-				A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */,
-				A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */,
-				A00F6E9E194278C5003CC8C2 /* cnftest */,
+				A044CD8E280625D600BFE7C3 /* liblibbindle.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,11 +180,6 @@
 		A01156EA175B0118008E66FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A01156EB175B0118008E66FA /* Foundation.framework */,
-				A0C329CC178BC4B300E32E25 /* Cocoa.framework */,
-				A0C329E1178BC4B300E32E25 /* XCTest.framework */,
-				A0EE9F3318DFE15700CF8788 /* UIKit.framework */,
-				A0C329CE178BC4B300E32E25 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -445,16 +292,6 @@
 			path = tests;
 			sourceTree = "<group>";
 		};
-		A0C329CE178BC4B300E32E25 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A0C329CF178BC4B300E32E25 /* Foundation.framework */,
-				A0C329D0178BC4B300E32E25 /* CoreData.framework */,
-				A0C329D1178BC4B300E32E25 /* AppKit.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		A0CE16D215E9846A00AC6A2F = {
 			isa = PBXGroup;
 			children = (
@@ -514,88 +351,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		A0EE9F1918DFE10F00CF8788 /* Headers */ = {
+		A044CD8A280625D600BFE7C3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0B6A3F2191CBECB000636B2 /* cnf.h in Headers */,
-				A00F6EB719427C61003CC8C2 /* log.h in Headers */,
+				A044CD9D2806266C00BFE7C3 /* cdefs.h in Headers */,
+				A044CD9E2806266C00BFE7C3 /* cnf.h in Headers */,
+				A044CD9C2806266C00BFE7C3 /* version.h in Headers */,
+				A044CD9F2806266C00BFE7C3 /* utf8.h in Headers */,
+				A044CDA02806266C00BFE7C3 /* fd.h in Headers */,
+				A044CD9A2806266C00BFE7C3 /* regex.h in Headers */,
+				A044CD9B2806266C00BFE7C3 /* log.h in Headers */,
+				A044CD992806266C00BFE7C3 /* err.h in Headers */,
+				A044CD982806266600BFE7C3 /* bindle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A00F6E9D194278C5003CC8C2 /* cnftest */ = {
+		A044CD8D280625D600BFE7C3 /* libbindle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A00F6EA4194278C5003CC8C2 /* Build configuration list for PBXNativeTarget "cnftest" */;
+			buildConfigurationList = A044CD8F280625D600BFE7C3 /* Build configuration list for PBXNativeTarget "libbindle" */;
 			buildPhases = (
-				A00F6E9A194278C5003CC8C2 /* Sources */,
-				A00F6E9B194278C5003CC8C2 /* Frameworks */,
-				A00F6E9C194278C5003CC8C2 /* CopyFiles */,
+				A044CD8A280625D600BFE7C3 /* Headers */,
+				A044CD8B280625D600BFE7C3 /* Sources */,
+				A044CD8C280625D600BFE7C3 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A00F6EA919427914003CC8C2 /* PBXTargetDependency */,
 			);
-			name = cnftest;
-			productName = cnftest;
-			productReference = A00F6E9E194278C5003CC8C2 /* cnftest */;
-			productType = "com.apple.product-type.tool";
-		};
-		A06092F618DF8FC000434E5C /* fdtest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A06092FD18DF8FC000434E5C /* Build configuration list for PBXNativeTarget "fdtest" */;
-			buildPhases = (
-				A06092F318DF8FC000434E5C /* Sources */,
-				A06092F418DF8FC000434E5C /* Frameworks */,
-				A06092F518DF8FC000434E5C /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0EE9F4F18DFE1E700CF8788 /* PBXTargetDependency */,
-			);
-			name = fdtest;
-			productName = fdtest;
-			productReference = A06092F718DF8FC000434E5C /* fdtest */;
-			productType = "com.apple.product-type.tool";
-		};
-		A0EE9F1A18DFE10F00CF8788 /* bindle-osx */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0EE9F1E18DFE10F00CF8788 /* Build configuration list for PBXNativeTarget "bindle-osx" */;
-			buildPhases = (
-				A0EE9F1718DFE10F00CF8788 /* Sources */,
-				A0EE9F1818DFE10F00CF8788 /* Frameworks */,
-				A0EE9F1918DFE10F00CF8788 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0CF1B4B1921DF5F00E5C668 /* PBXTargetDependency */,
-			);
-			name = "bindle-osx";
-			productName = "bindle-osx";
-			productReference = A0EE9F1B18DFE10F00CF8788 /* libbindle-osx.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		A0EE9F2218DFE15600CF8788 /* bindle-ios */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0EE9F4018DFE15700CF8788 /* Build configuration list for PBXNativeTarget "bindle-ios" */;
-			buildPhases = (
-				A0EE9F1F18DFE15600CF8788 /* Sources */,
-				A0EE9F2018DFE15600CF8788 /* Frameworks */,
-				A0EE9F2118DFE15600CF8788 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0CF1B4D1921DF6400E5C668 /* PBXTargetDependency */,
-			);
-			name = "bindle-ios";
-			productName = "bindle-ios";
-			productReference = A0EE9F2318DFE15600CF8788 /* libbindle-ios.a */;
+			name = libbindle;
+			productName = libbindle;
+			productReference = A044CD8E280625D600BFE7C3 /* liblibbindle.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -604,357 +393,141 @@
 		A0CE16D415E9846A00AC6A2F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					A044CD8D280625D600BFE7C3 = {
+						CreatedOnToolsVersion = 13.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					A044CD92280625E300BFE7C3 = {
+						CreatedOnToolsVersion = 13.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = A0CE16D715E9846A00AC6A2F /* Build configuration list for PBXProject "bindletools" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = A0CE16D215E9846A00AC6A2F;
 			productRefGroup = A01156D9175B00F6008E66FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A0EE9F2218DFE15600CF8788 /* bindle-ios */,
-				A0EE9F1A18DFE10F00CF8788 /* bindle-osx */,
-				A01156FE175B0DF3008E66FA /* bindle: Git Version */,
-				A0808A7D175D34000074058B /* bindle: doxygen */,
-				A0808A84175D4A6C0074058B /* bindle: open docs */,
-				A00F6EAB19427939003CC8C2 /* bindle: tests */,
-				A06092F618DF8FC000434E5C /* fdtest */,
-				A00F6E9D194278C5003CC8C2 /* cnftest */,
+				A044CD8D280625D600BFE7C3 /* libbindle */,
+				A044CD92280625E300BFE7C3 /* All Programs */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		A0115702175B0DFA008E66FA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./build-aux/git-package-version.sh ${PROJECT_DIR} ${PROJECT_DIR}/include\n";
-			showEnvVarsInLog = 0;
-		};
-		A0808A81175D34050074058B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd doc && /opt/local/bin/doxygen Doxyfile";
-			showEnvVarsInLog = 0;
-		};
-		A0808A8A175D4A770074058B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "open /Applications/Safari.app doc/doxygen/html/index.html";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		A00F6E9A194278C5003CC8C2 /* Sources */ = {
+		A044CD8B280625D600BFE7C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00F6EA7194278D6003CC8C2 /* cnftest.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A06092F318DF8FC000434E5C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A060930018DF8FD100434E5C /* fdtest.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0EE9F1718DFE10F00CF8788 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A00F6EB519427C46003CC8C2 /* log.c in Sources */,
-				A0EE9F4C18DFE19100CF8788 /* version.c in Sources */,
-				A0EE9F4B18DFE18D00CF8788 /* utf8.c in Sources */,
-				A0EE9F4718DFE18600CF8788 /* err.c in Sources */,
-				A0EE9F4918DFE18A00CF8788 /* fd.c in Sources */,
-				A0B6A3F0191CBDD4000636B2 /* cnf.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0EE9F1F18DFE15600CF8788 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A00F6EB419427C46003CC8C2 /* log.c in Sources */,
-				A0EE9F4D18DFE19200CF8788 /* version.c in Sources */,
-				A0EE9F4818DFE18900CF8788 /* fd.c in Sources */,
-				A0EE9F4618DFE18500CF8788 /* err.c in Sources */,
-				A0EE9F4A18DFE18C00CF8788 /* utf8.c in Sources */,
-				A0B6A3EF191CBDD4000636B2 /* cnf.c in Sources */,
+				A044CDA52806267900BFE7C3 /* utf8.c in Sources */,
+				A044CDA12806267900BFE7C3 /* log.c in Sources */,
+				A044CDA42806267900BFE7C3 /* cnf.c in Sources */,
+				A044CDA62806267900BFE7C3 /* fd.c in Sources */,
+				A044CDA32806267900BFE7C3 /* version.c in Sources */,
+				A044CDA22806267900BFE7C3 /* err.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A00F6EA919427914003CC8C2 /* PBXTargetDependency */ = {
+		A044CD97280625EE00BFE7C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A0EE9F1A18DFE10F00CF8788 /* bindle-osx */;
-			targetProxy = A00F6EA819427914003CC8C2 /* PBXContainerItemProxy */;
-		};
-		A00F6EB019427945003CC8C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A06092F618DF8FC000434E5C /* fdtest */;
-			targetProxy = A00F6EAF19427945003CC8C2 /* PBXContainerItemProxy */;
-		};
-		A00F6EB219427945003CC8C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A00F6E9D194278C5003CC8C2 /* cnftest */;
-			targetProxy = A00F6EB119427945003CC8C2 /* PBXContainerItemProxy */;
-		};
-		A0808A89175D4A750074058B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0808A7D175D34000074058B /* bindle: doxygen */;
-			targetProxy = A0808A88175D4A750074058B /* PBXContainerItemProxy */;
-		};
-		A0CF1B4B1921DF5F00E5C668 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A01156FE175B0DF3008E66FA /* bindle: Git Version */;
-			targetProxy = A0CF1B4A1921DF5F00E5C668 /* PBXContainerItemProxy */;
-		};
-		A0CF1B4D1921DF6400E5C668 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A01156FE175B0DF3008E66FA /* bindle: Git Version */;
-			targetProxy = A0CF1B4C1921DF6400E5C668 /* PBXContainerItemProxy */;
-		};
-		A0EE9F4F18DFE1E700CF8788 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0EE9F1A18DFE10F00CF8788 /* bindle-osx */;
-			targetProxy = A0EE9F4E18DFE1E700CF8788 /* PBXContainerItemProxy */;
+			target = A044CD8D280625D600BFE7C3 /* libbindle */;
+			targetProxy = A044CD96280625EE00BFE7C3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A00F6EA5194278C5003CC8C2 /* Debug */ = {
+		A044CD90280625D600BFE7C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		A00F6EA6194278C5003CC8C2 /* Release */ = {
+		A044CD91280625D600BFE7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		A00F6EAD19427939003CC8C2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A00F6EAE19427939003CC8C2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		A0115700175B0DF3008E66FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A0115701175B0DF3008E66FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		A06092FE18DF8FC000434E5C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		A06092FF18DF8FC000434E5C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		A0808A7E175D34000074058B /* Debug */ = {
+		A044CD94280625E300BFE7C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		A0808A7F175D34000074058B /* Release */ = {
+		A044CD95280625E300BFE7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		A0808A86175D4A6C0074058B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A0808A87175D4A6C0074058B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -962,13 +535,35 @@
 		A0CE16D915E9846A00AC6A2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = include;
 				ONLY_ACTIVE_ARCH = YES;
 			};
@@ -977,222 +572,55 @@
 		A0CE16DA15E9846A00AC6A2F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = include;
-			};
-			name = Release;
-		};
-		A0EE9F1C18DFE10F00CF8788 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_PREFIX = lib;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		A0EE9F1D18DFE10F00CF8788 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				EXECUTABLE_PREFIX = lib;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		A0EE9F4118DFE15700CF8788 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/bindle_ios.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A0EE9F4218DFE15700CF8788 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/bindle_ios.dst;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A00F6EA4194278C5003CC8C2 /* Build configuration list for PBXNativeTarget "cnftest" */ = {
+		A044CD8F280625D600BFE7C3 /* Build configuration list for PBXNativeTarget "libbindle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A00F6EA5194278C5003CC8C2 /* Debug */,
-				A00F6EA6194278C5003CC8C2 /* Release */,
+				A044CD90280625D600BFE7C3 /* Debug */,
+				A044CD91280625D600BFE7C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A00F6EAC19427939003CC8C2 /* Build configuration list for PBXAggregateTarget "bindle: tests" */ = {
+		A044CD93280625E300BFE7C3 /* Build configuration list for PBXAggregateTarget "All Programs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A00F6EAD19427939003CC8C2 /* Debug */,
-				A00F6EAE19427939003CC8C2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A01156FF175B0DF3008E66FA /* Build configuration list for PBXAggregateTarget "bindle: Git Version" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0115700175B0DF3008E66FA /* Debug */,
-				A0115701175B0DF3008E66FA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A06092FD18DF8FC000434E5C /* Build configuration list for PBXNativeTarget "fdtest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A06092FE18DF8FC000434E5C /* Debug */,
-				A06092FF18DF8FC000434E5C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0808A80175D34000074058B /* Build configuration list for PBXAggregateTarget "bindle: doxygen" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0808A7E175D34000074058B /* Debug */,
-				A0808A7F175D34000074058B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0808A85175D4A6C0074058B /* Build configuration list for PBXAggregateTarget "bindle: open docs" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0808A86175D4A6C0074058B /* Debug */,
-				A0808A87175D4A6C0074058B /* Release */,
+				A044CD94280625E300BFE7C3 /* Debug */,
+				A044CD95280625E300BFE7C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1202,24 +630,6 @@
 			buildConfigurations = (
 				A0CE16D915E9846A00AC6A2F /* Debug */,
 				A0CE16DA15E9846A00AC6A2F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0EE9F1E18DFE10F00CF8788 /* Build configuration list for PBXNativeTarget "bindle-osx" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0EE9F1C18DFE10F00CF8788 /* Debug */,
-				A0EE9F1D18DFE10F00CF8788 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0EE9F4018DFE15700CF8788 /* Build configuration list for PBXNativeTarget "bindle-ios" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0EE9F4118DFE15700CF8788 /* Debug */,
-				A0EE9F4218DFE15700CF8788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
