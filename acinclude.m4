@@ -1,6 +1,6 @@
 #
 #   Bindle Binaries Tools
-#   Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+#   Copyright (C) 2012, 2022 Bindle Binaries <syzdek@bindlebinaries.com>.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -34,24 +34,26 @@
 #   acinclude.m4 - custom m4 macros used by configure.ac
 #
 
-# AC_BINDLETOOLS_LIBRARY()
+# AC_BINDLETOOLS_LIBBINDLE()
 # -----------------------------------
-AC_DEFUN([AC_BINDLETOOLS_LIBRARY],[dnl
+AC_DEFUN([AC_BINDLETOOLS_LIBBINDLE],[dnl
 
    enableval=""
    AC_ARG_ENABLE(
       libbindle,
-      [AS_HELP_STRING([--enable-libbindle], [install library (default: no)])],
+      [AS_HELP_STRING([--enable-libbindle], [install bindletools library])],
       [ ELIBBINDLE=$enableval ],
       [ ELIBBINDLE=$enableval ]
    )
 
-   ENABLE_LIBBINDLE=no
    if test "x${ELIBBINDLE}" = "xyes";then
-      ENABLE_LIBBINDLETOOLS=${ELIBBINDLE}
+      ENABLE_LIBBINDLE="yes"
+   else
+      ENABLE_LIBBINDLE="no"
    fi
 
-   AM_CONDITIONAL([ENABLE_LIBBINDLE], [test "${ENABLE_LIBBINDLE}" == "yes"])
+   AM_CONDITIONAL([ENABLE_LIBBINDLE],  [test "$ENABLE_LIBBINDLE" = "yes"])
+   AM_CONDITIONAL([DISABLE_LIBBINDLE], [test "$ENABLE_LIBBINDLE" = "no"])
 ])dnl
 
 
