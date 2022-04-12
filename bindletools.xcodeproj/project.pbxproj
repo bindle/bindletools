@@ -51,7 +51,6 @@
 /* Begin PBXFileReference section */
 		A0059497175D17B700DD3266 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
 		A0059498175D17B700DD3266 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		A00F6E99194278A6003CC8C2 /* cnftest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnftest.c; sourceTree = "<group>"; };
 		A00F6EB319427C46003CC8C2 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
 		A00F6EB619427C61003CC8C2 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		A00F6EB81949715C003CC8C2 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
@@ -73,7 +72,6 @@
 		A044CD8E280625D600BFE7C3 /* liblibbindle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibbindle.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
-		A06092F218DF7A7500434E5C /* fdtest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fdtest.c; path = tests/fd/fdtest.c; sourceTree = SOURCE_ROOT; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
 		A06FDB1E1D7A02D200995468 /* bindle-doxygen.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; path = "bindle-doxygen.m4"; sourceTree = "<group>"; };
 		A07A07CD17829812006884FC /* Changes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Changes; sourceTree = "<group>"; };
@@ -87,14 +85,6 @@
 		A07A07DA1782B903006884FC /* vars.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = vars.pl; sourceTree = "<group>"; };
 		A07A07DB1782BC14006884FC /* bindle-perl.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-perl.m4"; sourceTree = "<group>"; };
 		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
-		A0808A8C175D4B930074058B /* utf8test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8test.c; sourceTree = "<group>"; };
-		A0808A8E175D5BB20074058B /* ascii.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ascii.txt; sourceTree = "<group>"; };
-		A0808A8F175D5BFA0074058B /* utf8test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = utf8test.sh; sourceTree = "<group>"; };
-		A0B5366E175DE1C9004828AA /* invalid-continuation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-continuation.txt"; sourceTree = "<group>"; };
-		A0B5366F175DE1C9004828AA /* invalid-length.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-length.txt"; sourceTree = "<group>"; };
-		A0B53670175DE1C9004828AA /* mixed.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mixed.txt; sourceTree = "<group>"; };
-		A0B53671175DE1C9004828AA /* null.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = null.txt; sourceTree = "<group>"; };
-		A0B53672175DE1C9004828AA /* utf8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = utf8.txt; sourceTree = "<group>"; };
 		A0B6A3EE191CBDD4000636B2 /* cnf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cnf.c; sourceTree = "<group>"; };
 		A0B6A3F1191CBECB000636B2 /* cnf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cnf.h; sourceTree = "<group>"; };
 		A0C48D8A178B8D0D00938EDD /* bindle-libtool.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-libtool.m4"; sourceTree = "<group>"; };
@@ -111,10 +101,6 @@
 		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-fd-poller.m4"; sourceTree = "<group>"; };
-		A0EE9F5118DFF94000CF8788 /* simple.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = simple.txt; sourceTree = "<group>"; };
-		A0EE9F5218DFFBB100CF8788 /* crlf.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = crlf.sh; sourceTree = "<group>"; };
-		A0EE9F5318DFFBB100CF8788 /* crlf.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = crlf.txt; sourceTree = "<group>"; };
-		A0EE9F5418E0035100CF8788 /* simple.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = simple.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,14 +127,6 @@
 				A0059498175D17B700DD3266 /* version.h */,
 			);
 			path = bindle;
-			sourceTree = "<group>";
-		};
-		A00F6E98194278A6003CC8C2 /* cnf */ = {
-			isa = PBXGroup;
-			children = (
-				A00F6E99194278A6003CC8C2 /* cnftest.c */,
-			);
-			path = cnf;
 			sourceTree = "<group>";
 		};
 		A01156CC175B009E008E66FA /* include */ = {
@@ -197,34 +175,6 @@
 			);
 			path = libbindle;
 			sourceTree = "<group>";
-		};
-		A03E2F4918CE80BE007DDFC6 /* utf8 */ = {
-			isa = PBXGroup;
-			children = (
-				A0808A8C175D4B930074058B /* utf8test.c */,
-				A0808A8F175D5BFA0074058B /* utf8test.sh */,
-				A0808A8E175D5BB20074058B /* ascii.txt */,
-				A0B5366E175DE1C9004828AA /* invalid-continuation.txt */,
-				A0B5366F175DE1C9004828AA /* invalid-length.txt */,
-				A0B53670175DE1C9004828AA /* mixed.txt */,
-				A0B53671175DE1C9004828AA /* null.txt */,
-				A0B53672175DE1C9004828AA /* utf8.txt */,
-			);
-			path = utf8;
-			sourceTree = "<group>";
-		};
-		A06092F118DE10F400434E5C /* fd */ = {
-			isa = PBXGroup;
-			children = (
-				A06092F218DF7A7500434E5C /* fdtest.c */,
-				A0EE9F5218DFFBB100CF8788 /* crlf.sh */,
-				A0EE9F5318DFFBB100CF8788 /* crlf.txt */,
-				A0EE9F5418E0035100CF8788 /* simple.sh */,
-				A0EE9F5118DFF94000CF8788 /* simple.txt */,
-			);
-			name = fd;
-			path = tests/fd;
-			sourceTree = SOURCE_ROOT;
 		};
 		A07A07CB17829812006884FC /* perl-bindletools */ = {
 			isa = PBXGroup;
@@ -285,9 +235,6 @@
 		A0808A8B175D4B640074058B /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				A00F6E98194278A6003CC8C2 /* cnf */,
-				A06092F118DE10F400434E5C /* fd */,
-				A03E2F4918CE80BE007DDFC6 /* utf8 */,
 			);
 			path = tests;
 			sourceTree = "<group>";

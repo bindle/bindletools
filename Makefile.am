@@ -1,6 +1,6 @@
 #
 #   Bindle Binaries Tools
-#   Copyright (C) 2012 Bindle Binaries <syzdek@bindlebinaries.com>.
+#   Copyright (C) 2012, 2022 Bindle Binaries <syzdek@bindlebinaries.com>.
 #
 #   @BINDLE_BINARIES_BSD_LICENSE_START@
 #
@@ -65,24 +65,11 @@ bindleinclude_HEADERS			=
 lib_LTLIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=
-noinst_DATA				= \
-					  tests/utf8/ascii.txt \
-					  tests/utf8/invalid-continuation.txt \
-					  tests/utf8/invalid-length.txt \
-					  tests/utf8/mixed.txt \
-					  tests/utf8/null.txt \
-					  tests/utf8/utf8.txt
+noinst_DATA				=
 noinst_LTLIBRARIES			=
 noinst_HEADERS				=
-noinst_PROGRAMS				= tests/cnf/cnftest \
-					  tests/fd/fdtest \
-					  tests/utf8/utf8test
-noinst_SCRIPTS				= tests/utf8/ascii.sh \
-					  tests/utf8/invalid-continuation.sh \
-					  tests/utf8/invalid-length.sh \
-					  tests/utf8/mixed.sh \
-					  tests/utf8/null.sh \
-					  tests/utf8/utf8.sh
+noinst_PROGRAMS				=
+noinst_SCRIPTS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
@@ -90,9 +77,7 @@ sbin_SCRIPTS				=
 
 # lists
 BUILT_SOURCES				=
-TESTS					= $(noinst_SCRIPTS) \
-					  tests/fd/crlf.sh \
-					  tests/fd/simple.sh
+TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= \
@@ -166,21 +151,6 @@ lib_libbindle_la_SOURCES		= \
 					  lib/libbindle/version.c
 
 
-# macros for tests/cnf/cnftest
-tests_cnf_cnftest_DEPENDENCIES		= lib/libbindle.la
-tests_cnf_cnftest_LDADD			= -lbindle
-
-
-# macros for tests/utf8test
-tests_utf8_utf8test_DEPENDENCIES	= lib/libbindle.la
-tests_utf8_utf8test_LDADD		= -lbindle
-
-
-# macros for tests/fd/fdtest
-tests_fd_fdtest_DEPENDENCIES		= lib/libbindle.la
-tests_fd_fdtest_LDADD			= -lbindle
-
-
 # Makefile includes
 GIT_PACKAGE_VERSION_DIR=include
 SUBST_EXPRESSIONS =
@@ -190,40 +160,8 @@ include $(srcdir)/build-aux/makefile-subst.am
 include $(srcdir)/build-aux/makefile-version.am
 
 
-# substitution routine
-make_utf8check = \
-		echo "cp tests/utf8/utf8test.sh $(@)"; \
-		mkdir -p `dirname ${@}` || exit 1; \
-		rm -f $(@) || exit 1; \
-		cp $(top_srcdir)/tests/utf8/utf8test.sh $(@) || exit 1; \
-		chmod 0755 ${@}
-
-
 # custom targets
 .PHONY:
-
-tests/utf8/ascii.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
-
-
-tests/utf8/invalid-continuation.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
-
-
-tests/utf8/invalid-length.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
-
-
-tests/utf8/mixed.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
-
-
-tests/utf8/null.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
-
-
-tests/utf8/utf8.sh: Makefile tests/utf8/utf8test.sh
-	@$(make_utf8check)
 
 
 # local targets
