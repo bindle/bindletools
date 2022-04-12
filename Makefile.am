@@ -41,13 +41,21 @@ SUBDIRS					=
 DIST_SUBDIRS				=
 
 
+# GNU make options
+V					= 0
+
+
 # Global flags
 AM_LIBS					=
-AM_LDFLAGS				= -L$(top_builddir)/lib
+AM_LDFLAGS				=
 AM_CFLAGS				= -O2 $(CFLAGS_WARNINGS)
 AM_CXXFLAGS				= -O2 @AM_CXXFLAGS@
 AM_OBJCFLAGS				= -O2 @AM_OBJCFLAGS@
-AM_CPPFLAGS				= -O2 -UPMARK -DHAVE_CONFIG_H=1 -I$(top_builddir)/include -I$(top_srcdir)/include
+AM_CPPFLAGS				= -O2 \
+					  -DHAVE_CONFIG_H=1 \
+					  -I$(top_builddir)/include \
+					  -I$(top_srcdir)/include \
+					  -DSYSCONFDIR="\"$(sysconfdir)\""
 ACLOCAL_AMFLAGS				= -I m4 -W all -W error
 AM_MAKEINFOFLAGS                        = --no-split
 DEFS					=
@@ -67,19 +75,24 @@ doc_DATA				= AUTHORS.md \
 include_HEADERS				=
 bindleinclude_HEADERS			=
 lib_LTLIBRARIES				=
+lib_LIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=
 noinst_DATA				=
 noinst_LTLIBRARIES			=
+noinst_LIBRARIES			=
 noinst_HEADERS				=
 noinst_PROGRAMS				=
 noinst_SCRIPTS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
+EXTRA_PROGRAMS				=
+EXTRA					=
 
 
 # lists
+AM_INSTALLCHECK_STD_OPTIONS_EXEMPT	=
 BUILT_SOURCES				=
 TESTS					=
 XFAIL_TESTS				=
@@ -103,56 +116,75 @@ EXTRA_DIST				= $(doc_DATA) \
 					  tests/utf8/utf8test.sh \
 					  $(PERL_FILES) \
 					  $(noinst_DATA)
-CLEANFILES				= \
-					  $(builddir)/a.out   $(srcdir)/a.out \
+CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  $(builddir)/*/a.out $(srcdir)/*/a.out \
 					  config.h.in~ $(srcdir)/config.h.in~ \
 					  $(man_MANS) \
 					  $(bin_SCRIPTS) \
 					  $(sbin_SCRIPTS) \
 					  $(noinst_SCRIPTS) \
+					  $(EXTRA_PROGRAMS) \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 
 
-# macros for lib/libbindle.la
+# conditional build
 if ENABLE_LIBBINDLE
-lib_LTLIBRARIES				+= lib/libbindle.la
-include_HEADERS				+= include/bindle.h
-bindleinclude_HEADERS			+= include/bindle/cdefs.h
-bindleinclude_HEADERS			+= include/bindle/cnf.h
-bindleinclude_HEADERS			+= include/bindle/err.h
-bindleinclude_HEADERS			+= include/bindle/fd.h
-bindleinclude_HEADERS			+= include/bindle/log.h
-bindleinclude_HEADERS			+= include/bindle/utf8.h
-bindleinclude_HEADERS			+= include/bindle/regex.h
-bindleinclude_HEADERS			+= include/bindle/version.h
+   lib_LTLIBRARIES			+= lib/libbindle.la
+   include_HEADERS			+= include/bindle.h
+   bindleinclude_HEADERS		+= include/bindle/cdefs.h
+   bindleinclude_HEADERS		+= include/bindle/cnf.h
+   bindleinclude_HEADERS		+= include/bindle/err.h
+   bindleinclude_HEADERS		+= include/bindle/fd.h
+   bindleinclude_HEADERS		+= include/bindle/log.h
+   bindleinclude_HEADERS		+= include/bindle/utf8.h
+   bindleinclude_HEADERS		+= include/bindle/regex.h
+   bindleinclude_HEADERS		+= include/bindle/version.h
 else
-noinst_HEADERS				+= include/bindle.h
-noinst_LTLIBRARIES			+= lib/libbindle.la
-noinst_HEADERS				+= include/bindle.h
-noinst_HEADERS				+= include/bindle/cdefs.h
-noinst_HEADERS				+= include/bindle/cnf.h
-noinst_HEADERS				+= include/bindle/err.h
-noinst_HEADERS				+= include/bindle/fd.h
-noinst_HEADERS				+= include/bindle/log.h
-noinst_HEADERS				+= include/bindle/utf8.h
-noinst_HEADERS				+= include/bindle/regex.h
-noinst_HEADERS				+= include/bindle/version.h
+   noinst_HEADERS			+= include/bindle.h
+   noinst_LIBRARIES			+= lib/libbindle.a
+   noinst_HEADERS			+= include/bindle.h
+   noinst_HEADERS			+= include/bindle/cdefs.h
+   noinst_HEADERS			+= include/bindle/cnf.h
+   noinst_HEADERS			+= include/bindle/err.h
+   noinst_HEADERS			+= include/bindle/fd.h
+   noinst_HEADERS			+= include/bindle/log.h
+   noinst_HEADERS			+= include/bindle/utf8.h
+   noinst_HEADERS			+= include/bindle/regex.h
+   noinst_HEADERS			+= include/bindle/version.h
 endif
-lib_libbindle_la_DEPENDENCIES		= Makefile lib/libbindle/libbindle.sym $(noinst_HEADERS) $(include_HEADERS) $(bindleinclude_HEADERS)
-lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
-					  -version-info $(LIB_VERSION_INFO) \
-					  $(AM_LDFLAGS) \
-					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
-lib_libbindle_la_SOURCES		= \
+
+
+# macros for lib/libtinyrad.a
+lib_libbindle_a_DEPENDENCIES		= Makefile \
+					  config.h
+lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_a_SOURCES			= $(noinst_HEADERS) \
+					  $(include_HEADERS) \
+					  $(bindleinclude_HEADERS) \
 					  lib/libbindle/cnf.c \
 					  lib/libbindle/err.c \
 					  lib/libbindle/fd.c \
 					  lib/libbindle/log.c \
 					  lib/libbindle/utf8.c \
 					  lib/libbindle/version.c
+
+
+# macros for lib/libbindle.la
+lib_libbindle_la_DEPENDENCIES		= Makefile \
+					  config.h \
+					  lib/libbindle/libbindle.sym
+lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_la_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)'\
+					  -version-info $(LIB_VERSION_INFO) \
+					  $(AM_LDFLAGS) \
+					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
+lib_libbindle_la_SOURCES		= $(lib_libbindle_a_SOURCES)
 
 
 # Makefile includes
@@ -165,7 +197,11 @@ include $(srcdir)/build-aux/makefile-version.am
 
 
 # custom targets
-.PHONY:
+.PHONY: git-clean
+
+git-clean:
+	git fsck --full --unreachable
+	git gc --auto --aggressive
 
 
 # local targets
