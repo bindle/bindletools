@@ -59,7 +59,11 @@ bindleincludedir			= $(includedir)/bindle
 
 # automake targets
 check_PROGRAMS				=
-doc_DATA				=
+doc_DATA				= AUTHORS.md \
+					  ChangeLog.md \
+					  COPYING.md \
+					  README.md \
+					  TODO.md
 include_HEADERS				=
 bindleinclude_HEADERS			=
 lib_LTLIBRARIES				=
@@ -80,7 +84,7 @@ BUILT_SOURCES				=
 TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
-EXTRA_DIST				= \
+EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
 					  lib/libbindle/libbindle.sym \
 					  m4/bindle-doxygen.m4 \

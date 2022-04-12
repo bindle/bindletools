@@ -93,13 +93,13 @@
 		A0CE16E015E984A600AC6A2F /* git-tar-name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "git-tar-name.txt"; sourceTree = "<group>"; };
 		A0CE16E415E988DB00AC6A2F /* bindle-git.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-git.m4"; sourceTree = "<group>"; };
 		A0CE16EC15E9892E00AC6A2F /* acinclude.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = acinclude.m4; sourceTree = "<group>"; };
-		A0CE16ED15E9892E00AC6A2F /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
-		A0CE16EE15E9892E00AC6A2F /* ChangeLog */ = {isa = PBXFileReference; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
+		A0CE16ED15E9892E00AC6A2F /* AUTHORS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AUTHORS.md; sourceTree = "<group>"; };
+		A0CE16EE15E9892E00AC6A2F /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
 		A0CE16EF15E9892E00AC6A2F /* configure.ac */ = {isa = PBXFileReference; explicitFileType = text.script; path = configure.ac; sourceTree = "<group>"; };
-		A0CE16F015E9892E00AC6A2F /* COPYING */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		A0CE16F015E9892E00AC6A2F /* COPYING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = COPYING.md; sourceTree = "<group>"; };
 		A0CE16F115E9892E00AC6A2F /* Makefile.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = Makefile.am; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
-		A0CE16F215E9892E00AC6A2F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
-		A0CE16F315E9892E00AC6A2F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A0CE16F215E9892E00AC6A2F /* NEWS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NEWS.md; sourceTree = "<group>"; };
+		A0CE16F315E9892E00AC6A2F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A0CF1B581922996900E5C668 /* bindle-fd-poller.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-fd-poller.m4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,19 +243,19 @@
 			isa = PBXGroup;
 			children = (
 				A0CE16EC15E9892E00AC6A2F /* acinclude.m4 */,
-				A0CE16ED15E9892E00AC6A2F /* AUTHORS */,
+				A0CE16ED15E9892E00AC6A2F /* AUTHORS.md */,
 				A00F6EB81949715C003CC8C2 /* autogen.sh */,
-				A0CE16EE15E9892E00AC6A2F /* ChangeLog */,
-				A0CE16EF15E9892E00AC6A2F /* configure.ac */,
-				A0CE16F015E9892E00AC6A2F /* COPYING */,
-				A0CE16F115E9892E00AC6A2F /* Makefile.am */,
-				A0CE16F215E9892E00AC6A2F /* NEWS */,
-				A0CE16F315E9892E00AC6A2F /* README */,
 				A0CE16DE15E984A600AC6A2F /* build-aux */,
+				A0CE16EE15E9892E00AC6A2F /* ChangeLog.md */,
+				A0CE16EF15E9892E00AC6A2F /* configure.ac */,
+				A0CE16F015E9892E00AC6A2F /* COPYING.md */,
 				A0808A82175D34A60074058B /* doc */,
 				A01156CC175B009E008E66FA /* include */,
 				A01156D1175B009E008E66FA /* lib */,
 				A0CE16E215E988DB00AC6A2F /* m4 */,
+				A0CE16F115E9892E00AC6A2F /* Makefile.am */,
+				A0CE16F215E9892E00AC6A2F /* NEWS.md */,
+				A0CE16F315E9892E00AC6A2F /* README.md */,
 				A0808A8B175D4B640074058B /* tests */,
 				A01156EA175B0118008E66FA /* Frameworks */,
 				A01156D9175B00F6008E66FA /* Products */,

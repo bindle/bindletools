@@ -1,6 +1,7 @@
 
-Bindle Binaries Tools
-=====================
+Bindle Binaries Tools  
+Copyright (c) 2012, 2022 David M. Syzdek <david@syzdek.net>.  
+All rights reserved.  
 
 #### devel
    - Changing default behavior to disable 'debug' option (syzdek)
