@@ -20,24 +20,6 @@
 		};
 /* End PBXAggregateTarget section */
 
-/* Begin PBXBuildFile section */
-		A044CD982806266600BFE7C3 /* bindle.h in Headers */ = {isa = PBXBuildFile; fileRef = A01156CD175B009E008E66FA /* bindle.h */; };
-		A044CD992806266C00BFE7C3 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597A18D1108D00D375B3 /* err.h */; };
-		A044CD9A2806266C00BFE7C3 /* regex.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C4C65317A2812F008E856D /* regex.h */; };
-		A044CD9B2806266C00BFE7C3 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = A00F6EB619427C61003CC8C2 /* log.h */; };
-		A044CD9C2806266C00BFE7C3 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059498175D17B700DD3266 /* version.h */; };
-		A044CD9D2806266C00BFE7C3 /* cdefs.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597918D10A5E00D375B3 /* cdefs.h */; };
-		A044CD9E2806266C00BFE7C3 /* cnf.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B6A3F1191CBECB000636B2 /* cnf.h */; };
-		A044CD9F2806266C00BFE7C3 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = A0059497175D17B700DD3266 /* utf8.h */; };
-		A044CDA02806266C00BFE7C3 /* fd.h in Headers */ = {isa = PBXBuildFile; fileRef = A02F597618D0F6AD00D375B3 /* fd.h */; };
-		A044CDA12806267900BFE7C3 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = A00F6EB319427C46003CC8C2 /* log.c */; };
-		A044CDA22806267900BFE7C3 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597B18D1112E00D375B3 /* err.c */; };
-		A044CDA32806267900BFE7C3 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156FB175B0764008E66FA /* version.c */; };
-		A044CDA42806267900BFE7C3 /* cnf.c in Sources */ = {isa = PBXBuildFile; fileRef = A0B6A3EE191CBDD4000636B2 /* cnf.c */; };
-		A044CDA52806267900BFE7C3 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A01156D2175B009E008E66FA /* utf8.c */; };
-		A044CDA62806267900BFE7C3 /* fd.c in Sources */ = {isa = PBXBuildFile; fileRef = A02F597718D0F6B700D375B3 /* fd.c */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		A044CD96280625EE00BFE7C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -51,25 +33,26 @@
 /* Begin PBXFileReference section */
 		A0059497175D17B700DD3266 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
 		A0059498175D17B700DD3266 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		A00F6EB319427C46003CC8C2 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
 		A00F6EB619427C61003CC8C2 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		A00F6EB81949715C003CC8C2 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		A01156CD175B009E008E66FA /* bindle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindle.h; sourceTree = "<group>"; };
-		A01156D2175B009E008E66FA /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utf8.c; path = lib/libbindle/utf8.c; sourceTree = SOURCE_ROOT; };
-		A01156D3175B009E008E66FA /* libbindle.sym */ = {isa = PBXFileReference; explicitFileType = text.script; name = libbindle.sym; path = lib/libbindle/libbindle.sym; sourceTree = SOURCE_ROOT; };
 		A01156FA175B029D008E66FA /* bindle-xxd.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-xxd.m4"; sourceTree = "<group>"; };
-		A01156FB175B0764008E66FA /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = version.c; path = lib/libbindle/version.c; sourceTree = SOURCE_ROOT; };
 		A016DA5F163753B0002165A5 /* bindle-gcc.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-gcc.m4"; sourceTree = "<group>"; };
 		A01B9E2D178E3A4700A04BBA /* bindle-postgresql.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-postgresql.m4"; sourceTree = "<group>"; };
 		A01B9E2F178EEF5200A04BBA /* bindle-sqlite3.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-sqlite3.m4"; sourceTree = "<group>"; };
 		A01F700117C5061500C4789F /* bindle-tools.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-tools.m4"; sourceTree = "<group>"; };
 		A01F700217C50E5500C4789F /* makefile-bindle.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-bindle.am"; sourceTree = "<group>"; };
 		A02F597618D0F6AD00D375B3 /* fd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fd.h; sourceTree = "<group>"; };
-		A02F597718D0F6B700D375B3 /* fd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fd.c; sourceTree = "<group>"; };
 		A02F597918D10A5E00D375B3 /* cdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdefs.h; sourceTree = "<group>"; };
 		A02F597A18D1108D00D375B3 /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
-		A02F597B18D1112E00D375B3 /* err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = err.c; sourceTree = "<group>"; };
 		A044CD8E280625D600BFE7C3 /* liblibbindle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibbindle.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A044CDA828063DB500BFE7C3 /* log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
+		A044CDA928063DB500BFE7C3 /* cnf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnf.c; sourceTree = "<group>"; };
+		A044CDAA28063DB500BFE7C3 /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8.c; sourceTree = "<group>"; };
+		A044CDAB28063DB500BFE7C3 /* err.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = err.c; sourceTree = "<group>"; };
+		A044CDAC28063DB500BFE7C3 /* fd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fd.c; sourceTree = "<group>"; };
+		A044CDAD28063DB500BFE7C3 /* version.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
+		A044CDB12806402400BFE7C3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		A050A3B516162EF70015528D /* makefile-subst.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 8; path = "makefile-subst.am"; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
 		A050A3B7161633A20015528D /* makefile-version.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-version.am"; sourceTree = "<group>"; };
 		A068E8CF161638FE00DE0DE5 /* makefile-autotools.am */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = "makefile-autotools.am"; sourceTree = "<group>"; };
@@ -85,7 +68,6 @@
 		A07A07DA1782B903006884FC /* vars.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = vars.pl; sourceTree = "<group>"; };
 		A07A07DB1782BC14006884FC /* bindle-perl.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-perl.m4"; sourceTree = "<group>"; };
 		A0808A83175D34BC0074058B /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text.script; name = Doxyfile; path = doc/Doxyfile; sourceTree = "<group>"; };
-		A0B6A3EE191CBDD4000636B2 /* cnf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cnf.c; sourceTree = "<group>"; };
 		A0B6A3F1191CBECB000636B2 /* cnf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cnf.h; sourceTree = "<group>"; };
 		A0C48D8A178B8D0D00938EDD /* bindle-libtool.m4 */ = {isa = PBXFileReference; explicitFileType = text.script; path = "bindle-libtool.m4"; sourceTree = "<group>"; };
 		A0C4C65317A2812F008E856D /* regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regex.h; sourceTree = "<group>"; };
@@ -132,8 +114,6 @@
 		A01156CC175B009E008E66FA /* include */ = {
 			isa = PBXGroup;
 			children = (
-				A0059496175D179100DD3266 /* bindle */,
-				A01156CD175B009E008E66FA /* bindle.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -141,8 +121,8 @@
 		A01156D1175B009E008E66FA /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				A044CDAE28063E0D00BFE7C3 /* old */,
 				A03E2F4818CE7F72007DDFC6 /* libbindle */,
-				A07A07CB17829812006884FC /* perl-bindletools */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -165,15 +145,32 @@
 		A03E2F4818CE7F72007DDFC6 /* libbindle */ = {
 			isa = PBXGroup;
 			children = (
-				A01156D3175B009E008E66FA /* libbindle.sym */,
-				A0B6A3EE191CBDD4000636B2 /* cnf.c */,
-				A02F597B18D1112E00D375B3 /* err.c */,
-				A02F597718D0F6B700D375B3 /* fd.c */,
-				A00F6EB319427C46003CC8C2 /* log.c */,
-				A01156D2175B009E008E66FA /* utf8.c */,
-				A01156FB175B0764008E66FA /* version.c */,
 			);
 			path = libbindle;
+			sourceTree = "<group>";
+		};
+		A044CDA728063DB500BFE7C3 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A01156CD175B009E008E66FA /* bindle.h */,
+				A0059496175D179100DD3266 /* bindle */,
+				A044CDA828063DB500BFE7C3 /* log.c */,
+				A044CDA928063DB500BFE7C3 /* cnf.c */,
+				A044CDAA28063DB500BFE7C3 /* utf8.c */,
+				A044CDAB28063DB500BFE7C3 /* err.c */,
+				A044CDAC28063DB500BFE7C3 /* fd.c */,
+				A044CDAD28063DB500BFE7C3 /* version.c */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		A044CDAE28063E0D00BFE7C3 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				A07A07CB17829812006884FC /* perl-bindletools */,
+				A044CDA728063DB500BFE7C3 /* lib */,
+			);
+			path = old;
 			sourceTree = "<group>";
 		};
 		A07A07CB17829812006884FC /* perl-bindletools */ = {
@@ -257,6 +254,7 @@
 				A0CE16F215E9892E00AC6A2F /* NEWS.md */,
 				A0CE16F315E9892E00AC6A2F /* README.md */,
 				A0808A8B175D4B640074058B /* tests */,
+				A044CDB12806402400BFE7C3 /* TODO.md */,
 				A01156EA175B0118008E66FA /* Frameworks */,
 				A01156D9175B00F6008E66FA /* Products */,
 			);
@@ -302,15 +300,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A044CD9D2806266C00BFE7C3 /* cdefs.h in Headers */,
-				A044CD9E2806266C00BFE7C3 /* cnf.h in Headers */,
-				A044CD9C2806266C00BFE7C3 /* version.h in Headers */,
-				A044CD9F2806266C00BFE7C3 /* utf8.h in Headers */,
-				A044CDA02806266C00BFE7C3 /* fd.h in Headers */,
-				A044CD9A2806266C00BFE7C3 /* regex.h in Headers */,
-				A044CD9B2806266C00BFE7C3 /* log.h in Headers */,
-				A044CD992806266C00BFE7C3 /* err.h in Headers */,
-				A044CD982806266600BFE7C3 /* bindle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,12 +365,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A044CDA52806267900BFE7C3 /* utf8.c in Sources */,
-				A044CDA12806267900BFE7C3 /* log.c in Sources */,
-				A044CDA42806267900BFE7C3 /* cnf.c in Sources */,
-				A044CDA62806267900BFE7C3 /* fd.c in Sources */,
-				A044CDA32806267900BFE7C3 /* version.c in Sources */,
-				A044CDA22806267900BFE7C3 /* err.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
