@@ -39,6 +39,22 @@ bindle_obj_release
 bindle_obj_retain
 bindle_obj_retain_count
 #
+# string functions
+bindle_strdup
+bindle_strexpand
+bindle_strlcpy
+bindle_strlcat
+bindle_strndup
+bindle_strtoargs
+bindle_strtobool
+bindle_strtrim
+#
+# string array prototypes
+#
+bindle_strsadd
+bindle_strscount
+bindle_strsdup
+bindle_strsfree
 # UTF8 functions
 bindle_utf8len
 bindle_utf8nlen
