@@ -31,6 +31,8 @@
 		A0EFB51B2808BC48008616D8 /* lstring.c in Sources */ = {isa = PBXBuildFile; fileRef = A0EFB5172808BC48008616D8 /* lstring.c */; };
 		A0EFB51C2808BC48008616D8 /* lstring.h in Headers */ = {isa = PBXBuildFile; fileRef = A0EFB5182808BC48008616D8 /* lstring.h */; };
 		A0EFB51D2808BC48008616D8 /* lstrings.c in Sources */ = {isa = PBXBuildFile; fileRef = A0EFB5192808BC48008616D8 /* lstrings.c */; };
+		A0EFB5202808CD15008616D8 /* lutf8.h in Headers */ = {isa = PBXBuildFile; fileRef = A0EFB51E2808CD15008616D8 /* lutf8.h */; };
+		A0EFB5212808CD15008616D8 /* lutf8.c in Sources */ = {isa = PBXBuildFile; fileRef = A0EFB51F2808CD15008616D8 /* lutf8.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		A0EFB5172808BC48008616D8 /* lstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lstring.c; sourceTree = "<group>"; };
 		A0EFB5182808BC48008616D8 /* lstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lstring.h; sourceTree = "<group>"; };
 		A0EFB5192808BC48008616D8 /* lstrings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lstrings.c; sourceTree = "<group>"; };
+		A0EFB51E2808CD15008616D8 /* lutf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lutf8.h; sourceTree = "<group>"; };
+		A0EFB51F2808CD15008616D8 /* lutf8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lutf8.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 				A0EFB5182808BC48008616D8 /* lstring.h */,
 				A0EFB5192808BC48008616D8 /* lstrings.c */,
 				A0EFB5162808BC48008616D8 /* lstrings.h */,
+				A0EFB51F2808CD15008616D8 /* lutf8.c */,
+				A0EFB51E2808CD15008616D8 /* lutf8.h */,
 			);
 			path = libbindle;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				A0EFB51A2808BC48008616D8 /* lstrings.h in Headers */,
 				A044CDC22806831900BFE7C3 /* bindle.h in Headers */,
 				A044CDBF28065C3800BFE7C3 /* ldebug.h in Headers */,
+				A0EFB5202808CD15008616D8 /* lutf8.h in Headers */,
 				A0EFB51C2808BC48008616D8 /* lstring.h in Headers */,
 				A044CDC52806879E00BFE7C3 /* lobj.h in Headers */,
 			);
@@ -408,6 +415,7 @@
 			files = (
 				A044CDC62806879E00BFE7C3 /* lobj.c in Sources */,
 				A0EFB51D2808BC48008616D8 /* lstrings.c in Sources */,
+				A0EFB5212808CD15008616D8 /* lutf8.c in Sources */,
 				A0EFB51B2808BC48008616D8 /* lstring.c in Sources */,
 				A044CDC028065C3800BFE7C3 /* ldebug.c in Sources */,
 			);

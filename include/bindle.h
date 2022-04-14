@@ -272,4 +272,26 @@ bindle_strsfree(
          char **                       strs );
 
 
+//-----------------//
+// UTF8 prototypes //
+//-----------------//
+#pragma mark UTF8 prototypes
+
+_BINDLE_F size_t
+bindle_utf8len(
+         const char *                  s );
+
+
+_BINDLE_F size_t
+bindle_utf8nlen(
+         const char *                  s,
+         size_t                        maxlen );
+
+
+_BINDLE_F ssize_t
+bindle_utf8test(
+         const char *                  s,
+         size_t                        maxlen );
+
+
 #endif /* end of header */

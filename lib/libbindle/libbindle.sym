@@ -38,4 +38,9 @@ bindle_obj_alloc
 bindle_obj_release
 bindle_obj_retain
 bindle_obj_retain_count
+#
+# UTF8 functions
+bindle_utf8len
+bindle_utf8nlen
+bindle_utf8test
 # end of symbol export file

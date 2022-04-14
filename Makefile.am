@@ -156,7 +156,9 @@ lib_libbindle_a_SOURCES			= include/bindle.h \
 					  lib/libbindle/lstring.c \
 					  lib/libbindle/lstring.h \
 					  lib/libbindle/lstrings.c \
-					  lib/libbindle/lstrings.h
+					  lib/libbindle/lstrings.h \
+					  lib/libbindle/lutf8.c \
+					  lib/libbindle/lutf8.h
 
 
 # macros for lib/libbindle.la
