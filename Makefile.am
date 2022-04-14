@@ -86,7 +86,9 @@ bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				=
-EXTRA					=
+EXTRA					= lib/libbindle.a \
+					  lib/libbindle.la \
+					  include/bindle.h
 
 
 # lists
@@ -123,7 +125,11 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 
 # conditional build
 if ENABLE_LIBBINDLE
+   include_HEADERS			+= include/bindle.h
+   lib_LTLIBRARIES			+= lib/libbindle.la
 else
+   noinst_HEADERS			+= include/bindle.h
+   noinst_LIBRARIES			+= lib/libbindle.a
 endif
 
 
@@ -133,6 +139,38 @@ SUBST_EXPRESSIONS =
 include $(srcdir)/build-aux/makefile-autotools.am
 include $(srcdir)/build-aux/makefile-subst.am
 include $(srcdir)/build-aux/makefile-version.am
+
+
+# macros for lib/libbindle.a
+lib_libbindle_a_DEPENDENCIES		= Makefile \
+					  config.h
+lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_a_SOURCES			= include/bindle.h \
+					  lib/libbindle/libbindle.h \
+					  lib/libbindle/ldebug.c \
+					  lib/libbindle/ldebug.h \
+					  lib/libbindle/lobj.c \
+					  lib/libbindle/lobj.h \
+					  lib/libbindle/lstring.c \
+					  lib/libbindle/lstring.h \
+					  lib/libbindle/lstrings.c \
+					  lib/libbindle/lstrings.h
+
+
+# macros for lib/libbindle.la
+lib_libbindle_la_DEPENDENCIES		= Makefile \
+					  config.h \
+					  lib/libbindle/libbindle.sym
+lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_la_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)' \
+					  -version-info $(LIB_VERSION_INFO) \
+					  $(AM_LDFLAGS) \
+					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
+lib_libbindle_la_SOURCES		= $(lib_libbindle_a_SOURCES)
 
 
 # custom targets
