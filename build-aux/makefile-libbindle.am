@@ -33,7 +33,7 @@ EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
 BUILT_SOURCES				+= include/bindle_prefix.h
 EXTRA_DIST				+= include/bindle_prefix.h
 
-LIBBINDLE_PREFIX			?=
+LIBBINDLE_PREFIX			?= bindle_
 
 libbindle_sources			=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   include/bindle_prefix.h \
@@ -54,12 +54,12 @@ libbindle_symbol_list = $(EGREP) \
 	'^[[:space:]]{0,1}bindle_[_[:alnum:]]{1,}[\(\;][[:space:]]{0,}$$' \
 	$(libbindle_sources) \
 	|cut -d: -f2 \
-	|$(SED) -e 's/[[:space:]]//g' -e 's/[(;]$$//g' \
+	|$(SED) -e 's/[[:space:]]//g' -e 's/[(;]$$//g' -e 's/^bindle_//g' \
 	|sort \
 	|uniq
 
 
-include/bindle_prefix.h: $(libbindle_sources)
+include/bindle_prefix.h: Makefile $(libbindle_sources)
 	@if test "x$(V)" == "x0";then \
 	   echo "  GEN      $(@)"; \
 	else \
