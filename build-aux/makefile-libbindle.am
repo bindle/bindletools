@@ -41,6 +41,8 @@ libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \

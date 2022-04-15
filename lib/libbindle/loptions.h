@@ -28,8 +28,8 @@
  *  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  *  SUCH DAMAGE.
  */
-#ifndef _LIB_LIBBINDLE_LDEBUG_H
-#define _LIB_LIBBINDLE_LDEBUG_H 1
+#ifndef _LIB_LIBBINDLE_LOPTIONS_H
+#define _LIB_LIBBINDLE_LOPTIONS_H 1
 
 
 ///////////////
@@ -45,46 +45,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-
-
-///////////////////
-//               //
-//  Definitions  //
-//               //
-///////////////////
-#pragma mark - Definitions
-
-
-
-/////////////////
-//             //
-//  Variables  //
-//             //
-/////////////////
-#pragma mark - Variables
-
-_BINDLE_V const char *
-bindle_debug_ident;
-
-
-_BINDLE_V char
-bindle_debug_ident_buff[128];
-
-
-_BINDLE_V int
-bindle_debug_level;
-
-
-_BINDLE_V int
-bindle_debug_syslog;
-
-
-//////////////////
-//              //
-//  Prototypes  //
-//              //
-//////////////////
-#pragma mark - Prototypes
 
 
 #endif /* end of header */

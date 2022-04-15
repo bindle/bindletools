@@ -105,6 +105,17 @@
 #define BNDL_YES                    1
 
 
+// library limits
+#define BNDL_LINE_MAX_LEN           256
+
+
+// library get/set options
+#define BNDL_OPT_DEBUG_LEVEL        1
+#define BNDL_OPT_DEBUG_IDENT        2
+#define BNDL_OPT_DEBUG_SYSLOG       3
+#define BNDL_OPT_RANDOM             4
+
+
 // library debug levels
 #define BNDL_DEBUG_NONE             0
 #define BNDL_DEBUG_TRACE            0x0000001
@@ -197,6 +208,25 @@ bindle_obj_retain(
 _BINDLE_F intptr_t
 bindle_obj_retain_count(
          bindle_obj_t *                obj );
+
+
+//-------------------//
+// option prototypes //
+//-------------------//
+#pragma mark option prototypes
+
+_BINDLE_F int
+bindle_get_option(
+         void *                        ptr,
+         int                           option,
+         void *                        outvalue );
+
+
+_BINDLE_F int
+bindle_set_option(
+         void *                        ptr,
+         int                           option,
+         const void *                  invalue );
 
 
 //-------------------//
