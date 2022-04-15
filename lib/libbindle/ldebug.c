@@ -46,7 +46,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <syslog.h>
-#include <stdatomic.h>
+#include <stdarg.h>
 #include <assert.h>
 
 

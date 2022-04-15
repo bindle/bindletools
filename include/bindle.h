@@ -42,6 +42,7 @@
 #include <stddef.h>
 #include <inttypes.h>
 #include <sys/types.h>
+#include <stdatomic.h>
 
 
 //////////////
@@ -135,9 +136,16 @@ typedef struct _bindle_obj
 /////////////////
 #pragma mark - Variables
 
-extern const char *   bindle_debug_ident;
-extern int            bindle_debug_level;
-extern int            bindle_debug_syslog;
+_BINDLE_V const char *
+bindle_debug_ident;
+
+
+_BINDLE_V int
+bindle_debug_level;
+
+
+_BINDLE_V int
+bindle_debug_syslog;
 
 
 //////////////////

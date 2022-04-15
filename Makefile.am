@@ -136,34 +136,23 @@ endif
 # Makefile includes
 GIT_PACKAGE_VERSION_DIR=include
 SUBST_EXPRESSIONS =
-include $(srcdir)/build-aux/makefile-autotools.am
-include $(srcdir)/build-aux/makefile-subst.am
-include $(srcdir)/build-aux/makefile-version.am
+include build-aux/makefile-subst.am
+include build-aux/makefile-version.am
+include build-aux/makefile-libbindle.am
 
 
 # macros for lib/libbindle.a
 lib_libbindle_a_DEPENDENCIES		= Makefile \
-					  config.h
+					  config.h \
+					  include/bindle_prefix.h
 lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
-lib_libbindle_a_SOURCES			= include/bindle.h \
-					  lib/libbindle/libbindle.h \
-					  lib/libbindle/ldebug.c \
-					  lib/libbindle/ldebug.h \
-					  lib/libbindle/lobj.c \
-					  lib/libbindle/lobj.h \
-					  lib/libbindle/lstring.c \
-					  lib/libbindle/lstring.h \
-					  lib/libbindle/lstrings.c \
-					  lib/libbindle/lstrings.h \
-					  lib/libbindle/lutf8.c \
-					  lib/libbindle/lutf8.h
+lib_libbindle_a_SOURCES			= $(libbindle_sources)
 
 
 # macros for lib/libbindle.la
-lib_libbindle_la_DEPENDENCIES		= Makefile \
-					  config.h \
+lib_libbindle_la_DEPENDENCIES		= $(lib_libbindle_a_DEPENDENCIES) \
 					  lib/libbindle/libbindle.sym
 lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
@@ -172,7 +161,7 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)' \
 					  -version-info $(LIB_VERSION_INFO) \
 					  $(AM_LDFLAGS) \
 					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
-lib_libbindle_la_SOURCES		= $(lib_libbindle_a_SOURCES)
+lib_libbindle_la_SOURCES		= $(libbindle_sources)
 
 
 # custom targets

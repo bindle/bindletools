@@ -1,0 +1,78 @@
+#
+#   Bindle Binaries Tools
+#   Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+#
+#   Redistribution and use in source and binary forms, with or without
+#   modification, are permitted provided that the following conditions are
+#   met:
+#
+#      * Redistributions of source code must retain the above copyright
+#        notice, this list of conditions and the following disclaimer.
+#      * Redistributions in binary form must reproduce the above copyright
+#        notice, this list of conditions and the following disclaimer in the
+#        documentation and/or other materials provided with the distribution.
+#      * Neither the name of Bindle Binaries nor the
+#        names of its contributors may be used to endorse or promote products
+#        derived from this software without specific prior written permission.
+#
+#   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+#   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+#   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+#   PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BINDLE BINARIES BE LIABLE FOR
+#   ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#   LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+#   OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+#   SUCH DAMAGE.
+#
+
+EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
+EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
+BUILT_SOURCES				+= include/bindle_prefix.h
+EXTRA_DIST				+= include/bindle_prefix.h
+
+LIBBINDLE_PREFIX			?=
+
+libbindle_sources			=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
+					   include/bindle_prefix.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/libbindle.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
+
+
+libbindle_symbol_list = $(EGREP) \
+	'^[[:space:]]{0,1}bindle_[_[:alnum:]]{1,}[\(\;][[:space:]]{0,}$$' \
+	$(libbindle_sources) \
+	|cut -d: -f2 \
+	|$(SED) -e 's/[[:space:]]//g' -e 's/[(;]$$//g' \
+	|sort \
+	|uniq
+
+
+include/bindle_prefix.h: $(libbindle_sources)
+	@if test "x$(V)" == "x0";then \
+	   echo "  GEN      $(@)"; \
+	else \
+	   echo "$(libbindle_symbol_list)"; \
+	fi; \
+	$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
+	rm -f $(@) || exit 1; \
+	touch $(@) || exit 1; \
+	for FUNC in `$(libbindle_symbol_list)`;do \
+	   echo "#undef $$FUNC"; \
+	   echo "#define $$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
+	done > $(@); \
+	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
+	touch $(@);
+
+# end of automake file
