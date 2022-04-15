@@ -104,10 +104,14 @@ include/bindle_prefix.h: Makefile $(libbindle_files)
 	fi; \
 	$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
 	rm -f $(@) || exit 1; \
+	echo "/* generated from include/bindle.h by make*/" >> $(@); \
+	echo "#ifndef __BINDLE_H" >> $(@); \
 	for FUNC in `$(libbindle_symbol_list)`;do \
 	   echo "#undef bindle_$$FUNC"; \
 	   echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
-	done > $(@); \
+	done >> $(@); \
+	echo "#endif" >> $(@); \
+	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
 	touch $(@);
 
 # end of automake file
