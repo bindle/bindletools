@@ -170,4 +170,94 @@ bindle_strsfree(
    return;
 }
 
+
+int
+bindle_strsplit(
+         const char *                  str,
+         int                           delim,
+         char ***                      argvp,
+         int *                         argcp )
+{
+   int            rc;
+   int            argc;
+   size_t         pos;
+   char **        argv;
+   char *         line;
+   char *         bol;
+   char           quote;
+
+   BindleDebugTrace();
+
+   assert(str   != NULL);
+   assert(delim != 0);
+   assert(argvp != NULL);
+
+   argv = NULL;
+   argc = 0;
+   if ((argvp))
+      *argvp   = NULL;
+   if ((argcp))
+      *argcp = 0;
+
+   if (!(str))
+      return(BNDL_SUCCESS);
+
+   if ((line = bindle_strdup(str)) == NULL)
+      return(ENOMEM);
+   bol = line;
+
+   for(pos = 0; ((line[pos])); pos++)
+   {
+      switch(line[pos])
+      {
+         case '"':
+         case '\'':
+         if (line[pos] != delim)
+         {
+            quote = str[pos];
+            for(pos += 1; ((line[pos] != '\0') && (line[pos] != quote)); pos++)
+               if ( (quote == '"') && (str[pos] == '\\') && (str[pos+1] == '"') )
+                  pos++;
+            if (str[pos] != quote)
+            {
+               free(line);
+               bindle_strsfree(argv);
+               return(EINVAL);
+            };
+            break;
+         };
+
+         default:
+         if (line[pos] == delim)
+         {
+            argc++;
+            line[pos] = '\0';
+            if ((rc = bindle_strsadd(&argv, bol)) != BNDL_SUCCESS)
+            {
+               free(line);
+               bindle_strsfree(argv);
+               return(rc);
+            };
+            bol = &line[pos+1];
+         };
+         break;
+      };
+   };
+
+   if ((rc = bindle_strsadd(&argv, bol)) != BNDL_SUCCESS)
+   {
+      free(line);
+      bindle_strsfree(argv);
+      return(rc);
+   };
+   argc++;
+
+   if ((argvp))
+      *argvp = argv;
+   if ((argcp))
+      *argcp = argc;
+
+   return(BNDL_SUCCESS);
+}
+
 /* end of source */

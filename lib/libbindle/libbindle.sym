@@ -55,6 +55,7 @@ bindle_strsadd
 bindle_strscount
 bindle_strsdup
 bindle_strsfree
+bindle_strsplit
 # UTF8 functions
 bindle_utf8len
 bindle_utf8nlen

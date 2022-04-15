@@ -98,6 +98,7 @@
 ///////////////////
 #pragma mark - Definitions
 
+#define BNDL_SUCCESS                0
 #define BNDL_OFF                    0
 #define BNDL_ON                     1
 #define BNDL_NO                     0
@@ -278,6 +279,14 @@ bindle_strsdup(
 _BINDLE_F void
 bindle_strsfree(
          char **                       strs );
+
+
+_BINDLE_F int
+bindle_strsplit(
+         const char *                  str,
+         int                           delim,
+         char ***                      argvp,
+         int *                         argcp );
 
 
 //-----------------//
