@@ -6,6 +6,9 @@ All rights reserved.
 #### devel
    - Changing default behavior to disable 'debug' option (syzdek)
    - Allowing additional warnings to be disabled (syzdek)
+   - Expanding libbindle.la with common string and object functions. (syzdek)
+   - Adding ability to embed libbindle.la in other projects with custom symbol
+     prefixes. (syzdek)
 
 #### 0.5
    - Removing call to contrib/bindletools/autogen.sh (syzdek)
