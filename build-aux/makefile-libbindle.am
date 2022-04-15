@@ -28,6 +28,8 @@
 #   SUCH DAMAGE.
 #
 
+include_HEADERS				+= include/bindle.h
+lib_LIBRARIES				+= lib/libbindle.a
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
 EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
 BUILT_SOURCES				+= include/bindle_prefix.h
@@ -51,6 +53,16 @@ libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
 libbindle_sources			=  $(libbindle_files) \
 					   include/bindle_prefix.h
+
+
+# macros for lib/libbindle.a
+lib_libbindle_a_DEPENDENCIES		= Makefile \
+					  config.h \
+					  $(libbindle_sources)
+lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_a_SOURCES			= $(libbindle_sources)
 
 
 libbindle_symbol_list = $(EGREP) \

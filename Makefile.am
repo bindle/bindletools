@@ -130,8 +130,6 @@ if ENABLE_LIBBINDLE
    include_HEADERS			+= include/bindle.h
    lib_LIBRARIES			+= lib/libbindle.a
 endif
-include_HEADERS				+= include/bindle.h
-lib_LIBRARIES				+= lib/libbindle.a
 
 
 # Makefile includes
@@ -140,16 +138,6 @@ SUBST_EXPRESSIONS =
 include build-aux/makefile-subst.am
 include build-aux/makefile-version.am
 include build-aux/makefile-libbindle.am
-
-
-# macros for lib/libbindle.a
-lib_libbindle_a_DEPENDENCIES		= Makefile \
-					  config.h \
-					  $(libbindle_sources)
-lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
-					  -I$(srcdir)/lib/libbindle
-lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
-lib_libbindle_a_SOURCES			= $(libbindle_sources)
 
 
 # macros for tests/bindle-str-expand
