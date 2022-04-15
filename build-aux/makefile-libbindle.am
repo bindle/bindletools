@@ -35,8 +35,7 @@ EXTRA_DIST				+= include/bindle_prefix.h
 
 LIBBINDLE_PREFIX			?= bindle_
 
-libbindle_sources			=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
-					   include/bindle_prefix.h \
+libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/libbindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
@@ -48,6 +47,7 @@ libbindle_sources			=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
+libbindle_sources			=  $(libbindle_files)
 
 
 libbindle_symbol_list = $(EGREP) \
@@ -59,7 +59,7 @@ libbindle_symbol_list = $(EGREP) \
 	|uniq
 
 
-include/bindle_prefix.h: Makefile $(libbindle_sources)
+include/bindle_prefix.h: Makefile $(libbindle_files)
 	@if test "x$(V)" == "x0";then \
 	   echo "  GEN      $(@)"; \
 	else \
