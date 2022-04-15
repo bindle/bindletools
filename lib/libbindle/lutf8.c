@@ -127,13 +127,13 @@ bindle_utf8test(
    ssize_t         bit;
    ssize_t         byte;
    ssize_t         width;
-   size_t          len;
-   size_t          pos;
+   ssize_t         len;
+   ssize_t         pos;
 
    buff = (const uint8_t *) s;
    len  = 0;
 
-   for(pos = 0; ((buff[pos] != 0x00) && (pos < maxlen)); pos++)
+   for(pos = 0; ((buff[pos] != 0x00) && (pos < ((ssize_t)maxlen))); pos++)
    {
       // determines character width (byte size)
       width = 1;
@@ -146,7 +146,7 @@ bindle_utf8test(
          return(-1);
 
       // verify that UTF-8 string is not longer than buffer
-      if ((pos+width) >= maxlen)
+      if ((pos+width) >= ((ssize_t)maxlen))
          return(-1);
 
       // skip continuation bits
