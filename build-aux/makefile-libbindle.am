@@ -74,46 +74,46 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 # macros for tests/bindle-array-queue
 tests_bindle_array_queue_DEPENDENCIES	= lib/libbindle.a
 tests_bindle_array_queue_LDADD		= lib/libbindle.a
-tests_bindle_array_queue_SOURCES	= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-array-queue.c
+tests_bindle_array_queue_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindle-array-queue.c
 
 
 # macros for tests/bindle-array-sorted
 tests_bindle_array_sorted_DEPENDENCIES	= lib/libbindle.a
 tests_bindle_array_sorted_LDADD		= lib/libbindle.a
-tests_bindle_array_sorted_SOURCES	= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-array-sorted.c
+tests_bindle_array_sorted_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindle-array-sorted.c
 
 
 # macros for tests/bindle-array-stack
 tests_bindle_array_stack_DEPENDENCIES	= lib/libbindle.a
 tests_bindle_array_stack_LDADD		= lib/libbindle.a
-tests_bindle_array_stack_SOURCES	= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-array-stack.c
+tests_bindle_array_stack_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindle-array-stack.c
 
 
 # macros for tests/bindle-str-expand
 tests_bindle_str_expand_DEPENDENCIES	= lib/libbindle.a
 tests_bindle_str_expand_LDADD		= lib/libbindle.a
-tests_bindle_str_expand_SOURCES		= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-str-expand.c
+tests_bindle_str_expand_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindle-str-expand.c
 
 
 # macros for tests/bindle-str-split
 tests_bindle_str_split_DEPENDENCIES	= lib/libbindle.a
 tests_bindle_str_split_LDADD		= lib/libbindle.a
-tests_bindle_str_split_SOURCES		= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-str-split.c
+tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindle-str-split.c
 
 
 libbindle_symbol_list = $(EGREP) \
