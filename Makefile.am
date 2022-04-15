@@ -128,11 +128,10 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 # conditional build
 if ENABLE_LIBBINDLE
    include_HEADERS			+= include/bindle.h
-   lib_LTLIBRARIES			+= lib/libbindle.la
-else
-   noinst_HEADERS			+= include/bindle.h
-   noinst_LIBRARIES			+= lib/libbindle.a
+   lib_LIBRARIES			+= lib/libbindle.a
 endif
+include_HEADERS				+= include/bindle.h
+lib_LIBRARIES				+= lib/libbindle.a
 
 
 # Makefile includes
@@ -146,24 +145,11 @@ include build-aux/makefile-libbindle.am
 # macros for lib/libbindle.a
 lib_libbindle_a_DEPENDENCIES		= Makefile \
 					  config.h \
-					  include/bindle_prefix.h
+					  $(libbindle_sources)
 lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
 lib_libbindle_a_SOURCES			= $(libbindle_sources)
-
-
-# macros for lib/libbindle.la
-lib_libbindle_la_DEPENDENCIES		= $(lib_libbindle_a_DEPENDENCIES) \
-					  lib/libbindle/libbindle.sym
-lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
-					  -I$(srcdir)/lib/libbindle
-lib_libbindle_la_CFLAGS			= $(AM_CFLAGS)
-lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)' \
-					  -version-info $(LIB_VERSION_INFO) \
-					  $(AM_LDFLAGS) \
-					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
-lib_libbindle_la_SOURCES		= $(libbindle_sources)
 
 
 # macros for tests/bindle-str-expand
