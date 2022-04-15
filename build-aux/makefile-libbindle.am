@@ -71,8 +71,8 @@ include/bindle_prefix.h: Makefile $(libbindle_files)
 	rm -f $(@) || exit 1; \
 	touch $(@) || exit 1; \
 	for FUNC in `$(libbindle_symbol_list)`;do \
-	   echo "#undef $$FUNC"; \
-	   echo "#define $$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
+	   echo "#undef bindle_$$FUNC"; \
+	   echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
 	done > $(@); \
 	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
 	touch $(@);
