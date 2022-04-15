@@ -30,9 +30,15 @@
 
 include_HEADERS				+= include/bindle.h
 lib_LIBRARIES				+= lib/libbindle.a
-EXTRA_PROGRAMS				+= tests/bindle-str-expand \
+EXTRA_PROGRAMS				+= tests/bindle-array-queue \
+					   tests/bindle-array-sorted \
+					   tests/bindle-array-stack \
+					   tests/bindle-str-expand \
 					   tests/bindle-str-split
-TESTS					+= tests/bindle-str-expand \
+TESTS					+= tests/bindle-array-queue \
+					   tests/bindle-array-sorted \
+					   tests/bindle-array-stack \
+					   tests/bindle-str-expand \
 					   tests/bindle-str-split
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
 EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
@@ -69,6 +75,33 @@ lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
 lib_libbindle_a_SOURCES			= $(libbindle_sources)
+
+
+# macros for tests/bindle-array-queue
+tests_bindle_array_queue_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_array_queue_LDADD		= lib/libbindle.a
+tests_bindle_array_queue_SOURCES	= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-array-queue.c
+
+
+# macros for tests/bindle-array-sorted
+tests_bindle_array_sorted_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_array_sorted_LDADD		= lib/libbindle.a
+tests_bindle_array_sorted_SOURCES	= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-array-sorted.c
+
+
+# macros for tests/bindle-array-stack
+tests_bindle_array_stack_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_array_stack_LDADD		= lib/libbindle.a
+tests_bindle_array_stack_SOURCES	= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-array-stack.c
 
 
 # macros for tests/bindle-str-expand
