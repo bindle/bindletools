@@ -31,7 +31,7 @@
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
 EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
 BUILT_SOURCES				+= include/bindle_prefix.h
-EXTRA_DIST				+= include/bindle_prefix.h
+CLEANFILES				+= include/bindle_prefix.h
 
 LIBBINDLE_PREFIX			?= bindle_
 
