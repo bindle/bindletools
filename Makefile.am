@@ -85,7 +85,8 @@ noinst_SCRIPTS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
-EXTRA_PROGRAMS				=
+EXTRA_PROGRAMS				= tests/bindle-str-expand \
+					  tests/bindle-str-split
 EXTRA					= lib/libbindle.a \
 					  lib/libbindle.la \
 					  include/bindle.h
@@ -94,7 +95,8 @@ EXTRA					= lib/libbindle.a \
 # lists
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT	=
 BUILT_SOURCES				=
-TESTS					=
+TESTS					= tests/bindle-str-expand \
+					  tests/bindle-str-split
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= $(doc_DATA) \
@@ -162,6 +164,24 @@ lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)' \
 					  $(AM_LDFLAGS) \
 					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
 lib_libbindle_la_SOURCES		= $(libbindle_sources)
+
+
+# macros for tests/bindle-str-expand
+tests_bindle_str_expand_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_str_expand_LDADD		= lib/libbindle.a
+tests_bindle_str_expand_SOURCES		= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-str-expand.c
+
+
+# macros for tests/bindle-str-split
+tests_bindle_str_split_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_str_split_LDADD		= lib/libbindle.a
+tests_bindle_str_split_SOURCES		= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-str-split.c
 
 
 # custom targets
