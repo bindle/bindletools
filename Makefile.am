@@ -125,6 +125,7 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
 if ENABLE_LIBBINDLE
    include_HEADERS			+= include/bindle.h
    lib_LIBRARIES			+= lib/libbindle.a
+   TESTS				+= $(LIBBINDLE_TESTS)
 endif
 
 

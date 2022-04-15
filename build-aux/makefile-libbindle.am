@@ -28,43 +28,22 @@
 #   SUCH DAMAGE.
 #
 
-include_HEADERS				+= include/bindle.h
-lib_LIBRARIES				+= lib/libbindle.a
 EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split
-TESTS					+= tests/bindle-array-queue \
+LIBBINDLE_TESTS				=  tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split
-EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
-EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
+EXTRA					+= lib/libbindle.a
+EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
+					   $(bindletools_srcdir)/include/bindle.h
 BUILT_SOURCES				+= include/bindle_prefix.h
-CLEANFILES				+= include/bindle_prefix.h
-
-LIBBINDLE_PREFIX			?= bindle_
-
-libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/libbindle.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
-					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
-libbindle_sources			=  $(libbindle_files) \
-					   include/bindle_prefix.h
+CLEANFILES				+= include/bindle_prefix.h \
+					   lib/libbindle.a
 
 
 # macros for lib/libbindle.a
@@ -74,7 +53,22 @@ lib_libbindle_a_DEPENDENCIES		= Makefile \
 lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
-lib_libbindle_a_SOURCES			= $(libbindle_sources)
+lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/libbindle.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
 
 
 # macros for tests/bindle-array-queue
@@ -124,14 +118,14 @@ tests_bindle_str_split_SOURCES		= include/bindle.h \
 
 libbindle_symbol_list = $(EGREP) \
 	'^[[:space:]]{0,1}bindle_[_[:alnum:]]{1,}[\(\;][[:space:]]{0,}$$' \
-	$(libbindle_sources) \
+	$(lib_libbindle_a_SOURCES) \
 	|cut -d: -f2 \
 	|$(SED) -e 's/[[:space:]]//g' -e 's/[(;]$$//g' -e 's/^bindle_//g' \
 	|sort \
 	|uniq
 
 
-include/bindle_prefix.h: Makefile $(libbindle_files)
+include/bindle_prefix.h: Makefile $(lib_libbindle_a_SOURCES)
 	@if test "x$(V)" == "x0";then \
 	   echo "  GEN      $(@)"; \
 	else \
@@ -141,10 +135,12 @@ include/bindle_prefix.h: Makefile $(libbindle_files)
 	rm -f $(@) || exit 1; \
 	echo "/* generated from include/bindle.h by make*/" >> $(@); \
 	echo "#ifndef __BINDLE_H" >> $(@); \
-	for FUNC in `$(libbindle_symbol_list)`;do \
-	   echo "#undef bindle_$$FUNC"; \
-	   echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
-	done >> $(@); \
+	if test "x${LIBBINDLE_PREFIX}" != "x";then \
+	   for FUNC in `$(libbindle_symbol_list)`;do \
+	      echo "#undef bindle_$$FUNC"; \
+	      echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
+	   done >> $(@); \
+	fi; \
 	echo "#endif" >> $(@); \
 	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
 	touch $(@);
