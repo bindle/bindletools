@@ -6,7 +6,7 @@
 *.swp
 *.sublime-project
 *.sublime-workspace
-#*.xcodeproj
+*.xcodeproj
 .DS_Store
 .deps
 .dirstamp
