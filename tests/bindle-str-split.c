@@ -125,7 +125,6 @@ main(
    int            c;
    int            opt_index;
    int            x;
-   int            rc;
    unsigned       opts;
    const char *   delim;
 
@@ -205,13 +204,13 @@ main(
    if (optind < argc)
    {
       delim = ((delim)) ? delim : ":";
-      if ((rc = my_test_array(opts, (const char *const *)&argv[optind], delim)) != 0)
+      if (my_test_array(opts, (const char *const *)&argv[optind], delim) != 0)
          return(1);
       return(0);
    };
 
    for(x = 0; ((test_strings[x])); x++)
-      if ((rc = my_test_array(opts, &test_strings[x][1], test_strings[x][0])) != 0)
+      if (my_test_array(opts, &test_strings[x][1], test_strings[x][0]) != 0)
          return(1);
 
    return(0);
@@ -273,7 +272,7 @@ my_test_array(
    };
    for(pos = 0; ((argv[pos])); pos++)
    {
-      if ((strcmp(argv[pos], strs[pos])))
+      if ((strcmp(argv[pos], argv[pos])))
       {
          bindle_tests_error(opts, NULL, "bindle_strsplit(): strings do not match originals ");
          return(1);
