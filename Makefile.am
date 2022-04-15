@@ -88,7 +88,6 @@ sbin_SCRIPTS				=
 EXTRA_PROGRAMS				= tests/bindle-str-expand \
 					  tests/bindle-str-split
 EXTRA					= lib/libbindle.a \
-					  lib/libbindle.la \
 					  include/bindle.h
 
 
@@ -101,7 +100,6 @@ XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
-					  lib/libbindle/libbindle.sym \
 					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \
