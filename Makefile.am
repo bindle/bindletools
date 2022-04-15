@@ -85,8 +85,7 @@ noinst_SCRIPTS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
-EXTRA_PROGRAMS				= tests/bindle-str-expand \
-					  tests/bindle-str-split
+EXTRA_PROGRAMS				=
 EXTRA					= lib/libbindle.a \
 					  include/bindle.h
 
@@ -94,8 +93,7 @@ EXTRA					= lib/libbindle.a \
 # lists
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT	=
 BUILT_SOURCES				=
-TESTS					= tests/bindle-str-expand \
-					  tests/bindle-str-split
+TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= $(doc_DATA) \
@@ -136,24 +134,6 @@ SUBST_EXPRESSIONS =
 include build-aux/makefile-subst.am
 include build-aux/makefile-version.am
 include build-aux/makefile-libbindle.am
-
-
-# macros for tests/bindle-str-expand
-tests_bindle_str_expand_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_expand_LDADD		= lib/libbindle.a
-tests_bindle_str_expand_SOURCES		= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-str-expand.c
-
-
-# macros for tests/bindle-str-split
-tests_bindle_str_split_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_split_LDADD		= lib/libbindle.a
-tests_bindle_str_split_SOURCES		= include/bindle.h \
-					  tests/bindle-tests.h \
-					  tests/bindle-tests.c \
-					  tests/bindle-str-split.c
 
 
 # custom targets

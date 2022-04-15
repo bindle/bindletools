@@ -30,6 +30,10 @@
 
 include_HEADERS				+= include/bindle.h
 lib_LIBRARIES				+= lib/libbindle.a
+EXTRA_PROGRAMS				+= tests/bindle-str-expand \
+					   tests/bindle-str-split
+TESTS					+= tests/bindle-str-expand \
+					   tests/bindle-str-split
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am
 EXTRA_DIST				+= $(bindletools_srcdir)/include/bindle.h
 BUILT_SOURCES				+= include/bindle_prefix.h
@@ -63,6 +67,24 @@ lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)
 lib_libbindle_a_SOURCES			= $(libbindle_sources)
+
+
+# macros for tests/bindle-str-expand
+tests_bindle_str_expand_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_str_expand_LDADD		= lib/libbindle.a
+tests_bindle_str_expand_SOURCES		= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-str-expand.c
+
+
+# macros for tests/bindle-str-split
+tests_bindle_str_split_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_str_split_LDADD		= lib/libbindle.a
+tests_bindle_str_split_SOURCES		= include/bindle.h \
+					  tests/bindle-tests.h \
+					  tests/bindle-tests.c \
+					  tests/bindle-str-split.c
 
 
 libbindle_symbol_list = $(EGREP) \
