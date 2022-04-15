@@ -45,11 +45,10 @@
 #include <config.h>
 #endif
 
-#ifdef LIBBINDLE_PREFIX
+#ifdef HAVE_BINDLE_PREFIX_H
 #   include <bindle_prefix.h>
-#else
-#   include <bindle.h>
 #endif
+#include <bindle.h>
 
 
 //////////////

@@ -49,7 +49,8 @@ libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
-libbindle_sources			=  $(libbindle_files)
+libbindle_sources			=  $(libbindle_files) \
+					   include/bindle_prefix.h
 
 
 libbindle_symbol_list = $(EGREP) \
@@ -69,12 +70,10 @@ include/bindle_prefix.h: Makefile $(libbindle_files)
 	fi; \
 	$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
 	rm -f $(@) || exit 1; \
-	touch $(@) || exit 1; \
 	for FUNC in `$(libbindle_symbol_list)`;do \
 	   echo "#undef bindle_$$FUNC"; \
 	   echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
 	done > $(@); \
-	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
 	touch $(@);
 
 # end of automake file
