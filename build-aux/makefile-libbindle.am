@@ -43,6 +43,8 @@ LIBBINDLE_PREFIX			?= bindle_
 
 libbindle_files				=  $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/libbindle.h \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.c \
+					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/larray.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.c \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/ldebug.h \
 					   $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \

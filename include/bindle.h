@@ -126,6 +126,19 @@
 #define BNDL_DEBUG_ANY              (~0x00)
 
 
+// array function options
+#define BNDL_ARRAY_INSERT        0x0001      ///< add type: insert unique object to sorted array
+#define BNDL_ARRAY_REPLACE       0x0002      ///< add type: replace deplucate object in sorted array, or insert if unique
+#define BNDL_ARRAY_MERGE         0x0004      ///< add type: add object to sorted array regardless if unique or duplicate
+#define BNDL_ARRAY_LASTDUP       0x0010      ///< dup handling: add/return/remove last duplicate object in series of matching objects
+#define BNDL_ARRAY_FIRSTDUP      0x0020      ///< dup handling: add/return/remove first duplicate object in series of matching objects
+#define BNDL_ARRAY_ANYDUP        0x0040      ///< dup handling: add/return/remove any one duplicate object in series of matching objects
+#define BNDL_ARRAY_DEFAULT       ( BNDL_ARRAY_INSERT | BNDL_ARRAY_ANYDUP )                         ///< default sorted array options
+#define BNDL_ARRAY_MASK_ADD      ( BNDL_ARRAY_INSERT | BNDL_ARRAY_MERGE   | BNDL_ARRAY_REPLACE )   ///< mask for add type
+#define BNDL_ARRAY_MASK_DUPS     ( BNDL_ARRAY_ANYDUP | BNDL_ARRAY_LASTDUP | BNDL_ARRAY_FIRSTDUP )  ///< mask for duplicate handling in sorted array
+#define BNDL_ARRAY_MASK          ( BNDL_ARRAY_MASK_ACTION | BNDL_ARRAY_MASK_DUPS )                 ///< mask of all sorted array options
+
+
 //////////////////
 //              //
 //  Data Types  //
@@ -166,6 +179,94 @@ bindle_debug_syslog;
 //              //
 //////////////////
 #pragma mark - Prototypes
+
+//------------------//
+// array prototypes //
+//------------------//
+#pragma mark array prototypes
+
+_BINDLE_F ssize_t
+bindle_array_add(
+         void **                       basep,
+         size_t *                      nelp,
+         size_t                        width,
+         void *                        obj,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *),
+         void (*freeobj)(void *),
+         void * (*reallocbase)(void *, size_t) );
+
+
+_BINDLE_F void *
+bindle_array_dequeue(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width );
+
+
+_BINDLE_F ssize_t
+bindle_array_enqueue(
+         void **                       basep,
+         size_t *                      nelp,
+         size_t                        width,
+         void *                        obj,
+         void * (*reallocbase)(void *, size_t) );
+
+
+_BINDLE_F void *
+bindle_array_get(
+         void *                        base,
+         size_t                        nel,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *) );
+
+
+_BINDLE_F void *
+bindle_array_peek(
+         void *                        base,
+         size_t                        nel,
+         size_t                        width );
+
+
+_BINDLE_F void *
+bindle_array_pop(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width );
+
+
+_BINDLE_F ssize_t
+bindle_array_push(
+         void **                       basep,
+         size_t *                      nelp,
+         size_t                        width,
+         void *                        obj,
+         void * (*reallocbase)(void *, size_t) );
+
+
+_BINDLE_F ssize_t
+bindle_array_remove(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *),
+         void (*freeobj)(void *) );
+
+
+_BINDLE_F ssize_t
+bindle_array_search(
+         const void *                  base,
+         size_t                        nel,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         size_t *                      wouldbep,
+         int (*compar)(const void *, const void *) );
+
 
 //------------------//
 // debug prototypes //
