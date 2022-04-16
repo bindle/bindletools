@@ -98,6 +98,7 @@ XFAIL_TESTS				=
 EXTRA_MANS				=
 EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
+					  checks/README.md \
 					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \
