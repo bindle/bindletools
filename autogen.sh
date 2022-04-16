@@ -60,18 +60,18 @@ if test -d ${SRCDIR}/.git || test -f ${SRCDIR}/.git;then
 fi
 
 
+# perform pre-hook
+if test -f ${SRCDIR}/build-aux/autogen-pre-hook.sh;then
+   . ${SRCDIR}/build-aux/autogen-pre-hook.sh
+fi
+
+
 # symlinks Bindle Tools M4 macros
 if test -f ${SRCDIR}/contrib/bindletools/m4/bindle-gcc.m4;then
    cd ${SRCDIR}/m4
    rm -f ./bindle*.m4 || exit 1
    ln -s ../contrib/bindletools/m4/bindle*.m4 ./
    cd -
-fi
-
-
-# perform pre-hook
-if test -f ${SRCDIR}/build-aux/autogen-pre-hook.sh;then
-   . ${SRCDIR}/build-aux/autogen-pre-hook.sh
 fi
 
 
