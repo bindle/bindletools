@@ -286,6 +286,13 @@ bindle_debug(
 #pragma mark file prototypes
 
 _BINDLE_F int
+bindle_filetostr(
+         char *                        dst,
+         const char *                  filename,
+         size_t                        size );
+
+
+_BINDLE_F int
 bindle_readline(
          int                           fd,
          char *                        str,

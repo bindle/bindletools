@@ -45,6 +45,7 @@
 #include <unistd.h>
 #include <syslog.h>
 #include <stdarg.h>
+#include <fcntl.h>
 #include <sys/errno.h>
 #include <sys/stat.h>
 #include <assert.h>
@@ -72,6 +73,46 @@
 //             //
 /////////////////
 #pragma mark - Functions
+
+int
+bindle_filetostr(
+         char *                        dst,
+         const char *                  filename,
+         size_t                        size )
+{
+   int            fd;
+   struct stat    sb;
+   size_t         len;
+   ssize_t        rlen;
+
+   assert(dst  != NULL);
+   assert(size  > 1);
+
+   if (stat(filename, &sb) == -1)
+      return(-1);
+   if ((sb.st_mode & S_IFMT) != S_IFREG)
+   {
+      errno = EINVAL;
+      return(-1);
+   };
+
+   len = (size > (size_t)(sb.st_size+1)) ? (size_t)sb.st_size : (size - 1);
+
+   if ((fd = open(filename, O_RDONLY)) == -1)
+      return(-1);
+
+   if ((rlen = read(fd, dst, len)) == -1)
+   {
+      close(fd);
+      return(-1);
+   };
+   dst[rlen] = '\0';
+
+   close(fd);
+
+   return((int)rlen);
+}
+
 
 int
 bindle_readline(
