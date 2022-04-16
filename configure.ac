@@ -166,7 +166,9 @@ AC_BINDLE_GIT_PACKAGE_VERSION([build-aux/git-package-version.sh])
 
 # custom configure options
 AC_BINDLE_ENABLE_WARNINGS([-Wno-unknown-pragmas -Wno-missing-format-attribute -Wno-poison-system-directories], [], [c11])
-AC_BINDLE_LIBBINDLE([])
+AC_BINDLETOOLS_PREFIX
+AC_BINDLETOOLS_DOCUMENTATION
+AC_BINDLETOOLS_EXAMPLES
 AC_BINDLETOOLS_LIBBINDLE
 
 # Creates outputs
@@ -179,9 +181,12 @@ AC_MSG_NOTICE([   Bindle Binaries Tools $GIT_PACKAGE_VERSION ($GIT_PACKAGE_BUILD
 AC_MSG_NOTICE([ ])
 AC_MSG_NOTICE([   Features:])
 AC_MSG_NOTICE([      Debug Output               ${USE_DEBUG}])
+AC_MSG_NOTICE([      Symbol Prefix              ${BINDLETOOLS_LIBRARY_PREFIX}])
 AC_MSG_NOTICE([ ])
 AC_MSG_NOTICE([   Options:])
-AC_MSG_NOTICE([      Install libbindle.la       ${ENABLE_LIBBINDLE}])
+AC_MSG_NOTICE([      Build examples             ${ENABLE_EXAMPLES}])
+AC_MSG_NOTICE([      Install extra docs         ${ENABLE_DOCUMENATION}])
+AC_MSG_NOTICE([      Install libbindle.a        ${ENABLE_LIBBINDLE}])
 AC_MSG_NOTICE([ ])
 AC_MSG_NOTICE([   Please send suggestions to:   $PACKAGE_BUGREPORT])
 AC_MSG_NOTICE([ ])

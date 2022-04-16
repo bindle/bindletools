@@ -34,6 +34,50 @@
 #   acinclude.m4 - custom m4 macros used by configure.ac
 #
 
+# AC_BINDLETOOLS_DOCUMENTATION()
+# ______________________________________________________________________________
+AC_DEFUN([AC_BINDLETOOLS_DOCUMENTATION],[dnl
+   enableval=""
+   AC_ARG_ENABLE(
+      documentation,
+      [AS_HELP_STRING([--enable-documentation], [install extra documentation])],
+      [ EDOCUMENATION=$enableval ],
+      [ EDOCUMENATION=$enableval ]
+   )
+
+   if test "x${EDOCUMENATION}" == "xyes";then
+      ENABLE_DOCUMENATION="yes"
+   else
+      ENABLE_DOCUMENATION="no"
+   fi
+
+   AM_CONDITIONAL([ENABLE_DOCUMENATION],  [test "$ENABLE_DOCUMENATION" = "yes"])
+   AM_CONDITIONAL([DISABLE_DOCUMENATION], [test "$ENABLE_DOCUMENATION" = "no"])
+])dnl
+
+
+# AC_BINDLETOOLS_EXAMPLES()
+# ______________________________________________________________________________
+AC_DEFUN([AC_BINDLETOOLS_EXAMPLES],[dnl
+   enableval=""
+   AC_ARG_ENABLE(
+      examples,
+      [AS_HELP_STRING([--enable-examples], [build tinyrad examples])],
+      [ EEXAMPLES=$enableval ],
+      [ EEXAMPLES=$enableval ]
+   )
+
+   if test "x${EEXAMPLES}" == "xyes";then
+      ENABLE_EXAMPLES="yes"
+   else
+      ENABLE_EXAMPLES="no"
+   fi
+
+   AM_CONDITIONAL([ENABLE_EXAMPLES],  [test "$ENABLE_EXAMPLES" = "yes"])
+   AM_CONDITIONAL([DISABLE_EXAMPLES], [test "$ENABLE_EXAMPLES" = "no"])
+])dnl
+
+
 # AC_BINDLETOOLS_LIBBINDLE()
 # -----------------------------------
 AC_DEFUN([AC_BINDLETOOLS_LIBBINDLE],[dnl
@@ -41,19 +85,46 @@ AC_DEFUN([AC_BINDLETOOLS_LIBBINDLE],[dnl
    enableval=""
    AC_ARG_ENABLE(
       libbindle,
-      [AS_HELP_STRING([--enable-libbindle], [install bindletools library])],
+      [AS_HELP_STRING([--disable-libbindle], [disable bindletools library])],
       [ ELIBBINDLE=$enableval ],
       [ ELIBBINDLE=$enableval ]
    )
 
-   if test "x${ELIBBINDLE}" = "xyes";then
-      ENABLE_LIBBINDLE="yes"
-   else
+   if test "x${ELIBBINDLE}" = "xno";then
       ENABLE_LIBBINDLE="no"
+   else
+      ENABLE_LIBBINDLE="yes"
    fi
 
    AM_CONDITIONAL([ENABLE_LIBBINDLE],  [test "$ENABLE_LIBBINDLE" = "yes"])
    AM_CONDITIONAL([DISABLE_LIBBINDLE], [test "$ENABLE_LIBBINDLE" = "no"])
+])dnl
+
+
+# AC_BINDLETOOLS_PREFIX()
+# -----------------------------------
+AC_DEFUN([AC_BINDLETOOLS_PREFIX],[dnl
+
+   withval=""
+   AC_ARG_WITH(
+      symbol-prefix,
+      [AS_HELP_STRING([--with-symbol-prefix=string], [set prefix for library symbols [default: bindle_]])],
+      [ WSYMBOLPREFIX=$withval ],
+      [ WSYMBOLPREFIX=$withval ]
+   )
+
+
+   if test "x${WSYMBOLPREFIX}" = "xyes";then
+      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
+   elif test "x${WSYMBOLPREFIX}" = "xno";then
+      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
+   elif test "x${WSYMBOLPREFIX}" = "x";then
+      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
+   else
+      BINDLETOOLS_LIBRARY_PREFIX="${WSYMBOLPREFIX}"
+   fi
+
+   AC_BINDLE_LIBBINDLE(${BINDLETOOLS_LIBRARY_PREFIX})
 ])dnl
 
 
