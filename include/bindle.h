@@ -280,6 +280,18 @@ bindle_debug(
          ... );
 
 
+//-----------------//
+// file prototypes //
+//-----------------//
+#pragma mark file prototypes
+
+_BINDLE_F int
+bindle_readline(
+         int                           fd,
+         char *                        str,
+         size_t                        size );
+
+
 //-------------------//
 // object prototypes //
 //-------------------//
