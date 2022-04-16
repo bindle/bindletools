@@ -132,6 +132,7 @@ AC_CHECK_FUNCS([strtol],         [], [AC_MSG_ERROR([missing required functions])
 AC_CHECK_FUNCS([strtoul],        [], [AC_MSG_ERROR([missing required functions])])
 AC_CHECK_FUNCS([strtoull],       [], [AC_MSG_ERROR([missing required functions])])
 AC_CHECK_FUNCS([strtoumax],      [], [AC_MSG_ERROR([missing required functions])])
+AC_CHECK_FUNCS([uname],          [], [AC_MSG_ERROR([missing required functions])])
 
 # enables getopt_long if header and functions were found
 AC_CHECK_HEADERS([assert.h],        [], [AC_MSG_ERROR([missing required headers])])
@@ -149,6 +150,7 @@ AC_CHECK_HEADERS([stdio.h],         [], [AC_MSG_ERROR([missing required headers]
 AC_CHECK_HEADERS([stdlib.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([string.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([strings.h],       [], [AC_MSG_ERROR([missing required headers])])
+AC_CHECK_HEADERS([syslog.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([unistd.h],        [], [AC_MSG_ERROR([missing required headers])])
 
 # check for data types
