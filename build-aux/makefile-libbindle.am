@@ -49,7 +49,7 @@ CLEANFILES				+= include/bindle_prefix.h \
 # macros for lib/libbindle.a
 lib_libbindle_a_DEPENDENCIES		= Makefile \
 					  config.h \
-					  $(libbindle_sources)
+					  include/bindle_prefix.h
 lib_libbindle_a_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_a_CFLAGS			= $(AM_CFLAGS)

@@ -67,8 +67,8 @@ _BINDLE_V const char *
 bindle_debug_ident;
 
 
-_BINDLE_V char
-bindle_debug_ident_buff[128];
+_BINDLE_V char *
+bindle_debug_ident_ptr;
 
 
 _BINDLE_V int

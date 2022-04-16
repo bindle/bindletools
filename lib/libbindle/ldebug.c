@@ -67,7 +67,7 @@
 
 // yes, global variables are evil...
 const char *   bindle_debug_ident     = BNDL_DFLT_DEBUG_IDENT;
-char           bindle_debug_ident_buff[128];
+char *         bindle_debug_ident_ptr = NULL;
 int            bindle_debug_level     = BNDL_DFLT_DEBUG_LEVEL;
 int            bindle_debug_syslog    = BNDL_DFLT_DEBUG_SYSLOG;
 

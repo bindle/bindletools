@@ -122,6 +122,8 @@ bindle_set_option(
          int                           option,
          const void *                  invalue )
 {
+   char *   str;
+
    BindleDebugTrace();
 
    assert(invalue != NULL);
@@ -133,8 +135,12 @@ bindle_set_option(
       BindleDebug(BNDL_DEBUG_ARGS, "   == %s( tr, BNDL_OPT_DEBUG_IDENT, \"%s\" )", __func__, ((!((const char *)invalue)) ? "(NULL)" : (const char *)invalue));
       if (!((const char *)invalue))
          invalue = BNDL_DFLT_DEBUG_IDENT;
-      bindle_strlcpy(bindle_debug_ident_buff, (const char *)invalue, sizeof(bindle_debug_ident_buff));
-      bindle_debug_ident = bindle_debug_ident_buff;
+      if ((str = bindle_strdup((const char *)invalue)) == NULL)
+         return(ENOMEM);
+      if ((bindle_debug_ident_ptr))
+         free(bindle_debug_ident_ptr);
+      bindle_debug_ident_ptr = str;
+      bindle_debug_ident = bindle_debug_ident_ptr;
       return(BNDL_SUCCESS);
 
       case BNDL_OPT_DEBUG_LEVEL:
