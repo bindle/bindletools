@@ -146,6 +146,13 @@
 //////////////////
 #pragma mark - Data Types
 
+typedef struct _tinyrad_map
+{
+   const char *          map_name;
+   uintptr_t             map_value;
+} bindle_map_t;
+
+
 typedef struct _bindle_obj
 {
    uint8_t                 magic[8];
@@ -297,6 +304,33 @@ bindle_readline(
          int                           fd,
          char *                        str,
          size_t                        size );
+
+
+//----------------//
+// map prototypes //
+//----------------//
+#pragma mark map prototypes
+
+_BINDLE_F int
+bindle_map_lookup(
+         const bindle_map_t *          map,
+         const char *                  name,
+         uintptr_t                     value,
+         const bindle_map_t **         mapp );
+
+
+_BINDLE_F uintptr_t
+bindle_map_lookup_name(
+         const bindle_map_t *          map,
+         const char *                  name,
+         const bindle_map_t **         mapp );
+
+
+_BINDLE_F const char *
+bindle_map_lookup_value(
+         const bindle_map_t *          map,
+         uintptr_t                     value,
+         const bindle_map_t **         mapp );
 
 
 //-------------------//
