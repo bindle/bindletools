@@ -38,12 +38,13 @@ LIBBINDLE_TESTS				=  tests/bindle-array-queue \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split
-EXTRA					+= lib/libbindle.a
+EXTRA					+= lib/libbindle.a \
+					   include/bindle_prefix.h
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
-					   $(bindletools_srcdir)/include/bindle.h
-BUILT_SOURCES				+= include/bindle_prefix.h
-CLEANFILES				+= include/bindle_prefix.h \
-					   lib/libbindle.a
+					   $(bindletools_srcdir)/build-aux/bindle-prefix.sh \
+					   $(bindletools_srcdir)/include/bindle.h \
+					   $(lib_libbindle_a_SOURCES)
+CLEANFILES				+= lib/libbindle.a
 
 
 # macros for lib/libbindle.a
@@ -131,20 +132,8 @@ include/bindle_prefix.h: Makefile $(lib_libbindle_a_SOURCES)
 	@if test "x$(V)" == "x0";then \
 	   echo "  GEN      $(@)"; \
 	else \
-	   echo "$(libbindle_symbol_list)"; \
+	   echo "$(srcdir)/$(bindletools_srcdir)/build-aux/bindle-prefix.sh $(@) $(LIBBINDLE_PREFIX)"; \
 	fi; \
-	$(MKDIR_P) "`dirname "$(@)"`" || exit 1; \
-	rm -f $(@) || exit 1; \
-	echo "/* generated from include/bindle.h by make*/" >> $(@); \
-	echo "#ifndef __BINDLE_H" >> $(@); \
-	if test "x${LIBBINDLE_PREFIX}" != "x";then \
-	   for FUNC in `$(libbindle_symbol_list)`;do \
-	      echo "#undef bindle_$$FUNC"; \
-	      echo "#define bindle_$$FUNC $(LIBBINDLE_PREFIX)$$FUNC"; \
-	   done >> $(@); \
-	fi; \
-	echo "#endif" >> $(@); \
-	cat $(srcdir)/$(bindletools_srcdir)/include/bindle.h >> $(@); \
-	touch $(@);
+	$(srcdir)/$(bindletools_srcdir)/build-aux/bindle-prefix.sh "$(@)" $(LIBBINDLE_PREFIX);
 
 # end of automake file

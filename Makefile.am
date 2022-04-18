@@ -92,7 +92,7 @@ EXTRA					= lib/libbindle.a \
 
 # lists
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT	=
-BUILT_SOURCES				=
+BUILT_SOURCES				= include/bindle_prefix.h
 TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
@@ -117,6 +117,7 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  $(sbin_SCRIPTS) \
 					  $(noinst_SCRIPTS) \
 					  $(EXTRA_PROGRAMS) \
+					  include/bindle_prefix.h \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
@@ -139,7 +140,9 @@ include build-aux/makefile-libbindle.am
 
 
 # custom targets
-.PHONY: git-clean
+.PHONY: dep git-clean
+
+dep: include/bindle_prefix.h
 
 git-clean:
 	git fsck --full --unreachable
