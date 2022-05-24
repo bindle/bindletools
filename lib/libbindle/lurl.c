@@ -397,7 +397,7 @@ bindle_urldesc_parse(
       };
       if ((budp))
       {
-         if ((budp->bud_path = bindle_strdup(&chr[1])) == NULL)
+         if ((budp->bud_path = bindle_strdup(chr)) == NULL)
          {
             free(buff);
             bindle_urldesc_free(budp);
