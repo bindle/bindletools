@@ -601,6 +601,8 @@ bindle_urldesc_resolve(
    memset(&hints, 0, sizeof(hints));
    hints.ai_family   = (family == 0) ? AF_UNSPEC : family;
    hints.ai_flags    = 0;
+   hints.ai_protocol = IPPROTO_TCP;
+   hints.ai_socktype = SOCK_STREAM;
    if ((rc = getaddrinfo(budp->bud_host, NULL, &hints, &res)) != 0)
       return(rc);
 
