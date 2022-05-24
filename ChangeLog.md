@@ -9,6 +9,7 @@ All rights reserved.
    - Expanding libbindle.la with common string and object functions. (syzdek)
    - Adding ability to embed libbindle.la in other projects with custom symbol
      prefixes. (syzdek)
+   - Adding initial URL functions (syzdek)
 
 #### 0.5
    - Removing call to contrib/bindletools/autogen.sh (syzdek)

@@ -32,12 +32,14 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
-					   tests/bindle-str-split
+					   tests/bindle-str-split \
+					   tests/bindle-urldesc-parse
 LIBBINDLE_TESTS				=  tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
-					   tests/bindle-str-split
+					   tests/bindle-str-split \
+					   tests/bindle-urldesc-parse
 EXTRA					+= lib/libbindle.a \
 					   include/bindle_prefix.h
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
@@ -71,6 +73,8 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lurl.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lurl.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
 
@@ -118,6 +122,15 @@ tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
 					  $(bindletools_srcdir)/checks/bindle-str-split.c
+
+
+# macros for tests/bindle-urldesc-parse
+tests_bindle_urldesc_parse_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_urldesc_parse_LDADD	= lib/libbindle.a
+tests_bindle_urldesc_parse_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.c \
+					  $(bindletools_srcdir)/checks/bindle-urldesc-parse.c
 
 
 libbindle_symbol_list = $(EGREP) \

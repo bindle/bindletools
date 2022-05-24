@@ -161,6 +161,22 @@ typedef struct _bindle_obj
 } bindle_obj_t;
 
 
+// URL = scheme ":" ["//" authority] path ["?" query] ["#" fragment]
+// authority = [userinfo "@"] host [":" service]
+typedef struct bindle_url_desc
+{
+   char *                        bud_scheme;
+   char *                        bud_userinfo;
+   char *                        bud_host;
+   char *                        bud_service;
+   uintptr_t                     bud_port;
+   char *                        bud_path;
+   char *                        bud_query;
+   char *                        bud_fragment;
+   void **                       bud_sockaddrs;
+} BindleURLDesc;
+
+
 /////////////////
 //             //
 //  Variables  //
@@ -471,6 +487,38 @@ bindle_strsplit(
          int                           delim,
          char ***                      argvp,
          int *                         argcp );
+
+
+//----------------//
+// URI prototypes //
+//----------------//
+#pragma mark URI prototypes
+
+_BINDLE_F int
+bindle_is_url(
+         const char *                  str );
+
+
+_BINDLE_F char *
+bindle_urldesc2str(
+         BindleURLDesc *               budp );
+
+
+_BINDLE_F void
+bindle_urldesc_free(
+         BindleURLDesc *               budp );
+
+
+_BINDLE_F int
+bindle_urldesc_parse(
+         const char *                  url,
+         BindleURLDesc **              budpp );
+
+
+_BINDLE_F int
+bindle_urldesc_resolve(
+         BindleURLDesc *               budp,
+         int                           family );
 
 
 //-----------------//
