@@ -33,12 +33,14 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split \
+					   tests/bindle-url-encoding \
 					   tests/bindle-urldesc-parse
 LIBBINDLE_TESTS				=  tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split \
+					   tests/bindle-url-encoding \
 					   tests/bindle-urldesc-parse
 EXTRA					+= lib/libbindle.a \
 					   include/bindle_prefix.h
@@ -122,6 +124,15 @@ tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
 					  $(bindletools_srcdir)/checks/bindle-str-split.c
+
+
+# macros for tests/bindle-url-encoding
+tests_bindle_url_encoding_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_url_encoding_LDADD		= lib/libbindle.a
+tests_bindle_url_encoding_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.c \
+					  $(bindletools_srcdir)/checks/bindle-url-encoding.c
 
 
 # macros for tests/bindle-urldesc-parse

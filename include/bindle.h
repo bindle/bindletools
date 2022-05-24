@@ -521,6 +521,25 @@ bindle_urldesc_resolve(
          int                           family );
 
 
+_BINDLE_F ssize_t
+bindle_url_decode(
+         const char *                  src,
+         char * restrict               dst,
+         size_t                        size );
+
+
+_BINDLE_F ssize_t
+bindle_url_encode(
+         const char *                  src,
+         char * restrict               dst,
+         size_t                        size );
+
+
+_BINDLE_F size_t
+bindle_url_encode_len(
+         const char *                  str );
+
+
 //-----------------//
 // UTF8 prototypes //
 //-----------------//
