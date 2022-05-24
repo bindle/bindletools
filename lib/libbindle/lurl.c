@@ -89,13 +89,12 @@ bindle_urldesc_free_sockaddrs(
 /////////////////
 #pragma mark - Functions
 
-/*
 int
 bindle_is_url(
          const char *                  str )
 {
+   return(((bindle_urldesc_parse(str, NULL))) ? 0 : 1);
 }
-*/
 
 
 char *

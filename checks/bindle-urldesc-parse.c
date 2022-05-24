@@ -308,6 +308,12 @@ my_test_url(
 
    bindle_tests_print(opts, "testing \"%s\" ...", url);
 
+   if (!(bindle_is_url(url)))
+   {
+      bindle_tests_error(opts, NULL, "bindle_is_url(): not a URL\n");
+      return(1);
+   };
+
    if ((rc = bindle_urldesc_parse(url, &budp)) != 0)
    {
       bindle_tests_error(opts, NULL, "bindle_urldesc_parse(): %s\n", strerror(rc));
