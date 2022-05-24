@@ -599,8 +599,8 @@ bindle_urldesc_resolve(
 
    // resolve host
    memset(&hints, 0, sizeof(hints));
-   hints.ai_family   = (family == 0)                  ? family                      : AF_UNSPEC;
-   hints.ai_flags    = (hints.ai_family == AF_UNSPEC) ? (AI_V4MAPPED|AI_ADDRCONFIG) : 0;
+   hints.ai_family   = (family == 0) ? AF_UNSPEC : family;
+   hints.ai_flags    = 0;
    if ((rc = getaddrinfo(budp->bud_host, NULL, &hints, &res)) != 0)
       return(rc);
 
