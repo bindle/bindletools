@@ -223,7 +223,7 @@ bindle_url_encode_len(
       if (!(bindle_url_encode_char(str[pos])))
          size += 2;
 
-   return(size);
+   return(size+1);
 }
 
 
