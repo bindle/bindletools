@@ -166,7 +166,7 @@ bindle_url_encode(
    {
       if ((dst[off] = bindle_url_encode_char(src[pos])) != 0)
          continue;
-      if ((off+3) >= size)
+      if ((off+2) >= size)
       {
          dst[off] = '\0';
          return(-1);
