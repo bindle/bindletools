@@ -696,11 +696,15 @@ bindle_urldesc_parse(
 int
 bindle_urldesc_resolve(
          BindleURLDesc *               budp,
-         int                           family )
+         int                           family,
+         unsigned                      default_port )
 {
    int                           rc;
    size_t                        count;
    size_t                        size;
+   char                          portbuf[6];
+   char *                        portstr;
+   unsigned                      portnum;
    struct addrinfo               hints;
    struct addrinfo *             res;
    struct addrinfo *             next;
@@ -726,13 +730,18 @@ bindle_urldesc_resolve(
       };
    };
 
+   // convert numeric port to string
+   portnum = (unsigned)(((budp->bud_port)) ? budp->bud_port : default_port);
+   portstr = ((portnum)) ? portbuf : NULL;
+   snprintf(portbuf, sizeof(portbuf), "%u", (0xffff & portnum));
+
    // resolve host
    memset(&hints, 0, sizeof(hints));
    hints.ai_family   = (family == 0) ? AF_UNSPEC : family;
-   hints.ai_flags    = 0;
+   hints.ai_flags    = AI_NUMERICSERV;
    hints.ai_protocol = IPPROTO_TCP;
    hints.ai_socktype = SOCK_STREAM;
-   if ((rc = getaddrinfo(budp->bud_host, NULL, &hints, &res)) != 0)
+   if ((rc = getaddrinfo(budp->bud_host, portstr, &hints, &res)) != 0)
       return(rc);
 
    // allocate list

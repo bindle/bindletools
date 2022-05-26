@@ -518,7 +518,8 @@ bindle_urldesc_parse(
 _BINDLE_F int
 bindle_urldesc_resolve(
          BindleURLDesc *               budp,
-         int                           family );
+         int                           family,
+         unsigned                      default_port );
 
 
 _BINDLE_F ssize_t
