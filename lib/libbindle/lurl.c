@@ -747,6 +747,7 @@ bindle_urldesc_resolve(
    // allocate list
    for(next = res, count = 0; ((next)); next = next->ai_next, count++);
    size = (count + 1) * sizeof(void *);
+   bindle_urldesc_free_sockaddrs(budp);
    if ((budp->bud_sockaddrs = malloc(size)) == NULL)
    {
       freeaddrinfo(res);
