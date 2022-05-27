@@ -61,6 +61,14 @@
 ///////////////////
 #pragma mark - Definitions
 
+#define BINDLE_URLDESC_SCHEME       0x01
+#define BINDLE_URLDESC_USERINFO     0x02
+#define BINDLE_URLDESC_HOST         0x04
+#define BINDLE_URLDESC_SERVICE      0x08
+#define BINDLE_URLDESC_PATH         0x10
+#define BINDLE_URLDESC_QUERY        0x20
+#define BINDLE_URLDESC_FRAGMENT     0x40
+
 
 //////////////////
 //              //
@@ -365,6 +373,7 @@ bindle_urldesc_parse(
    char *            chr;
    char *            endptr;
    unsigned          port;
+   unsigned          fields;
    BindleURLDesc *   budp;
    struct in6_addr   addr6;
    struct in_addr    addr;
@@ -372,6 +381,8 @@ bindle_urldesc_parse(
 
    if (!(url))
       return(EINVAL);
+
+   fields = 0;
 
    // allocate memory for URL desc
    budp = NULL;
@@ -436,6 +447,7 @@ bindle_urldesc_parse(
          };
       };
       // shift string
+      fields |= BINDLE_URLDESC_SCHEME;
       str = (chr[2] == '/') ? &chr[3]: &chr[1];
    };
 
@@ -475,6 +487,7 @@ bindle_urldesc_parse(
             return(ENOMEM);
          };
       };
+      fields |= BINDLE_URLDESC_FRAGMENT;
       chr[0] = '\0';
    };
 
@@ -514,6 +527,7 @@ bindle_urldesc_parse(
             return(ENOMEM);
          };
       };
+      fields |= BINDLE_URLDESC_QUERY;
       chr[0] = '\0';
    };
 
@@ -554,6 +568,7 @@ bindle_urldesc_parse(
             return(ENOMEM);
          };
       };
+      fields |= BINDLE_URLDESC_PATH;
       chr[0] = '\0';
    };
 
@@ -596,6 +611,7 @@ bindle_urldesc_parse(
             return(ENOMEM);
          };
       };
+      fields |= BINDLE_URLDESC_USERINFO;
       str = &chr[1];
    };
 
@@ -633,6 +649,7 @@ bindle_urldesc_parse(
          bindle_urldesc_free(budp);
          return(EINVAL);
       };
+      fields |= BINDLE_URLDESC_HOST;
       str = &chr[1];
    } else {
       // process hostnames and IPv4 addresses
@@ -649,14 +666,15 @@ bindle_urldesc_parse(
             return(EINVAL);
          };
       };
-      if ( ((budp)) && (len > 0) )
+      if (len > 0)
       {
-         if ((budp->bud_host = bindle_strndup(str, len)) == NULL)
+         if ( ((budp)) && ((budp->bud_host = bindle_strndup(str, len)) == NULL) )
          {
             free(buff);
             bindle_urldesc_free(budp);
             return(ENOMEM);
          };
+      fields |= BINDLE_URLDESC_HOST;
       };
       str = &str[len];
    };
@@ -696,7 +714,20 @@ bindle_urldesc_parse(
             return(ENOMEM);
          };
       };
+      fields |= BINDLE_URLDESC_SERVICE;
       str = &str[len];
+   };
+
+   if ( ((!(fields & BINDLE_URLDESC_SCHEME)) && ((fields & BINDLE_URLDESC_QUERY))) ||
+        ((!(fields & BINDLE_URLDESC_SCHEME)) && ((fields & BINDLE_URLDESC_FRAGMENT))) ||
+        ((!(fields & BINDLE_URLDESC_PATH))   && ((fields & BINDLE_URLDESC_QUERY))) ||
+        ((!(fields & BINDLE_URLDESC_PATH))   && ((fields & BINDLE_URLDESC_FRAGMENT))) ||
+        ((!(fields & BINDLE_URLDESC_HOST))   && ((fields & BINDLE_URLDESC_USERINFO))) ||
+        ((!(fields & BINDLE_URLDESC_HOST))   && ((fields & BINDLE_URLDESC_SERVICE))) )
+   {
+      free(buff);
+      bindle_urldesc_free(budp);
+      return(EINVAL);
    };
 
    if (str[0] != '\0')

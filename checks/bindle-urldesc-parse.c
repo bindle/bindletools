@@ -169,6 +169,7 @@ main(
    int               opt;
    int               c;
    int               opt_index;
+   int               skip;
    unsigned          opts;
    size_t            pos;
    size_t            pos_sc;
@@ -278,16 +279,32 @@ main(
                   {
                      for(pos_fr = 0; ((good_fr[pos_fr])); pos_fr++)
                      {
-                        bindle_strlcpy(url, good_sc[pos_sc], sizeof(url));
-                        bindle_strlcat(url, good_us[pos_us], sizeof(url));
-                        bindle_strlcat(url, good_ho[pos_ho], sizeof(url));
-                        bindle_strlcat(url, good_se[pos_se], sizeof(url));
-                        bindle_strlcat(url, good_pa[pos_pa], sizeof(url));
-                        bindle_strlcat(url, good_qu[pos_qu], sizeof(url));
-                        bindle_strlcat(url, good_fr[pos_fr], sizeof(url));
-                        if ((url[0]))
-                           if ((my_test_url(opts, url)))
-                              return(1);
+                        skip = 0;
+                        if ( (!(good_sc[pos_sc][0])) && ((good_qu[pos_qu][0])) )
+                           skip = 1;
+                        if ( (!(good_sc[pos_sc][0])) && ((good_fr[pos_fr][0])) )
+                           skip = 1;
+                        if ( (!(good_pa[pos_pa][0])) && ((good_qu[pos_qu][0])) )
+                           skip = 1;
+                        if ( (!(good_pa[pos_pa][0])) && ((good_fr[pos_fr][0])) )
+                           skip = 1;
+                        if ( (!(good_ho[pos_ho][0])) && ((good_us[pos_us][0])) )
+                           skip = 1;
+                        if ( (!(good_ho[pos_ho][0])) && ((good_se[pos_se][0])) )
+                           skip = 1;
+                        if (!(skip))
+                        {
+                           bindle_strlcpy(url, good_sc[pos_sc], sizeof(url));
+                           bindle_strlcat(url, good_us[pos_us], sizeof(url));
+                           bindle_strlcat(url, good_ho[pos_ho], sizeof(url));
+                           bindle_strlcat(url, good_se[pos_se], sizeof(url));
+                           bindle_strlcat(url, good_pa[pos_pa], sizeof(url));
+                           bindle_strlcat(url, good_qu[pos_qu], sizeof(url));
+                           bindle_strlcat(url, good_fr[pos_fr], sizeof(url));
+                           if ((url[0]))
+                              if ((my_test_url(opts, url)))
+                                 return(1);
+                        };
                      };
                   };
                };
