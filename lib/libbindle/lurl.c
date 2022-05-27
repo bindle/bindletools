@@ -401,6 +401,44 @@ bindle_urldesc_parse(
       return(0);
    };
 
+   // process scheme
+   //    Valid schemes include:
+   //       scheme:/path (no hostname)
+   //       scheme:///path (empty hostname)
+   //       scheme://hostname/path
+   if ( ((chr = strchr(str, ':')) != NULL) && (chr[1] == '/') )
+   {
+      len = (size_t)(chr - str);
+      // checks syntax
+      if (!(isalpha(str[0])))
+      {
+         free(buff);
+         bindle_urldesc_free(budp);
+         return(EINVAL);
+      };
+      for(pos = 1; (pos < len); pos++)
+      {
+         if ( (!(isalnum(str[0]))) && (str[pos] != '+') && (str[pos] != '.') && (str[pos] != '-') )
+         {
+            free(buff);
+            bindle_urldesc_free(budp);
+            return(EINVAL);
+         };
+      };
+      // copies scheme
+      if ((budp))
+      {
+         if ((budp->bud_scheme = bindle_strndup(str, len)) == NULL)
+         {
+            free(buff);
+            bindle_urldesc_free(budp);
+            return(ENOMEM);
+         };
+      };
+      // shift string
+      str = (chr[2] == '/') ? &chr[3]: &chr[1];
+   };
+
    // process fragment
    if ((chr = strchr(str, '#')) != NULL)
    {
@@ -477,44 +515,6 @@ bindle_urldesc_parse(
          };
       };
       chr[0] = '\0';
-   };
-
-   // process scheme
-   //    Valid schemes include:
-   //       scheme:/path (no hostname)
-   //       scheme:///path (empty hostname)
-   //       scheme://hostname/path
-   if ( ((chr = strchr(str, ':')) != NULL) && (chr[1] == '/') )
-   {
-      len = (size_t)(chr - str);
-      // checks syntax
-      if (!(isalpha(str[0])))
-      {
-         free(buff);
-         bindle_urldesc_free(budp);
-         return(EINVAL);
-      };
-      for(pos = 1; (pos < len); pos++)
-      {
-         if ( (!(isalnum(str[0]))) && (str[pos] != '+') && (str[pos] != '.') && (str[pos] != '-') )
-         {
-            free(buff);
-            bindle_urldesc_free(budp);
-            return(EINVAL);
-         };
-      };
-      // copies scheme
-      if ((budp))
-      {
-         if ((budp->bud_scheme = bindle_strndup(str, len)) == NULL)
-         {
-            free(buff);
-            bindle_urldesc_free(budp);
-            return(ENOMEM);
-         };
-      };
-      // shift string
-      str = (chr[2] == '/') ? &chr[3]: &chr[1];
    };
 
    // process path
