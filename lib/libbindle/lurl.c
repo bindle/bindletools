@@ -234,6 +234,7 @@ bindle_urldesc2str(
    size_t                  size;
    struct in6_addr         addr6;
    int                     is_ipv6addr;
+   char                    port[8];
    char *                  url;
 
    if (budp == NULL)
@@ -255,6 +256,8 @@ bindle_urldesc2str(
    size += ((budp->bud_path))     ? strlen(budp->bud_path)     + 0 : 0;
    size += ((budp->bud_query))    ? strlen(budp->bud_query)    + 1 : 0;
    size += ((budp->bud_fragment)) ? strlen(budp->bud_fragment) + 1 : 0;
+   if ( (!(budp->bud_service)) && ((budp->bud_port)) )
+      size += (size_t)snprintf(port, sizeof(port), "%u", (unsigned)(0xffff & budp->bud_port)) + 1;
 
    // allocates memory for string
    if ((url = malloc(size)) == NULL)
@@ -278,10 +281,13 @@ bindle_urldesc2str(
       bindle_strlcat(url, budp->bud_host, size);
       bindle_strlcat(url, (((is_ipv6addr)) ? "]" : ""), size);
    };
-   if ((budp->bud_service))
+   if ( ((budp->bud_service)) || ((budp->bud_port)) )
    {
       bindle_strlcat(url, ":", size);
-      bindle_strlcat(url, budp->bud_service, size);
+      if ((budp->bud_service))
+         bindle_strlcat(url, budp->bud_service, size);
+      else
+         bindle_strlcat(url, port, size);
    };
    if ((budp->bud_path))
       bindle_strlcat(url, budp->bud_path, size);
