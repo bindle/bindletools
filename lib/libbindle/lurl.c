@@ -367,11 +367,13 @@ bindle_urldesc_parse(
    unsigned          port;
    BindleURLDesc *   budp;
    struct in6_addr   addr6;
+   struct in_addr    addr;
    char              addrstr[INET_ADDRSTRLEN+INET6_ADDRSTRLEN];
 
    if (!(url))
       return(EINVAL);
 
+   // allocate memory for URL desc
    budp = NULL;
    if ((budpp))
    {
@@ -385,6 +387,19 @@ bindle_urldesc_parse(
       return(ENOMEM);
    };
    str = buff;
+
+   // test if IP address
+   if ( (inet_pton(AF_INET, str, &addr) == 1) || (inet_pton(AF_INET6, str, &addr6) == 1) )
+   {
+      if ((budpp))
+      {
+         budp->bud_host = buff;
+         *budpp = budp;
+      };
+      if (!(budpp))
+         free(buff);
+      return(0);
+   };
 
    // process fragment
    if ((chr = strchr(str, '#')) != NULL)
@@ -694,6 +709,8 @@ bindle_urldesc_parse(
    free(buff);
    if ((budpp))
       *budpp = budp;
+   else
+      bindle_urldesc_free(budp);
 
    return(0);
 }

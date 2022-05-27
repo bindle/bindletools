@@ -71,6 +71,8 @@
 static const char * test_urls_good[] =
 {
    "127.0.0.1",
+   "::1",
+   "2001:db8:4312:41::44af",
    NULL
 };
 
