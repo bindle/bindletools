@@ -136,6 +136,91 @@ bindle_basename_r(
 
 
 char *
+bindle_dirname(
+         const char *                  path )
+{
+   static char dname[512];
+   return(bindle_dirname_r(path, dname, sizeof(dname)));
+}
+
+
+char *
+bindle_dirname_r(
+         const char *                  path,
+         char *                        dname,
+         size_t                        dnamelen )
+{
+   size_t pos;
+   size_t off;
+
+   assert(dname != NULL);
+   assert(dnamelen > 2);
+
+   // handle empty strings
+   if ( (!(path)) || (path[0] == '\0') )
+   {
+      bindle_strlcpy(dname, ".", dnamelen);
+      return(dname);
+   };
+   if (!(strchr(path, '/')))
+   {
+      bindle_strlcpy(dname, ".", dnamelen);
+      return(dname);
+   };
+
+   // skip leading '/' chars
+   if (path[0] == '/')
+   {
+      while(path[1] == '/')
+         path = &path[1];
+      if (path[1] == '\0')
+      {
+         bindle_strlcpy(dname, "/", dnamelen);
+         return(dname);
+      };
+   } else if (!(strchr(path, '/')))
+   {
+      bindle_strlcpy(dname, ".", dnamelen);
+      return(dname);
+   };
+
+   // strip tailing '/' chars
+   for(pos = strlen(path) - 1; (path[pos] == '/'); pos--);
+
+   // strip filename
+   for(; ((pos > 0) && (path[pos] != '/')); pos--);
+   if (pos == 0)
+   {
+      if (path[0] == '/')
+         bindle_strlcpy(dname, "/", dnamelen);
+      else
+         bindle_strlcpy(dname, ".", dnamelen);
+      return(dname);
+   };
+
+   // strip trailing '/' in dirname
+   for(; ((pos > 1) && (path[pos-1] == '/')); pos--);
+
+
+   pos++;
+   dnamelen = (pos > dnamelen) ? dnamelen : pos;
+   bindle_strlcpy(dname, path, dnamelen);
+
+   // remove double '/'
+   for(pos = 0, off = 0; (dname[pos] != '\0'); pos++)
+   {
+      dname[off++] = dname[pos];
+      if (dname[pos] == '/')
+         while(dname[pos+1] == '/')
+            pos++;
+   };
+   dname[off] = '\0';
+
+   return(dname);
+}
+
+
+char *
 bindle_strdup(
          const char *                  s1 )
 {

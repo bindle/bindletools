@@ -32,6 +32,7 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-basename \
+					   tests/bindle-str-dirname \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split \
 					   tests/bindle-url-encoding \
@@ -40,6 +41,7 @@ LIBBINDLE_TESTS				=  tests/bindle-array-queue \
 					   tests/bindle-array-sorted \
 					   tests/bindle-array-stack \
 					   tests/bindle-str-basename \
+					   tests/bindle-str-dirname \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split \
 					   tests/bindle-url-encoding \
@@ -117,6 +119,15 @@ tests_bindle_str_basename_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
 					  $(bindletools_srcdir)/checks/bindle-str-basename.c
+
+
+# macros for tests/bindle-str-dirname
+tests_bindle_str_dirname_DEPENDENCIES	= lib/libbindle.a
+tests_bindle_str_dirname_LDADD		= lib/libbindle.a
+tests_bindle_str_dirname_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.h \
+					  $(bindletools_srcdir)/checks/bindle-tests.c \
+					  $(bindletools_srcdir)/checks/bindle-str-dirname.c
 
 
 # macros for tests/bindle-str-expand

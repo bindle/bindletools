@@ -417,6 +417,18 @@ bindle_basename_r(
 
 
 _BINDLE_F char *
+bindle_dirname(
+         const char *                  path );
+
+
+_BINDLE_F char *
+bindle_dirname_r(
+         const char *                  path,
+         char *                        dname,
+         size_t                        dnamelen );
+
+
+_BINDLE_F char *
 bindle_strdup(
          const char *                  s1 );
 
