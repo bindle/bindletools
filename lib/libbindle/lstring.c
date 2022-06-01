@@ -79,6 +79,63 @@
 #pragma mark - Functions
 
 char *
+bindle_basename(
+         const char *                  path )
+{
+   static char bname[512];
+   return(bindle_basename_r(path, bname, sizeof(bname)));
+}
+
+
+char *
+bindle_basename_r(
+         const char *                  path,
+         char *                        bname,
+         size_t                        bnamelen )
+{
+   size_t pos;
+   size_t slash;
+   size_t len;
+
+   assert(bname != NULL);
+   assert(bnamelen > 2);
+
+   // handle empty strings
+   if ( (!(path)) || (path[0] == '\0') )
+   {
+      bindle_strlcpy(bname, ".", bnamelen);
+      return(bname);
+   };
+
+   // skip leading '/' chars
+   while (path[0] == '/')
+      path = &path[1];
+   if (path[0] == '\0')
+   {
+      bindle_strlcpy(bname, "/", bnamelen);
+      return(bname);
+   };
+
+   // find start of trailing slashes, if any
+   for(pos = strlen(path) - 1; (path[pos] == '/'); pos--);
+   slash = pos + 1;
+
+   // find last slash before basename
+   for(pos = slash - 1; ((pos > 0) && (path[pos] != '/')); pos--);
+   if (path[pos] == '/')
+      pos++;
+
+   // copy string
+   len = slash - pos + 1;
+   bnamelen = (len > bnamelen) ? bnamelen : len;
+   bindle_strlcpy(bname, &path[pos], bnamelen);
+
+
+   return(bname);
+}
+
+
+char *
 bindle_strdup(
          const char *                  s1 )
 {

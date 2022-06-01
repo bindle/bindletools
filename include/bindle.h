@@ -405,6 +405,18 @@ bindle_set_option(
 #pragma mark string prototypes
 
 _BINDLE_F char *
+bindle_basename(
+         const char *                  path );
+
+
+_BINDLE_F char *
+bindle_basename_r(
+         const char *                  path,
+         char *                        bname,
+         size_t                        bnamelen );
+
+
+_BINDLE_F char *
 bindle_strdup(
          const char *                  s1 );
 
