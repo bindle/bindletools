@@ -220,6 +220,25 @@ bindle_dirname_r(
 }
 
 
+char
+bindle_strchop(
+         char *                        str )
+{
+   size_t   pos;
+   char     c;
+
+   BindleDebugTrace();
+
+   if ( (!(str)) || (!(str[0])) )
+      return(0);
+   for(pos = 0; ((str[pos+1])); pos++);
+   c        = str[pos];
+   str[pos] = '\0';
+
+   return(c);
+}
+
+
 char *
 bindle_strdup(
          const char *                  s1 )

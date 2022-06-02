@@ -445,6 +445,12 @@ bindle_dirname_r(
          size_t                        dnamelen );
 
 
+// based on perl chop()
+_BINDLE_F char
+bindle_strchop(
+         char *                        str );
+
+
 _BINDLE_F char *
 bindle_strdup(
          const char *                  s1 );
