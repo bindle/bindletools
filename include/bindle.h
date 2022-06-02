@@ -399,6 +399,16 @@ bindle_set_option(
          const void *                  invalue );
 
 
+//------------------------//
+// user prompt prototypes //
+//------------------------//
+#pragma mark user prompt prototypes
+
+char *
+bindle_getpass(
+         const char *                  prompt );
+
+
 //-------------------//
 // string prototypes //
 //-------------------//

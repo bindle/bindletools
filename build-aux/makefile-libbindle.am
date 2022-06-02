@@ -75,6 +75,8 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/loptions.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lprompt.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lprompt.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstring.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lstrings.c \

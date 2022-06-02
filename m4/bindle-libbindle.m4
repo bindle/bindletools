@@ -38,6 +38,9 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
 
    LIBBINDLE_PREFIX="$1"
 
+   AC_CHECK_HEADERS([termios.h],     [], [])
+   AC_CHECK_HEADERS([sgtty.h],       [], [])
+
    AC_SUBST([LIBBINDLE_PREFIX],                 [${LIBBINDLE_PREFIX}])
    AC_DEFINE_UNQUOTED([LIBBINDLE_PREFIX],       ["$LIBBINDLE_PREFIX"],  [libbindle.la function prefix])
    AM_CONDITIONAL([WITH_BINDLE_PREFIX_H],       [test "x${LIBBINDLE_PREFIX}" != "x"])
