@@ -409,6 +409,13 @@ bindle_getpass(
          const char *                  prompt );
 
 
+char *
+bindle_getpass_r(
+         const char *                  prompt,
+         char *                        pass,
+         size_t                        passlen );
+
+
 //-------------------//
 // string prototypes //
 //-------------------//

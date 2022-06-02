@@ -59,9 +59,20 @@
 #pragma mark - Functions
 
 char *
-bindle_getpass(const char * prompt)
+bindle_getpass(
+         const char *                  prompt )
 {
    static char    buff[512];
+   return(bindle_getpass_r(prompt, buff, sizeof(buff)));
+}
+
+
+char *
+bindle_getpass_r(
+         const char *                  prompt,
+         char *                        pass,
+         size_t                        passlen )
+{
    FILE         * fs;
    int            c;
    size_t         pos;
@@ -95,9 +106,9 @@ bindle_getpass(const char * prompt)
    // reads buffer
    pos = 0;
    while ( ((c = getc(fs)) != EOF) && (c != '\n') && (c != '\r') )
-      if (pos < (sizeof(buff)-1))
-         buff[pos++] = (char)c;
-   buff[pos] = '\0';
+      if (pos < (passlen-1))
+         pass[pos++] = (char)c;
+   pass[pos] = '\0';
 
    // restores previous terminal
    fprintf(stderr, "\n");
@@ -109,7 +120,7 @@ bindle_getpass(const char * prompt)
    fclose(fs);
 #endif
 
-   return(buff);
+   return(pass);
 }
 
 
