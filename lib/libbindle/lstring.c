@@ -220,6 +220,50 @@ bindle_dirname_r(
 }
 
 
+size_t
+bindle_strchomp(
+         char *                        str,
+         const char *                  separator )
+{
+   size_t      str_len;
+   size_t      fixed_len;
+   size_t      separator_len;
+   size_t      delta;
+   char *      endptr;
+
+   if ( (!(str)) || (!(str[0])) )
+      return(0);
+
+   separator      = ((separator)) ? separator : "\n";
+   separator_len  = strlen(separator);
+   str_len        = strlen(str);
+   fixed_len      = strtoull(separator, &endptr, 10);
+   delta          = 0;
+
+   if (!(separator[0]))
+      return(0);
+
+   // treat separator as fixed length
+   if (!(endptr[0]))
+   {
+      if (str_len < fixed_len)
+         return(0);
+      str[fixed_len] = '\0';
+      return(str_len - fixed_len);
+   };
+
+   // treat separator as terminating string
+   while ( (str_len >= separator_len) && (!(strcasecmp(&str[str_len-separator_len], separator))) )
+   {
+      delta       += separator_len;
+      str_len     -= separator_len;
+      str[str_len] = '\0';
+   };
+
+   return(delta);
+}
+
+
 char
 bindle_strchop(
          char *                        str )
