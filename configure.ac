@@ -146,6 +146,7 @@ AC_CHECK_HEADERS([inttypes.h],      [], [AC_MSG_ERROR([missing required headers]
 AC_CHECK_HEADERS([limits.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([netdb.h],         [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([netinet/in.h],    [], [AC_MSG_ERROR([missing required headers])])
+AC_CHECK_HEADERS([sgtty.h],         [], [])
 AC_CHECK_HEADERS([stdarg.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([stdatomic.h],     [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([stddef.h],        [], [AC_MSG_ERROR([missing required headers])])
@@ -154,6 +155,7 @@ AC_CHECK_HEADERS([stdlib.h],        [], [AC_MSG_ERROR([missing required headers]
 AC_CHECK_HEADERS([string.h],        [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([strings.h],       [], [AC_MSG_ERROR([missing required headers])])
 AC_CHECK_HEADERS([syslog.h],        [], [AC_MSG_ERROR([missing required headers])])
+AC_CHECK_HEADERS([termios.h],       [], [])
 AC_CHECK_HEADERS([unistd.h],        [], [AC_MSG_ERROR([missing required headers])])
 
 # check for data types
@@ -171,7 +173,7 @@ AC_BINDLE_GIT_PACKAGE_VERSION([build-aux/git-package-version.sh])
 
 # custom configure options
 AC_BINDLE_ENABLE_WARNINGS([-Wno-unknown-pragmas -Wno-missing-format-attribute -Wno-poison-system-directories], [], [c11])
-AC_BINDLETOOLS_PREFIX
+AC_BINDLE_LIBBINDLE([bindle_])
 AC_BINDLETOOLS_DOCUMENTATION
 AC_BINDLETOOLS_EXAMPLES
 AC_BINDLETOOLS_LIBBINDLE

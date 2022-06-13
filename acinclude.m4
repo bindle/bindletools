@@ -101,31 +101,4 @@ AC_DEFUN([AC_BINDLETOOLS_LIBBINDLE],[dnl
 ])dnl
 
 
-# AC_BINDLETOOLS_PREFIX()
-# -----------------------------------
-AC_DEFUN([AC_BINDLETOOLS_PREFIX],[dnl
-
-   withval=""
-   AC_ARG_WITH(
-      symbol-prefix,
-      [AS_HELP_STRING([--with-symbol-prefix=string], [set prefix for library symbols [default: bindle_]])],
-      [ WSYMBOLPREFIX=$withval ],
-      [ WSYMBOLPREFIX=$withval ]
-   )
-
-
-   if test "x${WSYMBOLPREFIX}" = "xyes";then
-      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
-   elif test "x${WSYMBOLPREFIX}" = "xno";then
-      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
-   elif test "x${WSYMBOLPREFIX}" = "x";then
-      BINDLETOOLS_LIBRARY_PREFIX="bindle_"
-   else
-      BINDLETOOLS_LIBRARY_PREFIX="${WSYMBOLPREFIX}"
-   fi
-
-   AC_BINDLE_LIBBINDLE(${BINDLETOOLS_LIBRARY_PREFIX})
-])dnl
-
-
 # end of m4 file
