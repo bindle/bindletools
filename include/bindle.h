@@ -139,6 +139,15 @@
 #define BNDL_ARRAY_MASK          ( BNDL_ARRAY_MASK_ACTION | BNDL_ARRAY_MASK_DUPS )                 ///< mask of all sorted array options
 
 
+// encoding methods
+#define BNDL_NONE                 0
+#define BNDL_BASE32               1
+#define BNDL_BASE32HEX            2
+#define BNDL_BASE64               3
+#define BNDL_HEX                  4
+#define BNDL_CROCKFORD            5
+
+
 //////////////////
 //              //
 //  Data Types  //
@@ -301,6 +310,49 @@ bindle_debug(
          int                           level,
          const char *                  fmt,
          ... );
+
+
+//---------------------//
+// encoding prototypes //
+//---------------------//
+#pragma mark encoding prototypes
+
+_BINDLE_F ssize_t
+bindle_decode(
+         int                           method,
+         void *                        dst,
+         size_t                        s,
+         const char *                  src,
+         size_t                        n );
+
+
+_BINDLE_F ssize_t
+bindle_decode_size(
+         int                           method,
+         size_t                        n );
+
+
+_BINDLE_F ssize_t
+bindle_encode(
+         int                           method,
+         char *                        dst,
+         size_t                        s,
+         const void *                  src,
+         size_t                        n,
+         int                           nopad );
+
+
+_BINDLE_F ssize_t
+bindle_encode_size(
+         int                           method,
+         size_t                        n );
+
+
+_BINDLE_F ssize_t
+bindle_encoding_verify(
+         int                           method,
+         const char *                  src,
+         size_t                        n );
 
 
 //-----------------//
