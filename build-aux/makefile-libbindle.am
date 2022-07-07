@@ -53,38 +53,55 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-str-split \
 					   tests/bindle-url-encoding \
 					   tests/bindle-urldesc-parse
-LIBBINDLE_TESTS				=  tests/bindle-array-queue \
-					   tests/bindle-array-sorted \
-					   tests/bindle-array-stack \
-					   tests/bindle-enc-b32-dec \
-					   tests/bindle-enc-b32-enc \
-					   tests/bindle-enc-b32-val \
-					   tests/bindle-enc-b32h-dec \
-					   tests/bindle-enc-b32h-enc \
-					   tests/bindle-enc-b32h-val \
-					   tests/bindle-enc-b64-dec \
-					   tests/bindle-enc-b64-enc \
-					   tests/bindle-enc-b64-val \
-					   tests/bindle-enc-crock-dec \
-					   tests/bindle-enc-crock-enc \
-					   tests/bindle-enc-crock-val \
-					   tests/bindle-enc-hex-dec \
-					   tests/bindle-enc-hex-enc \
-					   tests/bindle-enc-hex-val \
-					   tests/bindle-str-basename \
-					   tests/bindle-str-chomp \
-					   tests/bindle-str-dirname \
-					   tests/bindle-str-expand \
-					   tests/bindle-str-split \
-					   tests/bindle-url-encoding \
-					   tests/bindle-urldesc-parse
 EXTRA					+= lib/libbindle.a \
+					   lib/libbindle.la \
+					   include/bindle.h \
 					   include/bindle_prefix.h
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
 					   $(bindletools_srcdir)/build-aux/bindle-prefix.sh \
 					   $(bindletools_srcdir)/include/bindle.h \
 					   $(lib_libbindle_a_SOURCES)
 CLEANFILES				+= lib/libbindle.a
+
+
+# conditional build
+if ENABLE_BUILTIN_BINDLE
+   noinst_HEADERS			+= include/bindle.h
+   noinst_LIBRARIES			+= lib/libbindle.a
+   BINDLE_TESTS_DEPS			= lib/libbindle.a
+else
+   BINDLE_TESTS_DEPS			= lib/libbindle.la
+endif
+if ENABLE_BINDLE_TESTS
+   TESTS				+= tests/bindle-array-queue
+   TESTS				+= tests/bindle-array-sorted
+   TESTS				+= tests/bindle-array-stack
+   TESTS				+= tests/bindle-enc-b32-dec
+   TESTS				+= tests/bindle-enc-b32-enc
+   TESTS				+= tests/bindle-enc-b32-val
+   TESTS				+= tests/bindle-enc-b32h-dec
+   TESTS				+= tests/bindle-enc-b32h-enc
+   TESTS				+= tests/bindle-enc-b32h-val
+   TESTS				+= tests/bindle-enc-b64-dec
+   TESTS				+= tests/bindle-enc-b64-enc
+   TESTS				+= tests/bindle-enc-b64-val
+   TESTS				+= tests/bindle-enc-crock-dec
+   TESTS				+= tests/bindle-enc-crock-enc
+   TESTS				+= tests/bindle-enc-crock-val
+   TESTS				+= tests/bindle-enc-hex-dec
+   TESTS				+= tests/bindle-enc-hex-enc
+   TESTS				+= tests/bindle-enc-hex-val
+   TESTS				+= tests/bindle-str-basename
+   TESTS				+= tests/bindle-str-chomp
+   TESTS				+= tests/bindle-str-dirname
+   TESTS				+= tests/bindle-str-expand
+   TESTS				+= tests/bindle-str-split
+   TESTS				+= tests/bindle-url-encoding
+   TESTS				+= tests/bindle-urldesc-parse
+endif
+if WITH_BINDLE_PREFIX_H
+   BUILT_SOURCES			+= include/bindle_prefix.h
+endif
 
 
 # macros for lib/libbindle.a
@@ -121,9 +138,23 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
 
 
+# macros for lib/libbindle.la
+lib_libbindle_la_DEPENDENCIES		= Makefile \
+					  config.h \
+					  lib/libbindle/libbindle.sym
+lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
+					  -I$(srcdir)/lib/libbindle
+lib_libbindle_la_CFLAGS			= $(AM_CFLAGS)
+lib_libbindle_la_LDFLAGS		= -rpath'$(libdir)' \
+					  -version-info $(LIB_VERSION_INFO) \
+					  $(AM_LDFLAGS) \
+					  -export-symbols $(srcdir)/lib/libbindle/libbindle.sym
+lib_libbindle_la_SOURCES		= $(lib_libbindle_a_SOURCES)
+
+
 # macros for tests/bindle-array-queue
-tests_bindle_array_queue_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_array_queue_LDADD		= lib/libbindle.a
+tests_bindle_array_queue_DEPENDENCIES 	= $(BINDLE_TESTS_DEPS)
+tests_bindle_array_queue_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_array_queue_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -131,8 +162,8 @@ tests_bindle_array_queue_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-array-sorted
-tests_bindle_array_sorted_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_array_sorted_LDADD		= lib/libbindle.a
+tests_bindle_array_sorted_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_array_sorted_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_array_sorted_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -140,8 +171,8 @@ tests_bindle_array_sorted_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-array-stack
-tests_bindle_array_stack_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_array_stack_LDADD		= lib/libbindle.a
+tests_bindle_array_stack_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_array_stack_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_array_stack_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -149,8 +180,8 @@ tests_bindle_array_stack_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32-dec
-tests_bindle_enc_b32_dec_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32_dec_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32_dec_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32_dec_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -160,8 +191,8 @@ tests_bindle_enc_b32_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32-enc
-tests_bindle_enc_b32_enc_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32_enc_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32_enc_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32_enc_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -171,8 +202,8 @@ tests_bindle_enc_b32_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32-val
-tests_bindle_enc_b32_val_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32_val_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32_val_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -182,8 +213,8 @@ tests_bindle_enc_b32_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32h-dec
-tests_bindle_enc_b32h_dec_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32h_dec_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32h_dec_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32h_dec_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32h_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -193,8 +224,8 @@ tests_bindle_enc_b32h_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32h-enc
-tests_bindle_enc_b32h_enc_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32h_enc_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32h_enc_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32h_enc_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32h_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -204,8 +235,8 @@ tests_bindle_enc_b32h_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b32h-val
-tests_bindle_enc_b32h_val_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b32h_val_LDADD		= lib/libbindle.a
+tests_bindle_enc_b32h_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b32h_val_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b32h_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -215,8 +246,8 @@ tests_bindle_enc_b32h_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b64-dec
-tests_bindle_enc_b64_dec_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b64_dec_LDADD		= lib/libbindle.a
+tests_bindle_enc_b64_dec_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b64_dec_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b64_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -226,8 +257,8 @@ tests_bindle_enc_b64_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b64-enc
-tests_bindle_enc_b64_enc_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b64_enc_LDADD		= lib/libbindle.a
+tests_bindle_enc_b64_enc_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b64_enc_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b64_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -237,8 +268,8 @@ tests_bindle_enc_b64_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-b64-val
-tests_bindle_enc_b64_val_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_b64_val_LDADD		= lib/libbindle.a
+tests_bindle_enc_b64_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_b64_val_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_b64_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -248,8 +279,8 @@ tests_bindle_enc_b64_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-crock-dec
-tests_bindle_enc_crock_dec_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_crock_dec_LDADD	= lib/libbindle.a
+tests_bindle_enc_crock_dec_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_crock_dec_LDADD	= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_crock_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -259,8 +290,8 @@ tests_bindle_enc_crock_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-crock-enc
-tests_bindle_enc_crock_enc_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_crock_enc_LDADD	= lib/libbindle.a
+tests_bindle_enc_crock_enc_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_crock_enc_LDADD	= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_crock_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -270,8 +301,8 @@ tests_bindle_enc_crock_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-crock-val
-tests_bindle_enc_crock_val_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_crock_val_LDADD	= lib/libbindle.a
+tests_bindle_enc_crock_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_crock_val_LDADD	= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_crock_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -281,8 +312,8 @@ tests_bindle_enc_crock_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-hex-dec
-tests_bindle_enc_hex_dec_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_hex_dec_LDADD		= lib/libbindle.a
+tests_bindle_enc_hex_dec_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_hex_dec_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_hex_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -292,8 +323,8 @@ tests_bindle_enc_hex_dec_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-hex-enc
-tests_bindle_enc_hex_enc_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_hex_enc_LDADD		= lib/libbindle.a
+tests_bindle_enc_hex_enc_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_hex_enc_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_hex_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -303,8 +334,8 @@ tests_bindle_enc_hex_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-enc-hex-val
-tests_bindle_enc_hex_val_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_enc_hex_val_LDADD		= lib/libbindle.a
+tests_bindle_enc_hex_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_hex_val_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_enc_hex_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -314,8 +345,8 @@ tests_bindle_enc_hex_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-str-basename
-tests_bindle_str_basename_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_basename_LDADD		= lib/libbindle.a
+tests_bindle_str_basename_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_str_basename_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_str_basename_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -323,8 +354,8 @@ tests_bindle_str_basename_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-str-chomp
-tests_bindle_str_chomp_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_chomp_LDADD		= lib/libbindle.a
+tests_bindle_str_chomp_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_str_chomp_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_str_chomp_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -332,8 +363,8 @@ tests_bindle_str_chomp_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-str-dirname
-tests_bindle_str_dirname_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_dirname_LDADD		= lib/libbindle.a
+tests_bindle_str_dirname_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_str_dirname_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_str_dirname_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -341,8 +372,8 @@ tests_bindle_str_dirname_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-str-expand
-tests_bindle_str_expand_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_expand_LDADD		= lib/libbindle.a
+tests_bindle_str_expand_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_str_expand_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_str_expand_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -350,8 +381,8 @@ tests_bindle_str_expand_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-str-split
-tests_bindle_str_split_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_str_split_LDADD		= lib/libbindle.a
+tests_bindle_str_split_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_str_split_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -359,8 +390,8 @@ tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-url-encoding
-tests_bindle_url_encoding_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_url_encoding_LDADD		= lib/libbindle.a
+tests_bindle_url_encoding_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_url_encoding_LDADD		= $(BINDLE_TESTS_DEPS)
 tests_bindle_url_encoding_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \
@@ -368,8 +399,8 @@ tests_bindle_url_encoding_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 
 
 # macros for tests/bindle-urldesc-parse
-tests_bindle_urldesc_parse_DEPENDENCIES	= lib/libbindle.a
-tests_bindle_urldesc_parse_LDADD	= lib/libbindle.a
+tests_bindle_urldesc_parse_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_urldesc_parse_LDADD	= $(BINDLE_TESTS_DEPS)
 tests_bindle_urldesc_parse_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.h \
 					  $(bindletools_srcdir)/checks/bindle-tests.c \

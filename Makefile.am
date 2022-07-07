@@ -71,8 +71,8 @@ doc_DATA				= AUTHORS.md \
 					  COPYING.md \
 					  README.md \
 					  TODO.md
-include_HEADERS				=
-lib_LTLIBRARIES				=
+include_HEADERS				= include/bindle.h
+lib_LTLIBRARIES				= lib/libbindle.la
 lib_LIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=
@@ -86,13 +86,12 @@ bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				=
-EXTRA					= lib/libbindle.a \
-					  include/bindle.h
+EXTRA					=
 
 
 # lists
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT	=
-BUILT_SOURCES				= include/bindle_prefix.h
+BUILT_SOURCES				=
 TESTS					=
 XFAIL_TESTS				=
 EXTRA_MANS				=
@@ -121,14 +120,6 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
-
-
-# conditional build
-if ENABLE_LIBBINDLE
-   include_HEADERS			+= include/bindle.h
-   lib_LIBRARIES			+= lib/libbindle.a
-   TESTS				+= $(LIBBINDLE_TESTS)
-endif
 
 
 # Makefile includes

@@ -37,15 +37,66 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    AC_REQUIRE([AC_BINDLE])
 
    LIBBINDLE_PREFIX="$1"
+   ENABLE_BUILTIN_BINDLE="$2"
 
+   enableval=""
+   AC_ARG_ENABLE(
+      builtin-bindle,
+      [AS_HELP_STRING([--enable-builtin-bindle], [enable builtin bindletools library])],
+      [ EBUILTINBINDLE=$enableval ],
+      [ EBUILTINBINDLE=$enableval ]
+   )
+   if test "x${ENABLE_BUILTIN_BINDLE}" = "xyes";then
+      ENABLE_BUILTIN_BINDLE=yes
+   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
+      ENABLE_BUILTIN_BINDLE=no
+   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xtestsonly";then
+      ENABLE_BUILTIN_BINDLE=no
+      ENABLE_BINDLE_TESTS=yes
+   elif test "x${EBUILTINBINDLE}" = "xyes";then
+         ENABLE_BUILTIN_BINDLE=yes
+   else
+      ENABLE_BUILTIN_BINDLE=auto
+   fi
+
+   # look for installed libbindle
    AC_CHECK_HEADERS([termios.h],     [], [])
    AC_CHECK_HEADERS([sgtty.h],       [], [])
+   if test "x${ENABLE_BUILTIN_BINDLE}" = "xauto";then
+      FOUND_LIBBINDLE=yes
+      AC_CHECK_HEADERS([bindle.h],                    [], [FOUND_LIBBINDLE=no])
+      AC_CHECK_LIB([bindle], [bindle_free],           [], [FOUND_LIBBINDLE=no])
+      AC_CHECK_LIB([bindle], [bindle_obj_release],    [], [FOUND_LIBBINDLE=no])
+      AC_CHECK_LIB([bindle], [bindle_obj_retain],     [], [FOUND_LIBBINDLE=no])
+      if test test "x${FOUND_LIBBINDLE}" = "xyes";then
+         ENABLE_BUILTIN_BINDLE=no
+      elif test "x${EBUILTINBINDLE}" = "xno";then
+         AC_MSG_ERROR([libbindle not found])
+      else
+         ENABLE_BUILTIN_BINDLE=yes
+      fi
+   fi
+
+   if test "x${ENABLE_BUILTIN_BINDLE}" = "xyes";then
+      ENABLE_BINDLE_TESTS=yes
+   fi
+
+   # determine prefix
+   if test "x${LIBBINDLE_PREFIX}" = "x";then
+      LIBBINDLE_PREFIX="bindle_"
+   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
+      LIBBINDLE_PREFIX="bindle_"
+   fi
 
    AC_SUBST([LIBBINDLE_PREFIX],                 [${LIBBINDLE_PREFIX}])
-   AC_DEFINE_UNQUOTED([LIBBINDLE_PREFIX],       ["$LIBBINDLE_PREFIX"],  [libbindle.la function prefix])
-   AM_CONDITIONAL([WITH_BINDLE_PREFIX_H],       [test "x${LIBBINDLE_PREFIX}" != "x"])
-   AM_CONDITIONAL([WITHOUT_BINDLE_PREFIX_H],    [test "x${LIBBINDLE_PREFIX}"  = "x"])
-   if test "x${LIBBINDLE_PREFIX}" != "x";then
+   AM_CONDITIONAL([WITH_BINDLE_PREFIX_H],       [test "x${LIBBINDLE_PREFIX}"      != "xbindle_"])
+   AM_CONDITIONAL([WITHOUT_BINDLE_PREFIX_H],    [test "x${LIBBINDLE_PREFIX}"       = "xbindle_"])
+   AM_CONDITIONAL([ENABLE_BUILTIN_BINDLE],      [test "x${ENABLE_BUILTIN_BINDLE}"  = "xyes"])
+   AM_CONDITIONAL([DISABLE_BUILTIN_BINDLE],     [test "x${ENABLE_BUILTIN_BINDLE}" != "xyes"])
+   AM_CONDITIONAL([ENABLE_BINDLE_TESTS],        [test "x${ENABLE_BINDLE_TESTS}"    = "xyes"])
+   AM_CONDITIONAL([DISABLE_BINDLE_TESTS],       [test "x${ENABLE_BINDLE_TESTS}"   != "xyes"])
+   if test "x${LIBBINDLE_PREFIX}" != "xbindle_";then
+      AC_DEFINE_UNQUOTED([LIBBINDLE_PREFIX],       ["$LIBBINDLE_PREFIX"],  [libbindle.la function prefix])
       AC_DEFINE_UNQUOTED([HAVE_BINDLE_PREFIX_H],   1,  [use bindle_prefix.h])
    fi
 ])dnl

@@ -78,27 +78,4 @@ AC_DEFUN([AC_BINDLETOOLS_EXAMPLES],[dnl
 ])dnl
 
 
-# AC_BINDLETOOLS_LIBBINDLE()
-# -----------------------------------
-AC_DEFUN([AC_BINDLETOOLS_LIBBINDLE],[dnl
-
-   enableval=""
-   AC_ARG_ENABLE(
-      libbindle,
-      [AS_HELP_STRING([--disable-libbindle], [disable bindletools library])],
-      [ ELIBBINDLE=$enableval ],
-      [ ELIBBINDLE=$enableval ]
-   )
-
-   if test "x${ELIBBINDLE}" = "xno";then
-      ENABLE_LIBBINDLE="no"
-   else
-      ENABLE_LIBBINDLE="yes"
-   fi
-
-   AM_CONDITIONAL([ENABLE_LIBBINDLE],  [test "$ENABLE_LIBBINDLE" = "yes"])
-   AM_CONDITIONAL([DISABLE_LIBBINDLE], [test "$ENABLE_LIBBINDLE" = "no"])
-])dnl
-
-
 # end of m4 file
