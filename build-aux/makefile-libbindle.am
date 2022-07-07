@@ -67,7 +67,6 @@ BINDLE_TESTS_DEPS			=
 
 # conditional build
 if ENABLE_BUILTIN_BINDLE
-   noinst_HEADERS			+= include/bindle.h
    noinst_LIBRARIES			+= lib/libbindle.a
    BINDLE_TESTS_DEPS			+= lib/libbindle.a
 endif
