@@ -55,11 +55,12 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-urldesc-parse
 EXTRA					+= lib/libbindle.a \
 					   lib/libbindle.la \
-					   include/bindle.h \
+					   $(bindletools_srcdir)/include/bindle.h \
 					   include/bindle_prefix.h
 EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
 					   $(bindletools_srcdir)/build-aux/bindle-prefix.sh \
 					   $(bindletools_srcdir)/include/bindle.h \
+					   $(bindletools_srcdir)/lib/libbindle/libbindle.sym \
 					   $(lib_libbindle_a_SOURCES)
 CLEANFILES				+= lib/libbindle.a
 BINDLE_TESTS_DEPS			=
@@ -71,7 +72,7 @@ if ENABLE_BUILTIN_BINDLE
    BINDLE_TESTS_DEPS			+= lib/libbindle.a
 endif
 if ENABLE_LIBBINDLE
-   include_HEADERS			+= include/bindle.h
+   include_HEADERS			+= $(bindletools_srcdir)/include/bindle.h
    lib_LTLIBRARIES			+= lib/libbindle.la
    BINDLE_TESTS_DEPS			+= lib/libbindle.la
 endif
@@ -144,7 +145,7 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 # macros for lib/libbindle.la
 lib_libbindle_la_DEPENDENCIES		= Makefile \
 					  config.h \
-					  lib/libbindle/libbindle.sym
+					  $(bindletools_srcdir)/lib/libbindle/libbindle.sym
 lib_libbindle_la_CPPFLAGS		= $(AM_CPPFLAGS) \
 					  -I$(srcdir)/lib/libbindle
 lib_libbindle_la_CFLAGS			= $(AM_CFLAGS)
