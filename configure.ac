@@ -173,7 +173,7 @@ AC_BINDLE_GIT_PACKAGE_VERSION([build-aux/git-package-version.sh])
 
 # custom configure options
 AC_BINDLE_ENABLE_WARNINGS([-Wno-unknown-pragmas -Wno-missing-format-attribute -Wno-poison-system-directories], [], [c11])
-AC_BINDLE_LIBBINDLE([bindle_], [testsonly])
+AC_BINDLE_LIBBINDLE([bindle_], [install])
 AC_BINDLETOOLS_DOCUMENTATION
 AC_BINDLETOOLS_EXAMPLES
 

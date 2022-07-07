@@ -62,15 +62,19 @@ EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
 					   $(bindletools_srcdir)/include/bindle.h \
 					   $(lib_libbindle_a_SOURCES)
 CLEANFILES				+= lib/libbindle.a
+BINDLE_TESTS_DEPS			=
 
 
 # conditional build
 if ENABLE_BUILTIN_BINDLE
    noinst_HEADERS			+= include/bindle.h
    noinst_LIBRARIES			+= lib/libbindle.a
-   BINDLE_TESTS_DEPS			= lib/libbindle.a
-else
-   BINDLE_TESTS_DEPS			= lib/libbindle.la
+   BINDLE_TESTS_DEPS			+= lib/libbindle.a
+endif
+if ENABLE_LIBBINDLE
+   include_HEADERS			+= include/bindle.h
+   lib_LTLIBRARIES			+= lib/libbindle.la
+   BINDLE_TESTS_DEPS			+= lib/libbindle.la
 endif
 if ENABLE_BINDLE_TESTS
    TESTS				+= tests/bindle-array-queue

@@ -71,8 +71,8 @@ doc_DATA				= AUTHORS.md \
 					  COPYING.md \
 					  README.md \
 					  TODO.md
-include_HEADERS				= include/bindle.h
-lib_LTLIBRARIES				= lib/libbindle.la
+include_HEADERS				=
+lib_LTLIBRARIES				=
 lib_LIBRARIES				=
 man_MANS				=
 info_TEXINFOS				=

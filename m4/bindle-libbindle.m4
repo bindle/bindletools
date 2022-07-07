@@ -38,6 +38,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
 
    LIBBINDLE_PREFIX="$1"
    ENABLE_BUILTIN_BINDLE="$2"
+   ENABLE_LIBBINDLE="no"
 
    enableval=""
    AC_ARG_ENABLE(
@@ -50,8 +51,9 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
       ENABLE_BUILTIN_BINDLE=yes
    elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
       ENABLE_BUILTIN_BINDLE=no
-   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xtestsonly";then
+   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xinstall";then
       ENABLE_BUILTIN_BINDLE=no
+      ENABLE_LIBBINDLE=yes
       ENABLE_BINDLE_TESTS=yes
    elif test "x${EBUILTINBINDLE}" = "xyes";then
          ENABLE_BUILTIN_BINDLE=yes
@@ -93,6 +95,8 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    AM_CONDITIONAL([WITHOUT_BINDLE_PREFIX_H],    [test "x${LIBBINDLE_PREFIX}"       = "xbindle_"])
    AM_CONDITIONAL([ENABLE_BUILTIN_BINDLE],      [test "x${ENABLE_BUILTIN_BINDLE}"  = "xyes"])
    AM_CONDITIONAL([DISABLE_BUILTIN_BINDLE],     [test "x${ENABLE_BUILTIN_BINDLE}" != "xyes"])
+   AM_CONDITIONAL([ENABLE_LIBBINDLE],           [test "x${ENABLE_LIBBINDLE}"       = "xyes"])
+   AM_CONDITIONAL([DISABLE_LIBBINDLE],          [test "x${ENABLE_LIBBINDLE}"      != "xyes"])
    AM_CONDITIONAL([ENABLE_BINDLE_TESTS],        [test "x${ENABLE_BINDLE_TESTS}"    = "xyes"])
    AM_CONDITIONAL([DISABLE_BINDLE_TESTS],       [test "x${ENABLE_BINDLE_TESTS}"   != "xyes"])
    if test "x${LIBBINDLE_PREFIX}" != "xbindle_";then
