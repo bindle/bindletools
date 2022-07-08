@@ -70,7 +70,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
       AC_CHECK_LIB([bindle], [bindle_free],           [], [FOUND_LIBBINDLE=no])
       AC_CHECK_LIB([bindle], [bindle_obj_release],    [], [FOUND_LIBBINDLE=no])
       AC_CHECK_LIB([bindle], [bindle_obj_retain],     [], [FOUND_LIBBINDLE=no])
-      if test test "x${FOUND_LIBBINDLE}" = "xyes";then
+      if test "x${FOUND_LIBBINDLE}" = "xyes";then
          ENABLE_BUILTIN_BINDLE=no
       elif test "x${EBUILTINBINDLE}" = "xno";then
          AC_MSG_ERROR([libbindle not found])
