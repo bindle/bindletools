@@ -140,6 +140,10 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lurl.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
+if ENABLE_BUILTIN_BINDLE
+   BINDLE_LIBBINDLE_SOURCES		=  include/bindle_prefix.h \
+					   $(lib_libbindle_a_SOURCES)
+endif
 
 
 # macros for lib/libbindle.la
