@@ -45,8 +45,6 @@
 #include <errno.h>
 #include <getopt.h>
 
-#include <bindle.h>
-
 
 /////////////////
 //             //
