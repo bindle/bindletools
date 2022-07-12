@@ -193,17 +193,6 @@ typedef struct bindle_url_desc
 /////////////////
 #pragma mark - Variables
 
-_BINDLE_V const char *
-bindle_debug_ident;
-
-
-_BINDLE_V int
-bindle_debug_level;
-
-
-_BINDLE_V int
-bindle_debug_syslog;
-
 
 //////////////////
 //              //
