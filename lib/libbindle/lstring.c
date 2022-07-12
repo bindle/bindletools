@@ -51,7 +51,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <sys/utsname.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <assert.h>
 
 

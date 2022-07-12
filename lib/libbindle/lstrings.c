@@ -44,7 +44,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <assert.h>
 
 

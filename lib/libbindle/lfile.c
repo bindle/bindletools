@@ -46,7 +46,7 @@
 #include <syslog.h>
 #include <stdarg.h>
 #include <fcntl.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <sys/stat.h>
 #include <assert.h>
 

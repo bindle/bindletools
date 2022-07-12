@@ -44,7 +44,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <syslog.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <assert.h>
 
 #include "ldebug.h"

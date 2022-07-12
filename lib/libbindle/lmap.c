@@ -43,7 +43,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <strings.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <assert.h>
 
 
