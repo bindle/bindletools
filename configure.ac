@@ -34,7 +34,7 @@
 #   configure.in - automate compiling on a unix platform
 #
 
-AC_PREREQ([2.65])
+AC_PREREQ([2.69])
 
 AC_COPYRIGHT([Copyright (c) 2012, 2016, 2021, 2022 David M. Syzdek <david@syzdek.net>.])
 AC_REVISION(0.5)
