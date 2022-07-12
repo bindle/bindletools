@@ -369,6 +369,7 @@ bindle_base32_decode(
          dst[datlen]  = (map[(unsigned char)src[pos-1]] << 5) & 0xE0; // 3 MSB
          dst[datlen] |= (map[(unsigned char)src[pos-0]] >> 0) & 0x1F; // 5 LSB
          datlen++;
+         break;
 
          default:
          if (src[pos] == '=')
@@ -436,6 +437,7 @@ bindle_base32_encode(
          break;
 
          case 4:
+         default:
          dst[dpos-1] |=  src[spos] >> 5;          // 3 MSB
          dst[dpos++]  =  src[spos] & 0x1f;        // 5 LSB
          byte = 0;
@@ -587,6 +589,7 @@ bindle_base64_decode(
 
          // byte 3
          case 3:
+         default:
          dst[datlen-1] |= (map[(unsigned char)src[pos]] & 0x3f);    // 1 MSB
          break;
       };
@@ -636,6 +639,7 @@ bindle_base64_encode(
          break;
 
          case 2:
+         default:
          dst[dpos-1] |= (src[spos] & 0xc0) >> 6;  // 2 MSB
          dst[dpos++]  =  src[spos] & 0x3f;        // 6 LSB
          byte = 0;
@@ -754,6 +758,7 @@ bindle_hex_decode(
 
          // byte 1
          case 1:
+         default:
          dst[datlen-1] |=  map[(unsigned char)src[pos]] & 0x0f;
          break;
       };
