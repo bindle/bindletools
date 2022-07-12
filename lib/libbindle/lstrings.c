@@ -226,6 +226,7 @@ bindle_strsplit(
             };
             break;
          };
+         /* FALLTHRU */
 
          default:
          if (line[pos] == delim)
