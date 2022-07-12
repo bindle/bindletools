@@ -206,7 +206,8 @@ main(
    if (optind < argc)
    {
       pair.decoded = argv[optind];
-      pair.encoded = ((optind+1) < optind) ? argv[optind+1] : NULL;
+      optind++;
+      pair.encoded = ((optind > 0)&&(optind < argc)) ? argv[optind] : NULL;
       return(my_test_pair(opts, 1, &pair));
    };
 
