@@ -65,7 +65,7 @@ EXTRA_DIST				+= $(bindletools_srcdir)/build-aux/makefile-libbindle.am \
 CLEANFILES				+= lib/libbindle.a \
 					   include/bindle_prefix.h
 BINDLE_TESTS_DEPS			=
-BINDLE_LIBBINDLE_SOURCES		=
+BINDLE_LIBBINDLE_SRCS			=
 BINDLE_LIBBINDLE_DEPS			=
 
 
@@ -146,7 +146,7 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 if ENABLE_BUILTIN_BINDLE
    lib_libbindle_a_DEPENDENCIES		+= include/bindle_prefix.h
    BINDLE_LIBBINDLE_DEPS		+= include/bindle_prefix.h
-   BINDLE_LIBBINDLE_SOURCES		+= $(lib_libbindle_a_SOURCES)
+   BINDLE_LIBBINDLE_SRCS		+= $(lib_libbindle_a_SOURCES)
 endif
 
 
