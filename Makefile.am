@@ -82,7 +82,7 @@ noinst_LIBRARIES			=
 noinst_HEADERS				=
 noinst_PROGRAMS				=
 noinst_SCRIPTS				=
-bin_PROGRAMS				=
+bin_PROGRAMS				= src/bindletools
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				=
@@ -120,6 +120,14 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
+
+
+# macros for src/bindletools
+src_bindletools_DEPENDENCIES		= lib/libbindle.la
+src_bindletools_LDADD			= lib/libbindle.la
+src_bindletools_SOURCES			= src/bindletools.c \
+					  src/bindletools.h \
+					  src/widget-urldesc.c
 
 
 # Makefile includes
