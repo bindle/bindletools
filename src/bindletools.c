@@ -163,7 +163,7 @@ bindle_getopt(
       case 0:        /* long options toggles */
       break;
 
-      case 'd':
+      case 'D':
       end = NULL;
       i = (int)strtoll(optarg, &end, 0);
       if ( (!(end[0])) || (!(optarg[0])) )
@@ -208,27 +208,20 @@ bindle_usage(
    const char *               widget_help;
    const char *               widget_name;
 
-   widget_name  = "widget";
-   widget_help  = "";
    if ((cnf->widget))
    {
       if (!(strcasecmp(cnf->widget->name, "help")))
-      {
          cnf->widget = NULL;
-      } else
-      {
-         widget_name = cnf->widget->name;
-         widget_help = ((cnf->widget->usage)) ? cnf->widget->usage : "";
-      };
    };
 
-   widget_name = ((cnf->widget)) ? cnf->widget->name : "widget";
+   widget_name = ((cnf->widget)) ? cnf->widget->name  : "widget";
+   widget_help = ((cnf->widget)) ? cnf->widget->usage : "";
 
    printf("Usage: %s [OPTIONS] %s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("       %s-%s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("       %s%s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("OPTIONS:\n");
-   printf("  -d level, --debug=level   set debug level\n");
+   printf("  -D level, --debug=level   set debug level\n");
    printf("  -h, --help                print this help and exit\n");
    printf("  -q, --quiet, --silent     do not print messages\n");
    printf("  -V, --version             print version number and exit\n");

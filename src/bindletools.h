@@ -92,9 +92,9 @@
 #define BINDLE_OPT_VERBOSE          0x0002UL
 
 
-#define BINDLE_COMMON_SHORT "d:hqVv"
+#define BINDLE_COMMON_SHORT "D:hqVv"
 #define BINDLE_COMMON_LONG \
-   { "debug",            optional_argument, NULL, 'd' }, \
+   { "debug",            optional_argument, NULL, 'D' }, \
    { "help",             no_argument,       NULL, 'h' }, \
    { "quiet",            no_argument,       NULL, 'q' }, \
    { "silent",           no_argument,       NULL, 'q' }, \
