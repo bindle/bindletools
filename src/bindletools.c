@@ -274,11 +274,13 @@ bindle_widget(
    size_t                     len;
    size_t                     x;
    size_t                     y;
+   size_t                     matches;
    const char *               alias;
    const bindle_widget_t *    match;
    const bindle_widget_t *    widget;
 
-   match = NULL;
+   match   = NULL;
+   matches = 0;
 
    // trim prefix from string
    len = strlen(PROGRAM_NAME);
@@ -302,14 +304,15 @@ bindle_widget(
       {
          if (widget->name[len] == '\0')
             return(widget);
-         if ( ((match)) && (match != widget) )
-            return(NULL);
          if (!(exact))
+         {
+            matches++;
             match = widget;
+         };
       };
 
       // check widget aliases for string
-      if (!(widget->aliases))
+      if (widget->aliases == NULL)
          continue;
       for(y = 0; ((widget->aliases[y])); y++)
       {
@@ -318,15 +321,16 @@ bindle_widget(
          {
             if (alias[len] == '\0')
                return(widget);
-            if ( ((match)) && (match != widget) )
-               return(NULL);
             if (!(exact))
+            {
+               matches++;
                match = widget;
+            };
          };
       };
    };
 
-   return(match);
+   return((matches > 1) ? NULL : match);
 }
 
 
