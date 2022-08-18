@@ -367,26 +367,37 @@ bindle_widget_urldesc_addr(
          void **                       sockaddrs,
          uintptr_t                     flag )
 {
+   unsigned                   pos;
+   char                       field[64];
    char                       addr[INET_ADDRSTRLEN+INET6_ADDRSTRLEN];
    char *                     ptr;
    struct sockaddr_storage *  sas;
    struct sockaddr_in *       sa;
    struct sockaddr_in6 *      sa6;
 
-   ptr = NULL;
-   if ((sockaddrs))
+   if (!(sockaddrs))
+   {
+      ptr = NULL;
+      bindle_widget_urldesc_print(cnf, component, &ptr, flag);
+      return;
+   };
+
+   for(pos = 0; ((sockaddrs[pos])); pos++)
    {
       ptr = addr;
-      sas = sockaddrs[0];
+      sas = sockaddrs[pos];
+      bindle_strlcpy(field, component, sizeof(field));
+      if ((pos))
+         snprintf(field, sizeof(field), "%s%u", component, pos);
       switch(sas->ss_family)
       {
          case AF_INET:
-         sa = sockaddrs[0];
+         sa = sockaddrs[pos];
          inet_ntop(sas->ss_family, &sa->sin_addr, addr, sizeof(addr));
          break;
 
          case AF_INET6:
-         sa6 = sockaddrs[0];
+         sa6 = sockaddrs[pos];
          inet_ntop(sas->ss_family, &sa6->sin6_addr, addr, sizeof(addr));
          break;
 
@@ -394,8 +405,8 @@ bindle_widget_urldesc_addr(
          ptr = NULL;
          break;
       };
+      bindle_widget_urldesc_print(cnf, field, &ptr, flag);
    };
-   bindle_widget_urldesc_print(cnf, component, &ptr, flag);
 
    return;
 }
