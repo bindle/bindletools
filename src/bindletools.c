@@ -94,7 +94,7 @@ const bindle_widget_t bindle_widget_map[] =
       .flags      = 0,
       .desc       = "parses URL",
       .usage      = " url",
-      .aliases    = (const char * const[]) { "uridesc", NULL },
+      .aliases    = (const char * const[]) { "url", NULL },
       .func_exec  = &bindle_widget_urldesc,
       .func_usage = &bindle_widget_urldesc_usage,
    },
