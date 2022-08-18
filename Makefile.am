@@ -82,10 +82,10 @@ noinst_LIBRARIES			=
 noinst_HEADERS				=
 noinst_PROGRAMS				=
 noinst_SCRIPTS				=
-bin_PROGRAMS				= src/bindletools
+bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
-EXTRA_PROGRAMS				=
+EXTRA_PROGRAMS				= src/bindletools
 EXTRA					=
 
 
@@ -120,6 +120,12 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
+
+
+# conditional build
+if ENABLE_UTILITY
+   bin_PROGRAMS				+= src/bindletools
+endif
 
 
 # macros for src/bindletools

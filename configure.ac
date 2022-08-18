@@ -176,6 +176,7 @@ AC_BINDLE_ENABLE_WARNINGS([-Wno-unknown-pragmas -Wno-missing-format-attribute -W
 AC_BINDLE_LIBBINDLE([bindle_], [install])
 AC_BINDLETOOLS_DOCUMENTATION
 AC_BINDLETOOLS_EXAMPLES
+AC_BINDLETOOLS_UTILITY
 
 # Creates outputs
 AC_CONFIG_FILES([Makefile])
@@ -193,6 +194,7 @@ AC_MSG_NOTICE([   Options:])
 AC_MSG_NOTICE([      Build examples             ${ENABLE_EXAMPLES}])
 AC_MSG_NOTICE([      Install extra docs         ${ENABLE_DOCUMENATION}])
 AC_MSG_NOTICE([      Install libbindle.a        ${ENABLE_LIBBINDLE}])
+AC_MSG_NOTICE([      Install utility            ${ENABLE_UTILITY}])
 AC_MSG_NOTICE([ ])
 AC_MSG_NOTICE([   Please send suggestions to:   $PACKAGE_BUGREPORT])
 AC_MSG_NOTICE([ ])

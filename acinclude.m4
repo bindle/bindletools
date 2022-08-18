@@ -62,7 +62,7 @@ AC_DEFUN([AC_BINDLETOOLS_EXAMPLES],[dnl
    enableval=""
    AC_ARG_ENABLE(
       examples,
-      [AS_HELP_STRING([--enable-examples], [build tinyrad examples])],
+      [AS_HELP_STRING([--enable-examples], [build examples])],
       [ EEXAMPLES=$enableval ],
       [ EEXAMPLES=$enableval ]
    )
@@ -75,6 +75,28 @@ AC_DEFUN([AC_BINDLETOOLS_EXAMPLES],[dnl
 
    AM_CONDITIONAL([ENABLE_EXAMPLES],  [test "$ENABLE_EXAMPLES" = "yes"])
    AM_CONDITIONAL([DISABLE_EXAMPLES], [test "$ENABLE_EXAMPLES" = "no"])
+])dnl
+
+
+# AC_BINDLETOOLS_UTILITY()
+# ______________________________________________________________________________
+AC_DEFUN([AC_BINDLETOOLS_UTILITY],[dnl
+   enableval=""
+   AC_ARG_ENABLE(
+      utility,
+      [AS_HELP_STRING([--enable-utility], [build bindletools utility])],
+      [ EUTILITY=$enableval ],
+      [ EUTILITY=$enableval ]
+   )
+
+   if test "x${EUTILITY}" == "xno";then
+      ENABLE_UTILITY="no"
+   else
+      ENABLE_UTILITY="yes"
+   fi
+
+   AM_CONDITIONAL([ENABLE_UTILITY],  [test "$ENABLE_UTILITY" = "yes"])
+   AM_CONDITIONAL([DISABLE_UTILITY], [test "$ENABLE_UTILITY" = "no"])
 ])dnl
 
 
