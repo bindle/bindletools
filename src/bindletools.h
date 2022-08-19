@@ -182,4 +182,11 @@ bindle_widget_urldesc(
          bindle_conf_t *               cnf );
 
 
+extern const char * const bindle_widget_urlencoding_options[];
+
+extern int
+bindle_widget_urlencoding(
+         bindle_conf_t *               cnf );
+
+
 #endif /* end of header */

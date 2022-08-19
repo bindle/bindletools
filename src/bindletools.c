@@ -112,6 +112,16 @@ const bindle_widget_t bindle_widget_map[] =
       .func_usage = NULL,
    },
    {
+      .name       = "urlencoding",
+      .flags      = 0,
+      .desc       = "encode/decode string for URL",
+      .usage      = NULL,
+      .options    = bindle_widget_urlencoding_options,
+      .aliases    = (const char * const[]) { "percent-encoding", NULL },
+      .func_exec  = &bindle_widget_urlencoding,
+      .func_usage = NULL,
+   },
+   {
       .name       = "version",
       .flags      = 0,
       .desc       = "displays version",
