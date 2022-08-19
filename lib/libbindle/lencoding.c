@@ -94,7 +94,7 @@ bindle_base64_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n,
          int                           nopad );
 
@@ -606,7 +606,7 @@ bindle_base64_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n,
          int                           nopad )
 {
@@ -614,10 +614,13 @@ bindle_base64_encode(
    size_t    dpos;
    size_t    spos;
    size_t    byte;
+   uint8_t * dat;
 
    assert(dst != NULL);
    assert(src != NULL);
    assert(s   >  0);
+
+   dat = (uint8_t *)dst;
 
    // calculates each digit's value
    byte = 0;
@@ -630,21 +633,21 @@ bindle_base64_encode(
       switch(byte)
       {
          case 0:
-         dst[dpos++]  = (src[spos] & 0xfc) >> 2;  // 6 MSB
-         dst[dpos++]  = (src[spos] & 0x03) << 4;  // 2 LSB
+         dat[dpos++]  = (src[spos] & 0xfc) >> 2;  // 6 MSB
+         dat[dpos++]  = (src[spos] & 0x03) << 4;  // 2 LSB
          byte++;
          break;
 
          case 1:
-         dst[dpos-1] |= (src[spos] & 0xf0) >> 4;  // 4 MSB
-         dst[dpos++]  = (src[spos] & 0x0f) << 2;  // 4 LSB
+         dat[dpos-1] |= (src[spos] & 0xf0) >> 4;  // 4 MSB
+         dat[dpos++]  = (src[spos] & 0x0f) << 2;  // 4 LSB
          byte++;
          break;
 
          case 2:
          default:
-         dst[dpos-1] |= (src[spos] & 0xc0) >> 6;  // 2 MSB
-         dst[dpos++]  =  src[spos] & 0x3f;        // 6 LSB
+         dat[dpos-1] |= (src[spos] & 0xc0) >> 6;  // 2 MSB
+         dat[dpos++]  =  src[spos] & 0x3f;        // 6 LSB
          byte = 0;
          break;
       };
@@ -652,7 +655,7 @@ bindle_base64_encode(
 
    // encodes each value
    for(len = 0; ((size_t)len) < dpos; len++)
-      dst[len] = map[(unsigned char)dst[len]];
+      dst[len] = map[dat[len]];
 
    // add padding
    if (!(nopad))
