@@ -68,7 +68,7 @@ bindle_base32_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n,
          int                           nopad );
 
@@ -387,18 +387,21 @@ bindle_base32_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n,
          int                           nopad )
 {
-   ssize_t   len;
-   size_t    dpos;
-   size_t    spos;
-   size_t    byte;
+   ssize_t     len;
+   size_t      dpos;
+   size_t      spos;
+   size_t      byte;
+   uint8_t *   dat;
 
    assert(dst != NULL);
    assert(src != NULL);
    assert(s   >  0);
+
+   dat = (uint8_t *)dst;
 
    // calculates each digit's value
    byte = 0;
@@ -411,35 +414,35 @@ bindle_base32_encode(
       switch(byte)
       {
          case 0:
-         dst[dpos++]  =  src[spos] >> 3;         // 5 MSB
-         dst[dpos++]  = (src[spos] & 0x07) << 2; // 3 LSB   2 bits unused
+         dat[dpos++]  =  src[spos] >> 3;         // 5 MSB
+         dat[dpos++]  = (src[spos] & 0x07) << 2; // 3 LSB   2 bits unused
          byte++;
          break;
 
          case 1:
-         dst[dpos-1] |= (src[spos] >> 6) & 0x03;  // 2 MSB
-         dst[dpos++]  = (src[spos] >> 1) & 0x1f ; // 5 MB
-         dst[dpos++]  = (src[spos] << 4) & 0x10;  // 1 LSB   4 bits unused
+         dat[dpos-1] |= (src[spos] >> 6) & 0x03;  // 2 MSB
+         dat[dpos++]  = (src[spos] >> 1) & 0x1f ; // 5 MB
+         dat[dpos++]  = (src[spos] << 4) & 0x10;  // 1 LSB   4 bits unused
          byte++;
          break;
 
          case 2:
-         dst[dpos-1] |=  src[spos] >> 4;          // 4 MSB
-         dst[dpos++]  = (src[spos] << 1) & 0x1e ; // 4 LSB   1 bits unused
+         dat[dpos-1] |=  src[spos] >> 4;          // 4 MSB
+         dat[dpos++]  = (src[spos] << 1) & 0x1e ; // 4 LSB   1 bits unused
          byte++;
          break;
 
          case 3:
-         dst[dpos-1] |=  src[spos] >> 7;          // 1 MSB
-         dst[dpos++]  = (src[spos] >> 2) & 0x1f ; // 5 MB
-         dst[dpos++]  = (src[spos] << 3) & 0x18 ; // 2 LSB   3 bits unused
+         dat[dpos-1] |=  src[spos] >> 7;          // 1 MSB
+         dat[dpos++]  = (src[spos] >> 2) & 0x1f ; // 5 MB
+         dat[dpos++]  = (src[spos] << 3) & 0x18 ; // 2 LSB   3 bits unused
          byte++;
          break;
 
          case 4:
          default:
-         dst[dpos-1] |=  src[spos] >> 5;          // 3 MSB
-         dst[dpos++]  =  src[spos] & 0x1f;        // 5 LSB
+         dat[dpos-1] |=  src[spos] >> 5;          // 3 MSB
+         dat[dpos++]  =  src[spos] & 0x1f;        // 5 LSB
          byte = 0;
          break;
       };
@@ -447,7 +450,7 @@ bindle_base32_encode(
 
    // encodes each value
    for(len = 0; ((size_t)len) < dpos; len++)
-      dst[len] = map[(unsigned char)dst[len]];
+      dst[len] = map[(unsigned char)dat[len]];
 
    // add padding
    if (!(nopad))
