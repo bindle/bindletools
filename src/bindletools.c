@@ -285,6 +285,7 @@ bindle_usage(
          bindle_conf_t *               cnf )
 {
    size_t                     pos;
+   size_t                     x;
    size_t                     option_len;
    const bindle_widget_t *    widget;
    const char *               widget_help;
@@ -312,6 +313,7 @@ bindle_usage(
 
    widget_name = ((cnf->widget)) ? cnf->widget->name  : "widget";
    widget_help = ((cnf->widget)) ? cnf->widget->usage : "";
+   widget_help = ((widget_help)) ? widget_help        : "";
 
    printf("Usage: %s [OPTIONS] %s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("       %s-%s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
@@ -328,6 +330,19 @@ bindle_usage(
          widget = &bindle_widget_map[pos];
          if ((widget->desc))
             printf("  %-25s %s\n", widget->name, widget->desc);
+      };
+
+      if ((cnf->opts & BINDLE_OPT_VERBOSE))
+      {
+         printf("WIDGET ALIASES:\n");
+         for(pos = 0; bindle_widget_map[pos].name != NULL; pos++)
+         {
+            widget = &bindle_widget_map[pos];
+            if ( (!(widget->aliases)) || (!(widget->desc)) )
+               continue;
+            for(x = 0; ((widget->aliases[x])); x++)
+               printf("  %-25s alias for %s\n", widget->aliases[x], widget->name);
+         };
       };
    };
 
