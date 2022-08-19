@@ -179,6 +179,39 @@ bindle_version(
          bindle_conf_t *               cnf );
 
 
+//---------------//
+// encodings widget //
+//---------------//
+#pragma mark encodings widget
+
+extern const char * const bindle_widget_encodings_options[];
+
+
+extern int
+bindle_widget_base16(
+         bindle_conf_t *               cnf );
+
+
+extern int
+bindle_widget_base32(
+         bindle_conf_t *               cnf );
+
+
+extern int
+bindle_widget_base32hex(
+         bindle_conf_t *               cnf );
+
+
+extern int
+bindle_widget_base64(
+         bindle_conf_t *               cnf );
+
+
+extern int
+bindle_widget_crockfordbase32(
+         bindle_conf_t *               cnf );
+
+
 //----------------//
 // urldesc widget //
 //----------------//
