@@ -261,7 +261,7 @@ bindle_widget_encodings_stdin(
          len = bindle_decode(method, res, sizeof(res), chunk, (size_t)rc);
       else
          len = bindle_encode(method, res, sizeof(res), chunk, (size_t)rc, (cnf->widget_flags & BINDLE_FLG_NOPAD));
-      if (rc > 0)
+      if (len > 0)
          write(STDOUT_FILENO, res, (size_t)len);
    };
    if (rc == -1)
