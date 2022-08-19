@@ -154,6 +154,11 @@ extern const bindle_widget_t bindle_widget_map[];
 //////////////////
 #pragma mark - Prototypes
 
+//-----------------//
+// core prototypes //
+//-----------------//
+#pragma mark core prototypes
+
 extern int
 bindle_getopt(
          bindle_conf_t *               cnf,
@@ -174,6 +179,10 @@ bindle_version(
          bindle_conf_t *               cnf );
 
 
+//----------------//
+// urldesc widget //
+//----------------//
+#pragma mark urldesc widget
 
 extern const char * const bindle_widget_urldesc_options[];
 
@@ -181,6 +190,11 @@ extern int
 bindle_widget_urldesc(
          bindle_conf_t *               cnf );
 
+
+//--------------------//
+// urlencoding widget //
+//--------------------//
+#pragma mark urlencoding widget
 
 extern const char * const bindle_widget_urlencoding_options[];
 
