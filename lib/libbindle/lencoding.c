@@ -120,7 +120,7 @@ bindle_hex_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n );
 
 
@@ -779,28 +779,31 @@ bindle_hex_encode(
          const char *                  map,
          char *                        dst,
          size_t                        s,
-         const int8_t *                src,
+         const uint8_t *               src,
          size_t                        n )
 {
    ssize_t   len;
    size_t    dpos;
    size_t    spos;
+   uint8_t * dat;
 
    assert(dst != NULL);
    assert(src != NULL);
    assert(s   >  0);
 
+   dat = (uint8_t *)dst;
+
    // calculates each digit's value
    dpos = 0;
    for(spos = 0; (spos < n); spos++)
    {
-      dst[dpos++]  = (src[spos] & 0xf0) >> 4;
-      dst[dpos++]  = (src[spos] & 0x0f);
+      dat[dpos++]  = (src[spos] & 0xf0) >> 4;
+      dat[dpos++]  = (src[spos] & 0x0f);
    };
 
    // encodes each value
    for(len = 0; ((size_t)len) < dpos; len++)
-      dst[len] = map[(unsigned char)dst[len]];
+      dst[len] = map[dat[len]];
 
    dst[len] = '\0';
 
