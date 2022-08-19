@@ -129,6 +129,7 @@ struct bindle_widget
    const uintptr_t            flags;
    const char *               desc;
    const char *               usage;
+   const char * const *       options;
    const char * const *       aliases;
    int  (*func_exec)(bindle_conf_t * cnf);
    int  (*func_usage)(bindle_conf_t * cnf);
@@ -173,13 +174,12 @@ bindle_version(
          bindle_conf_t *               cnf );
 
 
+
+extern const char * const bindle_widget_urldesc_options[];
+
 extern int
 bindle_widget_urldesc(
          bindle_conf_t *               cnf );
 
-
-extern int
-bindle_widget_urldesc_usage(
-         bindle_conf_t *               cnf );
 
 #endif /* end of header */

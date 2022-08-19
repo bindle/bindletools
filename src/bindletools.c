@@ -76,6 +76,17 @@
 /////////////////
 #pragma mark - Variables
 
+#pragma mark bindle_options[]
+const char * const bindle_options[] =
+{
+   "  -D level, --debug=level   set debug level",
+   "  -h, --help                print this help and exit",
+   "  -q, --quiet, --silent     do not print messages",
+   "  -V, --version             print version number and exit",
+   "  -v, --verbose             print verbose messages",
+   NULL
+};
+
 
 #pragma mark bindle_widget_map[]
 const bindle_widget_t bindle_widget_map[] =
@@ -85,6 +96,7 @@ const bindle_widget_t bindle_widget_map[] =
       .flags      = 0,
       .desc       = "displays usage",
       .usage      = NULL,
+      .options    = NULL,
       .aliases    = (const char * const[]) { "usage", NULL },
       .func_exec  = &bindle_usage,
       .func_usage = NULL,
@@ -94,15 +106,17 @@ const bindle_widget_t bindle_widget_map[] =
       .flags      = 0,
       .desc       = "parses URL",
       .usage      = " url",
+      .options    = bindle_widget_urldesc_options,
       .aliases    = (const char * const[]) { "url", NULL },
       .func_exec  = &bindle_widget_urldesc,
-      .func_usage = &bindle_widget_urldesc_usage,
+      .func_usage = NULL,
    },
    {
       .name       = "version",
       .flags      = 0,
       .desc       = "displays version",
       .usage      = NULL,
+      .options    = NULL,
       .aliases    = NULL,
       .func_exec  = &bindle_version,
       .func_usage = NULL,
@@ -111,6 +125,7 @@ const bindle_widget_t bindle_widget_map[] =
       .name       = NULL,
       .desc       = NULL,
       .usage      = NULL,
+      .options    = NULL,
       .aliases    = NULL,
       .func_exec  = NULL,
       .func_usage = NULL,
@@ -124,6 +139,12 @@ const bindle_widget_t bindle_widget_map[] =
 //              //
 //////////////////
 #pragma mark - Prototypes
+
+static int
+bindle_usage_cmp(
+         const void *                  a,
+         const void *                  b );
+
 
 static const bindle_widget_t *
 bindle_widget(
@@ -204,15 +225,30 @@ bindle_usage(
          bindle_conf_t *               cnf )
 {
    size_t                     pos;
+   size_t                     option_len;
    const bindle_widget_t *    widget;
    const char *               widget_help;
    const char *               widget_name;
+   const char *               options[128];
+
+   option_len   = 0;
 
    if ((cnf->widget))
    {
+      // add widget options
+      if ((cnf->widget->options))
+         for(pos = 0; ( ((cnf->widget->options[pos])) && (option_len < 128) ); pos++)
+            options[option_len++] = cnf->widget->options[pos];
+
+      // unlink reserved widgets
       if (!(strcasecmp(cnf->widget->name, "help")))
          cnf->widget = NULL;
    };
+
+   // add common options and sort all options
+   for(pos = 0; ( ((bindle_options[pos])) && (option_len < 128) ); pos++)
+      options[option_len++] = bindle_options[pos];
+   qsort(options, option_len, sizeof(char *), bindle_usage_cmp);
 
    widget_name = ((cnf->widget)) ? cnf->widget->name  : "widget";
    widget_help = ((cnf->widget)) ? cnf->widget->usage : "";
@@ -221,11 +257,8 @@ bindle_usage(
    printf("       %s-%s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("       %s%s [OPTIONS]%s\n", PROGRAM_NAME, widget_name, widget_help);
    printf("OPTIONS:\n");
-   printf("  -D level, --debug=level   set debug level\n");
-   printf("  -h, --help                print this help and exit\n");
-   printf("  -q, --quiet, --silent     do not print messages\n");
-   printf("  -V, --version             print version number and exit\n");
-   printf("  -v, --verbose             print verbose messages\n");
+   for(pos = 0; (pos < option_len); pos++)
+      printf("%s\n", options[pos]);
 
    if (!(cnf->widget))
    {
@@ -245,6 +278,24 @@ bindle_usage(
    printf("\n");
 
    return(0);
+}
+
+
+int
+bindle_usage_cmp(
+         const void *                  a,
+         const void *                  b )
+{
+   int          rc;
+   char * const * str1 = a;
+   char * const * str2 = b;
+   if ( ((*str1)[3] == '-') && ((*str2)[3] != '-') )
+      return(1);
+   if ( ((*str1)[3] != '-') && ((*str2)[3] == '-') )
+      return(-1);
+   if ((rc = strcasecmp(*str1, *str2)) != 0)
+      return(rc);
+   return(strcmp(*str1, *str2));
 }
 
 

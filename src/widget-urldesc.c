@@ -100,6 +100,27 @@
 /////////////////
 #pragma mark - Variables
 
+#pragma mark bindle_widget_urldesc_options[]
+const char * const bindle_widget_urldesc_options[] =
+{
+   "  -4                        resolve host to IPv4 address",
+   "  -6                        resolve host to IPv6 address",
+   "  -n, --dryrun              do not resolve hostname",
+   "  -S, --service             print URL service",
+   "  -s, --scheme              print URL scheme",
+   "  -H, --host                print URL host",
+   "  -u, --userinfo            print URL userinfo",
+   "  -p, --port                print URL port",
+   "  -P, --path                print URL path",
+   "  -Q, --query               print URL query",
+   "  -r, --resolve             resolve hostname",
+   "  -f, --fragment            print URL fragment",
+   "  --all                     print all values, even if empty",
+   "  --short                   print only component values",
+   "  --shell                   print components as shell variables",
+   NULL
+};
+
 
 //////////////////
 //              //
@@ -431,29 +452,5 @@ bindle_widget_urldesc_unsigned(
    return;
 }
 
-
-int
-bindle_widget_urldesc_usage(
-         bindle_conf_t *               cnf )
-{
-   if (!(cnf->widget))
-      return(0);
-   printf("  -4                        resolve host to IPv4 address\n");
-   printf("  -6                        resolve host to IPv6 address\n");
-   printf("  -n, --dryrun              do not resolve hostname\n");
-   printf("  -S, --service             print URL service\n");
-   printf("  -s, --scheme              print URL scheme\n");
-   printf("  -H, --host                print URL host\n");
-   printf("  -u, --userinfo            print URL userinfo\n");
-   printf("  -p, --port                print URL port\n");
-   printf("  -P, --path                print URL path\n");
-   printf("  -Q, --query               print URL query\n");
-   printf("  -r, --resolve             resolve hostname\n");
-   printf("  -f, --fragment            print URL fragment\n");
-   printf("  --all                     print all values, even if empty\n");
-   printf("  --short                   print only component values\n");
-   printf("  --shell                   print components as shell variables\n");
-   return(0);
-}
 
 /* end of source */
