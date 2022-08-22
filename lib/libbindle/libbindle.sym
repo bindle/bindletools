@@ -36,7 +36,7 @@ bindle_dequeue
 bindle_enqueue
 bindle_array_get
 bindle_peek
-bindle_array_pop
+bindle_pop
 bindle_array_push
 bindle_array_remove
 bindle_array_search

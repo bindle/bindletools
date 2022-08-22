@@ -252,7 +252,7 @@ bindle_peek(
 
 
 _BINDLE_F void *
-bindle_array_pop(
+bindle_pop(
          void *                        base,
          size_t *                      nelp,
          size_t                        width );

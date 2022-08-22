@@ -245,7 +245,7 @@ int main( int argc, char * argv[] )
       // periodically pop data
       if ((x % 4) == 3)
       {
-         if ((objp = bindle_array_pop(list, &list_len, sizeof(MyData *))) == NULL)
+         if ((objp = bindle_pop(list, &list_len, sizeof(MyData *))) == NULL)
             return(bindle_tests_error(opts, NULL, "unable to pop from stack"));
          if ((strcasecmp(src[x-1]->name, (*objp)->name)))
             return(bindle_tests_error(opts, NULL, "str of pop object is incorrect"));
@@ -274,7 +274,7 @@ int main( int argc, char * argv[] )
    // pop data from stack
    bindle_tests_verbose(opts, "popping from stack ...");
    while (list_len > 0)
-      if (bindle_array_pop(list, &list_len, sizeof(MyData *)) == NULL)
+      if (bindle_pop(list, &list_len, sizeof(MyData *)) == NULL)
          return(bindle_tests_error(opts, NULL, "unable to pop from stack"));
 
    return(0);
