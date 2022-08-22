@@ -179,7 +179,7 @@ bindle_array_dequeue(
 
 
 ssize_t
-bindle_array_enqueue(
+bindle_enqueue(
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,

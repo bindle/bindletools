@@ -252,7 +252,7 @@ int main( int argc, char * argv[] )
       };
 
       // adds objects to queue
-      if (bindle_array_enqueue((void **)&list, &list_len, sizeof(MyData *), &src[x], &realloc) == -1)
+      if (bindle_enqueue((void **)&list, &list_len, sizeof(MyData *), &src[x], &realloc) == -1)
          return(bindle_tests_error(opts, NULL, "failed to enqueue object to queue"));
    };
 
