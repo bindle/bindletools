@@ -219,7 +219,7 @@ bindle_array_add(
 
 
 _BINDLE_F void *
-bindle_array_dequeue(
+bindle_dequeue(
          void *                        base,
          size_t *                      nelp,
          size_t                        width );

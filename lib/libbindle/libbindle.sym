@@ -32,7 +32,7 @@
 #
 # array functions
 bindle_array_add
-bindle_array_dequeue
+bindle_dequeue
 bindle_enqueue
 bindle_array_get
 bindle_peek

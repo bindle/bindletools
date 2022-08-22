@@ -245,7 +245,7 @@ int main( int argc, char * argv[] )
       // periodically dequeue data
       if ((x % 4) == 3)
       {
-         if ((objp = bindle_array_dequeue(list, &list_len, sizeof(MyData *))) == NULL)
+         if ((objp = bindle_dequeue(list, &list_len, sizeof(MyData *))) == NULL)
             return(bindle_tests_error(opts, NULL, "unable to dequeue from queue"));
          if ((strcasecmp(src[x/4]->name, (*objp)->name)))
             return(bindle_tests_error(opts, NULL, "str of dequeued object is incorrect"));
@@ -272,7 +272,7 @@ int main( int argc, char * argv[] )
    // dequeue data from queue
    bindle_tests_verbose(opts, "dequeueing from queue ...");
    while (list_len > 0)
-      if (bindle_array_dequeue(list, &list_len, sizeof(MyData *)) == NULL)
+      if (bindle_dequeue(list, &list_len, sizeof(MyData *)) == NULL)
          return(bindle_tests_error(opts, NULL, "unable to dequeue from queue"));
 
    return(0);
