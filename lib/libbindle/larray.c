@@ -162,71 +162,6 @@ bindle_array_add(
 
 
 void *
-bindle_dequeue(
-         void *                        base,
-         size_t *                      nelp,
-         size_t                        width )
-{
-   BindleDebugTrace();
-   assert(nelp  != NULL);
-   assert((base != NULL) || (!(*nelp)) );
-   assert(width  > 0);
-   if (!(*nelp))
-      return(NULL);
-   (*nelp)--;
-   return(((char *)base) + (width * (*nelp)));
-}
-
-
-ssize_t
-bindle_enqueue(
-         void **                       basep,
-         size_t *                      nelp,
-         size_t                        width,
-         void *                        obj,
-         void * (*reallocbase)(void *, size_t) )
-{
-   size_t      size;
-   size_t      pos;
-   void *      ptr;
-   char *      src;
-   char *      dst;
-
-   BindleDebugTrace();
-
-   assert(basep != NULL);
-   assert(nelp  != NULL);
-   assert(width  > 0);
-   assert(obj   != NULL);
-
-   // increases size of base
-   if ((reallocbase))
-   {
-      size = width * (*nelp + 1);
-      if ((ptr = (*reallocbase)(*basep, size)) == NULL)
-         return(-2);
-      *basep = ptr;
-   };
-
-   // shift list
-   for(pos = (*nelp); (pos > 0); pos--)
-   {
-      src = ((char *)*basep) + (width * (size_t)(pos-1));
-      dst = ((char *)*basep) + (width * (size_t)(pos-0));
-      bindle_array_move(src, dst, width);
-   };
-
-   // save object
-   bindle_array_move(obj, ((char *)*basep), width);
-
-   // increment nel
-   (*nelp)++;
-
-   return(0);
-}
-
-
-void *
 bindle_array_get(
          void *                        base,
          size_t                        nel,
@@ -261,76 +196,6 @@ bindle_array_move(
    for(s = size; (s > 0); s--)
       *y++ = *x++;
    return;
-}
-
-
-void *
-bindle_peek(
-         void *                        base,
-         size_t                        nel,
-         size_t                        width )
-{
-   BindleDebugTrace();
-   assert((base  != NULL) || (!(nel)) );
-   assert(width   > 0);
-   if (!(nel))
-      return(NULL);
-   return(((char *)base) + (width * (nel - 1)));
-}
-
-
-void *
-bindle_pop(
-         void *                        base,
-         size_t *                      nelp,
-         size_t                        width )
-{
-   BindleDebugTrace();
-   assert(nelp  != NULL);
-   assert((base != NULL) || (!(*nelp)) );
-   assert(width  > 0);
-   if (!(*nelp))
-      return(NULL);
-   (*nelp)--;
-   return(((char *)base) + (width * (*nelp)));
-}
-
-
-ssize_t
-bindle_push(
-         void **                       basep,
-         size_t *                      nelp,
-         size_t                        width,
-         void *                        obj,
-         void * (*reallocbase)(void *, size_t) )
-{
-   size_t      size;
-   void *      ptr;
-
-   BindleDebugTrace();
-
-   assert(basep != NULL);
-   assert(nelp  != NULL);
-   assert(width  > 0);
-   assert(obj   != NULL);
-
-   // increases size of base
-   if ((reallocbase))
-   {
-      size = width * (*nelp + 1);
-      if ((ptr = (*reallocbase)(*basep, size)) == NULL)
-         return(-2);
-      *basep = ptr;
-   };
-
-   // save object
-   ptr = ((char *)*basep) + (width * (*nelp));
-   bindle_array_move(obj, ptr, width);
-
-   // increment nel
-   (*nelp)++;
-
-   return((ssize_t)((*nelp) - 1));
 }
 
 
@@ -501,5 +366,139 @@ bindle_array_swap(
    return;
 }
 
+
+void *
+bindle_dequeue(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width )
+{
+   BindleDebugTrace();
+   assert(nelp  != NULL);
+   assert((base != NULL) || (!(*nelp)) );
+   assert(width  > 0);
+   if (!(*nelp))
+      return(NULL);
+   (*nelp)--;
+   return(((char *)base) + (width * (*nelp)));
+}
+
+
+ssize_t
+bindle_enqueue(
+         void **                       basep,
+         size_t *                      nelp,
+         size_t                        width,
+         void *                        obj,
+         void * (*reallocbase)(void *, size_t) )
+{
+   size_t      size;
+   size_t      pos;
+   void *      ptr;
+   char *      src;
+   char *      dst;
+
+   BindleDebugTrace();
+
+   assert(basep != NULL);
+   assert(nelp  != NULL);
+   assert(width  > 0);
+   assert(obj   != NULL);
+
+   // increases size of base
+   if ((reallocbase))
+   {
+      size = width * (*nelp + 1);
+      if ((ptr = (*reallocbase)(*basep, size)) == NULL)
+         return(-2);
+      *basep = ptr;
+   };
+
+   // shift list
+   for(pos = (*nelp); (pos > 0); pos--)
+   {
+      src = ((char *)*basep) + (width * (size_t)(pos-1));
+      dst = ((char *)*basep) + (width * (size_t)(pos-0));
+      bindle_array_move(src, dst, width);
+   };
+
+   // save object
+   bindle_array_move(obj, ((char *)*basep), width);
+
+   // increment nel
+   (*nelp)++;
+
+   return(0);
+}
+
+
+void *
+bindle_peek(
+         void *                        base,
+         size_t                        nel,
+         size_t                        width )
+{
+   BindleDebugTrace();
+   assert((base  != NULL) || (!(nel)) );
+   assert(width   > 0);
+   if (!(nel))
+      return(NULL);
+   return(((char *)base) + (width * (nel - 1)));
+}
+
+
+void *
+bindle_pop(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width )
+{
+   BindleDebugTrace();
+   assert(nelp  != NULL);
+   assert((base != NULL) || (!(*nelp)) );
+   assert(width  > 0);
+   if (!(*nelp))
+      return(NULL);
+   (*nelp)--;
+   return(((char *)base) + (width * (*nelp)));
+}
+
+
+ssize_t
+bindle_push(
+         void **                       basep,
+         size_t *                      nelp,
+         size_t                        width,
+         void *                        obj,
+         void * (*reallocbase)(void *, size_t) )
+{
+   size_t      size;
+   void *      ptr;
+
+   BindleDebugTrace();
+
+   assert(basep != NULL);
+   assert(nelp  != NULL);
+   assert(width  > 0);
+   assert(obj   != NULL);
+
+   // increases size of base
+   if ((reallocbase))
+   {
+      size = width * (*nelp + 1);
+      if ((ptr = (*reallocbase)(*basep, size)) == NULL)
+         return(-2);
+      *basep = ptr;
+   };
+
+   // save object
+   ptr = ((char *)*basep) + (width * (*nelp));
+   bindle_array_move(obj, ptr, width);
+
+   // increment nel
+   (*nelp)++;
+
+   return((ssize_t)((*nelp) - 1));
+}
 
 /* end of source */
