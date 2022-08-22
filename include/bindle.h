@@ -219,6 +219,38 @@ bindle_array_add(
 
 
 _BINDLE_F void *
+bindle_array_get(
+         void *                        base,
+         size_t                        nel,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *) );
+
+
+_BINDLE_F ssize_t
+bindle_array_remove(
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *),
+         void (*freeobj)(void *) );
+
+
+_BINDLE_F ssize_t
+bindle_array_search(
+         const void *                  base,
+         size_t                        nel,
+         size_t                        width,
+         const void *                  key,
+         unsigned                      opts,
+         size_t *                      wouldbep,
+         int (*compar)(const void *, const void *) );
+
+
+_BINDLE_F void *
 bindle_dequeue(
          void *                        base,
          size_t *                      nelp,
@@ -232,16 +264,6 @@ bindle_enqueue(
          size_t                        width,
          void *                        obj,
          void * (*reallocbase)(void *, size_t) );
-
-
-_BINDLE_F void *
-bindle_array_get(
-         void *                        base,
-         size_t                        nel,
-         size_t                        width,
-         const void *                  key,
-         unsigned                      opts,
-         int (*compar)(const void *, const void *) );
 
 
 _BINDLE_F void *
@@ -265,28 +287,6 @@ bindle_push(
          size_t                        width,
          void *                        obj,
          void * (*reallocbase)(void *, size_t) );
-
-
-_BINDLE_F ssize_t
-bindle_array_remove(
-         void *                        base,
-         size_t *                      nelp,
-         size_t                        width,
-         const void *                  key,
-         unsigned                      opts,
-         int (*compar)(const void *, const void *),
-         void (*freeobj)(void *) );
-
-
-_BINDLE_F ssize_t
-bindle_array_search(
-         const void *                  base,
-         size_t                        nel,
-         size_t                        width,
-         const void *                  key,
-         unsigned                      opts,
-         size_t *                      wouldbep,
-         int (*compar)(const void *, const void *) );
 
 
 //------------------//
