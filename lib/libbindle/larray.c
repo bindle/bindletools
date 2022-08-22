@@ -265,7 +265,7 @@ bindle_array_move(
 
 
 void *
-bindle_array_peek(
+bindle_peek(
          void *                        base,
          size_t                        nel,
          size_t                        width )
