@@ -252,7 +252,7 @@ int main( int argc, char * argv[] )
       };
 
       // adds objects to stack
-      if (bindle_array_push((void **)&list, &list_len, sizeof(MyData *), &src[x], &realloc) == -1)
+      if (bindle_push((void **)&list, &list_len, sizeof(MyData *), &src[x], &realloc) == -1)
          return(bindle_tests_error(opts, NULL, "failed to push object to stack"));
    };
 

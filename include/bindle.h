@@ -259,7 +259,7 @@ bindle_pop(
 
 
 _BINDLE_F ssize_t
-bindle_array_push(
+bindle_push(
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,
