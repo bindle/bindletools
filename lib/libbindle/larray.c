@@ -51,15 +51,8 @@
 //////////////////
 #pragma mark - Prototypes
 
-void
+static void
 bindle_array_move(
-         void *                        a,
-         void *                        b,
-         size_t                        size );
-
-
-void
-bindle_array_swap(
          void *                        a,
          void *                        b,
          size_t                        size );
@@ -341,29 +334,6 @@ bindle_array_search(
    *wouldbep = (size_t)((rc > 0) ? mid : mid+1);
 
    return(-1);
-}
-
-
-void
-bindle_array_swap(
-         void *                        a,
-         void *                        b,
-         size_t                        size )
-{
-   uint8_t *   x;
-   uint8_t *   y;
-   uint8_t     t;
-   size_t      s;
-   BindleDebugTrace();
-   x = a;
-   y = b;
-   for(s = size; (s > 0); s--)
-   {
-      t    = *x;
-      *x++ = *y;
-      *y++ = t;
-   };
-   return;
 }
 
 
