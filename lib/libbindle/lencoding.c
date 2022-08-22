@@ -144,7 +144,7 @@ bindle_none_decode(
          size_t                        n );
 
 
-ssize_t
+static ssize_t
 bindle_none_encode(
          char *                        dst,
          size_t                        s,
