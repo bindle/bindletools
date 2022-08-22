@@ -136,7 +136,7 @@ bindle_encode_method(
          int                           method );
 
 
-ssize_t
+static ssize_t
 bindle_none_decode(
          uint8_t *                     dst,
          size_t                        s,
