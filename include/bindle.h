@@ -207,7 +207,7 @@ typedef struct bindle_url_desc
 #pragma mark array prototypes
 
 _BINDLE_F ssize_t
-bindle_array_add(
+bindle_badd(
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,

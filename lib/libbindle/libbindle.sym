@@ -31,7 +31,7 @@
 #   lib/libbindle/libbindle.sym - list of symbols to export
 #
 # array functions
-bindle_array_add
+bindle_badd
 bindle_array_get
 bindle_array_remove
 bindle_array_search

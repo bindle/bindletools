@@ -660,16 +660,16 @@ my_test_insert(
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
    };
 
-   bindle_tests_verbose(opts, "testing   bindle_array_add( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
+   bindle_tests_verbose(opts, "testing   bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    for(x = 0; (x < dat_len); x++)
    {
-      if (bindle_array_add((void **)listp, list_lenp, sizeof(MyData *), &src[x], arrayopt, compar, NULL, &realloc) == -1)
-         return(bindle_tests_error(opts, NULL, "bindle_array_add(%s): returned error", action_name));
+      if (bindle_badd((void **)listp, list_lenp, sizeof(MyData *), &src[x], arrayopt, compar, NULL, &realloc) == -1)
+         return(bindle_tests_error(opts, NULL, "bindle_badd(%s): returned error", action_name));
       len = (iteration*dat_len) + x + 1;
       if ( ((iteration)) && (!(arrayopt & BNDL_ARRAY_MERGE)) )
          len = dat_len;
       if (*list_lenp != len)
-         return(bindle_tests_error(opts, NULL, "bindle_array_add(%s): did not increment length", action_name));
+         return(bindle_tests_error(opts, NULL, "bindle_badd(%s): did not increment length", action_name));
    };
 
    list = *listp;
@@ -677,25 +677,25 @@ my_test_insert(
    if (!(arrayopt & BNDL_ARRAY_MERGE))
       iteration = 0;
 
-   bindle_tests_verbose(opts, "verifying bindle_array_add( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
+   bindle_tests_verbose(opts, "verifying bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    iteration++;
    for(x = 0; (x < (dat_len*iteration)); x++)
    {
       pos = x/iteration;
       if ((strcasecmp(test[pos]->name, list[x]->name)))
-         return(bindle_tests_error(opts, NULL, "bindle_array_add(%s): misordered the list", action_name));
+         return(bindle_tests_error(opts, NULL, "bindle_badd(%s): misordered the list", action_name));
       switch(mergeopt)
       {
          case BNDL_ARRAY_LASTDUP:
          if ( (x < ((dat_len*iteration)-1)) && ((x % iteration) == (iteration-1)) )
             if (!(strcasecmp(list[x]->name, list[x+1]->name)))
-               return(bindle_tests_error(opts, NULL, "bindle_array_add(%s): first match not returned", action_name));
+               return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
          break;
 
          case BNDL_ARRAY_FIRSTDUP:
          if ( (x > 0) && (!(x % iteration)) )
             if (!(strcasecmp(list[x]->name, list[x-1]->name)))
-               return(bindle_tests_error(opts, NULL, "bindle_array_add(%s): first match not returned", action_name));
+               return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
          break;
 
          case BNDL_ARRAY_ANYDUP:

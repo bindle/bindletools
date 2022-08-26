@@ -66,7 +66,7 @@ bindle_array_move(
 #pragma mark - Functions
 
 ssize_t
-bindle_array_add(
+bindle_badd(
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,
