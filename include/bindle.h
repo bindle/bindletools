@@ -220,10 +220,10 @@ bindle_badd(
 
 _BINDLE_F void *
 bindle_array_get(
+         const void *                  key,
          void *                        base,
          size_t                        nel,
          size_t                        width,
-         const void *                  key,
          unsigned                      opts,
          int (*compar)(const void *, const void *) );
 

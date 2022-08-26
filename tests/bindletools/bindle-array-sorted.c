@@ -854,7 +854,7 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((res = bindle_array_get(list, x, sizeof(MyData *), ptr, BNDL_ARRAY_FIRSTDUP, compar)) == NULL)
+         if ((res = bindle_array_get(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, compar)) == NULL)
             return(bindle_tests_error(opts, NULL, "bindle_array_get(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((strcasecmp((*res)->name, list[y]->name)))
             return(bindle_tests_error(opts, NULL, "bindle_array_get(); size: %zu; func: %s; idx: %zu; result name does not match", x, compar_name, y));
