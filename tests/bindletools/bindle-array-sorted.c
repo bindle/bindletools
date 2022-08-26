@@ -840,7 +840,7 @@ my_test_search(
       };
    };
 
-   bindle_tests_verbose(opts, "testing   bindle_array_get(    %s ) ...", compar_name);
+   bindle_tests_verbose(opts, "testing   bindle_bsearch(    %s ) ...", compar_name);
    for(x = 1; (x < (len+1)); x++)
    {
       for(y = 0; (y < x); y++)
@@ -854,12 +854,12 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((res = bindle_array_get(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, compar)) == NULL)
-            return(bindle_tests_error(opts, NULL, "bindle_array_get(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
+         if ((res = bindle_bsearch(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, compar)) == NULL)
+            return(bindle_tests_error(opts, NULL, "bindle_bsearch(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((strcasecmp((*res)->name, list[y]->name)))
-            return(bindle_tests_error(opts, NULL, "bindle_array_get(); size: %zu; func: %s; idx: %zu; result name does not match", x, compar_name, y));
+            return(bindle_tests_error(opts, NULL, "bindle_bsearch(); size: %zu; func: %s; idx: %zu; result name does not match", x, compar_name, y));
          if ((*res)->value != list[y]->value)
-            return(bindle_tests_error(opts, NULL, "bindle_array_get(); size: %zu; func: %s; idx: %zu; result value does not match", x, compar_name, y));
+            return(bindle_tests_error(opts, NULL, "bindle_bsearch(); size: %zu; func: %s; idx: %zu; result value does not match", x, compar_name, y));
       };
    };
 

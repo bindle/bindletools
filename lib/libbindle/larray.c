@@ -155,7 +155,7 @@ bindle_badd(
 
 
 void *
-bindle_array_get(
+bindle_bsearch(
          const void *                  key,
          void *                        base,
          size_t                        nel,

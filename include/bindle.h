@@ -219,7 +219,7 @@ bindle_badd(
 
 
 _BINDLE_F void *
-bindle_array_get(
+bindle_bsearch(
          const void *                  key,
          void *                        base,
          size_t                        nel,

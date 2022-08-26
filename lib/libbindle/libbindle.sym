@@ -32,7 +32,7 @@
 #
 # array functions
 bindle_badd
-bindle_array_get
+bindle_bsearch
 bindle_bremove
 bindle_bindex
 bindle_dequeue
