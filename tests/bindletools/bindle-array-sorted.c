@@ -759,7 +759,7 @@ my_test_remove(
    bindle_tests_verbose(opts, "testing   bindle_bremove( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    for(x = 0; (x < dat_len); x++)
    {
-      if (bindle_bremove(list, list_lenp, sizeof(MyData *), &src[x], arrayopt, compar, NULL) == -1)
+      if (bindle_bremove(&src[x], list, list_lenp, sizeof(MyData *), arrayopt, compar, NULL) == -1)
          return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): returned error", action_name));
       len = ((iteration+1)*dat_len) - x - 1;
       if ( ((iteration)) && (!(arrayopt & BNDL_ARRAY_MERGE)) )

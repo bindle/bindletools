@@ -194,10 +194,10 @@ bindle_array_move(
 
 ssize_t
 bindle_bremove(
+         const void *                  key,
          void *                        base,
          size_t *                      nelp,
          size_t                        width,
-         const void *                  key,
          unsigned                      opts,
          int (*compar)(const void *, const void *),
          void (*freeobj)(void *) )
