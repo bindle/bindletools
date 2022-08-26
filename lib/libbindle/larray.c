@@ -51,12 +51,6 @@
 //////////////////
 #pragma mark - Prototypes
 
-static void
-bindle_array_move(
-         void *                        a,
-         void *                        b,
-         size_t                        size );
-
 
 /////////////////
 //             //
@@ -105,7 +99,7 @@ bindle_badd(
          *basep = ptr;
       };
       (*nelp)++;
-      bindle_array_move(obj, *basep, width);
+      memcpy(*basep, obj, width);
       return(0);
    };
 
@@ -119,7 +113,7 @@ bindle_badd(
          dst = ((char *)*basep) + (width * (size_t)idx);
          if ((freeobj))
             (*freeobj)(dst);
-         bindle_array_move(obj, dst, width);
+         memcpy(dst, obj, width);
          return(idx);
       };
       if ((opts & BNDL_ARRAY_MASK_ADD) != BNDL_ARRAY_MERGE)
@@ -140,12 +134,12 @@ bindle_badd(
    {
       src = ((char *)*basep) + (width * (size_t)(pos+0));
       dst = ((char *)*basep) + (width * (size_t)(pos+1));
-      bindle_array_move(src, dst, width);
+      memcpy(dst, src, width);
    };
 
    // save object
    dst = ((char *)*basep) + (width * wouldbe);
-   bindle_array_move(obj, dst, width);
+   memcpy(dst, obj, width);
 
    // increment nelp
    (*nelp)++;
@@ -171,24 +165,6 @@ bindle_bsearch(
    if ((idx = bindle_bindex(key, base, nel, width, opts, NULL, compar)) == -1)
       return(NULL);
    return(((char *)base) + (width * (size_t)idx));
-}
-
-
-void
-bindle_array_move(
-         void *                        a,
-         void *                        b,
-         size_t                        size )
-{
-   uint8_t *   x;
-   uint8_t *   y;
-   size_t      s;
-   BindleDebugTrace();
-   x = a;
-   y = b;
-   for(s = size; (s > 0); s--)
-      *y++ = *x++;
-   return;
 }
 
 
@@ -233,7 +209,7 @@ bindle_bremove(
    {
       src = ((char *)base) + (width * (size_t)(pos+1));
       dst = ((char *)base) + (width * (size_t)(pos+0));
-      bindle_array_move(src, dst, width);
+      memcpy(dst, src, width);
    };
 
    return(0);
@@ -389,11 +365,11 @@ bindle_enqueue(
    {
       src = ((char *)*basep) + (width * (size_t)(pos-1));
       dst = ((char *)*basep) + (width * (size_t)(pos-0));
-      bindle_array_move(src, dst, width);
+      memcpy(dst, src, width);
    };
 
    // save object
-   bindle_array_move(obj, ((char *)*basep), width);
+   memcpy(((char *)*basep), obj, width);
 
    // increment nel
    (*nelp)++;
@@ -463,7 +439,7 @@ bindle_push(
 
    // save object
    ptr = ((char *)*basep) + (width * (*nelp));
-   bindle_array_move(obj, ptr, width);
+   memcpy(ptr, obj, width);
 
    // increment nel
    (*nelp)++;
