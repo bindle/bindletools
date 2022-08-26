@@ -148,74 +148,6 @@ bindle_badd(
 }
 
 
-void *
-bindle_bsearch(
-         const void *                  key,
-         void *                        base,
-         size_t                        nel,
-         size_t                        width,
-         unsigned                      opts,
-         int (*compar)(const void *, const void *) )
-{
-   ssize_t     idx;
-   BindleDebugTrace();
-   assert((base != NULL) || (!(nel)) );
-   assert(key   != NULL);
-   assert(width  > 0);
-   if ((idx = bindle_bindex(key, base, nel, width, opts, NULL, compar)) == -1)
-      return(NULL);
-   return(((char *)base) + (width * (size_t)idx));
-}
-
-
-ssize_t
-bindle_bremove(
-         const void *                  key,
-         void *                        base,
-         size_t *                      nelp,
-         size_t                        width,
-         unsigned                      opts,
-         int (*compar)(const void *, const void *),
-         void (*freeobj)(void *) )
-{
-   ssize_t     idx;
-   char *      src;
-   char *      dst;
-   size_t      pos;
-
-   BindleDebugTrace();
-
-   assert(nelp  != NULL);
-   assert((base != NULL) || (!(*nelp)) );
-   assert(key   != NULL);
-   assert(width  > 0);
-
-   // search for matching object
-   if ((idx = bindle_bindex(key, base, *nelp, width, opts, NULL, compar)) == -1)
-      return(-1);
-
-   // free object
-   if ((freeobj))
-   {
-      dst = ((char *)base) + (width * (size_t)idx);
-      (*freeobj)(dst);
-   };
-
-   // decrement nelp
-   (*nelp)--;
-
-   // shift list
-   for(pos = ((size_t)idx); (pos < (*nelp)); pos ++)
-   {
-      src = ((char *)base) + (width * (size_t)(pos+1));
-      dst = ((char *)base) + (width * (size_t)(pos+0));
-      memcpy(dst, src, width);
-   };
-
-   return(0);
-}
-
-
 ssize_t
 bindle_bindex(
          const void *                  key,
@@ -310,6 +242,74 @@ bindle_bindex(
    *wouldbep = (size_t)((rc > 0) ? mid : mid+1);
 
    return(-1);
+}
+
+
+ssize_t
+bindle_bremove(
+         const void *                  key,
+         void *                        base,
+         size_t *                      nelp,
+         size_t                        width,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *),
+         void (*freeobj)(void *) )
+{
+   ssize_t     idx;
+   char *      src;
+   char *      dst;
+   size_t      pos;
+
+   BindleDebugTrace();
+
+   assert(nelp  != NULL);
+   assert((base != NULL) || (!(*nelp)) );
+   assert(key   != NULL);
+   assert(width  > 0);
+
+   // search for matching object
+   if ((idx = bindle_bindex(key, base, *nelp, width, opts, NULL, compar)) == -1)
+      return(-1);
+
+   // free object
+   if ((freeobj))
+   {
+      dst = ((char *)base) + (width * (size_t)idx);
+      (*freeobj)(dst);
+   };
+
+   // decrement nelp
+   (*nelp)--;
+
+   // shift list
+   for(pos = ((size_t)idx); (pos < (*nelp)); pos ++)
+   {
+      src = ((char *)base) + (width * (size_t)(pos+1));
+      dst = ((char *)base) + (width * (size_t)(pos+0));
+      memcpy(dst, src, width);
+   };
+
+   return(0);
+}
+
+
+void *
+bindle_bsearch(
+         const void *                  key,
+         void *                        base,
+         size_t                        nel,
+         size_t                        width,
+         unsigned                      opts,
+         int (*compar)(const void *, const void *) )
+{
+   ssize_t     idx;
+   BindleDebugTrace();
+   assert((base != NULL) || (!(nel)) );
+   assert(key   != NULL);
+   assert(width  > 0);
+   if ((idx = bindle_bindex(key, base, nel, width, opts, NULL, compar)) == -1)
+      return(NULL);
+   return(((char *)base) + (width * (size_t)idx));
 }
 
 
