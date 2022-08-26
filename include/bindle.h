@@ -241,10 +241,10 @@ bindle_bremove(
 
 _BINDLE_F ssize_t
 bindle_array_search(
+         const void *                  key,
          const void *                  base,
          size_t                        nel,
          size_t                        width,
-         const void *                  key,
          unsigned                      opts,
          size_t *                      wouldbep,
          int (*compar)(const void *, const void *) );

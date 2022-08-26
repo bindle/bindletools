@@ -110,7 +110,7 @@ bindle_badd(
    };
 
    // search for existing object which matches
-   if ((idx = bindle_array_search(*basep, *nelp, width, obj, opts, &wouldbe, compar)) != -1)
+   if ((idx = bindle_array_search(obj, *basep, *nelp, width, opts, &wouldbe, compar)) != -1)
    {
       if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_ARRAY_INSERT)
          return(-1);
@@ -168,7 +168,7 @@ bindle_array_get(
    assert((base != NULL) || (!(nel)) );
    assert(key   != NULL);
    assert(width  > 0);
-   if ((idx = bindle_array_search(base, nel, width, key, opts, NULL, compar)) == -1)
+   if ((idx = bindle_array_search(key, base, nel, width, opts, NULL, compar)) == -1)
       return(NULL);
    return(((char *)base) + (width * (size_t)idx));
 }
@@ -215,7 +215,7 @@ bindle_bremove(
    assert(width  > 0);
 
    // search for matching object
-   if ((idx = bindle_array_search(base, *nelp, width, key, opts, NULL, compar)) == -1)
+   if ((idx = bindle_array_search(key, base, *nelp, width, opts, NULL, compar)) == -1)
       return(-1);
 
    // free object
@@ -242,10 +242,10 @@ bindle_bremove(
 
 ssize_t
 bindle_array_search(
+         const void *                  key,
          const void *                  base,
          size_t                        nel,
          size_t                        width,
-         const void *                  key,
          unsigned                      opts,
          size_t *                      wouldbep,
          int (*compar)(const void *, const void *) )

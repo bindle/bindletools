@@ -833,7 +833,7 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((idx = bindle_array_search(list, x, sizeof(MyData *), ptr, BNDL_ARRAY_FIRSTDUP, NULL, compar)) == -1)
+         if ((idx = bindle_array_search(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, NULL, compar)) == -1)
             return(bindle_tests_error(opts, NULL, "bindle_array_search(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((size_t)idx != y)
             return(bindle_tests_error(opts, NULL, "bindle_array_search(); size: %zu; func: %s; idx: %zu; index mismatch", x, compar_name, y));
