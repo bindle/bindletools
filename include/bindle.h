@@ -218,13 +218,14 @@ bindle_badd(
          void * (*reallocbase)(void *, size_t) );
 
 
-_BINDLE_F void *
-bindle_bsearch(
+_BINDLE_F ssize_t
+bindle_bindex(
          const void *                  key,
-         void *                        base,
+         const void *                  base,
          size_t                        nel,
          size_t                        width,
          unsigned                      opts,
+         size_t *                      wouldbep,
          int (*compar)(const void *, const void *) );
 
 
@@ -239,14 +240,13 @@ bindle_bremove(
          void (*freeobj)(void *) );
 
 
-_BINDLE_F ssize_t
-bindle_bindex(
+_BINDLE_F void *
+bindle_bsearch(
          const void *                  key,
-         const void *                  base,
+         void *                        base,
          size_t                        nel,
          size_t                        width,
          unsigned                      opts,
-         size_t *                      wouldbep,
          int (*compar)(const void *, const void *) );
 
 
