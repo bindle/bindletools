@@ -193,7 +193,7 @@ bindle_array_move(
 
 
 ssize_t
-bindle_array_remove(
+bindle_bremove(
          void *                        base,
          size_t *                      nelp,
          size_t                        width,

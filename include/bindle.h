@@ -229,7 +229,7 @@ bindle_array_get(
 
 
 _BINDLE_F ssize_t
-bindle_array_remove(
+bindle_bremove(
          void *                        base,
          size_t *                      nelp,
          size_t                        width,

@@ -33,7 +33,7 @@
 # array functions
 bindle_badd
 bindle_array_get
-bindle_array_remove
+bindle_bremove
 bindle_array_search
 bindle_dequeue
 bindle_enqueue
