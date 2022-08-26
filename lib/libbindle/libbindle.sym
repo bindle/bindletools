@@ -34,7 +34,7 @@
 bindle_badd
 bindle_array_get
 bindle_bremove
-bindle_array_search
+bindle_bindex
 bindle_dequeue
 bindle_enqueue
 bindle_peek

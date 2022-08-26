@@ -819,7 +819,7 @@ my_test_search(
 
    my_compar_opts(opts, &compar_name, &compar);
 
-   bindle_tests_verbose(opts, "testing   bindle_array_search( %s ) ...", compar_name);
+   bindle_tests_verbose(opts, "testing   bindle_bindex( %s ) ...", compar_name);
    for(x = 1; (x < (len+1)); x++)
    {
       for(y = 0; (y < x); y++)
@@ -833,10 +833,10 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((idx = bindle_array_search(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, NULL, compar)) == -1)
-            return(bindle_tests_error(opts, NULL, "bindle_array_search(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
+         if ((idx = bindle_bindex(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, NULL, compar)) == -1)
+            return(bindle_tests_error(opts, NULL, "bindle_bindex(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((size_t)idx != y)
-            return(bindle_tests_error(opts, NULL, "bindle_array_search(); size: %zu; func: %s; idx: %zu; index mismatch", x, compar_name, y));
+            return(bindle_tests_error(opts, NULL, "bindle_bindex(); size: %zu; func: %s; idx: %zu; index mismatch", x, compar_name, y));
       };
    };
 

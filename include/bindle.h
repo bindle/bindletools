@@ -240,7 +240,7 @@ bindle_bremove(
 
 
 _BINDLE_F ssize_t
-bindle_array_search(
+bindle_bindex(
          const void *                  key,
          const void *                  base,
          size_t                        nel,
