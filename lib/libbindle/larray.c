@@ -66,10 +66,10 @@
 
 ssize_t
 bindle_badd(
+         void *                        obj,
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,
-         void *                        obj,
          unsigned                      opts,
          int  (*compar)(const void *, const void *),
          void (*freeobj)(void *),

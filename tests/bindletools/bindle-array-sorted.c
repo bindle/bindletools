@@ -663,7 +663,7 @@ my_test_insert(
    bindle_tests_verbose(opts, "testing   bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    for(x = 0; (x < dat_len); x++)
    {
-      if (bindle_badd((void **)listp, list_lenp, sizeof(MyData *), &src[x], arrayopt, compar, NULL, &realloc) == -1)
+      if (bindle_badd(&src[x], (void **)listp, list_lenp, sizeof(MyData *), arrayopt, compar, NULL, &realloc) == -1)
          return(bindle_tests_error(opts, NULL, "bindle_badd(%s): returned error", action_name));
       len = (iteration*dat_len) + x + 1;
       if ( ((iteration)) && (!(arrayopt & BNDL_BMERGE)) )
