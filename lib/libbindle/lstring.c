@@ -530,11 +530,11 @@ bindle_strlcpy(
    BindleDebugTrace();
    assert(dst     != NULL);
    assert(src     != NULL);
-   assert(dstsize  > 0);
    for(len = 0; ((src[len])); len++)
       if (len < dstsize)
          dst[len] = src[len];
-   dst[((len < dstsize) ? len : (dstsize-1))] = '\0';
+   if ((dstsize))
+      dst[((len < dstsize) ? len : (dstsize-1))] = '\0';
    return(len);
 }
 
