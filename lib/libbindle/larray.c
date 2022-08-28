@@ -250,20 +250,21 @@ bindle_bindex(
 }
 
 
-ssize_t
+void *
 bindle_bremove(
          const void *                  key,
          void *                        base,
          size_t *                      nelp,
          size_t                        width,
          unsigned                      opts,
-         int (*compar)(const void *, const void *),
-         void (*freeobj)(void *) )
+         int (*compar)(const void *, const void *) )
 {
    ssize_t     idx;
    char *      src;
    char *      dst;
    size_t      pos;
+   size_t      byte;
+   char        val;
 
    BindleDebugTrace();
 
@@ -274,14 +275,7 @@ bindle_bremove(
 
    // search for matching object
    if ((idx = bindle_bindex(key, base, *nelp, width, opts, NULL, compar)) == -1)
-      return(-1);
-
-   // free object
-   if ((freeobj))
-   {
-      dst = ((char *)base) + (width * (size_t)idx);
-      (*freeobj)(dst);
-   };
+      return(NULL);
 
    // decrement nelp
    (*nelp)--;
@@ -291,10 +285,15 @@ bindle_bremove(
    {
       src = ((char *)base) + (width * (size_t)(pos+1));
       dst = ((char *)base) + (width * (size_t)(pos+0));
-      memcpy(dst, src, width);
+      for(byte = 0; (byte < width); byte++)
+      {
+         val       = dst[byte];
+         dst[byte] = src[byte];
+         src[byte] = val;
+      };
    };
 
-   return(0);
+   return(((char *)base) + (width * (*nelp)));
 }
 
 

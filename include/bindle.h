@@ -228,15 +228,14 @@ bindle_bindex(
          int (*compar)(const void *, const void *) );
 
 
-_BINDLE_F ssize_t
+_BINDLE_F void *
 bindle_bremove(
          const void *                  key,
          void *                        base,
          size_t *                      nelp,
          size_t                        width,
          unsigned                      opts,
-         int (*compar)(const void *, const void *),
-         void (*freeobj)(void *) );
+         int (*compar)(const void *, const void *) );
 
 
 _BINDLE_F void *
