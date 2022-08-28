@@ -660,7 +660,7 @@ my_test_insert(
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
    };
 
-   bindle_tests_verbose(opts, "testing   bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
+   bindle_tests_verbose(opts, "testing   bindle_badd( %10s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    for(x = 0; (x < dat_len); x++)
    {
       if (bindle_badd(&src[x], (void **)listp, list_lenp, sizeof(MyData *), arrayopt, compar, NULL, &realloc) == -1)
@@ -677,7 +677,7 @@ my_test_insert(
    if (!(arrayopt & BNDL_BMERGE))
       iteration = 0;
 
-   bindle_tests_verbose(opts, "verifying bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
+   bindle_tests_verbose(opts, "verifying bindle_badd( %10s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
    iteration++;
    for(x = 0; (x < (dat_len*iteration)); x++)
    {
