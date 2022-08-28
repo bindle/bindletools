@@ -59,6 +59,11 @@
 /////////////////
 #pragma mark - Functions
 
+//-------------------------//
+// sorted array prototypes //
+//-------------------------//
+#pragma mark sorted array prototypes
+
 ssize_t
 bindle_badd(
          void **                       basep,
@@ -313,6 +318,11 @@ bindle_bsearch(
 }
 
 
+//------------------------//
+// queue array prototypes //
+//------------------------//
+#pragma mark queue array prototypes
+
 void *
 bindle_dequeue(
          void *                        base,
@@ -377,6 +387,11 @@ bindle_enqueue(
    return(0);
 }
 
+
+//------------------------//
+// stack array prototypes //
+//------------------------//
+#pragma mark stack prototypes
 
 void *
 bindle_peek(
