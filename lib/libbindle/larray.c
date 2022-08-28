@@ -108,7 +108,7 @@ bindle_badd(
    {
       if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_BINSERT)
          return(-1);
-      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_ARRAY_REPLACE)
+      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_BREPLACE)
       {
          dst = ((char *)*basep) + (width * (size_t)idx);
          if ((freeobj))
