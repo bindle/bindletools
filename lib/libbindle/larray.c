@@ -173,8 +173,8 @@ bindle_bindex(
    assert(opts  != ((unsigned)(~0)));
 
    // set default dup behavior
-   if ((opts & BNDL_ARRAY_MASK_DUPS) == 0)
-      opts |= BNDL_BDEFAULT & BNDL_ARRAY_MASK_DUPS;
+   if ((opts & BNDL_BMASK_DUPS) == 0)
+      opts |= BNDL_BDEFAULT & BNDL_BMASK_DUPS;
 
    if (nel == 0)
    {
@@ -195,7 +195,7 @@ bindle_bindex(
       ptr = ((const char *)base) + (width * (size_t)mid);
       if ((rc = (*compar)(ptr, key)) == 0)
       {
-         switch(opts & BNDL_ARRAY_MASK_DUPS)
+         switch(opts & BNDL_BMASK_DUPS)
          {
             case BNDL_ARRAY_LASTDUP:
             if (low == mid)
@@ -235,7 +235,7 @@ bindle_bindex(
    if ((rc = (*compar)(ptr, key)) == 0)
    {
       *wouldbep = (size_t)mid;
-      if ((opts & BNDL_ARRAY_MASK_DUPS) == BNDL_ARRAY_LASTDUP)
+      if ((opts & BNDL_BMASK_DUPS) == BNDL_ARRAY_LASTDUP)
          *wouldbep = (size_t)(mid+1);
       return(mid);
    };

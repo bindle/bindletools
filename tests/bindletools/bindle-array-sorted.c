@@ -639,7 +639,7 @@ my_test_insert(
 
    my_compar_opts(opts, &compar_name, &compar);
 
-   mergeopt = (arrayopt & BNDL_ARRAY_MASK_DUPS);
+   mergeopt = (arrayopt & BNDL_BMASK_DUPS);
    iteration = *list_lenp / dat_len;
    switch(arrayopt & BNDL_BMASK_ADD)
    {
@@ -735,7 +735,7 @@ my_test_remove(
 
    my_compar_opts(opts, &compar_name, &compar);
 
-   mergeopt = (arrayopt & BNDL_ARRAY_MASK_DUPS);
+   mergeopt = (arrayopt & BNDL_BMASK_DUPS);
    iteration = (*list_lenp / dat_len) - 1;
    switch(arrayopt & BNDL_BMASK_ADD)
    {
