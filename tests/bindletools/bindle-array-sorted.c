@@ -359,7 +359,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_ANYDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPANY;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -433,7 +433,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_ANYDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPANY;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -654,7 +654,7 @@ my_test_insert(
    {
       case BNDL_BDUPFIRST:  merge_type = "FIRST"; break;
       case BNDL_BDUPLAST:   merge_type = "LAST"; break;
-      case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
+      case BNDL_BDUPANY:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
@@ -698,7 +698,7 @@ my_test_insert(
                return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
          break;
 
-         case BNDL_ARRAY_ANYDUP:
+         case BNDL_BDUPANY:
          default:
          break;
       };
@@ -750,7 +750,7 @@ my_test_remove(
    {
       case BNDL_BDUPFIRST:  merge_type = "FIRST"; break;
       case BNDL_BDUPLAST:   merge_type = "LAST"; break;
-      case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
+      case BNDL_BDUPANY:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
@@ -791,7 +791,7 @@ my_test_remove(
                return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): first match not returned", action_name));
          break;
 
-         case BNDL_ARRAY_ANYDUP:
+         case BNDL_BDUPANY:
          default:
          break;
       };

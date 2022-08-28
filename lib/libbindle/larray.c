@@ -219,7 +219,7 @@ bindle_bindex(
             high = mid;
             break;
 
-            case BNDL_ARRAY_ANYDUP:
+            case BNDL_BDUPANY:
             default:
             return(*((ssize_t *)wouldbep) = mid);
          };
