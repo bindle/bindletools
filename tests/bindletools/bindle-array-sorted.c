@@ -643,10 +643,10 @@ my_test_insert(
    iteration = *list_lenp / dat_len;
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
-      case BNDL_BINSERT:  action_name = "INSERT"; break;
+      case BNDL_BINSERT:   action_name = "INSERT"; break;
       case BNDL_BMERGE:    action_name = "MERGE"; break;
       case BNDL_BREPLACE:  action_name = "REPLACE"; break;
-      case 0:                     action_name = "DEFAULT"; break;
+      case 0:             action_name = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown insert action"));
    };
@@ -655,7 +655,7 @@ my_test_insert(
       case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
       case BNDL_ARRAY_LASTDUP:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
-      case 0:                       merge_type = "DEFAULT"; break;
+      case 0:              merge_type = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
    };
@@ -739,10 +739,10 @@ my_test_remove(
    iteration = (*list_lenp / dat_len) - 1;
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
-      case BNDL_BINSERT:  action_name = "INSERT"; break;
+      case BNDL_BINSERT:   action_name = "INSERT"; break;
       case BNDL_BMERGE:    action_name = "MERGE"; break;
       case BNDL_BREPLACE:  action_name = "REPLACE"; break;
-      case 0:                     action_name = "DEFAULT"; break;
+      case 0:             action_name = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown insert action"));
    };
@@ -751,7 +751,7 @@ my_test_remove(
       case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
       case BNDL_ARRAY_LASTDUP:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
-      case 0:                       merge_type = "DEFAULT"; break;
+      case 0:              merge_type = "DEFAULT"; break;
       default:
       return(bindle_tests_error(opts, NULL, "unknown dup action"));
    };
