@@ -116,7 +116,7 @@ bindle_badd(
          memcpy(dst, obj, width);
          return(idx);
       };
-      if ((opts & BNDL_ARRAY_MASK_ADD) != BNDL_ARRAY_MERGE)
+      if ((opts & BNDL_ARRAY_MASK_ADD) != BNDL_BMERGE)
          return(-1);
    };
 

@@ -354,12 +354,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-   // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_UNORDERED
+   // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_UNORDERED
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_ANYDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_ANYDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -377,12 +377,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-   // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_APPEND
+   // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_APPEND
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_LASTDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_LASTDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -400,12 +400,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-  // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_PREPEND
+  // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_PREPEND
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_FIRSTDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_FIRSTDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -428,12 +428,12 @@ int main( int argc, char * argv[] )
    qsort(test, MY_LIST_LEN, sizeof(MyData *), &my_compare_obj_value);
 
 
-   // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_UNORDERED
+   // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_UNORDERED
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_ANYDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_ANYDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -451,12 +451,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-   // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_APPEND
+   // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_APPEND
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_LASTDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_LASTDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -474,12 +474,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-  // insert data as sorted list using BNDL_ARRAY_MERGE and BNDL_ARRAY_PREPEND
+  // insert data as sorted list using BNDL_BMERGE and BNDL_ARRAY_PREPEND
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_ARRAY_MERGE | BNDL_ARRAY_FIRSTDUP;
+   merge    = BNDL_BMERGE | BNDL_ARRAY_FIRSTDUP;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -644,7 +644,7 @@ my_test_insert(
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
       case BNDL_BINSERT:  action_name = "INSERT"; break;
-      case BNDL_ARRAY_MERGE:   action_name = "MERGE"; break;
+      case BNDL_BMERGE:    action_name = "MERGE"; break;
       case BNDL_BREPLACE:  action_name = "REPLACE"; break;
       case 0:                     action_name = "DEFAULT"; break;
       default:
@@ -666,7 +666,7 @@ my_test_insert(
       if (bindle_badd((void **)listp, list_lenp, sizeof(MyData *), &src[x], arrayopt, compar, NULL, &realloc) == -1)
          return(bindle_tests_error(opts, NULL, "bindle_badd(%s): returned error", action_name));
       len = (iteration*dat_len) + x + 1;
-      if ( ((iteration)) && (!(arrayopt & BNDL_ARRAY_MERGE)) )
+      if ( ((iteration)) && (!(arrayopt & BNDL_BMERGE)) )
          len = dat_len;
       if (*list_lenp != len)
          return(bindle_tests_error(opts, NULL, "bindle_badd(%s): did not increment length", action_name));
@@ -674,7 +674,7 @@ my_test_insert(
 
    list = *listp;
 
-   if (!(arrayopt & BNDL_ARRAY_MERGE))
+   if (!(arrayopt & BNDL_BMERGE))
       iteration = 0;
 
    bindle_tests_verbose(opts, "verifying bindle_badd( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
@@ -740,7 +740,7 @@ my_test_remove(
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
       case BNDL_BINSERT:  action_name = "INSERT"; break;
-      case BNDL_ARRAY_MERGE:   action_name = "MERGE"; break;
+      case BNDL_BMERGE:    action_name = "MERGE"; break;
       case BNDL_BREPLACE:  action_name = "REPLACE"; break;
       case 0:                     action_name = "DEFAULT"; break;
       default:
@@ -762,13 +762,13 @@ my_test_remove(
       if (bindle_bremove(&src[x], list, list_lenp, sizeof(MyData *), arrayopt, compar, NULL) == -1)
          return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): returned error", action_name));
       len = ((iteration+1)*dat_len) - x - 1;
-      if ( ((iteration)) && (!(arrayopt & BNDL_ARRAY_MERGE)) )
+      if ( ((iteration)) && (!(arrayopt & BNDL_BMERGE)) )
          len = dat_len;
       if (*list_lenp != len)
          return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): did not decrement length", action_name));
    };
 
-   if (!(arrayopt & BNDL_ARRAY_MERGE))
+   if (!(arrayopt & BNDL_BMERGE))
       iteration = 0;
 
    bindle_tests_verbose(opts, "verifying bindle_bremove( %7s, %9s, %s ) [%s] ...", action_name, merge_type, compar_name, (((iteration)) ? "duplicate" : "unique"));
