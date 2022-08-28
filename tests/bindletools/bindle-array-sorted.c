@@ -504,9 +504,9 @@ int my_compare_key_name(const void * a, const void * b)
 {
    MyData * const *  obj;
    const char *      key;
-   obj = a;
-   key = b;
-   return(strcasecmp((*obj)->name, key));
+   key = a;
+   obj = b;
+   return(strcasecmp(key, (*obj)->name));
 }
 
 
@@ -514,9 +514,9 @@ int my_compare_key_value(const void * a, const void *b)
 {
    MyData * const *  obj;
    const int *       key;
-   obj = a;
-   key = b;
-   return((*obj)->value - *key);
+   key = a;
+   obj = b;
+   return(*key - (*obj)->value);
 }
 
 
@@ -819,7 +819,7 @@ my_test_search(
 
    my_compar_opts(opts, &compar_name, &compar);
 
-   bindle_tests_verbose(opts, "testing   bindle_bindex( %s ) ...", compar_name);
+   bindle_tests_verbose(opts, "testing   bindle_bindex(  %s ) ...", compar_name);
    for(x = 1; (x < (len+1)); x++)
    {
       for(y = 0; (y < x); y++)
@@ -840,7 +840,7 @@ my_test_search(
       };
    };
 
-   bindle_tests_verbose(opts, "testing   bindle_bsearch(    %s ) ...", compar_name);
+   bindle_tests_verbose(opts, "testing   bindle_bsearch( %s ) ...", compar_name);
    for(x = 1; (x < (len+1)); x++)
    {
       for(y = 0; (y < x); y++)

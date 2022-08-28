@@ -198,7 +198,7 @@ bindle_bindex(
    while ( (mid >= low) && (mid <= high) && (high != low) )
    {
       ptr = ((const char *)base) + (width * (size_t)mid);
-      if ((rc = (*compar)(ptr, key)) == 0)
+      if ((rc = (*compar)(key, ptr)) == 0)
       {
          switch(opts & BNDL_BMASK_DUPS)
          {
@@ -209,7 +209,7 @@ bindle_bindex(
                if (mid < high)
                {
                   ptr = ((const char *)base) + (width * (size_t)(mid+1));
-                  if ((*compar)(ptr, key) == 0)
+                  if ((*compar)(key, ptr) == 0)
                   {
                      *wouldbep = (size_t)(mid+2);
                      return(mid+1);
@@ -229,7 +229,7 @@ bindle_bindex(
             return(*((ssize_t *)wouldbep) = mid);
          };
       }
-      else if (rc > 0)
+      else if (rc < 0)
          high = mid - 1;
       else
          low = mid + 1;
@@ -237,14 +237,14 @@ bindle_bindex(
    };
 
    ptr = ((const char *)base) + (width * (size_t)mid);
-   if ((rc = (*compar)(ptr, key)) == 0)
+   if ((rc = (*compar)(key, ptr)) == 0)
    {
       *wouldbep = (size_t)mid;
       if ((opts & BNDL_BMASK_DUPS) == BNDL_BDUPLAST)
          *wouldbep = (size_t)(mid+1);
       return(mid);
    };
-   *wouldbep = (size_t)((rc > 0) ? mid : mid+1);
+   *wouldbep = (size_t)((rc < 0) ? mid : mid+1);
 
    return(-1);
 }
