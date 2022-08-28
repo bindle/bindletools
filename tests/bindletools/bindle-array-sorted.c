@@ -382,7 +382,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_LASTDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPLAST;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -456,7 +456,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_LASTDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPLAST;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -653,7 +653,7 @@ my_test_insert(
    switch(mergeopt)
    {
       case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
-      case BNDL_ARRAY_LASTDUP:   merge_type = "LAST"; break;
+      case BNDL_BDUPLAST:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
       default:
@@ -686,7 +686,7 @@ my_test_insert(
          return(bindle_tests_error(opts, NULL, "bindle_badd(%s): misordered the list", action_name));
       switch(mergeopt)
       {
-         case BNDL_ARRAY_LASTDUP:
+         case BNDL_BDUPLAST:
          if ( (x < ((dat_len*iteration)-1)) && ((x % iteration) == (iteration-1)) )
             if (!(strcasecmp(list[x]->name, list[x+1]->name)))
                return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
@@ -749,7 +749,7 @@ my_test_remove(
    switch(mergeopt)
    {
       case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
-      case BNDL_ARRAY_LASTDUP:   merge_type = "LAST"; break;
+      case BNDL_BDUPLAST:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
       default:
@@ -779,7 +779,7 @@ my_test_remove(
          return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): misordered the list", action_name));
       switch(mergeopt)
       {
-         case BNDL_ARRAY_LASTDUP:
+         case BNDL_BDUPLAST:
          if ( (x < ((dat_len*iteration)-1)) && ((x % iteration) == (iteration-1)) )
             if (!(strcasecmp(list[x]->name, list[x+1]->name)))
                return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): first match not returned", action_name));

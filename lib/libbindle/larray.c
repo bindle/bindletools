@@ -197,7 +197,7 @@ bindle_bindex(
       {
          switch(opts & BNDL_BMASK_DUPS)
          {
-            case BNDL_ARRAY_LASTDUP:
+            case BNDL_BDUPLAST:
             if (low == mid)
             {
                *wouldbep = (size_t)(mid+1);
@@ -235,7 +235,7 @@ bindle_bindex(
    if ((rc = (*compar)(ptr, key)) == 0)
    {
       *wouldbep = (size_t)mid;
-      if ((opts & BNDL_BMASK_DUPS) == BNDL_ARRAY_LASTDUP)
+      if ((opts & BNDL_BMASK_DUPS) == BNDL_BDUPLAST)
          *wouldbep = (size_t)(mid+1);
       return(mid);
    };

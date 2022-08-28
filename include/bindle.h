@@ -130,12 +130,12 @@
 #define BNDL_BINSERT             0x0001      ///< add type: insert unique object to sorted array
 #define BNDL_BREPLACE            0x0002      ///< add type: replace deplucate object in sorted array, or insert if unique
 #define BNDL_BMERGE              0x0004      ///< add type: add object to sorted array regardless if unique or duplicate
-#define BNDL_ARRAY_LASTDUP       0x0010      ///< dup handling: add/return/remove last duplicate object in series of matching objects
+#define BNDL_BDUPLAST            0x0010      ///< dup handling: add/return/remove last duplicate object in series of matching objects
 #define BNDL_ARRAY_FIRSTDUP      0x0020      ///< dup handling: add/return/remove first duplicate object in series of matching objects
 #define BNDL_ARRAY_ANYDUP        0x0040      ///< dup handling: add/return/remove any one duplicate object in series of matching objects
 #define BNDL_BDEFAULT            ( BNDL_BINSERT | BNDL_ARRAY_ANYDUP )                         ///< default sorted array options
 #define BNDL_BMASK_ADD           ( BNDL_BINSERT | BNDL_BMERGE   | BNDL_BREPLACE )   ///< mask for add type
-#define BNDL_BMASK_DUPS          ( BNDL_ARRAY_ANYDUP | BNDL_ARRAY_LASTDUP | BNDL_ARRAY_FIRSTDUP )  ///< mask for duplicate handling in sorted array
+#define BNDL_BMASK_DUPS          ( BNDL_ARRAY_ANYDUP | BNDL_BDUPLAST | BNDL_ARRAY_FIRSTDUP )  ///< mask for duplicate handling in sorted array
 
 
 // encoding methods
