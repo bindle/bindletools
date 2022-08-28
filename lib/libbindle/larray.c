@@ -427,10 +427,10 @@ bindle_pop(
 
 ssize_t
 bindle_push(
+         void *                        obj,
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,
-         void *                        obj,
          void * (*reallocbase)(void *, size_t) )
 {
    size_t      size;
