@@ -61,12 +61,12 @@ To be written.
 
 .TP 20
 bindle_strchomp(3)
-truncates string based upon the specified separator. \fBbindle_strchomp(3)\fR
+truncates string based upon the specified separator. \fBbindle_strchomp()\fR
 is based on the Perl implementation of \fBchomp\fR.
 
 .TP 20
 bindle_strchop(3)
-Removes the last character of the string. \fBbindle_strchop(3)\fR is based on
+Removes the last character of the string. \fBbindle_strchop()\fR is based on
 the Perl implementation of \fBchop\fR.
 
 .TP 20
@@ -79,11 +79,15 @@ To be written.
 
 .TP 20
 bindle_strlcpy(3)
-To be written.
+Copies one string into another string and NULL terminates the result.
+\fBbindle_strlcpy\fR() is based on the OpenBSD and FreeBSD implementation of
+\fBstrlcpy\fR().
 
 .TP 20
 bindle_strlcat(3)
-To be written.
+Appends one string into another string and NULL terminates the result.
+\fBbindle_strlcat\fR() is based on the OpenBSD and FreeBSD implementation of
+\fBstrlcat\fR().
 
 .TP 20
 bindle_strndup(3)

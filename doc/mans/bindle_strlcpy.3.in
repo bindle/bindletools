@@ -1,0 +1,125 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_STRING" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_strlcpy, bindle_strlcat - Bindle Binary Tools string routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "size_t bindle_strlcpy( char * restrict " dst ","
+.BI "           const char * restrict " src ", size_t " dstsize " );"
+.sp
+.BI "size_t bindle_strlcat( char * restrict " dst ","
+.BI "           const char * restrict " src ", size_t " dstsize " );"
+.SH DESCRIPTION
+\fBbindle_strlcpy\fR() and \fBbindle_strlcat\fR() are based on the functions
+\fBstrlcpy\fR() and \fBstrlcat\fR() which first appeared in OpenBSD 2.4, and
+FreeBSD 3.3. \fBstrlcpy\fR() and \fBstrlcat\fR() are safer and less error
+prone than the standard functions \fBstrncpy\fR() and \fBstrncat\fR().
+
+\fBbindle_strlcpy\fR() copies up to \fIdstsize\fR - 1 characters from
+the \fIsrc\fR string into the \fIdst\fR string. If \fIdstsize\fR is not 0,
+then the result will be NULL terminated. \fIsrc\fR must be NULL terminated,
+otherwise the behavior is undefined.
+
+\fBbindle_strlcat\fR() appends the string \fIsrc\fR to end of the string
+\fIdst\fR. \fBbindle_strlcat\fR() will copy at most \fIdstsize\fR -
+strlen(\fIdst\fR) - 1 characters from \fIsrc\fR to \fIdst\fR. If the length
+of \fIdst\fR is less than \fIdstsize\fR, the resulting string in \fIdst\fR
+will be NULL terminated. \fIsrc\fR and \fIdst\fR must be NULL terminated,
+otherwise the behavior is undefined.
+
+The \fIsrc\fR and \fIdst\fR strings must not overlap.
+
+.SH RETURN VALUES
+\fBbindle_strlcpy\fR() returns the length of the \fIsrc\fR string.
+\fBbindle_strlcat\fR() returns the combined length of the \fIsrc\fR and
+\fIdst\fR strings. If the returned value is >= than \fIdstsize\fR, the
+resulting string in \fIdst\fR will be truncated to \fIdstsize\fR characters.
+
+.SH EXAMPLE
+
+The following example compares \fBstrncpy\fR() and \fBbindle_strlcpy\fR():
+
+   char str1[16], str2[16];
+
+   memset(str1, '-', sizeof(str1));
+   str1[sizeof(str1)-1] = '\0';
+   strncpy(str1, "hello world", 3);
+   printf("str1: \\"%s\\"\\n", str1);
+
+   memset(str2, '-', sizeof(str1));
+   str2[sizeof(str2)-1] = '\0';
+   bindle_strlcpy(str2, "hello world", 3);
+   printf("str2: \\"%s\\"\\n", str2);
+
+The above code results in the following output:
+
+   str1: "hel------------"
+   str2: "he"
+
+The following example compares \fBstrncat\fR() and \fBbindle_strlcat\fR():
+
+   char str1[24], str2[24];
+
+   memset(str1, '-', sizeof(str1));
+   str1[sizeof(str1)-1] = '\0';
+   strncpy(str1, "Hello", sizeof(str1));
+   strncat(str1, "BigWideWorld", 8);
+   printf("str1: \\"%s\\"\\n", str1);
+
+   memset(str2, '-', sizeof(str1));
+   str2[sizeof(str2)-1] = '\0';
+   strncpy(str2, "Hello", sizeof(str1));
+   bindle_strlcat(str2, "BigWideWorld", 8);
+   printf("str2: \\"%s\\"\\n", str2);
+
+The above code results in the following output:
+
+   str1: "HelloBigWideW"
+   str2: "HelloBi"
+
+.SH SEE ALSO
+.BR bindle_strings (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

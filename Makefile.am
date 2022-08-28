@@ -75,7 +75,8 @@ include_HEADERS				=
 lib_LTLIBRARIES				=
 lib_LIBRARIES				=
 man_MANS				= doc/mans/bindle_strchomp.3 \
-					  doc/mans/bindle_strings.3
+					  doc/mans/bindle_strings.3 \
+					  doc/mans/bindle_strlcpy.3
 info_TEXINFOS				=
 noinst_DATA				=
 noinst_LTLIBRARIES			=
@@ -100,6 +101,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
 					  doc/mans/bindle_strchomp.3.in \
 					  doc/mans/bindle_strings.3.in \
+					  doc/mans/bindle_strlcpy.3.in \
 					  tests/bindletools/README.md \
 					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
@@ -165,6 +167,9 @@ doc/mans/bindle_strchomp.3: Makefile $(srcdir)/doc/mans/bindle_strchomp.3.in
 doc/mans/bindle_strings.3: Makefile $(srcdir)/doc/mans/bindle_strings.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_strlcpy.3: Makefile $(srcdir)/doc/mans/bindle_strlcpy.3.in
+	@$(do_subst_dt)
+
 # local targets
 install-exec-local:
 
@@ -172,6 +177,10 @@ install-data-local: install-man
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strchomp.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \
            ln -fs bindle_strchomp.3 bindle_strchop.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strlcpy.3;then\
+           cd $(DESTDIR)/$(mandir)/man3 && \
+           ln -fs bindle_strlcpy.3 bindle_strlcat.3; \
 	fi;
 
 uninstall-local:
