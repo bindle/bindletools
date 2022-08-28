@@ -86,8 +86,8 @@ bindle_badd(
    assert(width  > 0);
 
    // set default add option
-   if ((opts & BNDL_ARRAY_MASK_ADD) == 0)
-      opts |= BNDL_ARRAY_MASK_ADD & BNDL_BDEFAULT;
+   if ((opts & BNDL_BMASK_ADD) == 0)
+      opts |= BNDL_BMASK_ADD & BNDL_BDEFAULT;
 
    if (!(*nelp))
    {
@@ -106,9 +106,9 @@ bindle_badd(
    // search for existing object which matches
    if ((idx = bindle_bindex(obj, *basep, *nelp, width, opts, &wouldbe, compar)) != -1)
    {
-      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_BINSERT)
+      if ((opts & BNDL_BMASK_ADD) == BNDL_BINSERT)
          return(-1);
-      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_BREPLACE)
+      if ((opts & BNDL_BMASK_ADD) == BNDL_BREPLACE)
       {
          dst = ((char *)*basep) + (width * (size_t)idx);
          if ((freeobj))
@@ -116,7 +116,7 @@ bindle_badd(
          memcpy(dst, obj, width);
          return(idx);
       };
-      if ((opts & BNDL_ARRAY_MASK_ADD) != BNDL_BMERGE)
+      if ((opts & BNDL_BMASK_ADD) != BNDL_BMERGE)
          return(-1);
    };
 

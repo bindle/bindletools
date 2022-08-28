@@ -641,7 +641,7 @@ my_test_insert(
 
    mergeopt = (arrayopt & BNDL_ARRAY_MASK_DUPS);
    iteration = *list_lenp / dat_len;
-   switch(arrayopt & BNDL_ARRAY_MASK_ADD)
+   switch(arrayopt & BNDL_BMASK_ADD)
    {
       case BNDL_BINSERT:   action_name = "INSERT"; break;
       case BNDL_BMERGE:    action_name = "MERGE"; break;
@@ -737,7 +737,7 @@ my_test_remove(
 
    mergeopt = (arrayopt & BNDL_ARRAY_MASK_DUPS);
    iteration = (*list_lenp / dat_len) - 1;
-   switch(arrayopt & BNDL_ARRAY_MASK_ADD)
+   switch(arrayopt & BNDL_BMASK_ADD)
    {
       case BNDL_BINSERT:   action_name = "INSERT"; break;
       case BNDL_BMERGE:    action_name = "MERGE"; break;

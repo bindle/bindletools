@@ -134,7 +134,7 @@
 #define BNDL_ARRAY_FIRSTDUP      0x0020      ///< dup handling: add/return/remove first duplicate object in series of matching objects
 #define BNDL_ARRAY_ANYDUP        0x0040      ///< dup handling: add/return/remove any one duplicate object in series of matching objects
 #define BNDL_BDEFAULT            ( BNDL_BINSERT | BNDL_ARRAY_ANYDUP )                         ///< default sorted array options
-#define BNDL_ARRAY_MASK_ADD      ( BNDL_BINSERT | BNDL_BMERGE   | BNDL_BREPLACE )   ///< mask for add type
+#define BNDL_BMASK_ADD           ( BNDL_BINSERT | BNDL_BMERGE   | BNDL_BREPLACE )   ///< mask for add type
 #define BNDL_ARRAY_MASK_DUPS     ( BNDL_ARRAY_ANYDUP | BNDL_ARRAY_LASTDUP | BNDL_ARRAY_FIRSTDUP )  ///< mask for duplicate handling in sorted array
 #define BNDL_ARRAY_MASK          ( BNDL_ARRAY_MASK_ACTION | BNDL_ARRAY_MASK_DUPS )                 ///< mask of all sorted array options
 
