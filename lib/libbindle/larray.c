@@ -215,7 +215,7 @@ bindle_bindex(
             low = mid;
             break;
 
-            case BNDL_ARRAY_FIRSTDUP:
+            case BNDL_BDUPFIRST:
             high = mid;
             break;
 

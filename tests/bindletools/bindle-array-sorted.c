@@ -405,7 +405,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_FIRSTDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPFIRST;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -479,7 +479,7 @@ int main( int argc, char * argv[] )
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_VALUE;
-   merge    = BNDL_BMERGE | BNDL_ARRAY_FIRSTDUP;
+   merge    = BNDL_BMERGE | BNDL_BDUPFIRST;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -652,7 +652,7 @@ my_test_insert(
    };
    switch(mergeopt)
    {
-      case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
+      case BNDL_BDUPFIRST:  merge_type = "FIRST"; break;
       case BNDL_BDUPLAST:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
@@ -692,7 +692,7 @@ my_test_insert(
                return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
          break;
 
-         case BNDL_ARRAY_FIRSTDUP:
+         case BNDL_BDUPFIRST:
          if ( (x > 0) && (!(x % iteration)) )
             if (!(strcasecmp(list[x]->name, list[x-1]->name)))
                return(bindle_tests_error(opts, NULL, "bindle_badd(%s): first match not returned", action_name));
@@ -748,7 +748,7 @@ my_test_remove(
    };
    switch(mergeopt)
    {
-      case BNDL_ARRAY_FIRSTDUP:  merge_type = "FIRST"; break;
+      case BNDL_BDUPFIRST:  merge_type = "FIRST"; break;
       case BNDL_BDUPLAST:   merge_type = "LAST"; break;
       case BNDL_ARRAY_ANYDUP:    merge_type = "ANY"; break;
       case 0:              merge_type = "DEFAULT"; break;
@@ -785,7 +785,7 @@ my_test_remove(
                return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): first match not returned", action_name));
          break;
 
-         case BNDL_ARRAY_FIRSTDUP:
+         case BNDL_BDUPFIRST:
          if ( (x > 0) && (!(x % iteration)) )
             if (!(strcasecmp(list[x]->name, list[x-1]->name)))
                return(bindle_tests_error(opts, NULL, "bindle_bremove(%s): first match not returned", action_name));
@@ -833,7 +833,7 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((idx = bindle_bindex(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, NULL, compar)) == -1)
+         if ((idx = bindle_bindex(ptr, list, x, sizeof(MyData *), BNDL_BDUPFIRST, NULL, compar)) == -1)
             return(bindle_tests_error(opts, NULL, "bindle_bindex(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((size_t)idx != y)
             return(bindle_tests_error(opts, NULL, "bindle_bindex(); size: %zu; func: %s; idx: %zu; index mismatch", x, compar_name, y));
@@ -854,7 +854,7 @@ my_test_search(
             default:
             return(bindle_tests_error(opts, NULL, "unknown key"));
          };
-         if ((res = bindle_bsearch(ptr, list, x, sizeof(MyData *), BNDL_ARRAY_FIRSTDUP, compar)) == NULL)
+         if ((res = bindle_bsearch(ptr, list, x, sizeof(MyData *), BNDL_BDUPFIRST, compar)) == NULL)
             return(bindle_tests_error(opts, NULL, "bindle_bsearch(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
          if ((strcasecmp((*res)->name, list[y]->name)))
             return(bindle_tests_error(opts, NULL, "bindle_bsearch(); size: %zu; func: %s; idx: %zu; result name does not match", x, compar_name, y));
