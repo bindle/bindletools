@@ -1,0 +1,107 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_STRING" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_strchomp, bindle_strchop - Bindle Binary Tools string routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "size_t bindle_strchomp( char * " str ", const char * " separator " );"
+.sp
+.BI "char bindle_strchop( char * " str " );"
+.SH DESCRIPTION
+\fBbindle_strchomp\fR() and \fBbindle_strchop\fR() are based on the Perl
+routines \fBchomp\fR() and \fBchop\fR().
+
+\fBbindle_strchomp\fR() truncates \fIstr\fR based upon the value of
+\fIseparator\fR.  If \fIseparator\fR is a numeric value represented as a
+base 10 string. If \fIseparator\fR is not a numeric value, then
+\fBbindle_strchom\fR() removes the instances of string \fIseparator\fR from
+\fIstr\fR. If \fIseparator\fR is \fBNULL\fR, then the value \fI"\\n"\fR is
+used.  \fIstr\fR is modified in place.
+
+\fBbindle_strchop\fR() chops off the last character of \fIstr\fR.
+
+.SH RETURN VALUES
+\fBbindle_strchomp\fR() returns the number of characters removed from
+\fIstr\fR.
+
+\fBbindle_strchop\fR() returns the character chopped from end of \fIstr\fR. If
+\fIstr\fR is \fBNULL\fR or \fI""\fR, then 0 is returned.
+
+.SH EXAMPLE
+
+The following is an example of \fBbindle_strchomp\fR():
+
+   char str[256];
+   strncpy(str, "Hello WorldWorld", sizeof(str));
+   printf("before len: %zu\\n",    strlen(str));
+   printf("before str: \\"%s\\"\\n", str);
+   printf("after len:  %zu\\n",    bindle_strchomp(str, "World"));
+   printf("after str:  \\"%s\\"\\n", str);
+
+The above code results in the following output:
+
+   before len: 16
+   before str: "Hello WorldWorld"
+   after len:  10
+   after str:  "Hello "
+
+The following is an example of \fBbindle_strchop\fR():
+
+   char str[256];
+   strncpy(str, "Hello WorldWorld", sizeof(str));
+   printf("before str:   \\"%s\\"\\n", str);
+   printf("chopped char: '%c'\\n",   bindle_strchop(str));
+   printf("after str:    \\"%s\\"\\n", str);
+
+The above code results in the following output:
+
+   before str:   "Hello WorldWorld"
+   chopped char: 'd'
+   after str:    "Hello WorldWorl"
+
+.SH SEE ALSO
+.BR bindle_strings (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

@@ -1,0 +1,134 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_STRINGS" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_strings - Bindle Binary Tools string routines
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+
+.SH DESCRIPTION
+The Bindle Binaries Tools library is a collection of routines which implement
+commonly used tasks.  The string routines implemented in the library are
+contain many reimplementations of functions with origins such as BSD and Perl.
+
+.SH INDEX
+
+.TP 20
+bindle_basename(3)
+To be written.
+
+.TP 20
+bindle_basename_r(3)
+To be written.
+
+.TP 20
+bindle_dirname(3)
+To be written.
+
+.TP 20
+bindle_dirname_r(3)
+To be written.
+
+.TP 20
+bindle_strchomp(3)
+truncates string based upon the specified separator. \fBbindle_strchomp(3)\fR
+is based on the Perl implementation of \fBchomp\fR.
+
+.TP 20
+bindle_strchop(3)
+Removes the last character of the string. \fBbindle_strchop(3)\fR is based on
+the Perl implementation of \fBchop\fR.
+
+.TP 20
+bindle_strdup(3)
+To be written.
+
+.TP 20
+bindle_strexpand(3)
+To be written.
+
+.TP 20
+bindle_strlcpy(3)
+To be written.
+
+.TP 20
+bindle_strlcat(3)
+To be written.
+
+.TP 20
+bindle_strndup(3)
+To be written.
+
+.TP 20
+bindle_strtoargs(3)
+To be written.
+
+.TP 20
+bindle_strtobool(3)
+To be written.
+
+.TP 20
+bindle_strtrim(3)
+To be written.
+
+.TP 20
+bindle_strsadd(3)
+To be written.
+
+.TP 20
+bindle_strscount(3)
+To be written.
+
+.TP 20
+bindle_strsdup(3)
+To be written.
+
+.TP 20
+bindle_strsfree(3)
+To be written.
+
+.TP 20
+bindle_strsplit(3)
+To be written.
+
+.SH SEE ALSO
+.BR bindle_array (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
