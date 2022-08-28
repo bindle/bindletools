@@ -1,0 +1,115 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLETOOLS" "1" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "User Commands"
+.SH NAME
+bindletools - Bindle Binary Tools command line utility
+
+.SH SYNOPSIS
+.nf
+\fBbindletools\fR [OPTIONS] <widget> [<args>]
+.sp
+\fBbindletools-widget\fR [OPTIONS]
+.sp
+\fBbindletoolswidget\fR [OPTIONS]
+
+.SH DESCRIPTION
+The Bindle Binaries Tools utility is a command line wrapper for select functions
+from the Bindle Binaries Library.
+
+.SH OPTIONS
+
+.TP 25
+\fB-D\fR \fIlevel\fR, \fB--debug\fR=\fIlevel\fR
+set debug level
+
+.TP 25
+\fB-h\fR, \fB--help\fR
+print this usage information and exit
+
+.TP 25
+\fB-q\fR, \fB--quiet\fR, \fB--silent\fR
+do not print messages
+
+.TP 25
+\fB-V\fR, \fB--version\fR
+print version number and exit
+
+.TP 25
+\fB-v\fR, \fB--verbose\fR
+print verbose messages
+
+.SH WIDGETS
+
+.TP 20
+base16
+encode/decode base16 strings (RFC4648).
+
+.TP 20
+base32
+encode/decode base32 strings (RFC4648).
+
+.TP 20
+base32hex
+encode/decode base32hex strings (RFC4648).
+
+.TP 20
+base64
+encode/decode base64 strings (RFC4648).
+
+.TP 20
+crockfordbase32
+encode/decode Crockford's base32 strings.
+
+.TP 20
+urldesc
+parses URL
+
+.TP 20
+urlencoding
+encode/decode string for URL
+
+.SH SEE ALSO
+.BR bindletools-base16 (1),
+.BR bindletools-base32 (1),
+.BR bindletools-base32hex (1),
+.BR bindletools-base64 (1),
+.BR bindletools-crockfordbase32 (1),
+.BR bindletools-urldesc (1),
+.BR bindletools-urlencoding (1)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
