@@ -512,11 +512,11 @@ int my_compare_key_name(const void * a, const void * b)
 
 int my_compare_key_value(const void * a, const void *b)
 {
-   MyData * const *  x;
-   const int *       y;
-   x = a;
-   y = b;
-   return((*x)->value - *y);
+   MyData * const *  obj;
+   const int *       key;
+   obj = a;
+   key = b;
+   return((*obj)->value - *key);
 }
 
 
