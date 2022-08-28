@@ -258,10 +258,10 @@ bindle_dequeue(
 
 _BINDLE_F ssize_t
 bindle_enqueue(
+         void *                        obj,
          void **                       basep,
          size_t *                      nelp,
          size_t                        width,
-         void *                        obj,
          void * (*reallocbase)(void *, size_t) );
 
 
