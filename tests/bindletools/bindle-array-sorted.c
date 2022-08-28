@@ -863,6 +863,29 @@ my_test_search(
       };
    };
 
+   bindle_tests_verbose(opts, "testing   bsearch(        %s ) ...", compar_name);
+   for(x = 1; (x < (len+1)); x++)
+   {
+      for(y = 0; (y < x); y++)
+      {
+         switch(opts & MY_MASK)
+         {
+            case MY_OBJ_NAME:  ptr = &list[y];        break;
+            case MY_OBJ_VALUE: ptr = &list[y];        break;
+            case MY_KEY_NAME:  ptr = list[y]->name;   break;
+            case MY_KEY_VALUE: ptr = &list[y]->value; break;
+            default:
+            return(bindle_tests_error(opts, NULL, "unknown key"));
+         };
+         if ((res = bsearch(ptr, list, x, sizeof(MyData *), compar)) == NULL)
+            return(bindle_tests_error(opts, NULL, "bsearch(); size: %zu; func: %s; idx: %zu; search error", x, compar_name, y));
+         if ((strcasecmp((*res)->name, list[y]->name)))
+            return(bindle_tests_error(opts, NULL, "bsearch(); size: %zu; func: %s; idx: %zu; result name does not match", x, compar_name, y));
+         if ((*res)->value != list[y]->value)
+            return(bindle_tests_error(opts, NULL, "bsearch(); size: %zu; func: %s; idx: %zu; result value does not match", x, compar_name, y));
+      };
+   };
+
    return(0);
 }
 
