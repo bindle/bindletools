@@ -87,7 +87,7 @@ bindle_badd(
 
    // set default add option
    if ((opts & BNDL_ARRAY_MASK_ADD) == 0)
-      opts |= BNDL_ARRAY_MASK_ADD & BNDL_ARRAY_DEFAULT;
+      opts |= BNDL_ARRAY_MASK_ADD & BNDL_BDEFAULT;
 
    if (!(*nelp))
    {
@@ -174,7 +174,7 @@ bindle_bindex(
 
    // set default dup behavior
    if ((opts & BNDL_ARRAY_MASK_DUPS) == 0)
-      opts |= BNDL_ARRAY_DEFAULT & BNDL_ARRAY_MASK_DUPS;
+      opts |= BNDL_BDEFAULT & BNDL_ARRAY_MASK_DUPS;
 
    if (nel == 0)
    {
