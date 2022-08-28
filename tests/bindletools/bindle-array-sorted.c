@@ -339,12 +339,12 @@ int main( int argc, char * argv[] )
    free(list);
 
 
-   // insert data as sorted list using BNDL_ARRAY_INSERT
+   // insert data as sorted list using BNDL_BINSERT
    bindle_tests_verbose(opts, "resetting list ...");
    list     = NULL;
    list_len = 0;
    opts     = (opts & ~MY_MASK) | MY_OBJ_NAME;
-   merge    = BNDL_ARRAY_INSERT;
+   merge    = BNDL_BINSERT;
    if ((my_test_insert(opts, &list, &list_len, src, test, MY_LIST_LEN, merge)))
       return(1);
    if ((my_test_remove(opts, list, &list_len, src, test, MY_LIST_LEN, merge)))
@@ -643,7 +643,7 @@ my_test_insert(
    iteration = *list_lenp / dat_len;
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
-      case BNDL_ARRAY_INSERT:  action_name = "INSERT"; break;
+      case BNDL_BINSERT:  action_name = "INSERT"; break;
       case BNDL_ARRAY_MERGE:   action_name = "MERGE"; break;
       case BNDL_ARRAY_REPLACE: action_name = "REPLACE"; break;
       case 0:                     action_name = "DEFAULT"; break;
@@ -739,7 +739,7 @@ my_test_remove(
    iteration = (*list_lenp / dat_len) - 1;
    switch(arrayopt & BNDL_ARRAY_MASK_ADD)
    {
-      case BNDL_ARRAY_INSERT:  action_name = "INSERT"; break;
+      case BNDL_BINSERT:  action_name = "INSERT"; break;
       case BNDL_ARRAY_MERGE:   action_name = "MERGE"; break;
       case BNDL_ARRAY_REPLACE: action_name = "REPLACE"; break;
       case 0:                     action_name = "DEFAULT"; break;

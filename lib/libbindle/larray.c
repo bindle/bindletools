@@ -106,7 +106,7 @@ bindle_badd(
    // search for existing object which matches
    if ((idx = bindle_bindex(obj, *basep, *nelp, width, opts, &wouldbe, compar)) != -1)
    {
-      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_ARRAY_INSERT)
+      if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_BINSERT)
          return(-1);
       if ((opts & BNDL_ARRAY_MASK_ADD) == BNDL_ARRAY_REPLACE)
       {
