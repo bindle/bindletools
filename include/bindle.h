@@ -136,7 +136,6 @@
 #define BNDL_BDEFAULT            ( BNDL_BINSERT | BNDL_ARRAY_ANYDUP )                         ///< default sorted array options
 #define BNDL_BMASK_ADD           ( BNDL_BINSERT | BNDL_BMERGE   | BNDL_BREPLACE )   ///< mask for add type
 #define BNDL_BMASK_DUPS          ( BNDL_ARRAY_ANYDUP | BNDL_ARRAY_LASTDUP | BNDL_ARRAY_FIRSTDUP )  ///< mask for duplicate handling in sorted array
-#define BNDL_ARRAY_MASK          ( BNDL_ARRAY_MASK_ACTION | BNDL_BMASK_DUPS )                 ///< mask of all sorted array options
 
 
 // encoding methods
