@@ -76,6 +76,7 @@ lib_LTLIBRARIES				=
 lib_LIBRARIES				=
 man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_strchomp.3 \
+					  doc/mans/bindle_strdup.3 \
 					  doc/mans/bindle_strings.3 \
 					  doc/mans/bindle_strlcpy.3
 info_TEXINFOS				=
@@ -102,6 +103,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
 					  doc/mans/bindletools.1.in \
 					  doc/mans/bindle_strchomp.3.in \
+					  doc/mans/bindle_strdup.3.in \
 					  doc/mans/bindle_strings.3.in \
 					  doc/mans/bindle_strlcpy.3.in \
 					  tests/bindletools/README.md \
@@ -169,6 +171,9 @@ doc/mans/bindletools.1: Makefile $(srcdir)/doc/mans/bindletools.1.in
 doc/mans/bindle_strchomp.3: Makefile $(srcdir)/doc/mans/bindle_strchomp.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_strdup.3: Makefile $(srcdir)/doc/mans/bindle_strdup.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_strings.3: Makefile $(srcdir)/doc/mans/bindle_strings.3.in
 	@$(do_subst_dt)
 
@@ -182,6 +187,10 @@ install-data-local: install-man
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strchomp.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \
            ln -fs bindle_strchomp.3 bindle_strchop.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strdup.3;then\
+           cd $(DESTDIR)/$(mandir)/man3 && \
+           ln -fs bindle_strdup.3 bindle_strndup.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strlcpy.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \

@@ -71,7 +71,8 @@ the Perl implementation of \fBchop\fR.
 
 .TP 20
 bindle_strdup(3)
-To be written.
+Allocates memory and copies the specified string to the allocated memory.
+\fBbindle_strdup\fR() is based on the BSD implementation of \fBstrdup\fR().
 
 .TP 20
 bindle_strexpand(3)
@@ -91,7 +92,8 @@ Appends one string into another string and NULL terminates the result.
 
 .TP 20
 bindle_strndup(3)
-To be written.
+Allocates memory and copies the specified string to the allocated memory.
+\fBbindle_strndup\fR() is based on the BSD implementation of \fBstrndup\fR().
 
 .TP 20
 bindle_strtoargs(3)
