@@ -103,7 +103,8 @@ encode/decode string for URL
 .BR bindletools-base64 (1),
 .BR bindletools-crockfordbase32 (1),
 .BR bindletools-urldesc (1),
-.BR bindletools-urlencoding (1)
+.BR bindletools-urlencoding (1),
+.BR bindletools (3)
 
 .SH AUTHOR
 David M. Syzdek <david@syzdek.net>
