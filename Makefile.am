@@ -75,7 +75,13 @@ include_HEADERS				=
 lib_LTLIBRARIES				=
 lib_LIBRARIES				=
 man_MANS				= doc/mans/bindletools.1 \
+					  doc/mans/bindletools.3 \
 					  doc/mans/bindle_array.3 \
+					  doc/mans/bindle_bindex.3 \
+					  doc/mans/bindle_decode.3 \
+					  doc/mans/bindle_enqueue.3 \
+					  doc/mans/bindle_peek.3 \
+					  doc/mans/bindle_push.3 \
 					  doc/mans/bindle_strchomp.3 \
 					  doc/mans/bindle_strdup.3 \
 					  doc/mans/bindle_strings.3 \
@@ -103,7 +109,13 @@ EXTRA_MANS				=
 EXTRA_DIST				= $(doc_DATA) \
 					  autogen.sh \
 					  doc/mans/bindletools.1.in \
+					  doc/mans/bindletools.3.in \
 					  doc/mans/bindle_array.3.in \
+					  doc/mans/bindle_bindex.3.in \
+					  doc/mans/bindle_decode.3.in \
+					  doc/mans/bindle_enqueue.3.in \
+					  doc/mans/bindle_peek.3.in \
+					  doc/mans/bindle_push.3.in \
 					  doc/mans/bindle_strchomp.3.in \
 					  doc/mans/bindle_strdup.3.in \
 					  doc/mans/bindle_strings.3.in \
@@ -170,7 +182,25 @@ git-clean:
 doc/mans/bindletools.1: Makefile $(srcdir)/doc/mans/bindletools.1.in
 	@$(do_subst_dt)
 
+doc/mans/bindletools.3: Makefile $(srcdir)/doc/mans/bindletools.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_array.3: Makefile $(srcdir)/doc/mans/bindle_array.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_bindex.3: Makefile $(srcdir)/doc/mans/bindle_bindex.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_decode.3: Makefile $(srcdir)/doc/mans/bindle_decode.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_enqueue.3: Makefile $(srcdir)/doc/mans/bindle_enqueue.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_peek.3: Makefile $(srcdir)/doc/mans/bindle_peek.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_push.3: Makefile $(srcdir)/doc/mans/bindle_push.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_strchomp.3: Makefile $(srcdir)/doc/mans/bindle_strchomp.3.in
@@ -189,6 +219,27 @@ doc/mans/bindle_strlcpy.3: Makefile $(srcdir)/doc/mans/bindle_strlcpy.3.in
 install-exec-local:
 
 install-data-local: install-man
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_bindex.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_bindex.3 bindle_badd.3 && \
+	   ln -fs bindle_bindex.3 bindle_bremove.3 && \
+	   ln -fs bindle_bindex.3 bindle_bsearch.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_decode.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_decode.3 bindle_decode_size.3 && \
+	   ln -fs bindle_decode.3 bindle_encode.3 && \
+	   ln -fs bindle_decode.3 bindle_encode_size.3 && \
+	   ln -fs bindle_decode.3 bindle_encoding_verify.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_enqueue.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_enqueue.3 bindle_dequeue.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_push.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_push.3 bindle_pop.3; \
+	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strchomp.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \
            ln -fs bindle_strchomp.3 bindle_strchop.3; \
