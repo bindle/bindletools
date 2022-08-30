@@ -405,7 +405,7 @@ bindle_obj_alloc(
 
 
 _BINDLE_F void
-bindle_obj_release(
+bindle_release(
          bindle_obj_t *                obj );
 
 

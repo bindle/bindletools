@@ -93,7 +93,7 @@ bindle_free(
       free(ptr);
       return;
    };
-   bindle_obj_release(ptr);
+   bindle_release(ptr);
    return;
 }
 
@@ -117,7 +117,7 @@ bindle_obj_alloc(
 
 
 void
-bindle_obj_release(
+bindle_release(
          bindle_obj_t *                obj )
 {
    BindleDebugTrace();
