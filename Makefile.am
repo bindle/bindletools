@@ -159,6 +159,7 @@ if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
    noinst_PROGRAMS			+= examples/example-queue
    noinst_PROGRAMS			+= examples/example-stack
+   examples_DATA			+= examples/Makefile
    examples_DATA			+= examples/example-bsearch.c
    examples_DATA			+= examples/example-queue.c
    examples_DATA			+= examples/example-stack.c
