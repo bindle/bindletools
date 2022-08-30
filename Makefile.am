@@ -158,8 +158,10 @@ endif
 if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
    noinst_PROGRAMS			+= examples/example-queue
+   noinst_PROGRAMS			+= examples/example-stack
    examples_DATA			+= examples/example-bsearch.c
    examples_DATA			+= examples/example-queue.c
+   examples_DATA			+= examples/example-stack.c
 endif
 
 
@@ -173,6 +175,12 @@ examples_example_bsearch_SOURCES	= examples/example-bsearch.c
 examples_example_queue_DEPENDENCIES	= lib/libbindle.la
 examples_example_queue_LDADD		= lib/libbindle.la
 examples_example_queue_SOURCES		= examples/example-queue.c
+
+
+# macros for examples/example-stack
+examples_example_stack_DEPENDENCIES	= lib/libbindle.la
+examples_example_stack_LDADD		= lib/libbindle.la
+examples_example_stack_SOURCES		= examples/example-stack.c
 
 
 # macros for src/bindletools
