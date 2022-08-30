@@ -142,7 +142,10 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  include/bindle_prefix.h \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
-DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings
+DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings \
+					  --enable-libbindle \
+					  --enable-examples \
+					  --enable-documentation
 
 
 # conditional build
