@@ -98,6 +98,7 @@ bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				= examples/example-bsearch \
+					  examples/example-queue \
 					  src/bindletools
 EXTRA					=
 
@@ -156,7 +157,9 @@ if ENABLE_UTILITY
 endif
 if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
+   noinst_PROGRAMS			+= examples/example-queue
    examples_DATA			+= examples/example-bsearch.c
+   examples_DATA			+= examples/example-queue.c
 endif
 
 
@@ -164,6 +167,12 @@ endif
 examples_example_bsearch_DEPENDENCIES	= lib/libbindle.la
 examples_example_bsearch_LDADD		= lib/libbindle.la
 examples_example_bsearch_SOURCES	= examples/example-bsearch.c
+
+
+# macros for examples/example-queue
+examples_example_queue_DEPENDENCIES	= lib/libbindle.la
+examples_example_queue_LDADD		= lib/libbindle.la
+examples_example_queue_SOURCES		= examples/example-queue.c
 
 
 # macros for src/bindletools
