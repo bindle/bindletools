@@ -415,7 +415,7 @@ bindle_retain(
 
 
 _BINDLE_F intptr_t
-bindle_obj_retain_count(
+bindle_retain_count(
          bindle_obj_t *                obj );
 
 
