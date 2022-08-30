@@ -39,19 +39,94 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .nf
 \fB#include\fR \fB<bindle.h>\fR
 .sp
-.BI "void * bindle_dequeue( void *" base ", size_t *" nelp ", size_t " width " );"
+.BI "ssize_t bindle_enqueue( void * " obj ", void ** " basep ", size_t * " nelp ","
+.BI "           size_t " width ", void * (*" reallocbase ")(void *, size_t) );"
 .sp
-.BI "ssize_t bindle_enqueue( void ** " basep ", size_t * " nelp ", size_t " width ","
-.BI "           void * " obj ", void * (*" reallocbase ")(void *, size_t) );"
+.BI "void * bindle_dequeue( void * " base ", size_t * " nelp ", size_t  width );"
 
 .SH DESCRIPTION
- To be written.
+The \fBbindle_enqueue\fR() and \fBbindle_dequeue\fR() functions implement an
+array based queue. The elements in the array are ordered from newest to
+oldest with the most recently added element being the first element in the
+array and oldest element in the array being the last element. When adding an
+element to the queue, all existing elements are shifted by one position within
+the array. If \fIreallocbase\fR is NULL, \fBbindle_enqueue\fR() has a cost of
+O(n). \fBbindle_dequeue\fR() has a cost of O(1).
+.sp
+The size (in bytes) of each element of the array is specified by
+\fIwidth\fR.
+.sp
+\fBbindle_enqueue\fR() adds \fIobj\fR to a queue of *\fInelp\fR elements
+referenced by \fIbasep\fR. If \fIreallocbase\fR is not NULL,
+\fBbindle_enqueue\fR() will attempt to increase the size of the array by
+calling \fIreallocbase\fR. If \fIreallocbase\fR is NULL, it is up to the
+developer to not queue more elements than can be held by the array. If
+successful, the value referenced by \fInelp\fR will be incremented.
+.sp
+\fBbindle_dequeue\fR() removes and returns the next element in a queue of
+*\fInelp\fR elements pointed to by \fIbase\fR.  If successful, the value
+referenced by \fInelp\fR will be decremented.
 
 .SH RETURN VALUES
-\fBbindle_dequeue\fR() and \fBbindle_peek\fR return \fINULL\fR
-if an error occurs, otherwise a pointer to the object is returned.
-Upon success, \fBbindle_enqueue\fR() returns 0, otherwise -2 if a
-memory error occured and -1 for all other errors.
+\fBbindle_dequeue\fR() return \fINULL\fR if the queue does not contain any
+elements, otherwise a pointer to the next object is returned.
+.sp
+Upon success, \fBbindle_enqueue\fR() returns 0. If an error ocurred,
+\fBbindle_enqueue\fR() returns -1. If \fIreallocbase\fR is NULL,
+\fBbindle_enqueue\fR() will always return 0.
+
+.SH EXAMPLE
+.nf
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <bindle.h>
+
+struct wc {
+    unsigned value;
+    char *   name;
+} wcs[] = {
+    { 0xFFFFFF, "white"   }, { 0xC0C0C0, "silver"  },
+    { 0x808080, "gray"    }, { 0x000000, "black"   },
+    { 0xFF0000, "red"     }, { 0x800000, "maroon"  }
+};
+
+#define nr_wcs (sizeof(wcs) / sizeof(wcs[0]))
+
+int main(void)
+{
+    size_t      pos, nel, width;
+    ssize_t     rc;
+    struct wc   **list, *obj, **res;
+
+    nel   = 0;
+    list  = NULL;
+    width = sizeof(struct wc *);
+
+    for(pos = 0; (pos < nr_wcs); pos++)
+    {
+        obj = &wcs[pos];
+        printf("enqueuing: #%06x %s\\n", obj->value, obj->name);
+        rc = bindle_enqueue(&obj, (void **)&list, &nel, width, realloc);
+        if (rc == -1)
+        {
+            fprintf(stderr, "error adding %s to queue\\n", wcs[pos].name);
+            free(list);
+            exit(EXIT_FAILURE);
+        };
+    };
+
+    while((res = bindle_dequeue(list, &nel, width)) != NULL)
+    {
+        printf("dequeued: #%06x %s\\n", (*res)->value, (*res)->name);
+    };
+
+
+    free(list);
+
+    exit(EXIT_SUCCESS);
+}
+.fi
 
 .SH SEE ALSO
 .BR bindle_array (3),
