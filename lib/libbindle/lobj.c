@@ -80,6 +80,23 @@ bindle_verify_is_obj(
 /////////////////
 #pragma mark - Functions
 
+void *
+bindle_alloc(
+         size_t                        size,
+         void (*free_func)(void * ptr) )
+{
+   bindle_obj_t * obj;
+   BindleDebugTrace();
+   assert(size > sizeof(bindle_obj_t));
+   if ((obj = malloc(size)) == NULL)
+      return(NULL);
+   memset(obj, 0, size);
+   memcpy(obj->magic, BNDL_MAGIC, 8);
+   atomic_init(&obj->ref_count, 0);
+   obj->free_func = ((free_func)) ? free_func : &free;
+   return(obj);
+}
+
 
 void
 bindle_free(
@@ -95,24 +112,6 @@ bindle_free(
    };
    bindle_release(ptr);
    return;
-}
-
-
-void *
-bindle_obj_alloc(
-         size_t                        size,
-         void (*free_func)(void * ptr) )
-{
-   bindle_obj_t * obj;
-   BindleDebugTrace();
-   assert(size > sizeof(bindle_obj_t));
-   if ((obj = malloc(size)) == NULL)
-      return(NULL);
-   memset(obj, 0, size);
-   memcpy(obj->magic, BNDL_MAGIC, 8);
-   atomic_init(&obj->ref_count, 0);
-   obj->free_func = ((free_func)) ? free_func : &free;
-   return(obj);
 }
 
 

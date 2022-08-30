@@ -393,15 +393,15 @@ bindle_map_lookup_value(
 //-------------------//
 #pragma mark object prototypes
 
+_BINDLE_F void *
+bindle_alloc(
+         size_t                        size,
+         void (*free_func)(void * ptr) );
+
+
 _BINDLE_F void
 bindle_free(
          void *                        ptr );
-
-
-_BINDLE_F void *
-bindle_obj_alloc(
-         size_t                        size,
-         void (*free_func)(void * ptr) );
 
 
 _BINDLE_F void
