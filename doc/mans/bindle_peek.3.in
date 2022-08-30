@@ -42,13 +42,14 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .BI "void * bindle_peek( void * " base ", size_t " nel ", size_t " width " );"
 
 .SH DESCRIPTION
- To be written.
+\fBbindle_peek\fR() returns the next element from a stack or queue pointed to
+by \fIbase\fR of \fInel\fR elements. The returned element is not removed from
+the stack or queue. The size (in bytes) of each element of the array is
+specified by \fIwidth\fR.
 
 .SH RETURN VALUES
-\fBbindle_array_pop\fR() and \fBbindle_array_peek\fR return \fINULL\fR
-if an error occurs, otherwise a pointer to the object is returned.
-Upon success, \fBbindle_array_push\fR() returns 0, otherwise -2 if a
-memory error occured and -1 for all other errors.
+\fBbindle_peek\fR() returns \fINULL\fR if the stack or queue does not contain
+any elements, otherwise a pointer to the next object is returned.
 
 .SH SEE ALSO
 .BR bindle_dequeue (3),
