@@ -410,7 +410,7 @@ bindle_release(
 
 
 _BINDLE_F void *
-bindle_obj_retain(
+bindle_retain(
          bindle_obj_t *                obj );
 
 

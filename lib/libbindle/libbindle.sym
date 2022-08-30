@@ -67,7 +67,7 @@ bindle_map_lookup_value
 bindle_free
 bindle_obj_alloc
 bindle_release
-bindle_obj_retain
+bindle_retain
 bindle_obj_retain_count
 #
 # library option functions
