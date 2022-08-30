@@ -62,7 +62,7 @@ DEFS					=
 
 
 # custom directories
-
+examplesdir				= $(docdir)/examples
 
 # automake targets
 check_PROGRAMS				=
@@ -71,6 +71,7 @@ doc_DATA				= AUTHORS.md \
 					  COPYING.md \
 					  README.md \
 					  TODO.md
+examples_DATA				=
 include_HEADERS				=
 lib_LTLIBRARIES				=
 lib_LIBRARIES				=
@@ -96,7 +97,8 @@ noinst_SCRIPTS				=
 bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
-EXTRA_PROGRAMS				= src/bindletools
+EXTRA_PROGRAMS				= examples/example-bsearch \
+					  src/bindletools
 EXTRA					=
 
 
@@ -152,6 +154,16 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings \
 if ENABLE_UTILITY
    bin_PROGRAMS				+= src/bindletools
 endif
+if ENABLE_EXAMPLES
+   noinst_PROGRAMS			+= examples/example-bsearch
+   examples_DATA			+= examples/example-bsearch.c
+endif
+
+
+# macros for examples/example-bsearch
+examples_example_bsearch_DEPENDENCIES	= lib/libbindle.la
+examples_example_bsearch_LDADD		= lib/libbindle.la
+examples_example_bsearch_SOURCES	= examples/example-bsearch.c
 
 
 # macros for src/bindletools
