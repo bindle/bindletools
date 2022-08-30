@@ -365,7 +365,7 @@ bindle_enqueue(
    {
       size = width * (*nelp + 1);
       if ((ptr = (*reallocbase)(*basep, size)) == NULL)
-         return(-2);
+         return(-1);
       *basep = ptr;
    };
 
