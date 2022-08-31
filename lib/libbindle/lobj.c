@@ -142,7 +142,7 @@ bindle_retain(
 }
 
 
-intptr_t
+int
 bindle_retain_count(
          bindle_obj_t *                obj )
 {
@@ -150,7 +150,7 @@ bindle_retain_count(
    if (obj == NULL)
       return(0);
    assert(bindle_verify_is_obj(obj) == BNDL_YES);
-   return(atomic_fetch_add(&obj->ref_count, 0));
+   return((int)atomic_fetch_add(&obj->ref_count, 0));
 }
 
 
