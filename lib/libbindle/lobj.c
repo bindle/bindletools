@@ -115,6 +115,17 @@ bindle_free(
 }
 
 
+void *
+bindle_realloc(
+         void *                        ptr,
+         size_t                        size )
+{
+   BindleDebugTrace();
+   assert(size >= BNDL_OBJ_SIZE);
+   return(realloc(ptr, size));
+}
+
+
 void
 bindle_release(
          bindle_obj_t *                obj )

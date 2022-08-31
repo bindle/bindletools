@@ -405,6 +405,12 @@ bindle_free(
          void *                        ptr );
 
 
+_BINDLE_F void *
+bindle_realloc(
+         void *                        ptr,
+         size_t                        size );
+
+
 _BINDLE_F void
 bindle_release(
          bindle_obj_t *                obj );
