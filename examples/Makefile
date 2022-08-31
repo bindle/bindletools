@@ -33,6 +33,7 @@
 CFLAGS					+= -Wall -Werror
 LDLIBS					+= -lbindle
 PROGS					= example-bsearch \
+					  example-decode \
 					  example-queue \
 					  example-stack
 

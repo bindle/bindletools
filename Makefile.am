@@ -98,6 +98,7 @@ bin_PROGRAMS				=
 bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				= examples/example-bsearch \
+					  examples/example-decode \
 					  examples/example-queue \
 					  examples/example-stack \
 					  src/bindletools
@@ -158,10 +159,12 @@ if ENABLE_UTILITY
 endif
 if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
+   noinst_PROGRAMS			+= examples/example-decode
    noinst_PROGRAMS			+= examples/example-queue
    noinst_PROGRAMS			+= examples/example-stack
    examples_DATA			+= examples/Makefile
    examples_DATA			+= examples/example-bsearch.c
+   examples_DATA			+= examples/example-decode.c
    examples_DATA			+= examples/example-queue.c
    examples_DATA			+= examples/example-stack.c
 endif
@@ -171,6 +174,12 @@ endif
 examples_example_bsearch_DEPENDENCIES	= lib/libbindle.la
 examples_example_bsearch_LDADD		= lib/libbindle.la
 examples_example_bsearch_SOURCES	= examples/example-bsearch.c
+
+
+# macros for examples/example-decode
+examples_example_decode_DEPENDENCIES	= lib/libbindle.la
+examples_example_decode_LDADD		= lib/libbindle.la
+examples_example_decode_SOURCES		= examples/example-decode.c
 
 
 # macros for examples/example-queue
