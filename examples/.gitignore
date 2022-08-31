@@ -1,5 +1,6 @@
 /*.o
 /example-bsearch
 /example-decode
+/example-encode
 /example-queue
 /example-stack
