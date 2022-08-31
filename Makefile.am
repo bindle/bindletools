@@ -126,6 +126,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_strdup.3.in \
 					  doc/mans/bindle_strings.3.in \
 					  doc/mans/bindle_strlcpy.3.in \
+					  examples/Makefile \
 					  tests/bindletools/README.md \
 					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
