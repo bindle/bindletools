@@ -167,6 +167,7 @@ typedef struct _bindle_obj
    atomic_intptr_t         ref_count;
    void (*free_func)(void * ptr);
 } bindle_obj_t;
+#define BNDL_OBJ_SIZE sizeof(bindle_obj_t)
 
 
 // URL = scheme ":" ["//" authority] path ["?" query] ["#" fragment]

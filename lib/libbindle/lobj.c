@@ -87,7 +87,7 @@ bindle_alloc(
 {
    bindle_obj_t * obj;
    BindleDebugTrace();
-   assert(size >= sizeof(bindle_obj_t));
+   assert(size >= BNDL_OBJ_SIZE);
    if ((obj = malloc(size)) == NULL)
       return(NULL);
    memset(obj, 0, size);
