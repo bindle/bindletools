@@ -1,2 +1,4 @@
 /*.o
-/example-*
+/example-bsearch
+/example-queue
+/example-stack
