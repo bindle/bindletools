@@ -53,13 +53,56 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .BI "           size_t " n " );"
 
 .SH DESCRIPTION
- To be written.
+\fBbindle_decode\fR() decodes \fIn\fR bytes from \fIsrc\fR into \fIdst\fR
+buffer of \fIs\fR bytes according to the method specified by \fImethod\fR.
+\fBbindle_decode_size\fR() calculates the number of bytes required to decode
+\fIn\fR bytes of data encoded according to the method specified by
+\fImethod\fR.
+.sp
+Valid values of \fImethod\fR are:
+.RS 6
+.TP 20
+.B BNDL_NONE
+copy data without an encoding method.
+.TP 20
+.B BNDL_BASE32
+use base32 string encoding (RFC4648)
+.TP 20
+.B BNDL_BASE32HEX
+use base32hex string encoding (RFC4648)
+.TP 20
+.B BNDL_BASE64
+use base64 string encoding (RFC4648)
+.TP 20
+.B BNDL_HEX
+use base16 string encoding (RFC4648)
+.TP 20
+.B BNDL_CROCKFORD
+use Crockford's base32 string encoding
+.RE
+.PP
+\fBbindle_encode\fR() decodes \fIn\fR bytes from \fIsrc\fR into \fIdst\fR
+buffer of \fIs\fR bytes according to the method specified by \fImethod\fR.
+\fBbindle_encode\fR() will omit padding in the encoded data if \fInopad\fR is
+not 0. The result stored in \fIdst\fR will be a NULL terminated string.
+\fBbindle_encode_size\fR() calculates the number of bytes required to
+encode \fIn\fR bytes of data according to the method specified by
+\fImethod\fR.
+.sp
+\fBbindle_encoding_verify\fR() verifies that \fIn\fR bytes of data in
+\fIsrc\fR are encoded according to encoding specified by \fImethod\fR.
 
 .SH RETURN VALUES
- To be written.
-
-.SH EXAMPLE
- To be written.
+If successful \fBbindle_decode\fR() and \fBbindle_encode\fR() return the
+number of bytes encoded or decoded into \fIdst\fR. If an error occurs, errno
+is set and -1 is returned.
+.sp
+If successful \fBbindle_decode_size\fR() and \fBbindle_encode_size\fR() return
+the number of bytes required to encode or decode \fIn\fR bytes of data. If an
+error occurs, errno is set and -1 is returned.
+.sp
+\fBbindle_encoding_verify\fR() returns 0 if the data is correctly encoded. If
+an error occurred, errno is set and -1 is returned.
 
 .SH SEE ALSO
 .BR bindletools (3)
