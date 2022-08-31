@@ -99,6 +99,7 @@ bin_SCRIPTS				=
 sbin_SCRIPTS				=
 EXTRA_PROGRAMS				= examples/example-bsearch \
 					  examples/example-queue \
+					  examples/example-stack \
 					  src/bindletools
 EXTRA					=
 
