@@ -145,6 +145,7 @@ and \fBbsearch\fR(); and removes objects from the list using
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <bindle.h>
 
 struct wc {
