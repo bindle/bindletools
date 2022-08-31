@@ -15,7 +15,6 @@ All rights reserved.
    * libbindle Man Pages
      - write bindle_basename.3
      - write bindle_debug.3
-     - write bindle_decode.3
      - write bindle_dirname.3
      - write bindle_filetostr.3
      - write bindle_get_option.3
