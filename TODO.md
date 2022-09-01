@@ -24,7 +24,6 @@ All rights reserved.
      - write bindle_readline.3
      - write bindle_strexpand.3
      - write bindle_strtoargs.3
-     - write bindle_strtrim.3
      - write bindle_url_decode.3
 
 #### libbindle
