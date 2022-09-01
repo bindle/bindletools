@@ -21,7 +21,6 @@ All rights reserved.
      - write bindle_strexpand.3
      - write bindle_strsplit.3
      - write bindle_strtoargs.3
-     - write bindle_strtobool.3
      - write bindle_strtrim.3
      - write bindle_urldesc.3
      - write bindle_url_decode.3
