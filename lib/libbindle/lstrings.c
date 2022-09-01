@@ -78,6 +78,7 @@ bindle_strsadd(
 {
    size_t     count;
    char **    strs;
+   char *     dup;
 
    BindleDebugTrace();
 
@@ -86,14 +87,18 @@ bindle_strsadd(
 
    count = bindle_strscount(*strsp);
 
+   // copy string
+   if ((dup = bindle_strdup(str)) == NULL)
+      return(ENOMEM);
+
    // increase size of array
    if ((strs = realloc(*strsp, (sizeof(char *)*(count+2)))) == NULL)
+   {
+      free(dup);
       return(ENOMEM);
+   };
    *strsp        = strs;
-
-   // copy string
-   if ((strs[count] = bindle_strdup(str)) == NULL)
-      return(ENOMEM);
+   strs[count]   = dup;
 
    // terminate array
    count++;
