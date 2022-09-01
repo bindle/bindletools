@@ -1,0 +1,73 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_REFCOUNT" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_basename, bindle_basename_r - Bindle Binary Tools string routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "char * bindle_basename( const char * " path " );"
+.sp
+.BI "char * bindle_basename_r( const char * " path ", char * " bname ","
+.BI "           size_t " bnamelen " );"
+.fi
+
+.SH DESCRIPTION
+The \fBbindle_basename\fR() function strips the trialing '/' characters from
+pathname pointed to by \fIpath\fR and returns a pointer to the last component
+of the pathname. If \fIpath\fR is NULL, an empty string, or only contains `/'
+characters, the string "." is returned. \fBbindle_basename\fR() uses a static
+internal buffer and does not modify the value of \fIpath\fR.
+\fBbindle_basename_r\fR() uses the buffer referenced by \fIbname\fR of
+\fIbnamelen\fR bytes instead of an internal buffer, but is otherwise
+identical to \fBbindle_basename\fR().
+
+.SH RETURN VALUES
+\fBbindle_basename\fR() and \fBbindle_basename_r\fR() return a pointer to the
+string containing the last component of the pathname pointed to by \fIpath\fR.
+
+.SH SEE ALSO
+.BR bindle_dirname (3),
+.BR dirname (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

@@ -13,7 +13,6 @@ All rights reserved.
      - write bindletools-urldesc.1
      - write bindletools-urlencoding.1
    * libbindle Man Pages
-     - write bindle_basename.3
      - write bindle_debug.3
      - write bindle_filetostr.3
      - write bindle_get_option.3
