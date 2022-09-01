@@ -47,12 +47,12 @@ Bindle Binaries Tools (libbindle, -lbindle)
 
 .SH DESCRIPTION
 The \fBbindle_dirname\fR() function returns a pointer to the parent directory
-of the pathname pointed to by \fIpath\fR. If \fIpath\fR is a NULL, an empty
+of the pathname pointed to by \fIpath\fR. If \fIpath\fR is NULL, an empty
 string, or does not contain a `/' character, the string "." is returned.
-\fBbindle_dirname\fR() uses a static buffer and does not modify the value of
-\fIpath\fR. \fBbindle_dirname_r\fR() uses the buffer referenced by \fIdname\fR
-of \fIdnamelen\fR bytes instead of an internal buffer, but is otherwise
-identical to \fBbindle_dirname\fR().
+\fBbindle_dirname\fR() uses a static internal buffer and does not modify the
+value of \fIpath\fR. \fBbindle_dirname_r\fR() uses the buffer referenced by
+\fIdname\fR of \fIdnamelen\fR bytes instead of an internal buffer, but is
+otherwise identical to \fBbindle_dirname\fR().
 
 .SH RETURN VALUES
 \fBbindle_dirname\fR() and \fBbindle_dirname_r\fR() return a pointer to the
