@@ -80,6 +80,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_array.3 \
 					  doc/mans/bindle_bindex.3 \
 					  doc/mans/bindle_decode.3 \
+					  doc/mans/bindle_dirname_r.3 \
 					  doc/mans/bindle_enqueue.3 \
 					  doc/mans/bindle_peek.3 \
 					  doc/mans/bindle_push.3 \
@@ -121,6 +122,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_array.3.in \
 					  doc/mans/bindle_bindex.3.in \
 					  doc/mans/bindle_decode.3.in \
+					  doc/mans/bindle_dirname_r.3.in \
 					  doc/mans/bindle_enqueue.3.in \
 					  doc/mans/bindle_peek.3.in \
 					  doc/mans/bindle_push.3.in \
@@ -258,6 +260,9 @@ doc/mans/bindle_bindex.3: Makefile $(srcdir)/doc/mans/bindle_bindex.3.in
 doc/mans/bindle_decode.3: Makefile $(srcdir)/doc/mans/bindle_decode.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_dirname_r.3: Makefile $(srcdir)/doc/mans/bindle_dirname_r.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_enqueue.3: Makefile $(srcdir)/doc/mans/bindle_enqueue.3.in
 	@$(do_subst_dt)
 
@@ -298,6 +303,10 @@ install-data-local: install-man
 	   ln -fs bindle_decode.3 bindle_encode.3 && \
 	   ln -fs bindle_decode.3 bindle_encode_size.3 && \
 	   ln -fs bindle_decode.3 bindle_encoding_verify.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_dirname_r.3;then \
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_dirname_r.3 bindle_dirname.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_enqueue.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \
