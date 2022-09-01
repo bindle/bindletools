@@ -246,7 +246,10 @@ bindle_urldesc2str(
    char *                  url;
 
    if (budp == NULL)
+   {
+      errno = EINVAL;
       return(NULL);
+   };
 
    // determine if host is an IPv6 address
    is_ipv6addr = 0;
