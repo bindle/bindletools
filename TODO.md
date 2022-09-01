@@ -19,7 +19,6 @@ All rights reserved.
      - write bindle_getpass.3
      - write bindle_readline.3
      - write bindle_strexpand.3
-     - write bindle_strsadd.3
      - write bindle_strsplit.3
      - write bindle_strtoargs.3
      - write bindle_strtobool.3

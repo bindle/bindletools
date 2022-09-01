@@ -89,7 +89,8 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_strchomp.3 \
 					  doc/mans/bindle_strdup.3 \
 					  doc/mans/bindle_strings.3 \
-					  doc/mans/bindle_strlcpy.3
+					  doc/mans/bindle_strlcpy.3 \
+					  doc/mans/bindle_strsadd.3
 info_TEXINFOS				=
 noinst_DATA				=
 noinst_LTLIBRARIES			=
@@ -133,6 +134,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_strdup.3.in \
 					  doc/mans/bindle_strings.3.in \
 					  doc/mans/bindle_strlcpy.3.in \
+					  doc/mans/bindle_strsadd.3.in \
 					  examples/Makefile \
 					  tests/bindletools/README.md \
 					  m4/bindle-doxygen.m4 \
@@ -292,6 +294,9 @@ doc/mans/bindle_strings.3: Makefile $(srcdir)/doc/mans/bindle_strings.3.in
 doc/mans/bindle_strlcpy.3: Makefile $(srcdir)/doc/mans/bindle_strlcpy.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_strsadd.3: Makefile $(srcdir)/doc/mans/bindle_strsadd.3.in
+	@$(do_subst_dt)
+
 # local targets
 install-exec-local:
 
@@ -345,6 +350,12 @@ install-data-local: install-man
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strlcpy.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \
            ln -fs bindle_strlcpy.3 bindle_strlcat.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strsadd.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_strsadd.3 bindle_strscount.3 && \
+	   ln -fs bindle_strsadd.3 bindle_strsdup.3 && \
+	   ln -fs bindle_strsadd.3 bindle_strsfree.3; \
 	fi;
 
 uninstall-local:

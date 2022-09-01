@@ -1,0 +1,130 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_STRINGS" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_strsadd, bindle_strscount, bindle_strsdup, bindle_strsfree - Bindle Binary Tools string array routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_strsadd( char *** " strsp ", const char * " str " );"
+.sp
+.BI "size_t bindle_strscount( char * const * " strs " );"
+.sp
+.BI "int bindle_strsdup( char *** " dstp ", char * const * " src " );"
+.sp
+.BI "void bindle_strsfree( char ** " strs " );"
+.fi
+
+.SH DESCRIPTION
+These functions manipulate NULL terminated arrays of strings. The
+\fBbindle_strsadd\fR() increases the size of the array referenced by
+\fIstrsp\fR, duplicates the string at \fIstr\fR, and appends the string to the
+end of the array. The \fBbindle_strscount\fR() function counts the number of
+strings in the array pointed to by \fIstrs\fR. The function
+\fBbindle_strsdup\fR() duplicates the array of strings pointed to by
+\fIsrc\fR and saves the duplicate array as a reference in \fIdstp\fR. The
+\fBbindle_strsfree\fR() frees the memory used by the array pointed to by
+\fIstrs\fR and the strings within the array.
+
+.SH RETURN VALUES
+Upon success, \fBbindle_strsadd\fR() and \fBbindle_strsdup\fR() return
+\fBBNDL_SUCCESS\fR, otherwise an error number suitable for \fBstrerror\fR()
+is returned.
+.sp
+\fBbindle_strscount\fR() returns the number of strings contained within
+\fIstrs\fR.
+
+.SH EXAMPLE
+.nf
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <bindle.h>
+
+int main(int argc, char * argv[])
+{
+    int  i, rc;
+    char **strs, **dups;
+
+    strs = NULL;
+    dups = NULL;
+
+    if (argc < 2) {
+        exit(EXIT_SUCCESS);
+    };
+
+    for(i = 1; (i < argc); i++) {
+        rc = bindle_strsadd(&strs, argv[i]);
+        if (rc != BNDL_SUCCESS) {
+            fprintf(stderr, "error: %s\\n", strerror(rc));
+            exit(EXIT_FAILURE);
+        };
+    };
+
+    printf("string count: %zu\\n", bindle_strscount(strs));
+
+    rc = bindle_strsdup(&dups, strs);
+    if (rc != BNDL_SUCCESS) {
+        fprintf(stderr, "error: %s\\n", strerror(rc));
+        bindle_strsfree(strs);
+        exit(EXIT_FAILURE);
+    };
+
+    for(i = 0; (strs[i] != NULL); i++) {
+        printf("string %i: %s\\n", i, strs[i]);
+    };
+
+    printf("duplicate count: %zu\\n", bindle_strscount(dups));
+
+    bindle_strsfree(strs);
+    bindle_strsfree(dups);
+
+    exit(EXIT_SUCCESS);
+}
+.fi
+
+.SH SEE ALSO
+.BR bindletools (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
