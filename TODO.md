@@ -3,6 +3,10 @@ Bindle Binaries Tools
 Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
 All rights reserved.
 
+#### autotools
+
+#### bindletools
+
 #### documentation
    * bindletools Man Pages
      - write bindletools-base16.1
@@ -23,4 +27,8 @@ All rights reserved.
      - write bindle_strtoargs.3
      - write bindle_strtrim.3
      - write bindle_url_decode.3
+
+#### libbindle
+   * merge bindle_url_decode() and bindle_url_encode() family of functions
+     into bindle_decode() and bindle_encode() family of functions.
 
