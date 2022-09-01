@@ -132,7 +132,6 @@ bindle_basename_r(
    bnamelen = (len > bnamelen) ? bnamelen : len;
    bindle_strlcpy(bname, &path[pos], bnamelen);
 
-
    return(bname);
 }
 
