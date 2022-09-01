@@ -20,7 +20,6 @@ All rights reserved.
      - write bindle_get_option.3
      - write bindle_getpass.3
      - write bindle_readline.3
-     - write bindle_refcount.3
      - write bindle_strexpand.3
      - write bindle_strsadd.3
      - write bindle_strsplit.3

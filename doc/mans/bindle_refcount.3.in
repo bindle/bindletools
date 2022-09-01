@@ -1,0 +1,191 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_REFCOUNT" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_alloc, bindle_realloc, bindle_free, bindle_release, bindle_retain, bindle_retain_count - Bindle Binary Tools reference counting routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "void * bindle_alloc( size_t " size ", void (*" free_func ")(void * ptr) );"
+.sp
+.BI "void * bindle_realloc( void * " ptr ", size_t " size " );"
+.sp
+.BI "void bindle_free( void * " ptr " );"
+.sp
+.BI "void bindle_release( bindle_obj_t * " obj " );"
+.sp
+.BI "void * bindle_retain( bindle_obj_t * " obj " );"
+.sp
+.BI "int bindle_retain_count( bindle_obj_t * " obj " );"
+.fi
+
+.SH DESCRIPTION
+\fBbindle_alloc\fR() allocates \fIsize\fR bytes of memory. \fIsize\fR must be
+greater than or equal to \fBBNDL_OBJ_SIZE\fR. If \fIfree_func\fR is not NULL,
+the function pointer must reference a function to free the allocated memory
+once the reference counter reaches 0. If \fIfree_func\fR is NULL, then the
+function \fBfree\fR() is used. The first \fBBNDL_OBJ_SIZE\fR bytes of memory
+are initialized with state data for the referencing counting functions and the
+remaining bytes are initialized to 0. The memory returned by
+\fBbindle_alloc\fR() is initialized with a reference count of 0 and must be
+passed to \fBbindle_retain\fR() to increment the reference count. The memory
+is usually retained by a initialization function.
+.sp
+The actual structure returned by \fBbindle_alloc\fR() or passed to
+\fBbindle_free\fR() will depend upon the psuedo object being defined, however
+the structure must have \fBbindle_obj_t\fR as the first member. The data type
+\fBbindle_obj_t\fR is defined as:
+.sp
+.RS 6
+.nf
+typedef struct {
+    uint8_t          magic[8];
+    atomic_intptr_t  ref_count;
+    void (*free_func)(void * ptr);
+} bindle_obj_t;
+.fi
+.RE
+.PP
+.sp
+The members of \fBbindle_obj_t\fR are used by \fBbindle_free\fR(),
+\fBbindle_release\fR(), \fBbindle_retain\fR(), and \fBbindle_retain_count\fR()
+to determine if the passed memory is utilizing reference counting as
+implemented by the library; to track the state of the managed memory; and to
+free the memory when the reference counter reaches zero.  Members of
+\fBbindle_obj_t\fR should not be accessed or modified directly.
+.sp
+Using \fBrealloc\fR(), the \fBbindle_realloc\fR() function tries to change the
+size of teh allocation pointed to by \fIptr\fR to \fIsize\fR, and returns
+\fIptr\fR. \fIsize\fR must be greater than or equal to \fBBNDL_OBJ_SIZE\fR.
+If \fIsize\fR is larger than the previous allocation, the additional memory
+is not initialized.
+.sp
+The \fBbindle_free\fR() function either frees the memory allocation at
+\fIptr\fR or decrements the reference count of the allocation referenced by
+\fIptr\fR.  The pointer \fIptr\fR is cast to a \fBbindle_obj_t\fR pointer and
+the value of \fImagic\fR is tested against the value of the magic number used
+for reference counter allocations. If the value matches the magic number, the
+reference count is decremented and will call the \fIfree_func\fR function
+pointer is called if the reference count is less than 1. If the \fImagic\fR
+values does not match the magic number used for reference counters,
+\fIfree\fR() is called with \fIptr\fR.
+.sp
+The \fBbindle_release\fR() function decrements the reference counter of
+\fIobj\fR. If the resulting reference count is less than 1, \fIfree_func\fR
+is called with \fIobj\fR as the argument.  The \fBbindle_retain\fR()
+increments the reference counter of \fIobj\fR. The \fBbindle_retain_count\fR()
+function returns the current reference count.
+.sp
+
+.SH EXAMPLE
+.nf
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <bindle.h>
+
+struct student {
+   bindle_obj_t   obj;
+   int            year;
+   int            grade;
+   char *         name;
+};
+
+static void
+student_free( void * ptr ) {
+   struct student * student = ptr;
+   const char *     name;
+   if (student == NULL)
+      return;
+   name = ((student->name)) ? student->name : "unknown";
+   printf("Freeing data struct for \"%s\".\\n", name);
+   if (student->name == NULL)
+      free(student->name);
+   free(student);
+   return;
+}
+
+static struct student *
+student_init( const char * name, int year ) {
+   size_t s;
+   struct student * person;
+   s = sizeof(struct student);
+   person = bindle_alloc(s, &student_free);
+   if (person == NULL) {
+      fprintf(stderr, "out of virtual memory\\n");
+      return(NULL);
+   };
+   person->year = year;
+   person->name = bindle_strdup(name);
+   if (person->name == NULL) {
+      fprintf(stderr, "out of virtual memory\\n");
+      bindle_free(person);
+      return(NULL);
+   };
+   return(bindle_retain(&person->obj));
+}
+
+int
+main( void ) {
+   struct student * student;
+   student = student_init("John Doe", 5);
+   if (student == NULL) {
+      fprintf(stderr, "out of virtual memory\\n");
+      return(1);
+   };
+   printf("1st ref count: %i\\n", bindle_retain_count(&student->obj));
+   bindle_retain(&student->obj);
+   printf("2nd ref count: %i\\n", bindle_retain_count(&student->obj));
+   bindle_free(student);
+   printf("3rd ref count: %i\\n", bindle_retain_count(&student->obj));
+   bindle_free(student);
+   return(0);
+}
+.fi
+
+.SH SEE ALSO
+.BR malloc (3),
+.BR realloc (3),
+.BR free (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

@@ -83,6 +83,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_enqueue.3 \
 					  doc/mans/bindle_peek.3 \
 					  doc/mans/bindle_push.3 \
+					  doc/mans/bindle_refcount.3 \
 					  doc/mans/bindle_strchomp.3 \
 					  doc/mans/bindle_strdup.3 \
 					  doc/mans/bindle_strings.3 \
@@ -101,6 +102,7 @@ EXTRA_PROGRAMS				= examples/example-bsearch \
 					  examples/example-decode \
 					  examples/example-encode \
 					  examples/example-queue \
+					  examples/example-refcount \
 					  examples/example-stack \
 					  src/bindletools
 EXTRA					=
@@ -122,6 +124,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_enqueue.3.in \
 					  doc/mans/bindle_peek.3.in \
 					  doc/mans/bindle_push.3.in \
+					  doc/mans/bindle_refcount.3.in \
 					  doc/mans/bindle_strchomp.3.in \
 					  doc/mans/bindle_strdup.3.in \
 					  doc/mans/bindle_strings.3.in \
@@ -164,12 +167,14 @@ if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-decode
    noinst_PROGRAMS			+= examples/example-encode
    noinst_PROGRAMS			+= examples/example-queue
+   noinst_PROGRAMS			+= examples/example-refcount
    noinst_PROGRAMS			+= examples/example-stack
    examples_DATA			+= examples/Makefile
    examples_DATA			+= examples/example-bsearch.c
    examples_DATA			+= examples/example-decode.c
    examples_DATA			+= examples/example-encode.c
    examples_DATA			+= examples/example-queue.c
+   examples_DATA			+= examples/example-refcount.c
    examples_DATA			+= examples/example-stack.c
 endif
 
@@ -196,6 +201,12 @@ examples_example_encode_SOURCES		= examples/example-encode.c
 examples_example_queue_DEPENDENCIES	= lib/libbindle.la
 examples_example_queue_LDADD		= lib/libbindle.la
 examples_example_queue_SOURCES		= examples/example-queue.c
+
+
+# macros for examples/example-refcount
+examples_example_refcount_DEPENDENCIES	= lib/libbindle.la
+examples_example_refcount_LDADD		= lib/libbindle.la
+examples_example_refcount_SOURCES	= examples/example-refcount.c
 
 
 # macros for examples/example-stack
@@ -256,6 +267,9 @@ doc/mans/bindle_peek.3: Makefile $(srcdir)/doc/mans/bindle_peek.3.in
 doc/mans/bindle_push.3: Makefile $(srcdir)/doc/mans/bindle_push.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_refcount.3: Makefile $(srcdir)/doc/mans/bindle_refcount.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_strchomp.3: Makefile $(srcdir)/doc/mans/bindle_strchomp.3.in
 	@$(do_subst_dt)
 
@@ -292,6 +306,15 @@ install-data-local: install-man
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_push.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \
 	   ln -fs bindle_push.3 bindle_pop.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_refcount.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_refcount.3 bindle_alloc.3 && \
+	   ln -fs bindle_refcount.3 bindle_free.3 && \
+	   ln -fs bindle_refcount.3 bindle_realloc.3 && \
+	   ln -fs bindle_refcount.3 bindle_release.3 && \
+	   ln -fs bindle_refcount.3 bindle_retain.3 && \
+	   ln -fs bindle_refcount.3 bindle_retain_count.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_strchomp.3;then\
            cd $(DESTDIR)/$(mandir)/man3 && \
