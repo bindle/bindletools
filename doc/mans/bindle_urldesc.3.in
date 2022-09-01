@@ -1,0 +1,176 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_is_url, bindle_urldesc_parse, bindle_urldesc2str, bindle_urldesc_free, bindle_urldesc_resolve - Bindle Binary Tools URL parsing routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_is_url( const char * " str " );"
+.sp
+.BI "int bindle_urldesc_parse( const char * " url ", BindleURLDesc ** " budpp " );"
+.sp
+typedef struct bindle_url_desc {
+   char *      bud_scheme;    /* URI scheme */
+   char *      bud_userinfo;  /* user credentials */
+   char *      bud_host;      /* host to contact */
+   char *      bud_service;   /* service name or port on host */
+   uintptr_t   bud_port;      /* port on host */
+   char *      bud_path;      /* path on host to resource */
+   char *      bud_query;     /* non-hierarchical data of resource */
+   char *      bud_fragment;  /* section or secondary resource */
+   void **     bud_sockaddrs; /* list of addresses */
+} BindleURLDesc;
+.sp
+.BI "char * bindle_urldesc2str( BindleURLDesc * " budp " );"
+.sp
+.BI "void bindle_urldesc_free( BindleURLDesc * " budp " );"
+.sp
+.BI "int bindle_urldesc_resolve( BindleURLDesc * " budp ", int " family ","
+.BI "           unsigned " default_port " );"
+.fi
+
+.SH DESCRIPTION
+These routines provide a framework for parsing and generating general URL
+(Uniform Resource Locators) or URI (Uniform Resource Identifier). The syntax
+of a URI is defined as:
+.sp
+.RS 4
+.nf
+URI = \fIscheme\fR ":" ["//" authority] \fIpath\fR ["?" \fIquery\fR] ["#" \fIfragment\fR]
+authority = [\fIuserinfo\fR "@"] \fIhost\fR [":" \fIport\fR]
+.fi
+.RE
+.PP
+where:
+.RS 4
+.PD 0
+.TP 9
+\fIscheme\fR
+is the specification to use for the URI. The \fIscheme\fR is stored as a
+string to \fIbud_scheme\fR.
+.TP 9
+\fIuserinfo\fR
+is the optional username and password. \fIuserinfo\fR is stored as a string
+to \fIbud_userinfo\fR.
+.TP 9
+\fIhost\fR
+is the host providing the resource. \fIhost\fR is stored as a string to
+\fIbud_host\fR.
+.TP 9
+\fIport\fR
+is the numeric port number or service name on the \fIhost\fR providing the
+service. \fIport\fR is stored as a string to \fIbud_service\fR and stored as
+an integer to \fIbud_port\fR if \fIport\fR is a numeric value.
+.TP 9
+\fIpath\fR
+is the path to the resource. \fIpath\fR is stored as a string to \fIbud_path\fR.
+.TP 9
+\fIquery\fR
+is the non-hierarchical data identifying the resource. \fIquery\fR is stored
+as a string to \fIbud_query\fR.
+.TP 9
+\fIfragment\fR
+is a section of the resource or a secondary resource. \fIfragment\fR is stored
+as a string to \fIbud_fragment\fR.
+.RE
+.PD
+.PP
+Examples:
+.RS 4
+.nf
+https://example.com:8443/demo/
+https://example/demo/#bindletools
+https://example/demo/?q=example
+ftp://jdoe@example.com/pub/demo.txt
+file:/pub/demo.txt
+http://jdoe:cred@example.com:8080/demo/?q=example#bindletools
+.fi
+.RE
+.PP
+The \fBbindle_is_url\fR() function evaluates \fIstr\fR and returns 0 if the
+string does not follow the syntax of a URL or a non-zero value if the string
+follows the syntax of a URL.
+.sp
+The \fBbindle_urldesc_parse\fR() function allocates memory for a
+\fBBindleURLDesc\fR structure, parses \fIurl\fR into components, and stores
+the compnents to the allocated \fBBindleURLDesc\fR structure. \fIbudpp\fR is
+updated with a reference to the \fBBindleURLDesc\fR structure which must be
+freed using \fBbindle_urldesc_free\fR(). The \fBbindle_urldesc_free\fR()
+function frees the memory used by a \fBBindleURLDesc\fR structure pointed to
+by \fIbudp\fR.
+.sp
+The \fBbindle_urldesc_resolve\fR() function resolves the host name specified
+by the \fIbud_host\fR member of \fIbudp\fR. The results are added to a NULL
+terminated array of \fBstruct sockaddr\fR and saved as to the
+\fIbud_sockaddrs\fR member of \fIbudp\fR.  Resolution may be limited to
+specific address families by setting \fIfamily\fR to either \fBAF_INET\fR,
+\fBAF_INET6\fR, \fBAF_UNSPEC\fR. Setting \fIfamily\fR to \fBAF_UNSPEC\fR or 0
+results in all available address families being used for resolution. If set,
+\fIdefault_port\fR specifies the default port number to use if the
+\fIbud_service\fR member of \fIbudp\fR is NULL.
+.sp
+The \fBbindle_urldesc2str\fR() function generates a URL string from the data
+contained within \fIbudp\fR.  The returned string must be freed using
+\fBbindle_free\fR().
+
+.SH RETURN VALUES
+The \fBbindle_is_url\fR() function returns 0 if \fIstr\fR does not follows the
+syntax of a URL, or returns a non-zero value if \fIstr\fR follows the syntax
+of a URL.
+.sp
+The \fBbindle_urldesc_parse\fR() function returns 0 on success or one of the
+error codes listed in errno(2) if an error occurs.
+.sp
+The \fBbindle_urldesc_resolve\fR() function returns 0 on success or one of the
+error codes listed in gai_strerror(3) if an error occurs.
+.sp
+The \fBbindle_urldesc2str\fR() returns a pointer to the generated URL string
+on success, otherwise errno is set and NULL is returned. The result must be
+freed with \fBbindle_free\fR().
+
+.SH SEE ALSO
+.BR bindletools (3),
+.BR bindletools-urldesc (1)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

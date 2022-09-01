@@ -91,7 +91,8 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_strings.3 \
 					  doc/mans/bindle_strlcpy.3 \
 					  doc/mans/bindle_strsadd.3 \
-					  doc/mans/bindle_strtobool.3
+					  doc/mans/bindle_strtobool.3 \
+					  doc/mans/bindle_urldesc.3
 info_TEXINFOS				=
 noinst_DATA				=
 noinst_LTLIBRARIES			=
@@ -137,6 +138,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_strlcpy.3.in \
 					  doc/mans/bindle_strsadd.3.in \
 					  doc/mans/bindle_strtobool.3.in \
+					  doc/mans/bindle_urldesc.3.in \
 					  examples/Makefile \
 					  tests/bindletools/README.md \
 					  m4/bindle-doxygen.m4 \
@@ -302,6 +304,10 @@ doc/mans/bindle_strsadd.3: Makefile $(srcdir)/doc/mans/bindle_strsadd.3.in
 doc/mans/bindle_strtobool.3: Makefile $(srcdir)/doc/mans/bindle_strtobool.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_urldesc.3: Makefile $(srcdir)/doc/mans/bindle_urldesc.3.in
+	@$(do_subst_dt)
+
+
 # local targets
 install-exec-local:
 
@@ -362,6 +368,15 @@ install-data-local: install-man
 	   ln -fs bindle_strsadd.3 bindle_strsdup.3 && \
 	   ln -fs bindle_strsadd.3 bindle_strsfree.3; \
 	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_urldesc.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_urldesc.3 bindle_is_url.3 && \
+	   ln -fs bindle_urldesc.3 bindle_urldesc2str.3 && \
+	   ln -fs bindle_urldesc.3 bindle_urldesc_free.3 && \
+	   ln -fs bindle_urldesc.3 bindle_urldesc_parse.3 && \
+	   ln -fs bindle_urldesc.3 bindle_urldesc_resolve.3; \
+	fi;
+
 
 uninstall-local:
 
