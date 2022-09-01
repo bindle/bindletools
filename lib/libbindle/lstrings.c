@@ -183,13 +183,14 @@ bindle_strsplit(
          char ***                      argvp,
          int *                         argcp )
 {
-   int            rc;
    int            argc;
    size_t         pos;
    char **        argv;
    char *         line;
    char *         bol;
    char           quote;
+   size_t         delim_count;
+   size_t         size;
 
    BindleDebugTrace();
 
@@ -205,11 +206,35 @@ bindle_strsplit(
       *argcp = 0;
 
    if (!(str))
+   {
+      if ((argvp))
+      {
+         if ((*argvp = malloc(sizeof(char *))) == NULL)
+            return(errno);
+         (*argvp)[0] = NULL;
+      };
       return(BNDL_SUCCESS);
+   };
 
    if ((line = bindle_strdup(str)) == NULL)
       return(ENOMEM);
    bol = line;
+
+   // pre-allocate array
+   if ((argvp))
+   {
+      delim_count = 2;
+      for(pos = 0; ((line[pos])); pos++)
+         if (line[pos] == delim)
+            delim_count++;
+      size = delim_count * sizeof(char *);
+      if ((argv = malloc(size)) == NULL)
+      {
+         free(line);
+         return(errno);
+      };
+      memset(argv, 0, size);
+   };
 
    for(pos = 0; ((line[pos])); pos++)
    {
@@ -236,25 +261,31 @@ bindle_strsplit(
          default:
          if (line[pos] == delim)
          {
-            argc++;
-            line[pos] = '\0';
-            if ((rc = bindle_strsadd(&argv, bol)) != BNDL_SUCCESS)
+            if ((argvp))
             {
-               free(line);
-               bindle_strsfree(argv);
-               return(rc);
+               line[pos] = '\0';
+               if ((argv[argc] = bindle_strdup(bol)) == NULL)
+               {
+                  free(line);
+                  bindle_strsfree(argv);
+                  return(errno);
+               };
             };
+            argc++;
             bol = &line[pos+1];
          };
          break;
       };
    };
 
-   if ((rc = bindle_strsadd(&argv, bol)) != BNDL_SUCCESS)
+   if ((argvp))
    {
-      free(line);
-      bindle_strsfree(argv);
-      return(rc);
+      if ((argv[argc] = bindle_strdup(bol)) == NULL)
+      {
+         free(line);
+         bindle_strsfree(argv);
+         return(errno);
+      };
    };
    argc++;
 
