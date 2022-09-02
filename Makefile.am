@@ -89,6 +89,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_refcount.3 \
 					  doc/mans/bindle_strchomp.3 \
 					  doc/mans/bindle_strdup.3 \
+					  doc/mans/bindle_strexpand.3 \
 					  doc/mans/bindle_strings.3 \
 					  doc/mans/bindle_strlcpy.3 \
 					  doc/mans/bindle_strsadd.3 \
@@ -138,6 +139,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_refcount.3.in \
 					  doc/mans/bindle_strchomp.3.in \
 					  doc/mans/bindle_strdup.3.in \
+					  doc/mans/bindle_strexpand.3.in \
 					  doc/mans/bindle_strings.3.in \
 					  doc/mans/bindle_strlcpy.3.in \
 					  doc/mans/bindle_strsadd.3.in \
@@ -300,6 +302,9 @@ doc/mans/bindle_strchomp.3: Makefile $(srcdir)/doc/mans/bindle_strchomp.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_strdup.3: Makefile $(srcdir)/doc/mans/bindle_strdup.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_strexpand.3: Makefile $(srcdir)/doc/mans/bindle_strexpand.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_strings.3: Makefile $(srcdir)/doc/mans/bindle_strings.3.in
