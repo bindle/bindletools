@@ -142,6 +142,16 @@ const bindle_widget_t bindle_widget_map[] =
       .func_usage = NULL,
    },
    {
+      .name       = "expand",
+      .flags      = 0,
+      .desc       = "expand tokens within string",
+      .usage      = " str1 str2 ... strN",
+      .options    = NULL,
+      .aliases    = NULL,
+      .func_exec  = &bindle_widget_expand,
+      .func_usage = &bindle_widget_expand_usage,
+   },
+   {
       .name       = "help",
       .flags      = 0,
       .desc       = "displays usage",

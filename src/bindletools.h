@@ -212,6 +212,21 @@ bindle_widget_crockfordbase32(
          bindle_conf_t *               cnf );
 
 
+//---------------//
+// expand widget //
+//---------------//
+#pragma mark expand widget
+
+extern int
+bindle_widget_expand(
+         bindle_conf_t *               cnf );
+
+
+extern int
+bindle_widget_expand_usage(
+         bindle_conf_t *               cnf );
+
+
 //----------------//
 // urldesc widget //
 //----------------//

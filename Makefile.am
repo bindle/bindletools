@@ -237,6 +237,7 @@ src_bindletools_LDADD			= lib/libbindle.la
 src_bindletools_SOURCES			= src/bindletools.c \
 					  src/bindletools.h \
 					  src/widget-encodings.c \
+					  src/widget-expand.c \
 					  src/widget-urldesc.c \
 					  src/widget-urlencoding.c
 
