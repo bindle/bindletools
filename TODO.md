@@ -18,7 +18,6 @@ All rights reserved.
      - write bindletools-urlencoding.1
    * libbindle Man Pages
      - write bindle_debug.3
-     - write bindle_filetostr.3
      - write bindle_get_option.3
      - write bindle_getpass.3
      - write bindle_readline.3
