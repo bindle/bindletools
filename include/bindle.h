@@ -145,6 +145,7 @@
 #define BNDL_BASE64               3
 #define BNDL_HEX                  4
 #define BNDL_CROCKFORD            5
+#define BNDL_PCTENC               6
 
 
 //////////////////

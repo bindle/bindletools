@@ -43,6 +43,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <assert.h>
 #include <errno.h>
 
@@ -149,6 +150,34 @@ bindle_none_encode(
          char *                        dst,
          size_t                        s,
          const int8_t *                src,
+         size_t                        n );
+
+
+static ssize_t
+bindle_pctenc_decode(
+         uint8_t *                     dst,
+         size_t                        s,
+         const char *                  src,
+         size_t                        n );
+
+
+static ssize_t
+bindle_pctenc_encode(
+         char *                        dst,
+         size_t                        s,
+         const uint8_t *               src,
+         size_t                        n );
+
+
+static size_t
+bindle_pctenc_encode_size(
+         const uint8_t *               src,
+         size_t                        n );
+
+
+static ssize_t
+bindle_pctenc_verify(
+         const char *                  src,
          size_t                        n );
 
 
@@ -286,6 +315,29 @@ static const int8_t hex_vals[256] =
 };
 #pragma mark hex_chars[]
 static const char * hex_chars = "0123456789abcdef";
+
+
+#pragma mark pctenc_vals[]
+static const int8_t pctenc_vals[256] =
+{
+//  00   01   02   03   04   05   06   07   08   09   0A   0B   0C   0D   0E   0F
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0x00
+   '+', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0x10
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ',', '-', '.', '/', // 0x20
+   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', 0x0, 0x0, 0x0, 0x0, // 0x30
+   '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', // 0x40
+   'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 0x0, 0x0, 0x0, 0x0, '_', // 0x50
+   0x0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', // 0x60
+   'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0x0, 0x0, 0x0, '~', 0x0, // 0x70
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0x80
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0x90
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0xA0
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0xB0
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0xC0
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0xD0
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, // 0xE0
+   0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '~', 0x0, // 0xF0
+};
 
 
 /////////////////
@@ -878,6 +930,142 @@ bindle_none_encode(
 }
 
 
+//----------------------------//
+// percent-encoding functions //
+//----------------------------//
+#pragma mark percent-encoding functions
+
+ssize_t
+bindle_pctenc_decode(
+         uint8_t *                     dst,
+         size_t                        s,
+         const char *                  src,
+         size_t                        n )
+{
+   ssize_t     dpos;
+   size_t      spos;
+   ssize_t     rc;
+   char        hex[3];
+
+   assert(dst != NULL);
+   assert(src != NULL);
+   assert(s   >  0);
+
+   // verifies encoded data contains only valid characters
+   if ((rc = bindle_pctenc_verify((const char *)src, n)) == -1)
+      return(-1);
+   if ( (rc >= ((ssize_t)s-1)) && ((dst)) )
+   {
+      errno = ENOBUFS;
+      return(-1);
+   };
+
+   // decodes percent-encode encoded data
+   for(dpos = 0, spos = 0; (spos < n); dpos++, spos++)
+   {
+      if (pctenc_vals[(uint8_t)src[spos]] != 0)
+         dst[dpos] = (uint8_t)src[spos];
+      else if (src[spos] == '+')
+         dst[dpos] = ' ' ;
+      else if (src[spos] == '%')
+      {
+         hex[0] = src[spos+1];
+         hex[1] = src[spos+2];
+         hex[2] = '\0';
+         dst[dpos] = strtoul(hex, NULL, 16);
+         spos += 2;
+      }
+      else
+         return(-1);
+   };
+
+   dst[dpos] = '\0';
+
+   return(dpos);
+}
+
+
+ssize_t
+bindle_pctenc_encode(
+         char *                        dst,
+         size_t                        s,
+         const uint8_t *               src,
+         size_t                        n )
+{
+   size_t      dpos;
+   size_t      spos;
+
+   assert(dst != NULL);
+   assert(src != NULL);
+   assert(s   >  0);
+
+   if (s == 0)
+      return(0);
+   s--;
+
+   for(spos = 0, dpos = 0; (spos < n); spos++, dpos++)
+   {
+      if ((dst[dpos] = pctenc_vals[src[spos]]) != 0)
+         continue;
+      if (src[spos] == ' ')
+      {
+         dst[dpos] = '+';
+         continue;
+      };
+      dst[dpos+0] = '%';
+      dst[dpos+1] = hex_chars[(src[spos] >> 4) & 0x0f];
+      dst[dpos+2] = hex_chars[ src[spos]       & 0x0f];
+      dpos += 2;
+   };
+
+   dst[dpos] = '\0';
+
+   return((ssize_t)dpos);
+}
+
+
+size_t
+bindle_pctenc_encode_size(
+         const uint8_t *               src,
+         size_t                        n )
+{
+   size_t      size;
+   size_t      pos;
+   if (!(src))
+      return(0);
+   for(pos = 0, size = 1; (pos < n); pos++, size++)
+      if (pctenc_vals[src[pos]] == 0)
+         size += 2;
+   return(size);
+}
+
+
+ssize_t
+bindle_pctenc_verify(
+         const char *                  src,
+         size_t                        n )
+{
+   size_t   pos;
+   ssize_t  size;
+   assert(src != NULL);
+   for(pos = 0, size = 0; (pos < n); pos++, size++)
+   {
+      if (src[pos] == '%')
+      {
+         if ((isxdigit(src[pos+1]) == 0) || (isxdigit(src[pos+2]) == 0))
+            return(-1);
+         pos += 2;
+         continue;
+      }
+      if (src[pos] == '+')
+         continue;
+      if (pctenc_vals[(unsigned char)src[pos]] == 0x00)
+         return(-1);
+   };
+   return(size);
+}
+
+
 //--------------------//
 // frontend functions //
 //--------------------//
@@ -918,6 +1106,9 @@ bindle_decode(
       case BNDL_NONE:
       return(bindle_none_decode(dst, s, src, n));
 
+      case BNDL_PCTENC:
+      return(bindle_pctenc_decode(dst, s, src, n));
+
       default:
       break;
    };
@@ -948,6 +1139,9 @@ bindle_decode_size(
       case BNDL_NONE:
       return((ssize_t)n);
 
+      case BNDL_PCTENC:
+      return((ssize_t)(n+1));
+
       default:
       break;
    };
@@ -973,7 +1167,14 @@ bindle_encode(
       return(-1);
 
    // validates buffer is big enough
-   if (s < (size_t)bindle_encode_size(method, n))
+   if (method == BNDL_PCTENC)
+   {
+      if (s < (size_t)bindle_pctenc_encode_size(src, n))
+      {
+         errno = ENOBUFS;
+         return(-1);
+      };
+   } else if (s < (size_t)bindle_encode_size(method, n))
    {
       errno = ENOBUFS;
       return(-1);
@@ -999,6 +1200,9 @@ bindle_encode(
       case BNDL_NONE:
       return(bindle_none_encode(dst, s, src, n));
 
+      case BNDL_PCTENC:
+      return(bindle_pctenc_encode(dst, s, src, n));
+
       default:
       errno = ENOTSUP;
       break;
@@ -1020,6 +1224,7 @@ bindle_encode_method(
       case BNDL_CROCKFORD:
       case BNDL_HEX:
       case BNDL_NONE:
+      case BNDL_PCTENC:
       return(method);
 
       default:
@@ -1050,6 +1255,9 @@ bindle_encode_size(
 
       case BNDL_NONE:
       return((ssize_t)n);
+
+      case BNDL_PCTENC:
+      return((ssize_t)((n*3)+1));
 
       default:
       errno = ENOTSUP;
@@ -1085,6 +1293,9 @@ bindle_encoding_verify(
 
       case BNDL_NONE:
       return((ssize_t)n);
+
+      case BNDL_PCTENC:
+      return(bindle_pctenc_verify(src, n));
 
       default:
       errno = ENOTSUP;

@@ -79,6 +79,9 @@ use base16 string encoding (RFC4648)
 .TP 20
 .B BNDL_CROCKFORD
 use Crockford's base32 string encoding
+.TP 20
+.B BNDL_PCTENC
+use percent-encoding/URL string encoding
 .RE
 .PP
 \fBbindle_encode\fR() decodes \fIn\fR bytes from \fIsrc\fR into \fIdst\fR
