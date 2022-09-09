@@ -84,6 +84,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_dirname_r.3 \
 					  doc/mans/bindle_enqueue.3 \
 					  doc/mans/bindle_filetostr.3 \
+					  doc/mans/bindle_getpass.3 \
 					  doc/mans/bindle_peek.3 \
 					  doc/mans/bindle_push.3 \
 					  doc/mans/bindle_refcount.3 \
@@ -134,6 +135,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_dirname_r.3.in \
 					  doc/mans/bindle_enqueue.3.in \
 					  doc/mans/bindle_filetostr.3.in \
+					  doc/mans/bindle_getpass.3.in \
 					  doc/mans/bindle_peek.3.in \
 					  doc/mans/bindle_push.3.in \
 					  doc/mans/bindle_refcount.3.in \
@@ -288,6 +290,9 @@ doc/mans/bindle_enqueue.3: Makefile $(srcdir)/doc/mans/bindle_enqueue.3.in
 doc/mans/bindle_filetostr.3: Makefile $(srcdir)/doc/mans/bindle_filetostr.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_getpass.3: Makefile $(srcdir)/doc/mans/bindle_getpass.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_peek.3: Makefile $(srcdir)/doc/mans/bindle_peek.3.in
 	@$(do_subst_dt)
 
@@ -356,6 +361,10 @@ install-data-local: install-man
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_enqueue.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \
 	   ln -fs bindle_enqueue.3 bindle_dequeue.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_getpass.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_getpass.3 bindle_getpass_r.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_push.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \
