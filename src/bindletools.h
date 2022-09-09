@@ -212,6 +212,11 @@ bindle_widget_crockfordbase32(
          bindle_conf_t *               cnf );
 
 
+extern int
+bindle_widget_pctenc(
+         bindle_conf_t *               cnf );
+
+
 //---------------//
 // expand widget //
 //---------------//
@@ -236,18 +241,6 @@ extern const char * const bindle_widget_urldesc_options[];
 
 extern int
 bindle_widget_urldesc(
-         bindle_conf_t *               cnf );
-
-
-//--------------------//
-// urlencoding widget //
-//--------------------//
-#pragma mark urlencoding widget
-
-extern const char * const bindle_widget_urlencoding_options[];
-
-extern int
-bindle_widget_urlencoding(
          bindle_conf_t *               cnf );
 
 

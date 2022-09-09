@@ -162,6 +162,16 @@ const bindle_widget_t bindle_widget_map[] =
       .func_usage = NULL,
    },
    {
+      .name       = "pctenc",
+      .flags      = 0,
+      .desc       = "encode/decode percent-encoding/URL encoding string",
+      .usage      = NULL,
+      .options    = bindle_widget_encodings_options,
+      .aliases    = (const char * const[]) { "percent-encoding", "url-encoding", "urlencoding", NULL },
+      .func_exec  = &bindle_widget_pctenc,
+      .func_usage = NULL,
+   },
+   {
       .name       = "urldesc",
       .flags      = 0,
       .desc       = "parses URL",
@@ -169,16 +179,6 @@ const bindle_widget_t bindle_widget_map[] =
       .options    = bindle_widget_urldesc_options,
       .aliases    = (const char * const[]) { "url", NULL },
       .func_exec  = &bindle_widget_urldesc,
-      .func_usage = NULL,
-   },
-   {
-      .name       = "urlencoding",
-      .flags      = 0,
-      .desc       = "encode/decode string for URL",
-      .usage      = NULL,
-      .options    = bindle_widget_urlencoding_options,
-      .aliases    = (const char * const[]) { "percent-encoding", NULL },
-      .func_exec  = &bindle_widget_urlencoding,
       .func_usage = NULL,
    },
    {

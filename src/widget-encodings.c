@@ -156,6 +156,14 @@ bindle_widget_crockfordbase32(
 
 
 int
+bindle_widget_pctenc(
+         bindle_conf_t *               cnf )
+{
+   return(bindle_widget_encodings(cnf, BNDL_PCTENC));
+}
+
+
+int
 bindle_widget_encodings(
          bindle_conf_t *               cnf,
          int                           method )
