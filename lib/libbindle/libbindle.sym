@@ -108,9 +108,6 @@ bindle_urldesc2str
 bindle_urldesc_free
 bindle_urldesc_parse
 bindle_urldesc_resolve
-bindle_url_decode
-bindle_url_encode
-bindle_url_encode_len
 #
 # UTF8 functions
 bindle_utf8len
