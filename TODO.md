@@ -19,7 +19,6 @@ All rights reserved.
    * libbindle Man Pages
      - write bindle_debug.3
      - write bindle_get_option.3
-     - write bindle_readline.3
 
 #### libbindle
 

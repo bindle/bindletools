@@ -88,6 +88,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_peek.3 \
 					  doc/mans/bindle_push.3 \
 					  doc/mans/bindle_refcount.3 \
+					  doc/mans/bindle_readline.3 \
 					  doc/mans/bindle_strchomp.3 \
 					  doc/mans/bindle_strdup.3 \
 					  doc/mans/bindle_strexpand.3 \
@@ -139,6 +140,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_getpass.3.in \
 					  doc/mans/bindle_peek.3.in \
 					  doc/mans/bindle_push.3.in \
+					  doc/mans/bindle_readline.3.in \
 					  doc/mans/bindle_refcount.3.in \
 					  doc/mans/bindle_strchomp.3.in \
 					  doc/mans/bindle_strdup.3.in \
@@ -299,6 +301,9 @@ doc/mans/bindle_peek.3: Makefile $(srcdir)/doc/mans/bindle_peek.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_push.3: Makefile $(srcdir)/doc/mans/bindle_push.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_readline.3: Makefile $(srcdir)/doc/mans/bindle_readline.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_refcount.3: Makefile $(srcdir)/doc/mans/bindle_refcount.3.in
