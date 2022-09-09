@@ -117,7 +117,8 @@ bindle_getpass_r(
    if(tcsetattr(fileno(fs), TCSANOW, &old))
       return(NULL);
    signal(SIGINT, sig);
-   fclose(fs);
+   if (fs != stdin)
+      fclose(fs);
 #endif
 
    return(pass);
