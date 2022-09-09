@@ -107,6 +107,7 @@
 
 // library limits
 #define BNDL_LINE_MAX_LEN           256
+#define BNDL_PASSWORD_LEN           128
 
 
 // library get/set options

@@ -62,7 +62,7 @@ char *
 bindle_getpass(
          const char *                  prompt )
 {
-   static char    buff[512];
+   static char    buff[BNDL_PASSWORD_LEN+1];
    return(bindle_getpass_r(prompt, buff, sizeof(buff)));
 }
 
