@@ -20,7 +20,6 @@ All rights reserved.
      - write bindle_debug.3
      - write bindle_get_option.3
      - write bindle_readline.3
-     - write bindle_strtoargs.3
 
 #### libbindle
 

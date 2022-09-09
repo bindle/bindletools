@@ -95,6 +95,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_strlcpy.3 \
 					  doc/mans/bindle_strsadd.3 \
 					  doc/mans/bindle_strsplit.3 \
+					  doc/mans/bindle_strtoargs.3 \
 					  doc/mans/bindle_strtobool.3 \
 					  doc/mans/bindle_strtrim.3 \
 					  doc/mans/bindle_urldesc.3
@@ -146,6 +147,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_strlcpy.3.in \
 					  doc/mans/bindle_strsadd.3.in \
 					  doc/mans/bindle_strsplit.3.in \
+					  doc/mans/bindle_strtoargs.3.in \
 					  doc/mans/bindle_strtobool.3.in \
 					  doc/mans/bindle_strtrim.3.in \
 					  doc/mans/bindle_urldesc.3.in \
@@ -324,6 +326,9 @@ doc/mans/bindle_strsplit.3: Makefile $(srcdir)/doc/mans/bindle_strsplit.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_strtobool.3: Makefile $(srcdir)/doc/mans/bindle_strtobool.3.in
+	@$(do_subst_dt)
+
+doc/mans/bindle_strtoargs.3: Makefile $(srcdir)/doc/mans/bindle_strtoargs.3.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_strtrim.3: Makefile $(srcdir)/doc/mans/bindle_strtrim.3.in
