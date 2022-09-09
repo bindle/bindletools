@@ -28,52 +28,8 @@
  *  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  *  SUCH DAMAGE.
  */
-#ifndef _TESTS_BINDLE_ENC_STRINGS_H
-#define _TESTS_BINDLE_ENC_STRINGS_H 1
-
-///////////////
-//           //
-//  Headers  //
-//           //
-///////////////
-#pragma mark - Headers
-
-#include "bindle-tests.h"
-
-#include <string.h>
-#include <strings.h>
-#include <stdlib.h>
-
-
-/////////////////
-//             //
-//  Datatypes  //
-//             //
-/////////////////
-#pragma mark - Datatypes
-
-struct test_data
-{
-   const char * dec;
-   const char * enc;
-   intptr_t     nopad;
-};
-
-
-/////////////////
-//             //
-//  Variables  //
-//             //
-/////////////////
-#pragma mark - Variables
-
-extern struct test_data base32_strings[];
-extern struct test_data base32hex_strings[];
-extern struct test_data base64_strings[];
-extern struct test_data crockford_strings[];
-extern struct test_data hex_strings[];
-extern struct test_data pctenc_strings[];
-
+#define _TESTS_BINDLE_ENC_HEX_PCTENC_C 1
+#include "bindle-enc-strings.h"
 
 //////////////////
 //              //
@@ -82,30 +38,20 @@ extern struct test_data pctenc_strings[];
 //////////////////
 #pragma mark - Prototypes
 
-int
-bindle_test_decode(
-         const char *                  prog_name,
-         int                           argc,
-         char *                        argv[],
-         int                           method,
-         struct test_data *            data );
+int main(int argc, char * argv[]);
 
 
-int
-bindle_test_encode(
-         const char *                  prog_name,
-         int                           argc,
-         char *                        argv[],
-         int                           method,
-         struct test_data *            data );
+/////////////////
+//             //
+//  Functions  //
+//             //
+/////////////////
+#pragma mark - Functions
+
+int main(int argc, char * argv[])
+{
+   return(bindle_test_decode("bindle-enc-pctenc-dec", argc, argv, BNDL_PCTENC, pctenc_strings));
+}
 
 
-int
-bindle_test_validate(
-         const char *                  prog_name,
-         int                           argc,
-         char *                        argv[],
-         int                           method,
-         struct test_data *            data );
-
-#endif /* end of header file */
+/* end of source file */

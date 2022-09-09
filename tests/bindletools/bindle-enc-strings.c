@@ -207,6 +207,18 @@ struct test_data hex_strings[] =
 };
 
 
+#pragma mark pctenc_strings[]
+struct test_data pctenc_strings[] =
+{
+   { .dec = "",               .enc = "",                       .nopad = 0 },
+   { .dec = "foobar",         .enc = "foobar",                 .nopad = 0 },
+   { .dec = "foo bar",        .enc = "foo+bar",                .nopad = 0 },
+   { .dec = "foo&bar",        .enc = "foo%26bar",              .nopad = 0 },
+   { .dec = "foo&bar=100%",   .enc = "foo%26bar%3d100%25",     .nopad = 0 },
+   { .dec = NULL,             .enc = NULL,                     .nopad = 0 }
+};
+
+
 /////////////////
 //             //
 //  Functions  //
