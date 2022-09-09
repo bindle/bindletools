@@ -1,0 +1,103 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLETOOLS" "1" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "User Commands"
+.SH NAME
+bindletools-base64 - Encode and decode using Base64 representation
+
+.SH SYNOPSIS
+.nf
+\fBbindletools base64\fR [OPTIONS]
+.sp
+\fBbindletools-base64\fR [OPTIONS]
+.sp
+\fBbase64\fR [OPTIONS]
+.fi
+
+.SH DESCRIPTION
+\fBbindletools-base64\fR encodes and decodes data using the base 64 encoding
+described in RFC 4648. If \fI-s\fR is not specified, data is read from stdin.
+The resulting string is printed to stdout.
+
+.SH OPTIONS
+
+.TP 25
+\fB-D\fR \fIlevel\fR, \fB--debug\fR=\fIlevel\fR
+set debug level
+
+.TP 25
+\fB-d\fR, \fB--decode\fR
+decode input data as a base64 string
+
+.TP 25
+\fB-e\fR, \fB--encode\fR
+add newline to end of string
+
+.TP 25
+\fB-h\fR, \fB--help\fR
+print this usage information and exit
+
+.TP 25
+\fB-n\fR, \fB--newline\fR
+decode input data as a base64 string
+
+.TP 25
+\fB-p\fR, \fB--nopadding\fR
+do not add padding to end of encoded string
+
+.TP 25
+\fB-q\fR, \fB--quiet\fR, \fB--silent\fR
+do not print messages
+
+.TP 25
+\fB-s\fR \fIstring\fR
+string to encode or decode
+
+.TP 25
+\fB-V\fR, \fB--version\fR
+print version number and exit
+
+.TP 25
+\fB-v\fR, \fB--verbose\fR
+print verbose messages
+
+.SH SEE ALSO
+.BR bindletools (1),
+.BR bindle_decode (3),
+.BR bindle_encode (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
