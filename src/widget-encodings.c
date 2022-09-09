@@ -46,6 +46,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <errno.h>
+#include <fcntl.h>
 
 
 ///////////////////
@@ -75,11 +76,21 @@ const char * const bindle_widget_encodings_options[] =
 {
    "  -d, --decode              decode string",
    "  -e, --encode              encode string",
+   "  -i file, --input=file     use input file instead of stdin",
    "  -n, --newline             add newline to output",
+   "  -o file, --output=file    use output file instead of stdout",
    "  -p, --nopadding           disable padding",
    "  -s string                 string to encode or decode",
    NULL
 };
+
+
+#pragma mark bindle_fsin
+static int bindle_fdin = STDIN_FILENO;
+
+
+#pragma mark bindle_fsout
+static int bindle_fdout = STDOUT_FILENO;
 
 
 //////////////////
@@ -173,20 +184,22 @@ bindle_widget_encodings(
    const char *      str;
 
    // getopt options
-   static const char *  short_opt = BINDLE_COMMON_SHORT "denps:";
+   static const char *  short_opt = BINDLE_COMMON_SHORT "dei:no:ps:";
    static struct option long_opt[] =
    {
       BINDLE_COMMON_LONG,
-      { "decode",          no_argument,      NULL, 'd' },
-      { "encode",          no_argument,      NULL, 'e' },
-      { "newline",         no_argument,      NULL, 'n' },
-      { "nopadding",       no_argument,      NULL, 'p' },
+      { "decode",          no_argument,         NULL, 'd' },
+      { "encode",          no_argument,         NULL, 'e' },
+      { "input",           optional_argument,   NULL, 'i' },
+      { "newline",         no_argument,         NULL, 'n' },
+      { "nopadding",       no_argument,         NULL, 'p' },
+      { "output",          optional_argument,   NULL, 'o' },
       { NULL, 0, NULL, 0 }
    };
 
-   optind    = 1;
-   opt_index = 0;
-   str       = NULL;
+   optind         = 1;
+   opt_index      = 0;
+   str            = NULL;
 
    while((c = bindle_getopt(cnf, cnf->argc, cnf->argv, short_opt, long_opt, &opt_index)) != -1)
    {
@@ -212,8 +225,36 @@ bindle_widget_encodings(
          cnf->widget_flags &= ~BINDLE_FLG_DECODE;
          break;
 
+         case 'i':
+         if (bindle_fdin != STDIN_FILENO)
+         {
+            fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
+            fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
+            return(1);
+         };
+         if ((bindle_fdin = open(optarg, O_RDONLY)) == -1)
+         {
+            fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
+            return(1);
+         };
+         break;
+
          case 'n':
          cnf->widget_flags |= BINDLE_FLG_NEWLINE;
+         break;
+
+         case 'o':
+         if (bindle_fdout != STDOUT_FILENO)
+         {
+            fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
+            fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
+            return(1);
+         };
+         if ((bindle_fdout = open(optarg, (O_WRONLY|O_CREAT|O_TRUNC), 0644)) == -1)
+         {
+            fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
+            return(1);
+         };
          break;
 
          case 'p':
@@ -262,7 +303,7 @@ bindle_widget_encodings_stdin(
    char        chunk[BINDLE_BUFF_SIZE+1];
    char        res[(BINDLE_BUFF_SIZE*3)+1];
 
-   while ((rc = read(STDIN_FILENO, chunk, BINDLE_BUFF_SIZE)) > 0)
+   while ((rc = read(bindle_fdin, chunk, BINDLE_BUFF_SIZE)) > 0)
    {
       chunk[rc] = '\0';
       if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
@@ -270,7 +311,7 @@ bindle_widget_encodings_stdin(
       else
          len = bindle_encode(method, res, sizeof(res), chunk, (size_t)rc, (cnf->widget_flags & BINDLE_FLG_NOPAD));
       if (len > 0)
-         write(STDOUT_FILENO, res, (size_t)len);
+         write(bindle_fdout, res, (size_t)len);
    };
    if (rc == -1)
    {
@@ -281,7 +322,7 @@ bindle_widget_encodings_stdin(
    if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
    {
       bindle_strlcpy(res, "\n", sizeof(res));
-      write(STDOUT_FILENO, res, strlen(res));
+      write(bindle_fdout, res, strlen(res));
    };
 
    return(0);
@@ -310,7 +351,7 @@ bindle_widget_encodings_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_decode(method, res, sizeof(res), chunk, size)) > 0)
-            write(STDOUT_FILENO, res, (size_t)rc);
+            write(bindle_fdout, res, (size_t)rc);
       };
    }
    else
@@ -320,7 +361,7 @@ bindle_widget_encodings_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_encode(method, res, sizeof(res), chunk, size, (cnf->widget_flags & BINDLE_FLG_NOPAD))) > 0)
-            write(STDOUT_FILENO, res, (size_t)rc);
+            write(bindle_fdout, res, (size_t)rc);
       };
    };
 

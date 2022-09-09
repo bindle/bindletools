@@ -65,8 +65,16 @@ encode input data as a Crockford's base32 encoded string
 print this usage information and exit
 
 .TP 25
+\fB-i\fR \fIinput\fR, \fB--input\fR=\fIfile\fR
+use input file instead of stdin
+
+.TP 25
 \fB-n\fR, \fB--newline\fR
 add newline to end of string
+
+.TP 25
+\fB-o\fR \fIinput\fR, \fB--output\fR=\fIfile\fR
+use output file instead of stdout
 
 .TP 25
 \fB-p\fR, \fB--nopadding\fR
