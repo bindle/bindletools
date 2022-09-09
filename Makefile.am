@@ -82,6 +82,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindletools-base32hex.1 \
 					  doc/mans/bindletools-base64.1 \
 					  doc/mans/bindletools-crockfordbase32.1 \
+					  doc/mans/bindletools-pctenc.1 \
 					  doc/mans/bindle_array.3 \
 					  doc/mans/bindle_basename_r.3 \
 					  doc/mans/bindle_bindex.3 \
@@ -140,6 +141,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindletools-base32hex.1.in \
 					  doc/mans/bindletools-base64.1.in \
 					  doc/mans/bindletools-crockfordbase32.1.in \
+					  doc/mans/bindletools-pctenc.1.in \
 					  doc/mans/bindle_array.3.in \
 					  doc/mans/bindle_basename_r.3.in \
 					  doc/mans/bindle_bindex.3.in \
@@ -296,6 +298,9 @@ doc/mans/bindletools-base64.1: Makefile $(srcdir)/doc/mans/bindletools-base64.1.
 	@$(do_subst_dt)
 
 doc/mans/bindletools-crockfordbase32.1: Makefile $(srcdir)/doc/mans/bindletools-crockfordbase32.1.in
+	@$(do_subst_dt)
+
+doc/mans/bindletools-pctenc.1: Makefile $(srcdir)/doc/mans/bindletools-pctenc.1.in
 	@$(do_subst_dt)
 
 doc/mans/bindle_array.3: Makefile $(srcdir)/doc/mans/bindle_array.3.in
