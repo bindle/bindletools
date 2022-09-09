@@ -48,6 +48,7 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-enc-hex-val \
 					   tests/bindle-enc-pctenc-dec \
 					   tests/bindle-enc-pctenc-enc \
+					   tests/bindle-enc-pctenc-val \
 					   tests/bindle-str-basename \
 					   tests/bindle-str-chomp \
 					   tests/bindle-str-dirname \
@@ -102,6 +103,7 @@ if ENABLE_BINDLE_TESTS
    TESTS				+= tests/bindle-enc-hex-val
    TESTS				+= tests/bindle-enc-pctenc-dec
    TESTS				+= tests/bindle-enc-pctenc-enc
+   TESTS				+= tests/bindle-enc-pctenc-val
    TESTS				+= tests/bindle-str-basename
    TESTS				+= tests/bindle-str-chomp
    TESTS				+= tests/bindle-str-dirname
@@ -380,6 +382,17 @@ tests_bindle_enc_pctenc_enc_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.c \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-pctenc-enc.c
+
+
+# macros for tests/bindle-pctenc-pctenc-val
+tests_bindle_enc_pctenc_val_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_pctenc_val_LDADD	= $(BINDLE_TESTS_DEPS)
+tests_bindle_enc_pctenc_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.c \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-pctenc-val.c
 
 
 # macros for tests/bindle-str-basename
