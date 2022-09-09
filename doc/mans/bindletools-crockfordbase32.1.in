@@ -58,7 +58,7 @@ decode input data as a Crockford's base32 encoded string
 
 .TP 25
 \fB-e\fR, \fB--encode\fR
-decode input data as a Crockford's base32 encoded string
+encode input data as a Crockford's base32 encoded string
 
 .TP 25
 \fB-h\fR, \fB--help\fR

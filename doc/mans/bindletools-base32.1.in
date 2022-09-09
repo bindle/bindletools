@@ -58,7 +58,7 @@ decode input data as a base 32 string
 
 .TP 25
 \fB-e\fR, \fB--encode\fR
-add newline to end of string
+encode input data as a base 32 string
 
 .TP 25
 \fB-h\fR, \fB--help\fR
@@ -66,7 +66,7 @@ print this usage information and exit
 
 .TP 25
 \fB-n\fR, \fB--newline\fR
-decode input data as a base 32 string
+add newline to end of string
 
 .TP 25
 \fB-p\fR, \fB--nopadding\fR
