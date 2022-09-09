@@ -87,7 +87,7 @@ main(
 
    for(i = 1; (i < argc); i++)
    {
-      if ((rc = bindle_encoding_verify(BNDL_BASE32, argv[i], strlen(argv[i]))) == -1)
+      if (bindle_encoding_verify(BNDL_BASE32, argv[i], strlen(argv[i])) == -1)
       {
          fprintf(stderr, "bindle_encoding_verify(): %s\n", strerror(errno));
          return(1);
@@ -102,7 +102,7 @@ main(
          fprintf(stderr, "error: buffer is too small for decoded string\n");
          return(1);
       };
-      if ((rc = bindle_decode(BNDL_BASE32, buff, sizeof(buff), argv[i], strlen(argv[i]))) == -1)
+      if (bindle_decode(BNDL_BASE32, buff, sizeof(buff), argv[i], strlen(argv[i])) == -1)
       {
          fprintf(stderr, "bindle_decode(): %s\n", strerror(errno));
          return(1);
