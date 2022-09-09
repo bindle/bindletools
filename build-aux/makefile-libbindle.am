@@ -54,7 +54,6 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-str-dirname \
 					   tests/bindle-str-expand \
 					   tests/bindle-str-split \
-					   tests/bindle-url-encoding \
 					   tests/bindle-urldesc-parse
 EXTRA					+= lib/libbindle.a \
 					   lib/libbindle.la \
@@ -109,7 +108,6 @@ if ENABLE_BINDLE_TESTS
    TESTS				+= tests/bindle-str-dirname
    TESTS				+= tests/bindle-str-expand
    TESTS				+= tests/bindle-str-split
-   TESTS				+= tests/bindle-url-encoding
    TESTS				+= tests/bindle-urldesc-parse
 endif
 if WITH_BINDLE_PREFIX_H
@@ -438,15 +436,6 @@ tests_bindle_str_split_SOURCES		= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-str-split.c
-
-
-# macros for tests/bindle-url-encoding
-tests_bindle_url_encoding_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
-tests_bindle_url_encoding_LDADD		= $(BINDLE_TESTS_DEPS)
-tests_bindle_url_encoding_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
-					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
-					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
-					  $(bindletools_srcdir)/tests/bindletools/bindle-url-encoding.c
 
 
 # macros for tests/bindle-urldesc-parse
