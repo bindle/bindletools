@@ -638,6 +638,8 @@ bindle_base64_decode(
 
          // byte 2
          case 2:
+         if (src[pos] == '=')
+            return((ssize_t)datlen-1);
          dst[datlen-1] |= (map[(unsigned char)src[pos]] & 0x3c) >> 2; // 4 MSB
          dst[datlen++]  = (map[(unsigned char)src[pos]] & 0x03) << 6; // 2 LSB
          break;
@@ -645,6 +647,8 @@ bindle_base64_decode(
          // byte 3
          case 3:
          default:
+         if (src[pos] == '=')
+            return((ssize_t)datlen-1);
          dst[datlen-1] |= (map[(unsigned char)src[pos]] & 0x3f);    // 1 MSB
          break;
       };
