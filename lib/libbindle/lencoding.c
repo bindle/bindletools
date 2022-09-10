@@ -393,7 +393,13 @@ bindle_base32_decode(
          datlen++;
          break;
 
-         // byte 1
+         // byte 2
+         case 2:
+         if (src[pos] == '=')
+            return((ssize_t)datlen);
+         break;
+
+         // byte 3
          case 3:
          dst[datlen]  = (map[(unsigned char)src[pos-2]] << 6) & 0xC0; // 2 MSB
          dst[datlen] |= (map[(unsigned char)src[pos-1]] << 1) & 0x3E; // 5  MB
@@ -401,14 +407,22 @@ bindle_base32_decode(
          datlen++;
          break;
 
-         // byte 2
+         // byte 4
          case 4:
+         if (src[pos] == '=')
+            return((ssize_t)datlen);
          dst[datlen]  = (map[(unsigned char)src[pos-1]] << 4) & 0xF0; // 4 MSB
          dst[datlen] |= (map[(unsigned char)src[pos-0]] >> 1) & 0x0F; // 4 LSB
          datlen++;
          break;
 
-         // byte 3
+         // byte 5;
+         case 5:
+         if (src[pos] == '=')
+            return((ssize_t)datlen);
+         break;
+
+         // byte 6
          case 6:
          dst[datlen]  = (map[(unsigned char)src[pos-2]] << 7) & 0x80; // 1 MSB
          dst[datlen] |= (map[(unsigned char)src[pos-1]] << 2) & 0x7C; // 5  MB
@@ -416,8 +430,10 @@ bindle_base32_decode(
          datlen++;
          break;
 
-         // byte 4
+         // byte 7
          case 7:
+         if (src[pos] == '=')
+            return((ssize_t)datlen);
          dst[datlen]  = (map[(unsigned char)src[pos-1]] << 5) & 0xE0; // 3 MSB
          dst[datlen] |= (map[(unsigned char)src[pos-0]] >> 0) & 0x1F; // 5 LSB
          datlen++;
