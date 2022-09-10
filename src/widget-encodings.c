@@ -180,6 +180,7 @@ bindle_widget_encodings(
          int                           method )
 {
    int               c;
+   int               rc;
    int               opt_index;
    const char *      str;
 
@@ -288,8 +289,14 @@ bindle_widget_encodings(
    fflush(stdout);
 
    if ((str))
-      return(bindle_widget_encodings_string(cnf, method, str));
-   return(bindle_widget_encodings_stdin(cnf, method));
+      rc = bindle_widget_encodings_string(cnf, method, str);
+   else
+      rc = bindle_widget_encodings_stdin(cnf, method);
+
+   if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
+      write(bindle_fdout, "\n", strlen("\n"));
+
+   return(rc);
 }
 
 
@@ -317,12 +324,6 @@ bindle_widget_encodings_stdin(
    {
       fprintf(stderr, "%s: read(): %s\n", cnf->prog_name, strerror(errno));
       return(1);
-   };
-
-   if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
-   {
-      bindle_strlcpy(res, "\n", sizeof(res));
-      write(bindle_fdout, res, strlen(res));
    };
 
    return(0);
@@ -363,12 +364,6 @@ bindle_widget_encodings_string(
          if ((rc = bindle_encode(method, res, sizeof(res), chunk, size, (cnf->widget_flags & BINDLE_FLG_NOPAD))) > 0)
             write(bindle_fdout, res, (size_t)rc);
       };
-   };
-
-   if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
-   {
-      bindle_strlcpy(res, "\n", sizeof(res));
-      write(bindle_fdout, res, strlen(res));
    };
 
    return(0);
