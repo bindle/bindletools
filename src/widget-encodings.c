@@ -365,7 +365,11 @@ bindle_widget_encodings_string(
       };
    };
 
-   printf("\n");
+   if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
+   {
+      bindle_strlcpy(res, "\n", sizeof(res));
+      write(bindle_fdout, res, strlen(res));
+   };
 
    return(0);
 }
