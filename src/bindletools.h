@@ -111,6 +111,7 @@
 
 typedef struct bindle_config     bindle_conf_t;
 typedef struct bindle_widget     bindle_widget_t;
+typedef struct bindle_state      bindle_state_t;
 
 struct bindle_config
 {
@@ -120,6 +121,7 @@ struct bindle_config
    const char *               prog_name;
    const bindle_widget_t *    widget;
    uintptr_t                  widget_flags;
+   bindle_state_t *           state;
 };
 
 

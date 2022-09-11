@@ -64,6 +64,20 @@
 #define BINDLE_FLG_NEWLINE    0x00008UL
 
 
+//////////////////
+//              //
+//  Data Types  //
+//              //
+//////////////////
+#pragma mark - Data Types
+
+struct bindle_state
+{
+   int                        fdin;
+   int                        fdout;
+};
+
+
 /////////////////
 //             //
 //  Variables  //
@@ -83,14 +97,6 @@ const char * const bindle_widget_encodings_options[] =
    "  -s string                 string to encode or decode",
    NULL
 };
-
-
-#pragma mark bindle_fsin
-static int bindle_fdin = STDIN_FILENO;
-
-
-#pragma mark bindle_fsout
-static int bindle_fdout = STDOUT_FILENO;
 
 
 //////////////////
@@ -130,6 +136,9 @@ int
 bindle_widget_base16(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_HEX));
 }
 
@@ -138,6 +147,9 @@ int
 bindle_widget_base32(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_BASE32));
 }
 
@@ -146,6 +158,9 @@ int
 bindle_widget_base32hex(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_BASE32HEX));
 }
 
@@ -154,6 +169,9 @@ int
 bindle_widget_base64(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_BASE64));
 }
 
@@ -162,6 +180,9 @@ int
 bindle_widget_crockfordbase32(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_CROCKFORD));
 }
 
@@ -170,6 +191,9 @@ int
 bindle_widget_pctenc(
          bindle_conf_t *               cnf )
 {
+   bindle_state_t    state;
+   memset(&state, 0, sizeof(state));
+   cnf->state        = &state;
    return(bindle_widget_encodings(cnf, BNDL_PCTENC));
 }
 
@@ -198,9 +222,11 @@ bindle_widget_encodings(
       { NULL, 0, NULL, 0 }
    };
 
-   optind         = 1;
-   opt_index      = 0;
-   str            = NULL;
+   optind            = 1;
+   opt_index         = 0;
+   str               = NULL;
+   cnf->state->fdin  = STDIN_FILENO;
+   cnf->state->fdout = STDOUT_FILENO;
 
    while((c = bindle_getopt(cnf, cnf->argc, cnf->argv, short_opt, long_opt, &opt_index)) != -1)
    {
@@ -227,13 +253,13 @@ bindle_widget_encodings(
          break;
 
          case 'i':
-         if (bindle_fdin != STDIN_FILENO)
+         if (cnf->state->fdin != STDIN_FILENO)
          {
             fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
             fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
             return(1);
          };
-         if ((bindle_fdin = open(optarg, O_RDONLY)) == -1)
+         if ((cnf->state->fdin = open(optarg, O_RDONLY)) == -1)
          {
             fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
             return(1);
@@ -245,13 +271,13 @@ bindle_widget_encodings(
          break;
 
          case 'o':
-         if (bindle_fdout != STDOUT_FILENO)
+         if (cnf->state->fdout != STDOUT_FILENO)
          {
             fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
             fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
             return(1);
          };
-         if ((bindle_fdout = open(optarg, (O_WRONLY|O_CREAT|O_TRUNC), 0644)) == -1)
+         if ((cnf->state->fdout = open(optarg, (O_WRONLY|O_CREAT|O_TRUNC), 0644)) == -1)
          {
             fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
             return(1);
@@ -294,7 +320,7 @@ bindle_widget_encodings(
       rc = bindle_widget_encodings_stdin(cnf, method);
 
    if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
-      write(bindle_fdout, "\n", strlen("\n"));
+      write(cnf->state->fdout, "\n", strlen("\n"));
 
    return(rc);
 }
@@ -310,7 +336,7 @@ bindle_widget_encodings_stdin(
    char        chunk[BINDLE_BUFF_SIZE+1];
    char        res[(BINDLE_BUFF_SIZE*3)+1];
 
-   while ((rc = read(bindle_fdin, chunk, BINDLE_BUFF_SIZE)) > 0)
+   while ((rc = read(cnf->state->fdin, chunk, BINDLE_BUFF_SIZE)) > 0)
    {
       chunk[rc] = '\0';
       if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
@@ -318,7 +344,7 @@ bindle_widget_encodings_stdin(
       else
          len = bindle_encode(method, res, sizeof(res), chunk, (size_t)rc, (cnf->widget_flags & BINDLE_FLG_NOPAD));
       if (len > 0)
-         write(bindle_fdout, res, (size_t)len);
+         write(cnf->state->fdout, res, (size_t)len);
    };
    if (rc == -1)
    {
@@ -352,7 +378,7 @@ bindle_widget_encodings_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_decode(method, res, sizeof(res), chunk, size)) > 0)
-            write(bindle_fdout, res, (size_t)rc);
+            write(cnf->state->fdout, res, (size_t)rc);
       };
    }
    else
@@ -362,7 +388,7 @@ bindle_widget_encodings_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_encode(method, res, sizeof(res), chunk, size, (cnf->widget_flags & BINDLE_FLG_NOPAD))) > 0)
-            write(bindle_fdout, res, (size_t)rc);
+            write(cnf->state->fdout, res, (size_t)rc);
       };
    };
 
