@@ -113,7 +113,7 @@ bindle_widget_encodings(
 
 
 static int
-bindle_widget_encodings_stdin(
+bindle_encodings_fileno(
          bindle_conf_t *               cnf,
          int                           method );
 
@@ -317,7 +317,7 @@ bindle_widget_encodings(
    if ((str))
       rc = bindle_widget_encodings_string(cnf, method, str);
    else
-      rc = bindle_widget_encodings_stdin(cnf, method);
+      rc = bindle_encodings_fileno(cnf, method);
 
    if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
       write(cnf->state->fdout, "\n", strlen("\n"));
@@ -327,7 +327,7 @@ bindle_widget_encodings(
 
 
 int
-bindle_widget_encodings_stdin(
+bindle_encodings_fileno(
          bindle_conf_t *               cnf,
          int                           method )
 {
