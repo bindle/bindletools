@@ -119,7 +119,7 @@ bindle_encodings_fileno(
 
 
 static int
-bindle_widget_encodings_string(
+bindle_encodings_string(
          bindle_conf_t *               cnf,
          int                           method,
          const char *                  str );
@@ -315,7 +315,7 @@ bindle_widget_encodings(
    fflush(stdout);
 
    if ((str))
-      rc = bindle_widget_encodings_string(cnf, method, str);
+      rc = bindle_encodings_string(cnf, method, str);
    else
       rc = bindle_encodings_fileno(cnf, method);
 
@@ -357,7 +357,7 @@ bindle_encodings_fileno(
 
 
 int
-bindle_widget_encodings_string(
+bindle_encodings_string(
          bindle_conf_t *               cnf,
          int                           method,
          const char *                  str )
