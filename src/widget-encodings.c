@@ -63,6 +63,19 @@
 #define BINDLE_FLG_NOPAD      0x00004UL
 #define BINDLE_FLG_NEWLINE    0x00008UL
 
+#define BNDLE_B16_CHUNK       2
+#define BNDLE_B16_BUFF_LEN    (BNDLE_B16_CHUNK*32)
+#define BNDLE_B16_RES_LEN     (BNDLE_B16_CHUNK*64)
+#define BNDLE_B32_CHUNK       40
+#define BNDLE_B32_BUFF_LEN    (BNDLE_B32_CHUNK*5)
+#define BNDLE_B32_RES_LEN     (BNDLE_B32_CHUNK*8)
+#define BNDLE_B64_CHUNK       12
+#define BNDLE_B64_BUFF_LEN    (BNDLE_B64_CHUNK*18)
+#define BNDLE_B64_RES_LEN     (BNDLE_B64_CHUNK*24)
+#define BNDLE_PCTENC_CHUNK    2048
+#define BNDLE_PCTENC_BUFF_LEN BNDLE_PCTENC_CHUNK
+#define BNDLE_PCTENC_RES_LEN  BNDLE_PCTENC_CHUNK
+
 
 //////////////////
 //              //
@@ -73,6 +86,12 @@
 
 struct bindle_state
 {
+   size_t                     chunk_size;
+   size_t                     res_size;
+   size_t                     buff_size;
+   size_t                     buff_len;
+   char *                     buff;
+   char *                     res;
    int                        fdin;
    int                        fdout;
 };
@@ -113,13 +132,25 @@ bindle_widget_encodings(
 
 
 static int
-bindle_encodings_fileno(
+bindle_encodings_action_decode(
          bindle_conf_t *               cnf,
          int                           method );
 
 
 static int
-bindle_encodings_string(
+bindle_encodings_action_encode(
+         bindle_conf_t *               cnf,
+         int                           method );
+
+
+static int
+bindle_encodings_src_fileno(
+         bindle_conf_t *               cnf,
+         int                           method );
+
+
+static int
+bindle_encodings_src_string(
          bindle_conf_t *               cnf,
          int                           method,
          const char *                  str );
@@ -137,8 +168,15 @@ bindle_widget_base16(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_B16_RES_LEN+1];
+   char              buff[BNDLE_B16_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_B16_CHUNK;
+   state.buff_size   = BNDLE_B16_BUFF_LEN;
+   state.res_size    = BNDLE_B16_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_HEX));
 }
 
@@ -148,8 +186,15 @@ bindle_widget_base32(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_B32_RES_LEN+1];
+   char              buff[BNDLE_B32_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_B32_CHUNK;
+   state.buff_size   = BNDLE_B32_BUFF_LEN;
+   state.res_size    = BNDLE_B32_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_BASE32));
 }
 
@@ -159,8 +204,15 @@ bindle_widget_base32hex(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_B32_RES_LEN+1];
+   char              buff[BNDLE_B32_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_B32_CHUNK;
+   state.buff_size   = BNDLE_B32_BUFF_LEN;
+   state.res_size    = BNDLE_B32_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_BASE32HEX));
 }
 
@@ -170,8 +222,15 @@ bindle_widget_base64(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_B64_RES_LEN+1];
+   char              buff[BNDLE_B64_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_B64_CHUNK;
+   state.buff_size   = BNDLE_B64_BUFF_LEN;
+   state.res_size    = BNDLE_B64_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_BASE64));
 }
 
@@ -181,8 +240,15 @@ bindle_widget_crockfordbase32(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_B32_RES_LEN+1];
+   char              buff[BNDLE_B32_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_B32_CHUNK;
+   state.buff_size   = BNDLE_B32_BUFF_LEN;
+   state.res_size    = BNDLE_B32_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_CROCKFORD));
 }
 
@@ -192,8 +258,15 @@ bindle_widget_pctenc(
          bindle_conf_t *               cnf )
 {
    bindle_state_t    state;
+   char              res[BNDLE_PCTENC_RES_LEN+1];
+   char              buff[BNDLE_PCTENC_BUFF_LEN+1];
    memset(&state, 0, sizeof(state));
    cnf->state        = &state;
+   state.chunk_size  = BNDLE_PCTENC_CHUNK;
+   state.buff_size   = BNDLE_PCTENC_BUFF_LEN;
+   state.res_size    = BNDLE_PCTENC_RES_LEN;
+   state.buff        = buff;
+   state.res         = res;
    return(bindle_widget_encodings(cnf, BNDL_PCTENC));
 }
 
@@ -315,9 +388,9 @@ bindle_widget_encodings(
    fflush(stdout);
 
    if ((str))
-      rc = bindle_encodings_string(cnf, method, str);
+      rc = bindle_encodings_src_string(cnf, method, str);
    else
-      rc = bindle_encodings_fileno(cnf, method);
+      rc = bindle_encodings_src_fileno(cnf, method);
 
    if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
       write(cnf->state->fdout, "\n", strlen("\n"));
@@ -327,26 +400,82 @@ bindle_widget_encodings(
 
 
 int
-bindle_encodings_fileno(
+bindle_encodings_action_decode(
          bindle_conf_t *               cnf,
          int                           method )
 {
-   ssize_t     rc;
-   ssize_t     len;
-   char        chunk[BINDLE_BUFF_SIZE+1];
-   char        res[(BINDLE_BUFF_SIZE*3)+1];
+   ssize_t              len;
+   bindle_state_t *     state;
 
-   while ((rc = read(cnf->state->fdin, chunk, BINDLE_BUFF_SIZE)) > 0)
+   state = cnf->state;
+
+   if ((len = bindle_decode(method, state->res, state->res_size, state->buff, state->buff_len)) == -1)
    {
-      chunk[rc] = '\0';
-      if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
-         len = bindle_decode(method, res, sizeof(res), chunk, (size_t)rc);
-      else
-         len = bindle_encode(method, res, sizeof(res), chunk, (size_t)rc, (cnf->widget_flags & BINDLE_FLG_NOPAD));
-      if (len > 0)
-         write(cnf->state->fdout, res, (size_t)len);
+      fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
+      return(-1);
    };
-   if (rc == -1)
+   if (len > 0)
+      write(cnf->state->fdout, cnf->state->res, (size_t)len);
+
+   state->buff_len = 0;
+
+   return(0);
+}
+
+
+int
+bindle_encodings_action_encode(
+         bindle_conf_t *               cnf,
+         int                           method )
+{
+   ssize_t              len;
+   bindle_state_t *     state;
+
+   state = cnf->state;
+
+   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len, (cnf->widget_flags & BINDLE_FLG_NOPAD))) == -1)
+   {
+      fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
+      return(-1);
+   };
+   if (len > 0)
+      write(cnf->state->fdout, cnf->state->res, (size_t)len);
+
+   return(0);
+}
+
+
+int
+bindle_encodings_src_fileno(
+         bindle_conf_t *               cnf,
+         int                           method )
+{
+   ssize_t           len;
+   bindle_state_t *  state;
+   char *            buff;
+   char *            res;
+
+   state             = cnf->state;
+   state->buff_len    = 0;
+   buff              = state->buff;
+   res               = state->res;
+
+   while ((len = read(cnf->state->fdin, &buff[state->buff_len], (state->buff_size-state->buff_len))) > 0)
+   {
+      state->buff_len += (size_t)len;
+      buff[state->buff_len] = '\0';
+      if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
+      {
+         if (bindle_encodings_action_decode(cnf, method) == -1)
+            return(1);
+      }
+      else
+      {
+         if (bindle_encodings_action_encode(cnf, method) == -1)
+            return(1);
+      }
+   };
+   if (len == -1)
    {
       fprintf(stderr, "%s: read(): %s\n", cnf->prog_name, strerror(errno));
       return(1);
@@ -357,7 +486,7 @@ bindle_encodings_fileno(
 
 
 int
-bindle_encodings_string(
+bindle_encodings_src_string(
          bindle_conf_t *               cnf,
          int                           method,
          const char *                  str )
