@@ -628,7 +628,10 @@ bindle_base64_decode(
 
    // verifies encoded data contains only valid characters
    if ((rc = bindle_base64_verify(map, (const char *)src, n)) == -1)
+   {
+      errno = EBADMSG;
       return(-1);
+   };
    if ( (rc > (ssize_t)s) && ((dst)) )
    {
       errno = ENOBUFS;
