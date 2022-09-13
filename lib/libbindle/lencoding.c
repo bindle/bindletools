@@ -982,7 +982,10 @@ bindle_pctenc_decode(
 
    // verifies encoded data contains only valid characters
    if ((rc = bindle_pctenc_verify((const char *)src, n)) == -1)
+   {
+      errno = EBADMSG;
       return(-1);
+   };
    if ( (rc >= ((ssize_t)s-1)) && ((dst)) )
    {
       errno = ENOBUFS;
