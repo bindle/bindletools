@@ -45,6 +45,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
 
@@ -406,18 +407,50 @@ bindle_encodings_action_decode(
 {
    ssize_t              len;
    bindle_state_t *     state;
+   size_t               pos;
+   size_t               off;
+   size_t               chunk_size;
+   int                  fullbuff;
 
    state = cnf->state;
 
-   if ((len = bindle_decode(method, state->res, state->res_size, state->buff, state->buff_len)) == -1)
+   fullbuff = (state->buff_size == state->buff_len) ? BNDL_YES : BNDL_NO;
+
+   // strip newlines
+   for(pos = 0, off = 0; (pos < state->buff_len); pos++)
    {
-      fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
+      if ( (state->buff[pos] == '\n') || (state->buff[pos] == '\r') )
+      {
+         off++;
+         continue;
+      };
+      if (off != 0)
+         state->buff[pos-off] = state->buff[pos];
+   };
+   state->buff_len -= off;
+   state->buff[state->buff_len] = '\0';
+
+   // decode data
+   chunk_size = state->buff_len;
+   if (fullbuff == BNDL_YES)
+   {
+      chunk_size = (state->buff_len / state->chunk_size) * state->chunk_size;
+      if ( (chunk_size > state->buff_len) || (chunk_size < state->chunk_size) )
+         return(0);
+   };
+   if ((len = bindle_decode(method, state->res, state->res_size, state->buff, chunk_size)) == -1)
+   {
+      fprintf(stderr, "%s: bindle_decode(): %s\n", cnf->prog_name, strerror(errno));
       return(-1);
    };
-   if (len > 0)
-      write(cnf->state->fdout, cnf->state->res, (size_t)len);
+   if (len == 0)
+      return(0);
+   write(state->fdout, state->res, (size_t)len);
 
-   state->buff_len = 0;
+   // shift unencoded data
+   for(pos = chunk_size; (pos < state->buff_len); pos++)
+      state->buff[pos-chunk_size] = state->buff[pos];
+   state->buff_len -= chunk_size;
 
    return(0);
 }
