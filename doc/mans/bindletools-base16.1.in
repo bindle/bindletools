@@ -65,6 +65,10 @@ encode input data to a base 16 string
 print this usage information and exit
 
 .TP 25
+\fB-I\fR, \fB--ignore-garbage\fR
+ignore invalid characters when decoding
+
+.TP 25
 \fB-i\fR \fIinput\fR, \fB--input\fR=\fIfile\fR
 use input file instead of stdin
 
@@ -95,6 +99,10 @@ print version number and exit
 .TP 25
 \fB-v\fR, \fB--verbose\fR
 print verbose messages
+
+.TP 25
+\fB-w\fR \fIcols\fR, \fB--wrap\fR=\fIcols\fR
+when encoding data, wrap output to \fIcols\fR characters per line
 
 .SH SEE ALSO
 .BR bindletools (1),
