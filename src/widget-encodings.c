@@ -91,6 +91,8 @@ struct bindle_state
    size_t                     res_size;
    size_t                     buff_size;
    size_t                     buff_len;
+   size_t                     line_wrap;
+   size_t                     line_off;
    char *                     buff;
    char *                     res;
    int                        fdin;
@@ -115,6 +117,7 @@ const char * const bindle_widget_encodings_options[] =
    "  -o file, --output=file    use output file instead of stdout",
    "  -p, --nopadding           disable padding",
    "  -s string                 string to encode or decode",
+   "  -w cols, --wrap=cols      wrap encoded lines to cols",
    NULL
 };
 
@@ -280,27 +283,30 @@ bindle_widget_encodings(
    int               c;
    int               rc;
    int               opt_index;
+   char *            endptr;
    const char *      str;
 
    // getopt options
-   static const char *  short_opt = BINDLE_COMMON_SHORT "dei:no:ps:";
+   static const char *  short_opt = BINDLE_COMMON_SHORT "b:dei:no:ps:w:";
    static struct option long_opt[] =
    {
       BINDLE_COMMON_LONG,
+      { "break",          no_argument,          NULL, 'b' },
       { "decode",          no_argument,         NULL, 'd' },
       { "encode",          no_argument,         NULL, 'e' },
       { "input",           optional_argument,   NULL, 'i' },
       { "newline",         no_argument,         NULL, 'n' },
       { "nopadding",       no_argument,         NULL, 'p' },
       { "output",          optional_argument,   NULL, 'o' },
+      { "wrap",            optional_argument,   NULL, 'w' },
       { NULL, 0, NULL, 0 }
    };
 
-   optind            = 1;
-   opt_index         = 0;
-   str               = NULL;
-   cnf->state->fdin  = STDIN_FILENO;
-   cnf->state->fdout = STDOUT_FILENO;
+   optind                  = 1;
+   opt_index               = 0;
+   str                     = NULL;
+   cnf->state->fdin        = STDIN_FILENO;
+   cnf->state->fdout       = STDOUT_FILENO;
 
    while((c = bindle_getopt(cnf, cnf->argc, cnf->argv, short_opt, long_opt, &opt_index)) != -1)
    {
@@ -366,7 +372,16 @@ bindle_widget_encodings(
          str = optarg;
          break;
 
-         case 'u':
+         case 'b':
+         case 'w':
+         cnf->widget_flags |= BINDLE_FLG_NEWLINE;
+         cnf->state->line_wrap = strtoul(optarg, &endptr, 0);
+         if ((endptr == optarg) || (endptr[0] != '\0'))
+         {
+            fprintf(stderr, "%s: invalid value for option `-%c'\n", PROGRAM_NAME, c);
+            fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
+            return(1);
+         };
          break;
 
          case '?':
@@ -462,17 +477,48 @@ bindle_encodings_action_encode(
          int                           method )
 {
    ssize_t              len;
+   ssize_t              chunk_len;
+   ssize_t              buff_off;
    bindle_state_t *     state;
 
    state = cnf->state;
 
-   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len, (cnf->widget_flags & BINDLE_FLG_NOPAD))) == -1)
+   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len, (cnf->widget_flags & BINDLE_FLG_NOPAD))) < 0)
    {
       fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
       return(-1);
    };
-   if (len > 0)
-      write(cnf->state->fdout, cnf->state->res, (size_t)len);
+   state->buff_len = 0;
+
+   if (!(state->line_wrap))
+   {
+      if (write(cnf->state->fdout, state->res, (size_t)len) == -1)
+      {
+         fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
+         return(-1);
+      };
+      return(0);
+   };
+
+   buff_off = 0;
+   while(buff_off < len)
+   {
+      chunk_len = (ssize_t)(state->line_wrap - state->line_off);
+      chunk_len = (len < (ssize_t)chunk_len)    ? len            : chunk_len;
+      chunk_len = (chunk_len > (len-buff_off)) ? (len-buff_off) : chunk_len;
+      if (write(cnf->state->fdout, &cnf->state->res[buff_off], (size_t)chunk_len) == -1)
+      {
+         fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
+         return(-1);
+      };
+      buff_off += chunk_len;
+      state->line_off += (size_t)chunk_len;
+      if (state->line_off == state->line_wrap)
+      {
+         state->line_off = 0;
+         write(cnf->state->fdout, "\n", strlen("\n"));
+      };
+   };
 
    return(0);
 }
@@ -486,12 +532,11 @@ bindle_encodings_src_fileno(
    ssize_t           len;
    bindle_state_t *  state;
    char *            buff;
-   char *            res;
 
    state             = cnf->state;
    state->buff_len    = 0;
+   state->line_off   = 0;
    buff              = state->buff;
-   res               = state->res;
 
    while ((len = read(cnf->state->fdin, &buff[state->buff_len], (state->buff_size-state->buff_len))) > 0)
    {
