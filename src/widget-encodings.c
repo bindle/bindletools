@@ -533,15 +533,11 @@ bindle_encodings_src_fileno(
          return(0);
       buff[state->buff_len] = '\0';
       if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
-      {
          if (bindle_encodings_action_decode(cnf, method) == -1)
             return(1);
-      }
-      else
-      {
+      if ((cnf->widget_flags & BINDLE_FLG_DECODE) != BINDLE_FLG_DECODE)
          if (bindle_encodings_action_encode(cnf, method) == -1)
             return(1);
-      };
       if (len == 0)
          return(0);
    };
