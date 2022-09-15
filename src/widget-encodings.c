@@ -95,8 +95,8 @@ struct bindle_state
    size_t                     line_off;
    char *                     buff;
    char *                     res;
-   int                        fdin;
-   int                        fdout;
+   FILE *                     fsin;
+   FILE *                     fsout;
 };
 
 
@@ -305,8 +305,8 @@ bindle_widget_encodings(
    optind                  = 1;
    opt_index               = 0;
    str                     = NULL;
-   cnf->state->fdin        = STDIN_FILENO;
-   cnf->state->fdout       = STDOUT_FILENO;
+   cnf->state->fsin        = NULL;
+   cnf->state->fsout       = NULL;
 
    while((c = bindle_getopt(cnf, cnf->argc, cnf->argv, short_opt, long_opt, &opt_index)) != -1)
    {
@@ -333,15 +333,15 @@ bindle_widget_encodings(
          break;
 
          case 'i':
-         if (cnf->state->fdin != STDIN_FILENO)
+         if (cnf->state->fsin != NULL)
          {
             fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
             fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
             return(1);
          };
-         if ((cnf->state->fdin = open(optarg, O_RDONLY)) == -1)
+         if ((cnf->state->fsin = fopen(optarg, "r")) == NULL)
          {
-            fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
+            fprintf(stderr, "%s: fopen(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
             return(1);
          };
          break;
@@ -351,15 +351,15 @@ bindle_widget_encodings(
          break;
 
          case 'o':
-         if (cnf->state->fdout != STDOUT_FILENO)
+         if (cnf->state->fsout != NULL)
          {
             fprintf(stderr, "%s: duplicate option `--%c'\n", PROGRAM_NAME, c);
             fprintf(stderr, "Try `%s --help' for more information.\n", PROGRAM_NAME);
             return(1);
          };
-         if ((cnf->state->fdout = open(optarg, (O_WRONLY|O_CREAT|O_TRUNC), 0644)) == -1)
+         if ((cnf->state->fsout = fopen(optarg, "w")) == NULL)
          {
-            fprintf(stderr, "%s: open(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
+            fprintf(stderr, "%s: fopen(): %s: %s\n", cnf->prog_name, optarg, strerror(errno));
             return(1);
          };
          break;
@@ -400,8 +400,8 @@ bindle_widget_encodings(
       fprintf(stderr, "Try `%s --help' for more information.\n", cnf->prog_name);
       return(1);
    };
-
-   fflush(stdout);
+   cnf->state->fsout = (cnf->state->fsout == NULL) ? stdout : cnf->state->fsout;
+   cnf->state->fsin  = (cnf->state->fsin  == NULL) ? stdin  : cnf->state->fsin;
 
    if ((str))
       rc = bindle_encodings_src_string(cnf, method, str);
@@ -409,7 +409,14 @@ bindle_widget_encodings(
       rc = bindle_encodings_src_fileno(cnf, method);
 
    if ((cnf->widget_flags & BINDLE_FLG_NEWLINE))
-      write(cnf->state->fdout, "\n", strlen("\n"));
+      fprintf(cnf->state->fsout, "\n");
+
+   fflush(cnf->state->fsout);
+
+   if (cnf->state->fsout != stdout)
+      fclose(cnf->state->fsout);
+   if (cnf->state->fsin != stdin)
+      fclose(cnf->state->fsin);
 
    return(rc);
 }
@@ -452,7 +459,7 @@ bindle_encodings_action_decode(
    };
    if (len == 0)
       return(0);
-   write(state->fdout, state->res, (size_t)len);
+   fwrite(state->res, 1, (size_t)len, state->fsout);
    state->buff_len = 0;
 
    return(0);
@@ -480,7 +487,7 @@ bindle_encodings_action_encode(
 
    if (!(state->line_wrap))
    {
-      if (write(cnf->state->fdout, state->res, (size_t)len) == -1)
+      if (fwrite(state->res, 1, (size_t)len, state->fsout) == 0)
       {
          fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
          return(-1);
@@ -494,7 +501,7 @@ bindle_encodings_action_encode(
       chunk_len = (ssize_t)(state->line_wrap - state->line_off);
       chunk_len = (len < (ssize_t)chunk_len)    ? len            : chunk_len;
       chunk_len = (chunk_len > (len-buff_off)) ? (len-buff_off) : chunk_len;
-      if (write(cnf->state->fdout, &cnf->state->res[buff_off], (size_t)chunk_len) == -1)
+      if (fwrite(&cnf->state->res[buff_off], 1, (size_t)chunk_len, state->fsout) == 0)
       {
          fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
          return(-1);
@@ -504,7 +511,7 @@ bindle_encodings_action_encode(
       if (state->line_off == state->line_wrap)
       {
          state->line_off = 0;
-         write(cnf->state->fdout, "\n", strlen("\n"));
+         fprintf(state->fsout, "\n");
       };
    };
 
@@ -517,7 +524,7 @@ bindle_encodings_src_fileno(
          bindle_conf_t *               cnf,
          int                           method )
 {
-   ssize_t           len;
+   size_t            len;
    bindle_state_t *  state;
    char *            buff;
 
@@ -526,7 +533,7 @@ bindle_encodings_src_fileno(
    state->line_off   = 0;
    buff              = state->buff;
 
-   while ((len = read(cnf->state->fdin, &buff[state->buff_len], (state->buff_size-state->buff_len))) >= 0)
+   while ((len = fread(&buff[state->buff_len], 1, (state->buff_size-state->buff_len), state->fsin)) >= 0)
    {
       state->buff_len += (size_t)len;
       if (state->buff_len == 0)
@@ -540,11 +547,6 @@ bindle_encodings_src_fileno(
             return(1);
       if (len == 0)
          return(0);
-   };
-   if (len == -1)
-   {
-      fprintf(stderr, "%s: read(): %s\n", cnf->prog_name, strerror(errno));
-      return(1);
    };
 
    return(0);
@@ -573,7 +575,7 @@ bindle_encodings_src_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_decode(method, res, sizeof(res), chunk, size)) > 0)
-            write(cnf->state->fdout, res, (size_t)rc);
+            fwrite(res, 1, (size_t)rc, cnf->state->fsout);
       };
    }
    else
@@ -583,7 +585,7 @@ bindle_encodings_src_string(
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
          if ((rc = bindle_encode(method, res, sizeof(res), chunk, size, (cnf->widget_flags & BINDLE_FLG_NOPAD))) > 0)
-            write(cnf->state->fdout, res, (size_t)rc);
+            fwrite(res, 1, (size_t)rc, cnf->state->fsout);
       };
    };
 
