@@ -338,6 +338,12 @@ bindle_encode_size(
          size_t                        n );
 
 
+_BINDLE_F int
+bindle_encoded_char(
+         int                           method,
+         char                          c );
+
+
 _BINDLE_F ssize_t
 bindle_encoding_verify(
          int                           method,

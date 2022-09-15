@@ -1300,6 +1300,42 @@ bindle_encode_size(
 }
 
 
+int
+bindle_encoded_char(
+         int                           method,
+         char                          c )
+{
+   unsigned char u = (unsigned char)c;
+   switch(method)
+   {
+      case BNDL_BASE32:
+      return(base32_vals[u]);
+
+      case BNDL_BASE32HEX:
+      return(base32hex_vals[u]);
+
+      case BNDL_BASE64:
+      return(base64_vals[u]);
+
+      case BNDL_CROCKFORD:
+      return(crockford_vals[u]);
+
+      case BNDL_HEX:
+      return(hex_vals[u]);
+
+      case BNDL_NONE:
+      return((int)u);
+
+      case BNDL_PCTENC:
+      return(pctenc_vals[u]);
+
+      default:
+      break;
+   };
+   return(-1);
+}
+
+
 ssize_t
 bindle_encoding_verify(
          int                           method,

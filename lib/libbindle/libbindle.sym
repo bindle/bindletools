@@ -52,6 +52,7 @@ bindle_decode
 bindle_decode_size
 bindle_encode
 bindle_encode_size
+bindle_encoded_char
 bindle_encoding_verify
 #
 # file functions

@@ -51,6 +51,8 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .sp
 .BI "ssize_t bindle_encoding_verify( int " method ", const char * " src ","
 .BI "           size_t " n " );"
+.sp
+.BI "int bindle_encoded_char( int " method ", char " c " );"
 
 .SH DESCRIPTION
 \fBbindle_decode\fR() decodes \fIn\fR bytes from \fIsrc\fR into \fIdst\fR
@@ -94,6 +96,9 @@ encode \fIn\fR bytes of data according to the method specified by
 .sp
 \fBbindle_encoding_verify\fR() verifies that \fIn\fR bytes of data in
 \fIsrc\fR are encoded according to encoding specified by \fImethod\fR.
+.sp
+\fBbindle_encoded_char\fR() returns the value of the encoded character \fIc\fR
+for \fImethod\fR.
 
 .SH RETURN VALUES
 If successful \fBbindle_decode\fR() and \fBbindle_encode\fR() return the
@@ -106,6 +111,10 @@ error occurs, errno is set and -1 is returned.
 .sp
 \fBbindle_encoding_verify\fR() returns 0 if the data is correctly encoded. If
 an error occurred, errno is set and -1 is returned.
+.sp
+\fBbindle_encoded_char\fR() returns the value of the specified character if
+\fIc\fR is a valid encoded character for \fImethod\fR or returns -1 if \fIc\fR
+is not a valid encoded character.
 
 .SH SEE ALSO
 .BR bindletools (3)
