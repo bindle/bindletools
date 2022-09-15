@@ -63,6 +63,7 @@
 #define BINDLE_FLG_DECODE     0x00002UL
 #define BINDLE_FLG_NOPAD      0x00004UL
 #define BINDLE_FLG_NEWLINE    0x00008UL
+#define BINDLE_FLG_IGNOREBAD  0x00010UL
 
 #define BNDLE_B16_CHUNK       2
 #define BNDLE_B16_BUFF_LEN    (BNDLE_B16_CHUNK*32)
@@ -112,6 +113,7 @@ const char * const bindle_widget_encodings_options[] =
 {
    "  -d, --decode              decode string",
    "  -e, --encode              encode string",
+   "  -I, --ignore-garbage      ignore invalid characters when decoding",
    "  -i file, --input=file     use input file instead of stdin",
    "  -n, --newline             add newline to output",
    "  -o file, --output=file    use output file instead of stdout",
@@ -287,13 +289,14 @@ bindle_widget_encodings(
    const char *      str;
 
    // getopt options
-   static const char *  short_opt = BINDLE_COMMON_SHORT "b:dei:no:ps:w:";
+   static const char *  short_opt = BINDLE_COMMON_SHORT "b:deIi:no:ps:w:";
    static struct option long_opt[] =
    {
       BINDLE_COMMON_LONG,
       { "break",          no_argument,          NULL, 'b' },
       { "decode",          no_argument,         NULL, 'd' },
       { "encode",          no_argument,         NULL, 'e' },
+      { "ignore-garbage",   no_argument,         NULL, 'I' },
       { "input",           optional_argument,   NULL, 'i' },
       { "newline",         no_argument,         NULL, 'n' },
       { "nopadding",       no_argument,         NULL, 'p' },
@@ -330,6 +333,10 @@ bindle_widget_encodings(
          case 'e':
          cnf->widget_flags |=  BINDLE_FLG_ENCODE;
          cnf->widget_flags &= ~BINDLE_FLG_DECODE;
+         break;
+
+         case 'I':
+         cnf->widget_flags |= BINDLE_FLG_IGNOREBAD;
          break;
 
          case 'i':
@@ -427,6 +434,7 @@ bindle_encodings_action_decode(
          bindle_conf_t *               cnf,
          int                           method )
 {
+   char                 c;
    ssize_t              len;
    bindle_state_t *     state;
    size_t               pos;
@@ -439,7 +447,13 @@ bindle_encodings_action_decode(
    // strip newlines
    for(pos = 0, off = 0; (pos < state->buff_len); pos++)
    {
-      if ( (state->buff[pos] == '\n') || (state->buff[pos] == '\r') )
+      c = state->buff[pos];
+      if ( (c == '\n') || (c == '\r') )
+      {
+         off++;
+         continue;
+      };
+      if ( ((cnf->widget_flags & BINDLE_FLG_IGNOREBAD)) && (bindle_encoded_char(method, c) == -1) )
       {
          off++;
          continue;
