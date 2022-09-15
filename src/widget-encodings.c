@@ -424,12 +424,10 @@ bindle_encodings_action_decode(
    bindle_state_t *     state;
    size_t               pos;
    size_t               off;
-   size_t               chunk_size;
-   int                  fullbuff;
+   size_t               buff_len;
 
-   state = cnf->state;
-
-   fullbuff = (state->buff_size == state->buff_len) ? BNDL_YES : BNDL_NO;
+   state       = cnf->state;
+   buff_len    = state->buff_len;
 
    // strip newlines
    for(pos = 0, off = 0; (pos < state->buff_len); pos++)
@@ -443,17 +441,11 @@ bindle_encodings_action_decode(
          state->buff[pos-off] = state->buff[pos];
    };
    state->buff_len -= off;
-   state->buff[state->buff_len] = '\0';
+   if (buff_len != state->buff_len)
+      return(0);
 
    // decode data
-   chunk_size = state->buff_len;
-   if (fullbuff == BNDL_YES)
-   {
-      chunk_size = (state->buff_len / state->chunk_size) * state->chunk_size;
-      if ( (chunk_size > state->buff_len) || (chunk_size < state->chunk_size) )
-         return(0);
-   };
-   if ((len = bindle_decode(method, state->res, state->res_size, state->buff, chunk_size)) == -1)
+   if ((len = bindle_decode(method, state->res, state->res_size, state->buff, buff_len)) == -1)
    {
       fprintf(stderr, "%s: bindle_decode(): %s\n", cnf->prog_name, strerror(errno));
       return(-1);
@@ -461,11 +453,7 @@ bindle_encodings_action_decode(
    if (len == 0)
       return(0);
    write(state->fdout, state->res, (size_t)len);
-
-   // shift unencoded data
-   for(pos = chunk_size; (pos < state->buff_len); pos++)
-      state->buff[pos-chunk_size] = state->buff[pos];
-   state->buff_len -= chunk_size;
+   state->buff_len = 0;
 
    return(0);
 }
