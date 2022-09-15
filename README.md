@@ -2,8 +2,9 @@
 Bindle Binaries Tools
 =====================
 
-   Bindle Binaries Tools is a collection of scripts and files which aid in the
-   management of projects. 
+   Bindle Binaries Tools is a collection of scripts, autoconf macros, automake
+   includes, utilities, and library functions which aid in the development of 
+   software projects. 
 
 
 Contents
@@ -45,12 +46,6 @@ Software Requirements
    Bash Shell
 
 
-Maintainers
-===========
-
-   David M. Syzdek
-   Bindle Binaries
-   syzdek@bindlebinaries.com
 
 
 Source Code
