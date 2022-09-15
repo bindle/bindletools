@@ -54,11 +54,11 @@ The following contains information to checkout the source code from the git
 repository.
 
  Browse Source:
-   * [https://github.com/bindle/bindletools](https://github.com/bindle/bindletools)
+   * https://github.com/bindle/bindletools
 
 Git URLs:
-   * [https://github.com/bindle/bindletools.git](https://github.com/bindle/bindletools.git)
-   * [git@github.com:bindle/bindletools.git](git@github.com:bindle/bindletools.git)
+   * https://github.com/bindle/bindletools.git
+   * git@github.com:bindle/bindletools.git
 
 Downloading Source:
 
@@ -89,8 +89,11 @@ New Release Checklist:
    - Update date and version in ChangeLog.
    - Commit configure.ac and ChangeLog changes to repository.
    - Create tag in git repository:
+
            $ git tag -s v${MAJOR}.${MINOR}
+
    - Push repository to publishing server:
+
            $ git push --tags origin master:master next:next pu:pu
 
 Creating Source Distribution Archives:
