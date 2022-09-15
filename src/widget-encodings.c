@@ -538,9 +538,11 @@ bindle_encodings_src_fileno(
    state->line_off   = 0;
    buff              = state->buff;
 
-   while ((len = read(cnf->state->fdin, &buff[state->buff_len], (state->buff_size-state->buff_len))) > 0)
+   while ((len = read(cnf->state->fdin, &buff[state->buff_len], (state->buff_size-state->buff_len))) >= 0)
    {
       state->buff_len += (size_t)len;
+      if (state->buff_len == 0)
+         return(0);
       buff[state->buff_len] = '\0';
       if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
       {
@@ -551,7 +553,9 @@ bindle_encodings_src_fileno(
       {
          if (bindle_encodings_action_encode(cnf, method) == -1)
             return(1);
-      }
+      };
+      if (len == 0)
+         return(0);
    };
    if (len == -1)
    {
