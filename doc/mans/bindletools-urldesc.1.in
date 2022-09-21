@@ -1,0 +1,196 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2022 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLETOOLS" "1" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "User Commands"
+.SH NAME
+bindletools-urldesc - parses URL
+
+.SH SYNOPSIS
+.nf
+\fBbindletools urldesc\fR [OPTIONS] \fIurl\fR
+.sp
+\fBbindletools-urldesc\fR [OPTIONS] \fIurl\fR
+.sp
+\fBurldesc\fR [OPTIONS] \fIurl\fR
+.fi
+
+.SH DESCRIPTION
+\fBbindletools-urldesc\fR parses general URL (Uniform Resource Locators) or
+URI (Uniform  Resource  Identifier) strings and prints the URL components. The
+syntax of a URI is defined as:
+.sp
+.RS 4
+.nf
+URI = \fIscheme\fR ":" ["//" authority] \fIpath\fR ["?" \fIquery\fR] ["#" \fIfragment\fR]
+authority = [\fIuserinfo\fR "@"] \fIhost\fR [":" \fIport\fR]
+.fi
+.RE
+.PP
+where:
+.RS 4
+.PD 0
+.TP 9
+\fIscheme\fR
+is the specification to use for the URI. The \fIscheme\fR is stored as a
+string to \fIbud_scheme\fR.
+.TP 9
+\fIuserinfo\fR
+is the optional username and password. \fIuserinfo\fR is stored as a string
+to \fIbud_userinfo\fR.
+.TP 9
+\fIhost\fR
+is the host providing the resource. \fIhost\fR is stored as a string to
+\fIbud_host\fR.
+.TP 9
+\fIport\fR
+is the numeric port number or service name on the \fIhost\fR providing the
+service. \fIport\fR is stored as a string to \fIbud_service\fR and stored as
+an integer to \fIbud_port\fR if \fIport\fR is a numeric value.
+.TP 9
+\fIpath\fR
+is the path to the resource. \fIpath\fR is stored as a string to \fIbud_path\fR.
+.TP 9
+\fIquery\fR
+is the non-hierarchical data identifying the resource. \fIquery\fR is stored
+as a string to \fIbud_query\fR.
+.TP 9
+\fIfragment\fR
+is a section of the resource or a secondary resource. \fIfragment\fR is stored
+as a string to \fIbud_fragment\fR.
+.RE
+.PD
+.PP
+Examples:
+.RS 4
+.nf
+https://example.com:8443/demo/
+https://example/demo/#bindletools
+https://example/demo/?q=example
+ftp://jdoe@example.com/pub/demo.txt
+file:/pub/demo.txt
+http://jdoe:cred@example.com:8080/demo/?q=example#bindletools
+.fi
+.RE
+
+.SH OPTIONS
+
+.TP 25
+\fB-4\fR
+resolve IPv4 address of host
+
+.TP 25
+\fB-6\fR
+resolve IPv6 address of host
+
+.TP 25
+\fB-D\fR \fIlevel\fR, \fB--debug\fR=\fIlevel\fR
+set debug level
+
+.TP 25
+\fB-f\fR, \fB--fragment\fR
+print URL fragment
+
+.TP 25
+\fB-H\fR, \fB--host\fR
+print URL host
+
+.TP 25
+\fB-h\fR, \fB--help\fR
+print this usage information and exit
+
+.TP 25
+\fB-n\fR, \fB--dryrun\fR
+do not resolve hostname
+
+.TP 25
+\fB-P\fR, \fB--path\fR
+print URL path
+
+.TP 25
+\fB-p\fR, \fB--port\fR
+print URL port number if \fIservice\fR is a numeric value or if resolving the
+hostname of the URL.
+
+.TP 25
+\fB-Q\fR, \fB--query\fR
+print URL query
+
+.TP 25
+\fB-q\fR, \fB--quiet\fR, \fB--silent\fR
+do not print messages
+
+.TP 25
+\fB-r\fR, \fB--resolve\fR
+resolve hostname and service name
+
+.TP 25
+\fB-S\fR, \fB--service\fR
+print URL service
+
+.TP 25
+\fB-s\fR, \fB--scheme\fR
+print URL scheme
+
+.TP 25
+\fB-u\fR, \fB--userinfo\fR
+print URL userinfo
+
+.TP 25
+\fB-V\fR, \fB--version\fR
+print version number and exit
+
+.TP 25
+\fB-v\fR, \fB--verbose\fR
+print verbose messages
+
+.TP 25
+\fB--all\fR
+print all values, even if empty
+
+.TP 25
+\fB--shell\fR
+print components as shell variables
+
+.TP 25
+\fB--short\fR
+print only component values
+
+.SH SEE ALSO
+.BR bindletools (1),
+.BR bindle_urldesc (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

@@ -93,12 +93,12 @@ expand
 expand tokens within string
 
 .TP 20
-expand
-expand tokens within string
-
-.TP 20
 pctenc
 encode/decode percent-encoding/URL encoding string
+
+.TP 20
+urldesc
+parse URL string
 
 .SH SEE ALSO
 .BR bindletools-base16 (1),

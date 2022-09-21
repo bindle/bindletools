@@ -10,7 +10,6 @@ All rights reserved.
 #### documentation
    * bindletools Man Pages
      - write bindletools-expand.1
-     - write bindletools-urldesc.1
    * libbindle Man Pages
      - write bindle_debug.3
      - write bindle_get_option.3
