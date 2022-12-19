@@ -149,6 +149,8 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
 if ENABLE_BUILTIN_BINDLE
    lib_libbindle_a_DEPENDENCIES		+= include/bindle_prefix.h
+endif
+if ENABLE_LIBBINDLE_SOURCES
    BINDLE_LIBBINDLE_DEPS		+= include/bindle_prefix.h
    BINDLE_LIBBINDLE_SRCS		+= $(lib_libbindle_a_SOURCES)
 endif

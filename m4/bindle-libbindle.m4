@@ -38,6 +38,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
 
    LIBBINDLE_PREFIX="$1"
    ENABLE_BUILTIN_BINDLE="$2"
+   ENABLE_LIBBINDLE_SRCS="no"
    ENABLE_LIBBINDLE="no"
 
    enableval=""
@@ -49,16 +50,23 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    )
    if test "x${ENABLE_BUILTIN_BINDLE}" = "xyes";then
       ENABLE_BUILTIN_BINDLE=yes
+      ENABLE_LIBBINDLE_SRCS=yes
    elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
       ENABLE_BUILTIN_BINDLE=no
    elif test "x${ENABLE_BUILTIN_BINDLE}" = "xinstall";then
       ENABLE_BUILTIN_BINDLE=no
+      ENABLE_LIBBINDLE_SRCS=no
       ENABLE_LIBBINDLE=yes
       ENABLE_BINDLE_TESTS=yes
+   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xsources";then
+      ENABLE_BUILTIN_BINDLE=no
+      ENABLE_LIBBINDLE_SRCS=yes
    elif test "x${EBUILTINBINDLE}" = "xyes";then
-         ENABLE_BUILTIN_BINDLE=yes
+      ENABLE_BUILTIN_BINDLE=yes
+      ENABLE_LIBBINDLE_SRCS=yes
    else
       ENABLE_BUILTIN_BINDLE=auto
+      ENABLE_LIBBINDLE_SRCS=auto
    fi
 
    # look for installed libbindle
@@ -72,10 +80,12 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
       AC_CHECK_LIB([bindle], [bindle_obj_retain],     [], [FOUND_LIBBINDLE=no])
       if test "x${FOUND_LIBBINDLE}" = "xyes";then
          ENABLE_BUILTIN_BINDLE=no
+         ENABLE_LIBBINDLE_SRCS=no
       elif test "x${EBUILTINBINDLE}" = "xno";then
          AC_MSG_ERROR([libbindle not found])
       else
          ENABLE_BUILTIN_BINDLE=yes
+         ENABLE_LIBBINDLE_SRCS=yes
       fi
    fi
 
@@ -91,18 +101,25 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    fi
 
    AC_SUBST([LIBBINDLE_PREFIX],                 [${LIBBINDLE_PREFIX}])
-   AM_CONDITIONAL([WITH_BINDLE_PREFIX_H],       [test "x${LIBBINDLE_PREFIX}"      != "xbindle_"])
-   AM_CONDITIONAL([WITHOUT_BINDLE_PREFIX_H],    [test "x${LIBBINDLE_PREFIX}"       = "xbindle_"])
-   AM_CONDITIONAL([ENABLE_BUILTIN_BINDLE],      [test "x${ENABLE_BUILTIN_BINDLE}"  = "xyes"])
-   AM_CONDITIONAL([DISABLE_BUILTIN_BINDLE],     [test "x${ENABLE_BUILTIN_BINDLE}" != "xyes"])
-   AM_CONDITIONAL([ENABLE_LIBBINDLE],           [test "x${ENABLE_LIBBINDLE}"       = "xyes"])
-   AM_CONDITIONAL([DISABLE_LIBBINDLE],          [test "x${ENABLE_LIBBINDLE}"      != "xyes"])
-   AM_CONDITIONAL([ENABLE_BINDLE_TESTS],        [test "x${ENABLE_BINDLE_TESTS}"    = "xyes"])
-   AM_CONDITIONAL([DISABLE_BINDLE_TESTS],       [test "x${ENABLE_BINDLE_TESTS}"   != "xyes"])
    if test "x${LIBBINDLE_PREFIX}" != "xbindle_";then
       AC_DEFINE_UNQUOTED([LIBBINDLE_PREFIX],       ["$LIBBINDLE_PREFIX"],  [libbindle.la function prefix])
       AC_DEFINE_UNQUOTED([HAVE_BINDLE_PREFIX_H],   1,  [use bindle_prefix.h])
    fi
+   #
+   AM_CONDITIONAL([WITH_BINDLE_PREFIX_H],       [test "x${LIBBINDLE_PREFIX}"      != "xbindle_"])
+   AM_CONDITIONAL([WITHOUT_BINDLE_PREFIX_H],    [test "x${LIBBINDLE_PREFIX}"       = "xbindle_"])
+   #
+   AM_CONDITIONAL([ENABLE_BUILTIN_BINDLE],      [test "x${ENABLE_BUILTIN_BINDLE}"  = "xyes"])
+   AM_CONDITIONAL([DISABLE_BUILTIN_BINDLE],     [test "x${ENABLE_BUILTIN_BINDLE}" != "xyes"])
+   #
+   AM_CONDITIONAL([ENABLE_LIBBINDLE_SOURCES],   [test "x${ENABLE_LIBBINDLE_SRCS}"  = "xyes"])
+   AM_CONDITIONAL([DISABLE_LIBBINDLE_SOURCES],  [test "x${ENABLE_LIBBINDLE_SRCS}" != "xyes"])
+   #
+   AM_CONDITIONAL([ENABLE_LIBBINDLE],           [test "x${ENABLE_LIBBINDLE}"       = "xyes"])
+   AM_CONDITIONAL([DISABLE_LIBBINDLE],          [test "x${ENABLE_LIBBINDLE}"      != "xyes"])
+   #
+   AM_CONDITIONAL([ENABLE_BINDLE_TESTS],        [test "x${ENABLE_BINDLE_TESTS}"    = "xyes"])
+   AM_CONDITIONAL([DISABLE_BINDLE_TESTS],       [test "x${ENABLE_BINDLE_TESTS}"   != "xyes"])
 ])dnl
 
 
