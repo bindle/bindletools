@@ -81,7 +81,7 @@ if ENABLE_LIBBINDLE
    lib_LTLIBRARIES			+= lib/libbindle.la
    BINDLE_TESTS_DEPS			+= lib/libbindle.la
 endif
-if ENABLE_BINDLE_TESTS
+if ENABLE_LIBBINDLE_TESTS
    TESTS				+= tests/bindle-array-queue
    TESTS				+= tests/bindle-array-sorted
    TESTS				+= tests/bindle-array-stack
