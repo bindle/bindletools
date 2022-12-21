@@ -37,7 +37,9 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    AC_REQUIRE([AC_BINDLE])
 
    LIBBINDLE_PREFIX="$1"
-   ENABLE_BUILTIN_BINDLE="$2"
+   LIBBINDLE_OPTION="$2"
+
+   ENABLE_BUILTIN_BINDLE="no"
    ENABLE_LIBBINDLE_SRCS="no"
    ENABLE_LIBBINDLE="no"
 
@@ -48,31 +50,31 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
       [ EBUILTINBINDLE=$enableval ],
       [ EBUILTINBINDLE=$enableval ]
    )
-   if test "x${ENABLE_BUILTIN_BINDLE}" = "xyes";then
+   if test "x${LIBBINDLE_OPTION}" = "xyes";then
       ENABLE_BUILTIN_BINDLE=yes
       ENABLE_LIBBINDLE_SRCS=yes
-   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
+   elif test "x${LIBBINDLE_OPTION}" = "xno";then
       ENABLE_BUILTIN_BINDLE=no
-   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xinstall";then
+      ENABLE_LIBBINDLE_SRCS=no
+   elif test "x${LIBBINDLE_OPTION}" = "xinstall";then
       ENABLE_BUILTIN_BINDLE=no
       ENABLE_LIBBINDLE_SRCS=no
       ENABLE_LIBBINDLE=yes
       ENABLE_BINDLE_TESTS=yes
-   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xsources";then
+   elif test "x${LIBBINDLE_OPTION}" = "xsources";then
       ENABLE_BUILTIN_BINDLE=no
       ENABLE_LIBBINDLE_SRCS=yes
    elif test "x${EBUILTINBINDLE}" = "xyes";then
       ENABLE_BUILTIN_BINDLE=yes
       ENABLE_LIBBINDLE_SRCS=yes
    else
-      ENABLE_BUILTIN_BINDLE=auto
-      ENABLE_LIBBINDLE_SRCS=auto
+      LIBBINDLE_OPTION=auto
    fi
 
    # look for installed libbindle
    AC_CHECK_HEADERS([termios.h],     [], [])
    AC_CHECK_HEADERS([sgtty.h],       [], [])
-   if test "x${ENABLE_BUILTIN_BINDLE}" = "xauto";then
+   if test "x${LIBBINDLE_OPTION}" = "xauto";then
       FOUND_LIBBINDLE=yes
       AC_CHECK_HEADERS([bindle.h],                    [], [FOUND_LIBBINDLE=no])
       AC_CHECK_LIB([bindle], [bindle_free],           [], [FOUND_LIBBINDLE=no])
@@ -96,7 +98,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    # determine prefix
    if test "x${LIBBINDLE_PREFIX}" = "x";then
       LIBBINDLE_PREFIX="bindle_"
-   elif test "x${ENABLE_BUILTIN_BINDLE}" = "xno";then
+   elif test "x${ENABLE_LIBBINDLE_SRCS}" = "xno";then
       LIBBINDLE_PREFIX="bindle_"
    fi
 
