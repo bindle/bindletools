@@ -72,7 +72,7 @@ BINDLE_LIBBINDLE_DEPS			=
 
 
 # conditional build
-if ENABLE_BUILTIN_BINDLE
+if ENABLE_LIBBINDLE_BUILTIN
    noinst_LIBRARIES			+= lib/libbindle.a
    BINDLE_TESTS_DEPS			+= lib/libbindle.a
 endif
@@ -147,7 +147,7 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lurl.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lutf8.h
-if ENABLE_BUILTIN_BINDLE
+if ENABLE_LIBBINDLE_BUILTIN
    lib_libbindle_a_DEPENDENCIES		+= include/bindle_prefix.h
 endif
 if ENABLE_LIBBINDLE_SOURCES
