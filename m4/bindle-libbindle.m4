@@ -40,7 +40,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    LIBBINDLE_OPTION="$2"
 
    ENABLE_LIBBINDLE_BUILTIN="no"
-   ENABLE_LIBBINDLE_SRCS="no"
+   ENABLE_LIBBINDLE_SOURCES="no"
    ENABLE_LIBBINDLE="no"
 
    enableval=""
@@ -52,21 +52,21 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    )
    if test "x${LIBBINDLE_OPTION}" = "xyes";then
       ENABLE_LIBBINDLE_BUILTIN=yes
-      ENABLE_LIBBINDLE_SRCS=yes
+      ENABLE_LIBBINDLE_SOURCES=yes
    elif test "x${LIBBINDLE_OPTION}" = "xno";then
       ENABLE_LIBBINDLE_BUILTIN=no
-      ENABLE_LIBBINDLE_SRCS=no
+      ENABLE_LIBBINDLE_SOURCES=no
    elif test "x${LIBBINDLE_OPTION}" = "xinstall";then
       ENABLE_LIBBINDLE_BUILTIN=no
-      ENABLE_LIBBINDLE_SRCS=no
+      ENABLE_LIBBINDLE_SOURCES=no
       ENABLE_LIBBINDLE=yes
       ENABLE_BINDLE_TESTS=yes
    elif test "x${LIBBINDLE_OPTION}" = "xsources";then
       ENABLE_LIBBINDLE_BUILTIN=no
-      ENABLE_LIBBINDLE_SRCS=yes
+      ENABLE_LIBBINDLE_SOURCES=yes
    elif test "x${EBUILTINBINDLE}" = "xyes";then
       ENABLE_LIBBINDLE_BUILTIN=yes
-      ENABLE_LIBBINDLE_SRCS=yes
+      ENABLE_LIBBINDLE_SOURCES=yes
    else
       LIBBINDLE_OPTION=auto
    fi
@@ -82,12 +82,12 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
       AC_CHECK_LIB([bindle], [bindle_obj_retain],     [], [FOUND_LIBBINDLE=no])
       if test "x${FOUND_LIBBINDLE}" = "xyes";then
          ENABLE_LIBBINDLE_BUILTIN=no
-         ENABLE_LIBBINDLE_SRCS=no
+         ENABLE_LIBBINDLE_SOURCES=no
       elif test "x${EBUILTINBINDLE}" = "xno";then
          AC_MSG_ERROR([libbindle not found])
       else
          ENABLE_LIBBINDLE_BUILTIN=yes
-         ENABLE_LIBBINDLE_SRCS=yes
+         ENABLE_LIBBINDLE_SOURCES=yes
       fi
    fi
 
@@ -98,7 +98,7 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    # determine prefix
    if test "x${LIBBINDLE_PREFIX}" = "x";then
       LIBBINDLE_PREFIX="bindle_"
-   elif test "x${ENABLE_LIBBINDLE_SRCS}" = "xno";then
+   elif test "x${ENABLE_LIBBINDLE_SOURCES}" = "xno";then
       LIBBINDLE_PREFIX="bindle_"
    fi
 
@@ -114,8 +114,8 @@ AC_DEFUN([AC_BINDLE_LIBBINDLE],[dnl
    AM_CONDITIONAL([ENABLE_BUILTIN_BINDLE],      [test "x${ENABLE_LIBBINDLE_BUILTIN}"  = "xyes"])
    AM_CONDITIONAL([DISABLE_BUILTIN_BINDLE],     [test "x${ENABLE_LIBBINDLE_BUILTIN}" != "xyes"])
    #
-   AM_CONDITIONAL([ENABLE_LIBBINDLE_SOURCES],   [test "x${ENABLE_LIBBINDLE_SRCS}"  = "xyes"])
-   AM_CONDITIONAL([DISABLE_LIBBINDLE_SOURCES],  [test "x${ENABLE_LIBBINDLE_SRCS}" != "xyes"])
+   AM_CONDITIONAL([ENABLE_LIBBINDLE_SOURCES],   [test "x${ENABLE_LIBBINDLE_SOURCES}"  = "xyes"])
+   AM_CONDITIONAL([DISABLE_LIBBINDLE_SOURCES],  [test "x${ENABLE_LIBBINDLE_SOURCES}" != "xyes"])
    #
    AM_CONDITIONAL([ENABLE_LIBBINDLE],           [test "x${ENABLE_LIBBINDLE}"       = "xyes"])
    AM_CONDITIONAL([DISABLE_LIBBINDLE],          [test "x${ENABLE_LIBBINDLE}"      != "xyes"])
