@@ -156,7 +156,7 @@
 //////////////////
 #pragma mark - Data Types
 
-typedef struct _tinyrad_map
+typedef struct _bindle_map
 {
    const char *          map_name;
    uintptr_t             map_value;
