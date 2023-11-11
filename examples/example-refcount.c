@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,7 +50,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "example-refcount"
@@ -61,7 +61,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 struct student
 {
@@ -77,7 +77,7 @@ struct student
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 
 //////////////////
@@ -85,7 +85,7 @@ struct student
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int
 main(
@@ -108,7 +108,7 @@ student_init(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 main(

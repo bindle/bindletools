@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,7 +50,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "example-encode"
@@ -61,7 +61,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int
 main(
@@ -74,7 +74,7 @@ main(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 main(

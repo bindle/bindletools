@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,7 +51,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "example-bsearch"
@@ -62,7 +62,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 struct wc
 {
@@ -76,7 +76,7 @@ struct wc
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 struct wc wcs[] =
 {
@@ -98,7 +98,7 @@ struct wc wcs[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static int
 compkey(
@@ -123,7 +123,7 @@ main(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 compobj(
