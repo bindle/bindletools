@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include "bindle-tests.h"
 
@@ -50,7 +50,7 @@
 //  Datatypes  //
 //             //
 /////////////////
-#pragma mark - Datatypes
+// MARK: - Datatypes
 
 struct test_data
 {
@@ -65,7 +65,7 @@ struct test_data
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 extern struct test_data base32_strings[];
 extern struct test_data base32hex_strings[];
@@ -80,7 +80,7 @@ extern struct test_data pctenc_strings[];
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int
 bindle_test_decode(

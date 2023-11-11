@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <assert.h>
 #include <stdio.h>
@@ -48,7 +48,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 
 /////////////////
@@ -56,9 +56,9 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark program_name
+// MARK: program_name
 const char * program_name = "bindle-test";
 
 
@@ -67,7 +67,7 @@ const char * program_name = "bindle-test";
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 
 /////////////////
@@ -75,7 +75,7 @@ const char * program_name = "bindle-test";
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_tests_error(

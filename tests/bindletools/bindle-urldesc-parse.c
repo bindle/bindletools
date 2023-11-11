@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include "bindle-tests.h"
 
@@ -55,7 +55,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "bindle-urldesc-parse"
@@ -66,7 +66,7 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 static const char * test_urls_good[] =
 {
@@ -140,7 +140,7 @@ static const char * good_fr[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int
 main(
@@ -159,7 +159,7 @@ my_test_url(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 main(

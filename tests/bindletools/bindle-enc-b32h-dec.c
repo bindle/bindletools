@@ -36,7 +36,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int main(int argc, char * argv[]);
 
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]);
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int main(int argc, char * argv[])
 {

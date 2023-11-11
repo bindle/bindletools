@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include "bindle-tests.h"
 
@@ -56,7 +56,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "bindle-array-queue"
@@ -69,7 +69,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 typedef struct _mydata MyData;
 
@@ -86,7 +86,7 @@ struct _mydata
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 static const char * test_strs[] =
 {
@@ -102,7 +102,7 @@ static const char * test_strs[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 int
 main(
@@ -121,7 +121,7 @@ my_strrand(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int main( int argc, char * argv[] )
 {

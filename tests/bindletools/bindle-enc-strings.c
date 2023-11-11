@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <string.h>
@@ -51,9 +51,9 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark base32_strings[]
+// MARK: base32_strings[]
 struct test_data base32_strings[] =
 {
    { .dec = "",             .enc = "",                         .nopad = 0 },
@@ -89,7 +89,7 @@ struct test_data base32_strings[] =
 };
 
 
-#pragma mark base32hex_strings[]
+// MARK: base32hex_strings[]
 struct test_data base32hex_strings[] =
 {
    { .dec = "",             .enc = "",                         .nopad = 0 },
@@ -122,7 +122,7 @@ struct test_data base32hex_strings[] =
 };
 
 
-#pragma mark base64_strings[]
+// MARK: base64_strings[]
 struct test_data base64_strings[] =
 {
    { .dec = "",             .enc = "",                               .nopad = 0 },
@@ -167,7 +167,7 @@ struct test_data base64_strings[] =
 };
 
 
-#pragma mark crockford_strings[]
+// MARK: crockford_strings[]
 struct test_data crockford_strings[] =
 {
    { .dec = "",             .enc = "",                         .nopad = 0 },
@@ -187,7 +187,7 @@ struct test_data crockford_strings[] =
 };
 
 
-#pragma mark hex_strings[]
+// MARK: hex_strings[]
 struct test_data hex_strings[] =
 {
    { .dec = "",             .enc = "",                         .nopad = 0 },
@@ -207,7 +207,7 @@ struct test_data hex_strings[] =
 };
 
 
-#pragma mark pctenc_strings[]
+// MARK: pctenc_strings[]
 struct test_data pctenc_strings[] =
 {
    { .dec = "",               .enc = "",                       .nopad = 0 },
@@ -224,7 +224,7 @@ struct test_data pctenc_strings[] =
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_test_decode(

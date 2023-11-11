@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 // defined in the Single UNIX Specification
 #ifndef _XOPEN_SOURCE
@@ -60,7 +60,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #ifndef PACKAGE_BUGREPORT
 #   define PACKAGE_BUGREPORT "unknown"
@@ -85,9 +85,9 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark program_name
+// MARK: program_name
 extern const char * program_name;
 
 
@@ -96,7 +96,7 @@ extern const char * program_name;
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 _BINDLE_F int
 bindle_tests_error(
