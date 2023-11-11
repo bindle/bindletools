@@ -36,7 +36,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <errno.h>
 #include <stdarg.h>
@@ -53,7 +53,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static ssize_t
 bindle_base32_decode(
@@ -186,9 +186,9 @@ bindle_pctenc_verify(
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark base32_vals[]
+// MARK: base32_vals[]
 static const int8_t base32_vals[256] =
 {
 //    This map cheats and interprets:
@@ -213,11 +213,11 @@ static const int8_t base32_vals[256] =
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xE0
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xF0
 };
-#pragma mark base32_chars[]
+// MARK: base32_chars[]
 static const char * base32_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=";
 
 
-#pragma mark base32hex_vals[]
+// MARK: base32hex_vals[]
 static const int8_t base32hex_vals[256] =
 {
 // 00  01  02  03  04  05  06  07  08  09  0A  0B  0C  0D  0E  0F
@@ -238,11 +238,11 @@ static const int8_t base32hex_vals[256] =
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xE0
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xF0
 };
-#pragma mark base32hex_chars[]
+// MARK: base32hex_chars[]
 static const char * base32hex_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUV=";
 
 
-#pragma mark base64_vals[]
+// MARK: base64_vals[]
 static const int8_t base64_vals[256] =
 {
 // 00  01  02  03  04  05  06  07  08  09  0A  0B  0C  0D  0E  0F
@@ -263,11 +263,11 @@ static const int8_t base64_vals[256] =
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xE0
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xF0
 };
-#pragma mark base64_chars[]
+// MARK: base64_chars[]
 static const char * base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
 
-#pragma mark crockford_vals[]
+// MARK: crockford_vals[]
 static const int8_t crockford_vals[256] =
 {
 // 00  01  02  03  04  05  06  07  08  09  0A  0B  0C  0D  0E  0F
@@ -288,11 +288,11 @@ static const int8_t crockford_vals[256] =
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xE0
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xF0
 };
-#pragma mark crockford_chars[]
+// MARK: crockford_chars[]
 static const char * crockford_chars = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
 
-#pragma mark hex_vals[]
+// MARK: hex_vals[]
 static const int8_t hex_vals[256] =
 {
 // 00  01  02  03  04  05  06  07  08  09  0A  0B  0C  0D  0E  0F
@@ -313,11 +313,11 @@ static const int8_t hex_vals[256] =
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xE0
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 0xF0
 };
-#pragma mark hex_chars[]
+// MARK: hex_chars[]
 static const char * hex_chars = "0123456789abcdef";
 
 
-#pragma mark pctenc_vals[]
+// MARK: pctenc_vals[]
 static const int8_t pctenc_vals[256] =
 {
 //  00   01   02   03   04   05   06   07   08   09   0A   0B   0C   0D   0E   0F
@@ -345,12 +345,12 @@ static const int8_t pctenc_vals[256] =
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 //------------------//
 // base32 functions //
 //------------------//
-#pragma mark base32 functions
+// MARK: base32 functions
 
 ssize_t
 bindle_base32_decode(
@@ -608,7 +608,7 @@ bindle_base32_verify(
 //------------------//
 // base64 functions //
 //------------------//
-#pragma mark base64 functions
+// MARK: base64 functions
 
 ssize_t
 bindle_base64_decode(
@@ -802,7 +802,7 @@ bindle_base64_verify(
 //---------------//
 // hex functions //
 //---------------//
-#pragma mark hex functions
+// MARK: hex functions
 
 ssize_t
 bindle_hex_decode(
@@ -917,7 +917,7 @@ bindle_hex_verify(
 //----------------//
 // none functions //
 //----------------//
-#pragma mark none functions
+// MARK: none functions
 
 ssize_t
 bindle_none_decode(
@@ -962,7 +962,7 @@ bindle_none_encode(
 //----------------------------//
 // percent-encoding functions //
 //----------------------------//
-#pragma mark percent-encoding functions
+// MARK: percent-encoding functions
 
 ssize_t
 bindle_pctenc_decode(
@@ -1101,7 +1101,7 @@ bindle_pctenc_verify(
 //--------------------//
 // frontend functions //
 //--------------------//
-#pragma mark frontend functions
+// MARK: frontend functions
 
 ssize_t
 bindle_decode(

@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stddef.h>
 #include <inttypes.h>
@@ -50,7 +50,7 @@
 //  Macros  //
 //          //
 //////////////
-#pragma mark - Macros
+// MARK: - Macros
 
 // Exports function type
 #undef BINDLE_C_DECLS
@@ -96,7 +96,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #define BNDL_SUCCESS                0
 #define BNDL_OFF                    0
@@ -154,7 +154,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 typedef struct _bindle_map
 {
@@ -193,7 +193,7 @@ typedef struct bindle_url_desc
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 
 //////////////////
@@ -201,12 +201,12 @@ typedef struct bindle_url_desc
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 //------------------//
 // array prototypes //
 //------------------//
-#pragma mark array prototypes
+// MARK: array prototypes
 
 _BINDLE_F ssize_t
 bindle_badd(
@@ -293,7 +293,7 @@ bindle_push(
 //------------------//
 // debug prototypes //
 //------------------//
-#pragma mark debug prototypes
+// MARK: debug prototypes
 
 _BINDLE_F void
 bindle_debug(
@@ -305,7 +305,7 @@ bindle_debug(
 //---------------------//
 // encoding prototypes //
 //---------------------//
-#pragma mark encoding prototypes
+// MARK: encoding prototypes
 
 _BINDLE_F ssize_t
 bindle_decode(
@@ -354,7 +354,7 @@ bindle_encoding_verify(
 //-----------------//
 // file prototypes //
 //-----------------//
-#pragma mark file prototypes
+// MARK: file prototypes
 
 _BINDLE_F int
 bindle_filetostr(
@@ -373,7 +373,7 @@ bindle_readline(
 //----------------//
 // map prototypes //
 //----------------//
-#pragma mark map prototypes
+// MARK: map prototypes
 
 _BINDLE_F int
 bindle_map_lookup(
@@ -400,7 +400,7 @@ bindle_map_lookup_value(
 //-------------------//
 // object prototypes //
 //-------------------//
-#pragma mark object prototypes
+// MARK: object prototypes
 
 _BINDLE_F void *
 bindle_alloc(
@@ -437,7 +437,7 @@ bindle_retain_count(
 //-------------------//
 // option prototypes //
 //-------------------//
-#pragma mark option prototypes
+// MARK: option prototypes
 
 _BINDLE_F int
 bindle_get_option(
@@ -456,7 +456,7 @@ bindle_set_option(
 //------------------------//
 // user prompt prototypes //
 //------------------------//
-#pragma mark user prompt prototypes
+// MARK: user prompt prototypes
 
 char *
 bindle_getpass(
@@ -473,7 +473,7 @@ bindle_getpass_r(
 //-------------------//
 // string prototypes //
 //-------------------//
-#pragma mark string prototypes
+// MARK: string prototypes
 
 _BINDLE_F char *
 bindle_basename(
@@ -565,7 +565,7 @@ bindle_strtrim(
 //-------------------------//
 // string array prototypes //
 //-------------------------//
-#pragma mark string array prototypes
+// MARK: string array prototypes
 
 _BINDLE_F int
 bindle_strsadd(
@@ -600,7 +600,7 @@ bindle_strsplit(
 //----------------//
 // URI prototypes //
 //----------------//
-#pragma mark URI prototypes
+// MARK: URI prototypes
 
 _BINDLE_F int
 bindle_is_url(
@@ -633,7 +633,7 @@ bindle_urldesc_resolve(
 //-----------------//
 // UTF8 prototypes //
 //-----------------//
-#pragma mark UTF8 prototypes
+// MARK: UTF8 prototypes
 
 _BINDLE_F size_t
 bindle_utf8len(

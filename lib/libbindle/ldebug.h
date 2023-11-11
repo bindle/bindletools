@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include "libbindle.h"
 
@@ -52,7 +52,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 
 
@@ -61,7 +61,7 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 _BINDLE_V const char *
 bindle_debug_ident;
@@ -84,7 +84,7 @@ bindle_debug_syslog;
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 
 #endif /* end of header */

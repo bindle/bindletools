@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdlib.h>
 #include <string.h>
@@ -53,7 +53,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 // Magic number used to determine if memory passed to bindle_free() is a
 // "bindle_obj_t" or raw virtual memory.  The magic number purposely starts
@@ -66,7 +66,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static int
 bindle_verify_is_obj(
@@ -78,7 +78,7 @@ bindle_verify_is_obj(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 void *
 bindle_alloc(

@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdlib.h>
 #include <string.h>
@@ -49,7 +49,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 
 /////////////////
@@ -57,12 +57,12 @@
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 //-------------------------//
 // sorted array prototypes //
 //-------------------------//
-#pragma mark sorted array prototypes
+// MARK: sorted array prototypes
 
 ssize_t
 bindle_badd(
@@ -320,7 +320,7 @@ bindle_bsearch(
 //------------------------//
 // queue array prototypes //
 //------------------------//
-#pragma mark queue array prototypes
+// MARK: queue array prototypes
 
 void *
 bindle_dequeue(
@@ -390,7 +390,7 @@ bindle_enqueue(
 //------------------------//
 // stack array prototypes //
 //------------------------//
-#pragma mark stack prototypes
+// MARK: stack prototypes
 
 void *
 bindle_peek(

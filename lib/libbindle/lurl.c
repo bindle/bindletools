@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdlib.h>
 #include <string.h>
@@ -59,7 +59,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #define BINDLE_URLDESC_SCHEME       0x01
 #define BINDLE_URLDESC_USERINFO     0x02
@@ -75,7 +75,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static void
 bindle_urldesc_free_sockaddrs(
@@ -87,7 +87,7 @@ bindle_urldesc_free_sockaddrs(
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 
 /////////////////
@@ -95,7 +95,7 @@ bindle_urldesc_free_sockaddrs(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_is_url(

@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 // defined in the Single UNIX Specification
 #ifndef _XOPEN_SOURCE
@@ -60,7 +60,7 @@
 //  Macros  //
 //          //
 //////////////
-#pragma mark - Macros
+// MARK: - Macros
 
 #undef Debug
 #ifdef USE_DEBUG
@@ -77,7 +77,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #define BNDL_SUCCESS                      0
 
@@ -93,7 +93,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 
 /////////////////
@@ -101,7 +101,7 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 
 //////////////////
@@ -109,7 +109,7 @@
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 
 #endif /* end of header */

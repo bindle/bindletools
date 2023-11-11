@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #undef NDEBUG
 
@@ -55,7 +55,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 
 /////////////////
@@ -63,7 +63,7 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
 // yes, global variables are evil...
 const char *   bindle_debug_ident     = BNDL_DFLT_DEBUG_IDENT;
@@ -77,7 +77,7 @@ int            bindle_debug_syslog    = BNDL_DFLT_DEBUG_SYSLOG;
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 void
 bindle_debug(
