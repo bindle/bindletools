@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 // defined in the Single UNIX Specification
 #ifndef _XOPEN_SOURCE
@@ -62,7 +62,7 @@
 //  Macros  //
 //          //
 //////////////
-#pragma mark - Macros
+// MARK: - Macros
 
 
 ///////////////////
@@ -70,7 +70,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #undef PROGRAM_NAME
 #define PROGRAM_NAME "bindletools"
@@ -107,7 +107,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 typedef struct bindle_config     bindle_conf_t;
 typedef struct bindle_widget     bindle_widget_t;
@@ -143,9 +143,9 @@ struct bindle_widget
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark tinyrad_cmdmap[]
+// MARK: tinyrad_cmdmap[]
 extern const bindle_widget_t bindle_widget_map[];
 
 
@@ -154,12 +154,12 @@ extern const bindle_widget_t bindle_widget_map[];
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 //-----------------//
 // core prototypes //
 //-----------------//
-#pragma mark core prototypes
+// MARK: core prototypes
 
 extern int
 bindle_getopt(
@@ -184,7 +184,7 @@ bindle_version(
 //---------------//
 // encodings widget //
 //---------------//
-#pragma mark encodings widget
+// MARK: encodings widget
 
 extern const char * const bindle_widget_encodings_options[];
 
@@ -222,7 +222,7 @@ bindle_widget_pctenc(
 //---------------//
 // expand widget //
 //---------------//
-#pragma mark expand widget
+// MARK: expand widget
 
 extern int
 bindle_widget_expand(
@@ -237,7 +237,7 @@ bindle_widget_expand_usage(
 //----------------//
 // urldesc widget //
 //----------------//
-#pragma mark urldesc widget
+// MARK: urldesc widget
 
 extern const char * const bindle_widget_urldesc_options[];
 

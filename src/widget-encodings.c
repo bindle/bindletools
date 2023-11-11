@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <string.h>
@@ -55,7 +55,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #define BINDLE_BUFF_SIZE      (40*3)
 
@@ -84,7 +84,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 struct bindle_state
 {
@@ -106,9 +106,9 @@ struct bindle_state
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark bindle_widget_encodings_options[]
+// MARK: bindle_widget_encodings_options[]
 const char * const bindle_widget_encodings_options[] =
 {
    "  -d, --decode              decode string",
@@ -129,7 +129,7 @@ const char * const bindle_widget_encodings_options[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static int
 bindle_widget_encodings(
@@ -167,7 +167,7 @@ bindle_encodings_src_string(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_widget_base16(

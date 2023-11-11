@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <string.h>
@@ -51,7 +51,7 @@
 //  Macros  //
 //          //
 //////////////
-#pragma mark - Macros
+// MARK: - Macros
 
 
 ///////////////////
@@ -59,7 +59,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 #define BINDLE_FLG_IPV4       0x00000100UL
 #define BINDLE_FLG_IPV6       0x00000200UL
@@ -90,7 +90,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 
 /////////////////
@@ -98,9 +98,9 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark bindle_widget_urldesc_options[]
+// MARK: bindle_widget_urldesc_options[]
 const char * const bindle_widget_urldesc_options[] =
 {
    "  -4                        resolve host to IPv4 address",
@@ -127,7 +127,7 @@ const char * const bindle_widget_urldesc_options[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static void
 bindle_widget_urldesc_print(
@@ -158,7 +158,7 @@ bindle_widget_urldesc_unsigned(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_widget_urldesc(

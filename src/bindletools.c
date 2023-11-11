@@ -37,7 +37,7 @@
 //  Headers  //
 //           //
 ///////////////
-#pragma mark - Headers
+// MARK: - Headers
 
 #include <stdio.h>
 #include <string.h>
@@ -50,7 +50,7 @@
 //  Macros  //
 //          //
 //////////////
-#pragma mark - Macros
+// MARK: - Macros
 
 
 ///////////////////
@@ -58,7 +58,7 @@
 //  Definitions  //
 //               //
 ///////////////////
-#pragma mark - Definitions
+// MARK: - Definitions
 
 
 //////////////////
@@ -66,7 +66,7 @@
 //  Data Types  //
 //              //
 //////////////////
-#pragma mark - Data Types
+// MARK: - Data Types
 
 
 /////////////////
@@ -74,9 +74,9 @@
 //  Variables  //
 //             //
 /////////////////
-#pragma mark - Variables
+// MARK: - Variables
 
-#pragma mark bindle_options[]
+// MARK: bindle_options[]
 const char * const bindle_options[] =
 {
    "  -D level, --debug=level   set debug level",
@@ -88,7 +88,7 @@ const char * const bindle_options[] =
 };
 
 
-#pragma mark bindle_widget_map[]
+// MARK: bindle_widget_map[]
 const bindle_widget_t bindle_widget_map[] =
 {
    {
@@ -208,7 +208,7 @@ const bindle_widget_t bindle_widget_map[] =
 //  Prototypes  //
 //              //
 //////////////////
-#pragma mark - Prototypes
+// MARK: - Prototypes
 
 static int
 bindle_usage_cmp(
@@ -233,7 +233,7 @@ main(
 //  Functions  //
 //             //
 /////////////////
-#pragma mark - Functions
+// MARK: - Functions
 
 int
 bindle_getopt(
