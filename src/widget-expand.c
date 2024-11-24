@@ -74,7 +74,6 @@ bindle_widget_expand(
    int               c;
    int               i;
    int               opt_index;
-   const char *      str;
    char              buff[4096];
 
    // getopt options
@@ -87,7 +86,6 @@ bindle_widget_expand(
 
    optind    = 1;
    opt_index = 0;
-   str       = NULL;
 
    while((c = bindle_getopt(cnf, cnf->argc, cnf->argv, short_opt, long_opt, &opt_index)) != -1)
    {
