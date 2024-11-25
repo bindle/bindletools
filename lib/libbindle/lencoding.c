@@ -1191,8 +1191,15 @@ bindle_encode(
          size_t                        n,
          int                           nopad )
 {
+   int methodpad;
+
    assert(dst != NULL);
    assert(src != NULL);
+
+   nopad      = ((method & BNDL_NOPAD)) ? 1 : nopad;
+   method    &= ~BNDL_NOPAD;
+   methodpad  = method;
+   methodpad |= ((nopad)) ? BNDL_NOPAD : 0;
 
    // validate encoding method
    if (bindle_encode_method(method) == -1)
@@ -1206,7 +1213,7 @@ bindle_encode(
          errno = ENOBUFS;
          return(-1);
       };
-   } else if (s <= (size_t)bindle_encode_size(method, n))
+   } else if (s <= (size_t)bindle_encode_size(methodpad, n))
    {
       errno = ENOBUFS;
       return(-1);
@@ -1280,7 +1287,10 @@ bindle_encode_size(
       case BNDL_BASE32HEX:
       return( ((n / 5) + (((n % 5)) ? 1 : 0)) * 8 );
 
+      case BNDL_BASE32_NOPAD:
+      case BNDL_BASE32HEX_NOPAD:
       case BNDL_CROCKFORD:
+      case BNDL_CROCKFORD_NOPAD:
       len = (n / 5) * 8;
       switch(n % 5)
       {
@@ -1295,13 +1305,26 @@ bindle_encode_size(
       case BNDL_BASE64:
       return( ((n / 3) + (((n % 3)) ? 1 : 0)) * 4 );
 
+      case BNDL_BASE64_NOPAD:
+      len = (n / 3) * 4;
+      switch(n % 3)
+      {
+         case 1:  return(len + 2);
+         case 2:  return(len + 3);
+         default: break;
+      };
+      return( len );
+
       case BNDL_HEX:
+      case BNDL_HEX_NOPAD:
       return( (ssize_t)(n * 2) );
 
       case BNDL_NONE:
+      case BNDL_NONE_NOPAD:
       return((ssize_t)n);
 
       case BNDL_PCTENC:
+      case BNDL_PCTENC_NOPAD:
       return((ssize_t)((n*3)+1));
 
       default:

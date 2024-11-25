@@ -147,6 +147,14 @@
 #define BNDL_HEX                  4
 #define BNDL_CROCKFORD            5
 #define BNDL_PCTENC               6
+#define BNDL_NOPAD                0x40000000
+#define BNDL_NONE_NOPAD           ( BNDL_NOPAD | BNDL_NONE )
+#define BNDL_BASE32_NOPAD         ( BNDL_NOPAD | BNDL_BASE32 )
+#define BNDL_BASE32HEX_NOPAD      ( BNDL_NOPAD | BNDL_BASE32HEX )
+#define BNDL_BASE64_NOPAD         ( BNDL_NOPAD | BNDL_BASE64 )
+#define BNDL_HEX_NOPAD            ( BNDL_NOPAD | BNDL_HEX )
+#define BNDL_CROCKFORD_NOPAD      ( BNDL_NOPAD | BNDL_CROCKFORD )
+#define BNDL_PCTENC_NOPAD         ( BNDL_NOPAD | BNDL_PCTENC )
 
 
 //////////////////
