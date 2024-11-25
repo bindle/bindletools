@@ -459,20 +459,24 @@ bindle_test_encode(
          continue;
 
       snprintf(msg, sizeof(msg), "encoding \"%s\" ... ", dec);
-      printf("%-35s", msg);
+      if (!(opts & BNDLTEST_OPT_QUIET))
+         printf("%-35s", msg);
 
       len = bindle_encode(method, buff, sizeof(buff), dec, strlen(dec), nopad);
       if (len == -1)
       {
-         printf("FAIL -- %s\n", strerror(errno));
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf("FAIL -- %s\n", strerror(errno));
          exit_code = 1;
       } else {
          buff[len] = '\0';
          if (!(strcmp(enc, buff)))
          {
-            printf("PASS\n");
+            if (!(opts & BNDLTEST_OPT_QUIET))
+               printf("PASS\n");
          } else {
-            printf("FAIL expected: \"%s\"; received: \"%s\"\n", enc, buff);
+            if (!(opts & BNDLTEST_OPT_QUIET))
+               printf("FAIL expected: \"%s\"; received: \"%s\"\n", enc, buff);
             exit_code = 1;
          };
       };
