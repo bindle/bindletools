@@ -368,6 +368,7 @@ bindle_test_encode(
    int               opt_index;
    unsigned          opts;
    size_t            pos;
+   size_t            bufflen;
    char              buff[32];
    ssize_t           len;
    const char *      dec;
@@ -448,7 +449,9 @@ bindle_test_encode(
       fprintf(stderr, "Try `%s --help' for more information.\n", prog_name);
       return(1);
    };
-   
+
+   if (!(opts & BNDLTEST_OPT_QUIET))
+      printf("checking data encoding:\n");
    for(pos = 0; (((data[pos].dec)) || ((data[pos].enc))); pos++)
    {
       dec   = data[pos].dec;
@@ -458,7 +461,7 @@ bindle_test_encode(
       if ( (!(dec)) || (!(enc)) )
          continue;
 
-      snprintf(msg, sizeof(msg), "encoding \"%s\" ... ", dec);
+      snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
       if (!(opts & BNDLTEST_OPT_QUIET))
          printf("%-35s", msg);
 
@@ -479,6 +482,70 @@ bindle_test_encode(
                printf("FAIL expected: \"%s\"; received: \"%s\"\n", enc, buff);
             exit_code = 1;
          };
+      };
+   };
+
+   if (!(opts & BNDLTEST_OPT_QUIET))
+      printf("checking under sized buffer:\n");
+   for(pos = 0; (((data[pos].dec)) || ((data[pos].enc))); pos++)
+   {
+      dec   = data[pos].dec;
+      enc   = data[pos].enc;
+      nopad = (int)data[pos].nopad;
+
+      if ( (!(dec)) || (!(enc)) )
+         continue;
+
+      bufflen = strlen(enc);
+
+      snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
+      if (!(opts & BNDLTEST_OPT_QUIET))
+         printf("%-35s", msg);
+
+      len = bindle_encode(method, buff, bufflen, dec, strlen(dec), nopad);
+      if ( (len == -1) && (errno == ENOBUFS) )
+      {
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf("PASS -- caught undersized buffer\n");
+      } else
+      {
+         if (!(opts & BNDLTEST_OPT_QUIET))
+         {
+            if (len == -1)
+               printf("FAIL -- %s\n", strerror(errno));
+            else
+               printf("FAIL -- failed to catch undersized buffer\n");
+         };
+         exit_code = 1;
+      };
+   };
+
+   if (!(opts & BNDLTEST_OPT_QUIET))
+      printf("checking exact sized buffer:\n");
+   for(pos = 0; (((data[pos].dec)) || ((data[pos].enc))); pos++)
+   {
+      dec   = data[pos].dec;
+      enc   = data[pos].enc;
+      nopad = (int)data[pos].nopad;
+
+      if ( (!(dec)) || (!(enc)) )
+         continue;
+
+      bufflen = strlen(enc);
+
+      snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
+      if (!(opts & BNDLTEST_OPT_QUIET))
+         printf("%-35s", msg);
+
+      len = bindle_encode(method, buff, bufflen+1, dec, strlen(dec), nopad);
+      if ( (len == -1) && (errno == ENOBUFS) )
+      {
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf("FAIL -- %s\n", strerror(errno));
+         exit_code = 1;
+      } else if (!(opts & BNDLTEST_OPT_QUIET))
+      {
+         printf("PASS\n");
       };
    };
 
