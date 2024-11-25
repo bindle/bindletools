@@ -161,6 +161,11 @@ bindle_pctenc_decode(
          size_t                        n );
 
 
+static size_t
+bindle_pctenc_decode_size(
+         const char *                  src );
+
+
 static ssize_t
 bindle_pctenc_encode(
          char *                        dst,
@@ -1014,6 +1019,29 @@ bindle_pctenc_decode(
    dst[dpos] = '\0';
 
    return(dpos);
+}
+
+
+size_t
+bindle_pctenc_decode_size(
+         const char *               src )
+{
+   size_t      size;
+   size_t      pos;
+   size_t      n;
+   if (!(src))
+      return(0);
+   n    = strlen(src);
+   size = n;
+   for(pos = 0; (pos < n); pos++)
+   {
+      if (src[pos] == '%')
+      {
+         size -= 2;
+         pos  += 2;
+      };
+   };
+   return(size);
 }
 
 
