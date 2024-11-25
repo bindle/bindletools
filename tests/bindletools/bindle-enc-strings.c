@@ -368,7 +368,7 @@ bindle_test_encode(
    int               opt_index;
    unsigned          opts;
    size_t            pos;
-   char              buff[24];
+   char              buff[32];
    ssize_t           len;
    const char *      dec;
    const char *      enc;
