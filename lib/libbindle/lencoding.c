@@ -1255,6 +1255,7 @@ int
 bindle_encode_method(
          int                           method )
 {
+   method &= ~ BNDL_NOPAD;
    switch(method)
    {
       case BNDL_BASE32:
