@@ -1118,7 +1118,7 @@ bindle_decode(
    if (bindle_encode_method(method) == -1)
       return(-1);
 
-   switch(method)
+   switch(method & ~BNDL_NOPAD)
    {
       case BNDL_BASE32:
       return(bindle_base32_decode(base32_vals, dst, s, src, n));
@@ -1191,35 +1191,31 @@ bindle_encode(
          size_t                        n,
          int                           nopad )
 {
-   int methodpad;
-
    assert(dst != NULL);
    assert(src != NULL);
 
-   nopad      = ((method & BNDL_NOPAD)) ? 1 : nopad;
-   method    &= ~BNDL_NOPAD;
-   methodpad  = method;
-   methodpad |= ((nopad)) ? BNDL_NOPAD : 0;
+   nopad   = ((method & BNDL_NOPAD)) ? 1           : nopad;
+   method |= ((nopad))               ? BNDL_NOPAD  : 0;
 
    // validate encoding method
    if (bindle_encode_method(method) == -1)
       return(-1);
 
    // validates buffer is big enough
-   if (method == BNDL_PCTENC)
+   if ((method & ~BNDL_NOPAD) == BNDL_PCTENC)
    {
       if (s <= (size_t)bindle_pctenc_encode_size(src, n))
       {
          errno = ENOBUFS;
          return(-1);
       };
-   } else if (s <= (size_t)bindle_encode_size(methodpad, n))
+   } else if (s <= (size_t)bindle_encode_size(method, n))
    {
       errno = ENOBUFS;
       return(-1);
    };
 
-   switch(method)
+   switch(method & ~BNDL_NOPAD)
    {
       case BNDL_BASE32:
       return(bindle_base32_encode(base32_chars, dst, s, src, n, nopad));
