@@ -1201,12 +1201,12 @@ bindle_encode(
    // validates buffer is big enough
    if (method == BNDL_PCTENC)
    {
-      if (s < (size_t)bindle_pctenc_encode_size(src, n))
+      if (s <= (size_t)bindle_pctenc_encode_size(src, n))
       {
          errno = ENOBUFS;
          return(-1);
       };
-   } else if (s < (size_t)bindle_encode_size(method, n))
+   } else if (s <= (size_t)bindle_encode_size(method, n))
    {
       errno = ENOBUFS;
       return(-1);
