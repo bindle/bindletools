@@ -585,22 +585,26 @@ bindle_test_validate(
       enc   = data[pos].enc;
 
       snprintf(msg, sizeof(msg), "validating \"%s\" ... ", enc);
-      printf("%-45s", msg);
+      if (!(opts & BNDLTEST_OPT_QUIET))
+         printf("%-45s", msg);
 
       rc  = bindle_encoding_verify(method, enc, strlen(enc));
       len = ((dec)) ? ((ssize_t)strlen(dec)) : -1;
 
       if ( (!(dec)) && (len >= 0) )
       {
-         printf("FAIL -- validate passed bad string\n");
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf("FAIL -- validate passed bad string\n");
          exit_code = 1;
       } else if (len != rc)
       {
-         printf("FAIL -- validate reported incorrect length\n");
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf("FAIL -- validate reported incorrect length\n");
          exit_code = 1;
       } else
       {
-         printf(((dec)) ? "PASS\n" : "PASS (caught bad encoding)\n");
+         if (!(opts & BNDLTEST_OPT_QUIET))
+            printf(((dec)) ? "PASS\n" : "PASS (caught bad encoding)\n");
       };
    };
 
