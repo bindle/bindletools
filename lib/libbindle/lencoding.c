@@ -1272,12 +1272,25 @@ bindle_encode_size(
          int                           method,
          size_t                        n )
 {
+   ssize_t len;
+
    switch(method)
    {
       case BNDL_BASE32:
       case BNDL_BASE32HEX:
-      case BNDL_CROCKFORD:
       return( ((n / 5) + (((n % 5)) ? 1 : 0)) * 8 );
+
+      case BNDL_CROCKFORD:
+      len = (n / 5) * 8;
+      switch(n % 5)
+      {
+         case 1:  return(len + 2);
+         case 2:  return(len + 4);
+         case 3:  return(len + 5);
+         case 4:  return(len + 7);
+         default: break;
+      };
+      return( len );
 
       case BNDL_BASE64:
       return( ((n / 3) + (((n % 3)) ? 1 : 0)) * 4 );
