@@ -1066,9 +1066,9 @@ bindle_pctenc_encode_size(
    if (!(src))
       return(0);
    for(pos = 0, size = 1; (pos < n); pos++, size++)
-      if (pctenc_vals[src[pos]] == 0)
+      if (pctenc_vals[src[pos]] == -1)
          size += 2;
-   return(size);
+   return(size-1);
 }
 
 
