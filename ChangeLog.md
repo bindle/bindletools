@@ -11,6 +11,7 @@ All rights reserved.
      prefixes. (syzdek)
    - Adding initial URL functions (syzdek)
    - Adding bindletools utility (syzdek)
+   - Adding initial encoding/decoding functions (syzdek)
 
 #### 0.5
    - Removing call to contrib/bindletools/autogen.sh (syzdek)
