@@ -124,6 +124,12 @@ EXTRA_PROGRAMS				= examples/example-bsearch \
 					  examples/example-refcount \
 					  examples/example-stack \
 					  src/bindletools
+EXTRA_SCRIPTS				= tests/bindletools/bindletools-base16.sh \
+					  tests/bindletools/bindletools-base32.sh \
+					  tests/bindletools/bindletools-base32hex.sh \
+					  tests/bindletools/bindletools-base64.sh \
+					  tests/bindletools/bindletools-crockfordbase32.sh \
+					  tests/bindletools/bindletools-pctenc.sh
 EXTRA					=
 
 
@@ -169,6 +175,12 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_urldesc.3.in \
 					  examples/Makefile \
 					  tests/bindletools/README.md \
+					  tests/bindletools/bindletools-base16.sh.in \
+					  tests/bindletools/bindletools-base32.sh.in \
+					  tests/bindletools/bindletools-base32hex.sh.in \
+					  tests/bindletools/bindletools-base64.sh.in \
+					  tests/bindletools/bindletools-crockfordbase32.sh.in \
+					  tests/bindletools/bindletools-pctenc.sh.in \
 					  m4/bindle-doxygen.m4 \
 					  m4/bindle-fd-poller.m4 \
 					  m4/bindle-gcc.m4 \
@@ -188,6 +200,12 @@ CLEANFILES				= $(builddir)/a.out   $(srcdir)/a.out \
 					  $(noinst_SCRIPTS) \
 					  $(EXTRA_PROGRAMS) \
 					  include/bindle_prefix.h \
+					  tests/bindletools/bindletools-base16.sh \
+					  tests/bindletools/bindletools-base32.sh \
+					  tests/bindletools/bindletools-base32hex.sh \
+					  tests/bindletools/bindletools-base64.sh \
+					  tests/bindletools/bindletools-crockfordbase32.sh \
+					  tests/bindletools/bindletools-pctenc.sh \
 					  @PACKAGE_TARNAME@-*.tar.* \
 					  @PACKAGE_TARNAME@-*.zip
 DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings \
@@ -199,6 +217,12 @@ DISTCHECK_CONFIGURE_FLAGS		= --enable-strictwarnings \
 # conditional build
 if ENABLE_UTILITY
    bin_PROGRAMS				+= src/bindletools
+   TESTS				+= tests/bindletools/bindletools-base16.sh
+   TESTS				+= tests/bindletools/bindletools-base32.sh
+   TESTS				+= tests/bindletools/bindletools-base32hex.sh
+   TESTS				+= tests/bindletools/bindletools-base64.sh
+   TESTS				+= tests/bindletools/bindletools-crockfordbase32.sh
+   TESTS				+= tests/bindletools/bindletools-pctenc.sh
 endif
 if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
@@ -376,6 +400,24 @@ doc/mans/bindle_strtrim.3: Makefile $(srcdir)/doc/mans/bindle_strtrim.3.in
 
 doc/mans/bindle_urldesc.3: Makefile $(srcdir)/doc/mans/bindle_urldesc.3.in
 	@$(do_subst_dt)
+
+tests/bindletools/bindletools-base16.sh: Makefile $(srcdir)/tests/bindletools/bindletools-base16.sh.in
+	@$(do_subst_fn)
+
+tests/bindletools/bindletools-base32.sh: Makefile $(srcdir)/tests/bindletools/bindletools-base32.sh.in
+	@$(do_subst_fn)
+
+tests/bindletools/bindletools-base32hex.sh: Makefile $(srcdir)/tests/bindletools/bindletools-base32hex.sh.in
+	@$(do_subst_fn)
+
+tests/bindletools/bindletools-base64.sh: Makefile $(srcdir)/tests/bindletools/bindletools-base64.sh.in
+	@$(do_subst_fn)
+
+tests/bindletools/bindletools-crockfordbase32.sh: Makefile $(srcdir)/tests/bindletools/bindletools-crockfordbase32.sh.in
+	@$(do_subst_fn)
+
+tests/bindletools/bindletools-pctenc.sh: Makefile $(srcdir)/tests/bindletools/bindletools-pctenc.sh.in
+	@$(do_subst_fn)
 
 
 # local targets
