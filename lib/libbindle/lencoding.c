@@ -1146,6 +1146,20 @@ bindle_decode(
    if (bindle_encode_method(method) == -1)
       return(-1);
 
+   // validates buffer is big enough
+   if ((method & ~BNDL_NOPAD) == BNDL_PCTENC)
+   {
+      if (s <= (size_t)bindle_pctenc_decode_size(src))
+      {
+         errno = ENOBUFS;
+         return(-1);
+      };
+   } else if (s <= (size_t)bindle_decode_size(method, n))
+   {
+      errno = ENOBUFS;
+      return(-1);
+   };
+
    switch(method & ~BNDL_NOPAD)
    {
       case BNDL_BASE32:
@@ -1183,6 +1197,8 @@ bindle_decode_size(
          int                           method,
          size_t                        n )
 {
+   ssize_t len;
+
    switch(method)
    {
       case BNDL_BASE32:
@@ -1190,16 +1206,47 @@ bindle_decode_size(
       case BNDL_CROCKFORD:
       return( ((n / 8) + (((n % 8)) ? 1 : 0)) * 5 );
 
+      case BNDL_BASE32_NOPAD:
+      case BNDL_BASE32HEX_NOPAD:
+      case BNDL_CROCKFORD_NOPAD:
+      len = (n / 8) * 5;
+      switch( n % 8 )
+      {
+         case 1: return(-1);
+         case 2: return(len + 1);
+         case 3: return(-1);
+         case 4: return(len + 2);
+         case 5: return(len + 3);
+         case 6: return(-1);
+         case 7: return(len + 4);
+         default: break;
+      };
+      return( len );
+
       case BNDL_BASE64:
       return( ((n / 4) + (((n % 4)) ? 1 : 0)) * 3 );
 
+      case BNDL_BASE64_NOPAD:
+      len = (n / 4) * 3;
+      switch( n % 4 )
+      {
+         case 1: return(-1);
+         case 2: return(len + 1);
+         case 3: return(len + 2);
+         default: break;
+      };
+      return( len );
+
       case BNDL_HEX:
+      case BNDL_HEX_NOPAD:
       return( (n / 2) + (((n % 2)) ? 1 : 0) );
 
       case BNDL_NONE:
+      case BNDL_NONE_NOPAD:
       return((ssize_t)n);
 
       case BNDL_PCTENC:
+      case BNDL_PCTENC_NOPAD:
       return((ssize_t)(n+1));
 
       default:
