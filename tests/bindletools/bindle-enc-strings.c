@@ -526,11 +526,16 @@ bindle_test_encode(
       if ( (!(dec)) || (!(enc)) )
          continue;
 
+      if ((nopad))
+         method |= BNDL_NOPAD;
+      if (!(nopad))
+         method &= ~BNDL_NOPAD;
+
       snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
       if (!(opts & BNDLTEST_OPT_QUIET))
          printf("%-35s", msg);
 
-      len = bindle_encode(method, buff, sizeof(buff), dec, strlen(dec), nopad);
+      len = bindle_encode(method, buff, sizeof(buff), dec, strlen(dec));
       if (len == -1)
       {
          if (!(opts & BNDLTEST_OPT_QUIET))
@@ -563,11 +568,16 @@ bindle_test_encode(
 
       bufflen = strlen(enc);
 
+      if ((nopad))
+         method |= BNDL_NOPAD;
+      if (!(nopad))
+         method &= ~BNDL_NOPAD;
+
       snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
       if (!(opts & BNDLTEST_OPT_QUIET))
          printf("%-35s", msg);
 
-      len = bindle_encode(method, buff, bufflen, dec, strlen(dec), nopad);
+      len = bindle_encode(method, buff, bufflen, dec, strlen(dec));
       if ( (len == -1) && (errno == ENOBUFS) )
       {
          if (!(opts & BNDLTEST_OPT_QUIET))
@@ -598,11 +608,16 @@ bindle_test_encode(
 
       bufflen = strlen(enc);
 
+      if ((nopad))
+         method |= BNDL_NOPAD;
+      if (!(nopad))
+         method &= ~BNDL_NOPAD;
+
       snprintf(msg, sizeof(msg), "   encoding \"%s\" ... ", dec);
       if (!(opts & BNDLTEST_OPT_QUIET))
          printf("%-35s", msg);
 
-      len = bindle_encode(method, buff, bufflen+1, dec, strlen(dec), nopad);
+      len = bindle_encode(method, buff, bufflen+1, dec, strlen(dec));
       if (len == -1)
       {
          if (!(opts & BNDLTEST_OPT_QUIET))

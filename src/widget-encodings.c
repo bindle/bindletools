@@ -490,9 +490,10 @@ bindle_encodings_action_encode(
    ssize_t              buff_off;
    bindle_state_t *     state;
 
-   state = cnf->state;
+   state   = cnf->state;
+   method |= ((cnf->widget_flags & BINDLE_FLG_NOPAD)) ? BNDL_NOPAD : 0;
 
-   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len, (cnf->widget_flags & BINDLE_FLG_NOPAD))) < 0)
+   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len)) < 0)
    {
       fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
       return(-1);
@@ -580,7 +581,8 @@ bindle_encodings_src_string(
    char        chunk[BINDLE_BUFF_SIZE+1];
    char        res[(BINDLE_BUFF_SIZE*3)+1];
 
-   len = strlen(str);
+   len     = strlen(str);
+   method |= ((cnf->widget_flags & BINDLE_FLG_NOPAD)) ? BNDL_NOPAD : 0;
 
    if ((cnf->widget_flags & BINDLE_FLG_DECODE) == BINDLE_FLG_DECODE)
    {
@@ -598,7 +600,7 @@ bindle_encodings_src_string(
       {
          size = ((off+BINDLE_BUFF_SIZE) < len) ? BINDLE_BUFF_SIZE : (len-off);
          memcpy(chunk, &str[off], size);
-         if ((rc = bindle_encode(method, res, sizeof(res), chunk, size, (cnf->widget_flags & BINDLE_FLG_NOPAD))) > 0)
+         if ((rc = bindle_encode(method, res, sizeof(res), chunk, size)) > 0)
             fwrite(res, 1, (size_t)rc, cnf->state->fsout);
       };
    };

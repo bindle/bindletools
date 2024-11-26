@@ -336,8 +336,7 @@ bindle_encode(
          char *                        dst,
          size_t                        s,
          const void *                  src,
-         size_t                        n,
-         int                           nopad );
+         size_t                        n );
 
 
 _BINDLE_F ssize_t

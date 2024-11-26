@@ -97,7 +97,7 @@ main(
          fprintf(stderr, "error: buffer is too small for encoded string\n");
          return(1);
       };
-      if (bindle_encode(BNDL_BASE32, buff, sizeof(buff), argv[i], strlen(argv[i]), 0) == -1)
+      if (bindle_encode(BNDL_BASE32, buff, sizeof(buff), argv[i], strlen(argv[i])) == -1)
       {
          fprintf(stderr, "bindle_encode(): %s\n", strerror(errno));
          return(1);

@@ -1263,14 +1263,14 @@ bindle_encode(
          char *                        dst,
          size_t                        s,
          const void *                  src,
-         size_t                        n,
-         int                           nopad )
+         size_t                        n )
 {
+   int nopad;
+
    assert(dst != NULL);
    assert(src != NULL);
 
-   nopad   = ((method & BNDL_NOPAD)) ? 1           : nopad;
-   method |= ((nopad))               ? BNDL_NOPAD  : 0;
+   nopad = ((method & BNDL_NOPAD)) ? 1 : 0;
 
    // validate encoding method
    if (bindle_encode_method(method) == -1)
