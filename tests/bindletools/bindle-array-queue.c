@@ -304,7 +304,7 @@ my_strrand(
       str[pos] = (random() % 26) + 'a';
 
    // ensure unique value for test
-   snprintf(&str[pos], (len-pos+1), "%04xu", (~count)&0xffff);
+   snprintf(&str[pos], (len-pos+1), "%04x", (~count)&0xffff);
    count++;
 
    return(str);
