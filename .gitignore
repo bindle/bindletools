@@ -1,11 +1,13 @@
 *~
 *.lo
+*.log
 *.mode1v3
 *.o
 *.pbxuser
 *.swp
 *.sublime-project
 *.sublime-workspace
+*.trs
 *.xcodeproj
 .DS_Store
 .deps
