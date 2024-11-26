@@ -493,7 +493,7 @@ bindle_encodings_action_encode(
    state   = cnf->state;
    method |= ((cnf->widget_flags & BINDLE_FLG_NOPAD)) ? BNDL_NOPAD : 0;
 
-   if ((len = bindle_encode(method, state->res, state->res_size, state->buff, state->buff_len)) < 0)
+   if ((len = bindle_encode(method, state->res, state->res_size+1, state->buff, state->buff_len)) < 0)
    {
       fprintf(stderr, "%s: %s\n", cnf->prog_name, strerror(errno));
       return(-1);
