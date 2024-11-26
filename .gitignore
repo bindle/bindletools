@@ -1,4 +1,8 @@
 *~
+*.1
+*.3
+*.a
+*.la
 *.lo
 *.log
 *.mode1v3
@@ -12,6 +16,7 @@
 .DS_Store
 .deps
 .dirstamp
+/*/.libs/
 /ABOUT-NLS
 /INSTALL
 /Makefile
@@ -20,6 +25,9 @@
 /libtool
 /bindletools-*.tar.*
 /bindletools-*.zip
+/src/bindletools
+/tests/bindle-*
+/tests/bindletools/*.sh
 a.out
 aclocal.m4
 autom4te.cache
