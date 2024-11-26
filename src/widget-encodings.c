@@ -548,7 +548,7 @@ bindle_encodings_src_fileno(
    state->line_off   = 0;
    buff              = state->buff;
 
-   while ( ((len = fread(&buff[state->buff_len], 1, (state->buff_size-state->buff_len), state->fsin)) >= 0) || ((state->buff_len)) )
+   while ( ((len = fread(&buff[state->buff_len], 1, (state->buff_size-state->buff_len), state->fsin)) > 0) || ((state->buff_len)) )
    {
       state->buff_len += (size_t)len;
       if (state->buff_len == 0)
