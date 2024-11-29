@@ -41,6 +41,18 @@ bindle_peek
 bindle_pop
 bindle_push
 #
+# berval functions
+bindle_berval_bv2str
+bindle_berval_cmp
+bindle_berval_dup
+bindle_berval_free
+bindle_berval_init
+bindle_berval_str2bv
+bindle_bvarray_add
+bindle_bvarray_free
+bindle_bvarray_init
+bindle_bvarray_len
+#
 # debug functions and variables
 bindle_debug_ident
 bindle_debug_level

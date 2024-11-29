@@ -164,6 +164,13 @@
 //////////////////
 // MARK: - Data Types
 
+typedef struct _bindle_berval
+{
+   size_t               bv_len;
+   void *               bv_val;
+} bindle_berval_t;
+
+
 typedef struct _bindle_map
 {
    const char *          map_name;
@@ -296,6 +303,64 @@ bindle_push(
          size_t *                      nelp,
          size_t                        width,
          void * (*reallocbase)(void *, size_t) );
+
+
+//-------------------//
+// berval prototypes //
+//-------------------//
+// MARK: berval prototypes
+
+_BINDLE_F char *
+bindle_berval_bv2str(
+         const bindle_berval_t *       bv );
+
+
+_BINDLE_F int
+bindle_berval_cmp(
+         const void *                  a,
+         const void *                  b );
+
+
+_BINDLE_F bindle_berval_t *
+bindle_berval_dup(
+         const bindle_berval_t *       bv );
+
+
+_BINDLE_F void
+bindle_berval_free(
+         bindle_berval_t *             bv );
+
+
+_BINDLE_F bindle_berval_t *
+bindle_berval_init(
+         const void *                  val,
+         size_t                        len );
+
+
+_BINDLE_F bindle_berval_t *
+bindle_berval_str2bv(
+         const char *                  val );
+
+
+_BINDLE_F int
+bindle_bvarray_add(
+         bindle_berval_t ***           bvap,
+         bindle_berval_t *             bv );
+
+
+_BINDLE_F void
+bindle_bvarray_free(
+         bindle_berval_t **            bva );
+
+
+_BINDLE_F int
+bindle_bvarray_init(
+         bindle_berval_t ***           bvap );
+
+
+_BINDLE_F size_t
+bindle_bvarray_len(
+         bindle_berval_t **            bva );
 
 
 //------------------//
