@@ -59,6 +59,7 @@ bindle_berval_bv2str(
          const bindle_berval_t *       bv )
 {
    char *   str;
+   BindleDebugTrace();
    assert(bv != NULL);
    if ((str = malloc(bv->bv_len + 1)) == NULL)
       return(NULL);
@@ -78,6 +79,7 @@ bindle_berval_cmp(
    const bindle_berval_t *    ap;
    const bindle_berval_t *    bp;
 
+   BindleDebugTrace();
    assert(a != NULL);
    assert(b != NULL);
 
@@ -104,6 +106,7 @@ _BINDLE_F bindle_berval_t *
 bindle_berval_dup(
          const bindle_berval_t *       bv )
 {
+   BindleDebugTrace();
    assert(bv != NULL);
    return(bindle_berval_init(bv->bv_val, bv->bv_len));
 }
@@ -113,6 +116,7 @@ void
 bindle_berval_free(
          bindle_berval_t *             bv )
 {
+   BindleDebugTrace();
    assert(bv != NULL);
 
    bv->bv_len = 0;
@@ -135,6 +139,7 @@ bindle_berval_init(
    size_t               alloc_size;
    bindle_berval_t *    bv;
 
+   BindleDebugTrace();
    assert( ((!(len)) && (!(val))) || ((val)) );
 
    alloc_size = ((len)) ? len : 1;
@@ -161,6 +166,7 @@ bindle_berval_t *
 bindle_berval_str2bv(
          const char *                  val )
 {
+   BindleDebugTrace();
    assert(val != NULL);
    return(bindle_berval_init(val, (strlen(val) + 1)));
 }
@@ -175,6 +181,7 @@ bindle_bvarray_add(
    size_t               size;
    bindle_berval_t **   bva;
 
+   BindleDebugTrace();
    assert( bvap != NULL );
    assert( bv != NULL );
 
@@ -198,6 +205,7 @@ bindle_bvarray_free(
          bindle_berval_t **            bva )
 {
    size_t pos;
+   BindleDebugTrace();
    assert( bva != NULL );
    for(pos = 0; ((bva[pos])); pos++)
       bindle_berval_free(bva[pos]);
@@ -211,6 +219,7 @@ bindle_bvarray_init(
          bindle_berval_t ***           bvap )
 {
    bindle_berval_t **   bva;
+   BindleDebugTrace();
    assert( bvap != NULL );
    if ((bva = malloc(sizeof(bindle_berval_t *))) == NULL)
       return(-1);
@@ -225,6 +234,7 @@ bindle_bvarray_len(
          bindle_berval_t **            bva )
 {
    size_t   pos;
+   BindleDebugTrace();
    assert( bva != NULL );
    for(pos = 0; ((bva[pos])); pos++);
    return(pos);

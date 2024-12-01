@@ -71,6 +71,22 @@ bindle_encoding_verify
 bindle_filetostr
 bindle_readline
 #
+# hash functions
+bindle_hash_del
+bindle_hash_free
+bindle_hash_get
+bindle_hash_get_r
+bindle_hash_initialize
+bindle_hash_keys
+bindle_hash_len
+bindle_hash_opts
+bindle_hash_sdel
+bindle_hash_set
+bindle_hash_sget
+bindle_hash_sget_r
+bindle_hash_skeys
+bindle_hash_sset
+#
 # map functions
 bindle_map_lookup
 bindle_map_lookup_name

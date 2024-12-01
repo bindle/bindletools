@@ -157,12 +157,36 @@
 #define BNDL_PCTENC_NOPAD         ( BNDL_NOPAD | BNDL_PCTENC )
 
 
+// hash options
+#define BNDL_HASH_BERVAL         0x0000
+#define BNDL_HASH_STRING         0x0001
+#define BNDL_HASH_INT            0x0002
+#define BNDL_HASH_UNSIGNED       0x0003
+#define BNDL_HASH_DOUBLE         0x0004
+#define BNDL_HKEY_TYPE           0x000f
+#define BNDL_HKEY_BERVAL         (BNDL_HASH_BERVAL   << 0)
+#define BNDL_HKEY_STRING         (BNDL_HASH_STRING   << 0)
+#define BNDL_HVAL_TYPE           0x00f0
+#define BNDL_HVAL_BERVAL         (BNDL_HASH_BERVAL   << 4)
+#define BNDL_HVAL_STRING         (BNDL_HASH_STRING   << 4)
+#define BNDL_HVAL_INT            (BNDL_HASH_INT      << 4)
+#define BNDL_HVAL_UNSIGNED       (BNDL_HASH_UNSIGNED << 4)
+#define BNDL_HVAL_DOUBLE         (BNDL_HASH_DOUBLE   << 4)
+#define BNDL_HASH_CASE           0x0100
+#define BNDL_HASH_REPLACE        0x0200
+
+#define BNDL_HASH_KEY_LIMIT      64
+
+
 //////////////////
 //              //
 //  Data Types  //
 //              //
 //////////////////
 // MARK: - Data Types
+
+typedef struct _bindle_hash bindle_hash_t;
+
 
 typedef struct _bindle_berval
 {
@@ -440,6 +464,110 @@ bindle_readline(
          int                           fd,
          char *                        str,
          size_t                        size );
+
+
+//----------------------//
+// hash tabe prototypes //
+//----------------------//
+// MARK: hash table prototypes
+
+_BINDLE_F int
+bindle_hash_del(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len );
+
+
+_BINDLE_F void
+bindle_hash_free(
+         bindle_hash_t *               bh );
+
+
+_BINDLE_F int
+bindle_hash_get(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len,
+         const void **                 valp,
+         size_t *                      val_lenp );
+
+
+_BINDLE_F int
+bindle_hash_get_r(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len,
+         void *                        dst,
+         size_t                        n,
+         size_t *                      val_lenp );
+
+
+_BINDLE_F int
+bindle_hash_initialize(
+         bindle_hash_t **              bhp,
+         int                           opts );
+
+
+_BINDLE_F int
+bindle_hash_keys(
+         bindle_hash_t *               bh,
+         bindle_berval_t ***           bvap );
+
+
+_BINDLE_F size_t
+bindle_hash_len(
+         bindle_hash_t *               bh );
+
+
+_BINDLE_F int
+bindle_hash_opts(
+         bindle_hash_t *               bh );
+
+
+_BINDLE_F int
+bindle_hash_sdel(
+         bindle_hash_t *               bh,
+         const char *                  key );
+
+
+_BINDLE_F int
+bindle_hash_set(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len,
+         const void *                  val,
+         size_t                        val_len );
+
+
+_BINDLE_F int
+bindle_hash_sget(
+         bindle_hash_t *               bh,
+         const char *                  key,
+         const void **                 valp,
+         size_t *                      val_lenp );
+
+
+_BINDLE_F int
+bindle_hash_sget_r(
+         bindle_hash_t *               bh,
+         const char *                  key,
+         void *                        dst,
+         size_t                        n,
+         size_t *                      val_lenp );
+
+
+_BINDLE_F int
+bindle_hash_skeys(
+         bindle_hash_t *               bh,
+         char ***                      keysp );
+
+
+_BINDLE_F int
+bindle_hash_sset(
+         bindle_hash_t *               bh,
+         const char *                  key,
+         const void *                  val,
+         size_t                        val_len );
 
 
 //----------------//

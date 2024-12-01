@@ -49,6 +49,8 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-enc-pctenc-dec \
 					   tests/bindle-enc-pctenc-enc \
 					   tests/bindle-enc-pctenc-val \
+					   tests/bindle-hash-berval \
+					   tests/bindle-hash-string \
 					   tests/bindle-str-basename \
 					   tests/bindle-str-chomp \
 					   tests/bindle-str-dirname \
@@ -103,6 +105,8 @@ if ENABLE_LIBBINDLE_TESTS
    TESTS				+= tests/bindle-enc-pctenc-dec
    TESTS				+= tests/bindle-enc-pctenc-enc
    TESTS				+= tests/bindle-enc-pctenc-val
+   TESTS				+= tests/bindle-hash-berval
+   TESTS				+= tests/bindle-hash-string
    TESTS				+= tests/bindle-str-basename
    TESTS				+= tests/bindle-str-chomp
    TESTS				+= tests/bindle-str-dirname
@@ -133,6 +137,8 @@ lib_libbindle_a_SOURCES			= $(srcdir)/$(bindletools_srcdir)/include/bindle.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lencoding.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lfile.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lfile.h \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lhash.c \
+					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lhash.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lmap.c \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lmap.h \
 					  $(srcdir)/$(bindletools_srcdir)/lib/libbindle/lobj.c \
@@ -395,6 +401,24 @@ tests_bindle_enc_pctenc_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-strings.c \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-pctenc-val.c
+
+
+# macros for tests/bindle-hash-berval
+tests_bindle_hash_berval_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_berval_LDADD		= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_berval_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-hash-berval.c
+
+
+# macros for tests/bindle-hash-string
+tests_bindle_hash_string_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_string_LDADD		= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_string_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
+					  $(bindletools_srcdir)/tests/bindletools/bindle-hash-string.c
 
 
 # macros for tests/bindle-str-basename
