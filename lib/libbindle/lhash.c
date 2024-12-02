@@ -469,7 +469,6 @@ bindle_hash_keys(
          bindle_berval_t ***           bvap )
 {
    bindle_berval_t **      bva;
-   bindle_berval_t *       bv;
    size_t                  pos;
 
    BindleDebugTrace();
@@ -477,18 +476,13 @@ bindle_hash_keys(
    assert( bvap != NULL );
 
    // allocate array
-   if (bindle_bvarray_init(&bva) == -1)
+   if (bindle_bvarray_init(&bva, bh->h_len) == -1)
       return(-1);
 
    // dupulicate bervals
    for(pos = 0; (pos < bh->h_len); pos++)
    {
-      if ((bv = bindle_berval_dup(bh->h_elements[pos]->e_key)) == NULL)
-      {
-         bindle_bvarray_free(bva);
-         return(-1);
-      };
-      if (bindle_bvarray_add(&bva, bv) == -1)
+      if (bindle_bvarray_add(&bva, bh->h_elements[pos]->e_key) == -1)
       {
          bindle_bvarray_free(bva);
          return(-1);

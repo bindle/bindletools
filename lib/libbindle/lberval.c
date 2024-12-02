@@ -170,27 +170,43 @@ bindle_berval_str2bv(
 int
 bindle_bvarray_add(
          bindle_berval_t ***           bvap,
-         bindle_berval_t *             bv )
+         const bindle_berval_t *       bv )
 {
    size_t               len;
    size_t               size;
    bindle_berval_t **   bva;
+   bindle_berval_t *    dup;
 
    BindleDebugTrace();
    assert( bvap != NULL );
    assert( bv != NULL );
 
+   if ((dup = bindle_berval_dup(bv)) == NULL)
+      return(-1);
+
    if (!(*bvap))
-      if (bindle_bvarray_init(bvap) == -1)
+   {
+      if (bindle_bvarray_init(bvap, 1) == -1)
+      {
+         bindle_berval_free(dup);
          return(-1);
+      };
+      (*bvap)[0] = dup;
+      (*bvap)[1] = NULL;
+      return(0);
+   };
 
    len   = bindle_bvarray_len(*bvap);
    size  = (len+2) * sizeof(bindle_berval_t *);
    if ((bva = realloc(*bvap, size)) == NULL)
+   {
+      bindle_berval_free(dup);
       return(-1);
-   bva[len+0]  = bv;
-   bva[len+1]  = NULL;
+   };
+   bva[len+0] = dup;
+   bva[len+1] = NULL;
    *bvap       = bva;
+
    return(0);
 }
 
@@ -211,12 +227,16 @@ bindle_bvarray_free(
 
 _BINDLE_F int
 bindle_bvarray_init(
-         bindle_berval_t ***           bvap )
+         bindle_berval_t ***           bvap,
+         size_t                        n )
 {
    bindle_berval_t **   bva;
+   size_t               size;
    BindleDebugTrace();
    assert( bvap != NULL );
-   if ((bva = malloc(sizeof(bindle_berval_t *))) == NULL)
+   n++;
+   size = sizeof(bindle_berval_t *) * n;
+   if ((bva = malloc(size)) == NULL)
       return(-1);
    bva[0] = NULL;
    *bvap = bva;

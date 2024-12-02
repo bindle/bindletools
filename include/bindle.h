@@ -369,7 +369,7 @@ bindle_berval_str2bv(
 _BINDLE_F int
 bindle_bvarray_add(
          bindle_berval_t ***           bvap,
-         bindle_berval_t *             bv );
+         const bindle_berval_t *       bv );
 
 
 _BINDLE_F void
@@ -379,7 +379,8 @@ bindle_bvarray_free(
 
 _BINDLE_F int
 bindle_bvarray_init(
-         bindle_berval_t ***           bvap );
+         bindle_berval_t ***           bvap,
+         size_t                        n );
 
 
 _BINDLE_F size_t
