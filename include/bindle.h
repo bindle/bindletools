@@ -341,8 +341,8 @@ bindle_berval_bv2str(
 
 _BINDLE_F int
 bindle_berval_cmp(
-         const void *                  a,
-         const void *                  b );
+         const bindle_berval_t *       bv1,
+         const bindle_berval_t *       bv2 );
 
 
 _BINDLE_F bindle_berval_t *

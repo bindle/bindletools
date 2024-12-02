@@ -71,31 +71,26 @@ bindle_berval_bv2str(
 
 int
 bindle_berval_cmp(
-         const void *                  a,
-         const void *                  b )
+         const bindle_berval_t *       bv1,
+         const bindle_berval_t *       bv2 )
 {
    size_t                     len;
    int                        rc;
-   const bindle_berval_t *    ap;
-   const bindle_berval_t *    bp;
 
    BindleDebugTrace();
-   assert(a != NULL);
-   assert(b != NULL);
+   assert(bv1 != NULL);
+   assert(bv2 != NULL);
 
-   ap    = *((const bindle_berval_t * const *)a);
-   bp    = *((const bindle_berval_t * const *)b);
+   assert(bv1 != NULL);
+   assert(bv2 != NULL);
 
-   assert(ap != NULL);
-   assert(bp != NULL);
-
-   len = (ap->bv_len < bp->bv_len) ? ap->bv_len : bp->bv_len;
-   if ((rc = memcmp(ap->bv_val, bp->bv_val, len)) != 0)
+   len = (bv1->bv_len < bv2->bv_len) ? bv1->bv_len : bv2->bv_len;
+   if ((rc = memcmp(bv1->bv_val, bv2->bv_val, len)) != 0)
       return(rc);
 
-   if (ap->bv_len < bp->bv_len)
+   if (bv1->bv_len < bv2->bv_len)
       return(-1);
-   if (ap->bv_len > bp->bv_len)
+   if (bv1->bv_len > bv2->bv_len)
       return(1);
 
    return(0);
