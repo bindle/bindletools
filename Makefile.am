@@ -88,6 +88,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_basename_r.3 \
 					  doc/mans/bindle_berval.3 \
 					  doc/mans/bindle_bindex.3 \
+					  doc/mans/bindle_bvarray.3 \
 					  doc/mans/bindle_decode.3 \
 					  doc/mans/bindle_dirname_r.3 \
 					  doc/mans/bindle_enqueue.3 \
@@ -155,6 +156,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_basename_r.3.in \
 					  doc/mans/bindle_berval.3.in \
 					  doc/mans/bindle_bindex.3.in \
+					  doc/mans/bindle_bvarray.3.in \
 					  doc/mans/bindle_decode.3.in \
 					  doc/mans/bindle_dirname_r.3.in \
 					  doc/mans/bindle_enqueue.3.in \
@@ -346,6 +348,9 @@ doc/mans/bindle_berval.3: Makefile $(srcdir)/doc/mans/bindle_berval.3.in
 doc/mans/bindle_bindex.3: Makefile $(srcdir)/doc/mans/bindle_bindex.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_bvarray.3: Makefile $(srcdir)/doc/mans/bindle_bvarray.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_decode.3: Makefile $(srcdir)/doc/mans/bindle_decode.3.in
 	@$(do_subst_dt)
 
@@ -447,6 +452,13 @@ install-data-local: install-man
 	   ln -fs bindle_bindex.3 bindle_badd.3 && \
 	   ln -fs bindle_bindex.3 bindle_bremove.3 && \
 	   ln -fs bindle_bindex.3 bindle_bsearch.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_bvarray.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_bvarray.3 bindle_bvarray_add.3 && \
+	   ln -fs bindle_bvarray.3 bindle_bvarray_free.3 && \
+	   ln -fs bindle_bvarray.3 bindle_bvarray_init.3 && \
+	   ln -fs bindle_bvarray.3 bindle_bvarray_len.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_decode.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \

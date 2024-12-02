@@ -110,6 +110,7 @@ less than, equal to, or greater than \fBbv2\fR.
 
 .SH SEE ALSO
 .BR bindletools (3),
+.BR bindle_bvarray (3)
 
 .SH AUTHOR
 David M. Syzdek <david@syzdek.net>

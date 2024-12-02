@@ -1,0 +1,91 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2024 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_bvarray_init, bindle_bvarray_add, bindle_bvarray_len, and bindle_bvarray_free - Bindle Binary Tools URL parsing routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_bvarray_init( bindle_berval_t *** " bvap ", size_t " n " );"
+.sp
+.BI "int bindle_bvarray_add( bindle_berval_t *** " bvap ", const bindle_berval_t * " bv " );"
+.sp
+.BI "size_t bindle_bvarray_len( bindle_berval_t ** " bva " );"
+.sp
+.BI "void bindle_bvarray_free( bindle_berval_t * " bv " );"
+.fi
+
+.SH DESCRIPTION
+These routines provide a framework for managing an array of
+\fBbindle_berval_t\fR references.
+.sp
+The \fBbindle_bvarray_init\fR() function allocates the initial memory for
+a \fBNULL\fR terminated array of \fBbindle_berval_t\fR references.  The
+function will pre-allocate enough memory to contain \fIn\fR references and a
+terminating \fBNULL\fR.  The allocated memory will be assigned to *\fIbvap\fR.
+.sp
+The \fBbindle_bvarray_add\fR() function will add a copy of the
+\fBbindle_berval_t\fR referenced by \fIbv\fR to end of the array referenced by
+*\fIbvap\fR.  The memory allocation of *\fIbvap\fR may be increased to allow
+the additional array element.
+.sp
+\fBbindle_bvarray_len\fR() is a convenience function which returns the number
+of elements, not counting the \fBNULL\fR terminating reference, contained
+within \fIbva\fR.
+.sp
+The \fBbindle_bvarray_free\fR() function frees the \fBbindle_berval_t\fR
+elements contained within \fIbva\fR and frees the memory used by \fIbva\fR.
+
+.SH RETURN VALUES
+The \fBbindle_bvarray_init\fR() and \fBbindle_bvarray_add\fR() functions
+return 0 if successful.  If an error is encountered, the functions will return
+-1 and set the value of \fIerrno\fR.
+.sp
+The \fBbindle_bvarray_len\fR() function returns the number of elements
+contained within \fIbva\fR.
+
+.SH SEE ALSO
+.BR bindletools (3),
+.BR bindle_berval (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
