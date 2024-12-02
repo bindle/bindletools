@@ -1,0 +1,121 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2024 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_berval_init, bindle_berval_free, bindle_berval_dup, bindle_berval_cmp, bindle_berval_bv2str, bindle_berval_str2bv - Bindle Binary Tools URL parsing routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+typedef struct _bindle_berval
+{
+   size_t      bv_len;  /* length of data */
+   void *      bv_val;  /* pointer to data */
+} bindle_berval_t;
+.sp
+.BI "bindle_berval_t * bindle_berval_init( const void * " val ", size_t " len " );"
+.sp
+.BI "bindle_berval_t * bindle_berval_dup( const bindle_berval_t * " bv " );"
+.sp
+.BI "bindle_berval_t * bindle_berval_str2bv( const char * " val " );"
+.sp
+.BI "void bindle_berval_free( void * " bv " );"
+.sp
+.BI "char * bindle_berval_bv2str( const bindle_berval_t * " bv " );"
+.sp
+.BI "int bindle_berval_cmp( const void * " bv1 ", const void " bv2 " );"
+.fi
+
+.SH DESCRIPTION
+These routines provide a framework for allocating, duplicating, comparing, and
+freeing of BER (Basic Encoding Rules) objects.  The BER objects in this
+framework which are similar to the BER objects used in LDAP API (RFC 1823).
+.sp
+The \fBbindle_berval_init\fR() function allocates a \fBbindle_berval_t\fR
+reference and allocates a \fIlen\fR bytes for the \fIbv_val\fR member. If
+successful, \fIlen\fR bytes of \fIval\fR will be copied to the \fIbv_val\fR
+member. The reference returned by \fBbindle_berval_init\fR() must be freed by
+\fBbindle_berval_free\fR().
+.sp
+The \fBbindle_berval_dup\fR() function allocates a \fBbindle_berval_t\fR
+reference and allocates a \fIbv->bv_len\fR bytes for the \fIbv_val\fR member.
+If successful, \fIbv->bv_len\fR bytes of \fIbv->bv_val\fR will be copied to
+the \fIbv_val\fR member. The reference returned by \fBbindle_berval_dup\fR()
+must be freed by \fBbindle_berval_free\fR().
+.sp
+The \fBbindle_berval_str2bv\fR() function allocates a \fBbindle_berval_t\fR
+reference and allocates enough bytes for the \fIbv_val\fR member to contain
+\fIstr\fR member. If successful, \fIstr\fR is copied into the \fIbv_val\fR
+member. The reference returned by \fBbindle_berval_dup\fR() must be freed by
+\fBbindle_berval_free\fR().
+.sp
+The \fBbindle_berval_free\fR() function frees memory used by the
+\fBbindle_berval_t\fR reference \fIbv\fR.
+.sp
+The \fBbindle_berval_bv2str\fR() function allocates at most \fIbv->bv_len\fR +
+1 bytes of memory and copies the data in \fIbv->bv_val\fR into the newly
+allocated memory.  If the last byte of \fIbv->bv_val\fR is not zero, then a
+terminating \'\\0\' is appended to the end of the data.  The reference
+returned by \fBbindle_berval_bv2str\fR() must be freed using \fBfree\fR().
+.sp
+The \fBbindle_berval_cmp\fR() function compares \fBbindle_berval_t\fR
+reference \fIbv1\fR and \fBbindle_berval_t\fR reference \fIbv2\fR.
+
+.SH RETURN VALUES
+The \fBbindle_berval_init\fR(), \fBbindle_berval_dup\fR(), and
+\fBbindle_berval_str2bv\fR() functions return a \fBbindke_berval_t\fR
+reference if successful. If an error was encountered, \fIerrno\fR will be set
+and the functions will return \fINULL\fR. The reference returned must be freed
+using the \fBbindle_berval_free\fR() function.
+.sp
+The \fBbindle_berval_bv2str\fR() function returns \fBNULL\fR and sets the value of
+\fIerrno\fR if an error was encountered.  If successful, the
+\fBbindle_berval_bv2str\fR() function returns a \fBchar *\fR reference which
+must be freed using \fBfree\fR().
+.sp
+The \fBbindle_berval_cmp\fR() function returns -1, 0, or 1 if \fIbv1\fR is
+less than, equal to, or greater than \fBbv2\fR.
+
+.SH SEE ALSO
+.BR bindletools (3),
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
