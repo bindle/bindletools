@@ -684,7 +684,7 @@ bindle_hash_skeys(
    size = sizeof(char *) * (bh->h_len+1);
    if ((keys = malloc(size)) == NULL)
       return(-1);
-   memset(keys, 0, size);
+   keys[bh->h_len] = NULL;
 
    // dupulicate bervals
    for(pos = 0; (pos < bh->h_len); pos++)
