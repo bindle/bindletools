@@ -74,7 +74,7 @@ typedef struct my_test_strings
 {
    const char *   origin;
    const char *   expand;
-   intptr_t       force;
+   intptr_t       opts;
 } MyTestStr;
 
 
@@ -87,20 +87,20 @@ typedef struct my_test_strings
 
 static const MyTestStr  test_strings[] =
 {
-   { "asdfghj",                              "asdfghj",                       BNDL_NO },
-   { "'asdfghj'",                            "asdfghj",                       BNDL_NO },
-   { "\"asdfghj\"",                          "asdfghj",                       BNDL_NO },
-   { "\\141\\163\\144\\146\\147\\150\\152",  "asdfghj",                       BNDL_YES },
-   { "\\x61\\x73\\x64\\x66\\x67\\x68\\x6a",  "asdfghj",                       BNDL_YES },
-   { "a\\163\\x64f\\147\\x68j",              "asdfghj",                       BNDL_YES },
-   { "a%%sdfghj",                            "a%sdfghj",                      BNDL_YES },
-   { "zaq%%-%p-%%qaz",                       "zaq%-" PROGRAM_NAME "-%qaz",    BNDL_YES },
-   { "%u:x:%U:%G:test user:%d:/bin/false",   NULL,                            BNDL_YES },
-   { "%g:x:%G:%u,root",                      NULL,                            BNDL_YES },
-   { "Is %p running successfully?",          NULL,                            BNDL_YES },
-   { "Is your email address %u@%D\?",        NULL,                            BNDL_YES },
-   { "is your email address %u@%H\?",        NULL,                            BNDL_YES },
-   { "Is your email address %u@%h.%D\?",     NULL,                            BNDL_YES },
+   { "asdfghj",                              "asdfghj",                       0 },
+   { "'asdfghj'",                            "asdfghj",                       0 },
+   { "\"asdfghj\"",                          "asdfghj",                       0 },
+   { "\\141\\163\\144\\146\\147\\150\\152",  "asdfghj",                       BNDL_EXP_FORCE },
+   { "\\x61\\x73\\x64\\x66\\x67\\x68\\x6a",  "asdfghj",                       BNDL_EXP_FORCE },
+   { "a\\163\\x64f\\147\\x68j",              "asdfghj",                       BNDL_EXP_FORCE },
+   { "a%%sdfghj",                            "a%sdfghj",                      BNDL_EXP_FORCE },
+   { "zaq%%-%p-%%qaz",                       "zaq%-" PROGRAM_NAME "-%qaz",    BNDL_EXP_FORCE },
+   { "%u:x:%U:%G:test user:%d:/bin/false",   NULL,                            BNDL_EXP_FORCE },
+   { "%g:x:%G:%u,root",                      NULL,                            BNDL_EXP_FORCE },
+   { "Is %p running successfully?",          NULL,                            BNDL_EXP_FORCE },
+   { "Is your email address %u@%D\?",        NULL,                            BNDL_EXP_FORCE },
+   { "is your email address %u@%H\?",        NULL,                            BNDL_EXP_FORCE },
+   { "Is your email address %u@%h.%D\?",     NULL,                            BNDL_EXP_FORCE },
    { NULL, NULL, 0 }
 };
 
@@ -217,7 +217,7 @@ main(
       while (optind < argc)
       {
          bindle_tests_verbose(opts, "test string:  %s", argv[optind]);
-         if (!(bindle_strexpand(buff,  argv[optind], sizeof(buff), (((opts&TEST_OPT_FORCE)) ? BNDL_YES : BNDL_NO))))
+         if (!(bindle_strexpand(buff,  argv[optind], sizeof(buff), (((opts&TEST_OPT_FORCE)) ? BNDL_EXP_FORCE : 0))))
          {
             bindle_tests_error(opts, NULL, "bindle_strexpand(): error occurred");
             return(1);
@@ -238,7 +238,7 @@ main(
    {
       test_str = &test_strings[pos];
       bindle_tests_verbose(opts, "test string:  %s", test_strings[pos].origin);
-      if (!(bindle_strexpand(buff, test_str->origin, sizeof(buff), (int)test_str->force)))
+      if (!(bindle_strexpand(buff, test_str->origin, sizeof(buff), (int)test_str->opts)))
       {
          bindle_tests_error(opts, NULL, "bindle_strexpand(): error occurred");
          return(1);

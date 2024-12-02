@@ -308,7 +308,7 @@ bindle_strexpand(
          char *                        dst,
          const char * restrict         src,
          size_t                        len,
-         int                           force_expansion )
+         int                           opts )
 {
    size_t            pos;
    size_t            offset;
@@ -334,7 +334,7 @@ bindle_strexpand(
    quote  = ((src[0] == '\'')||(src[0] == '"')) ? src[0] : 0;
    for(pos = (((quote)) ? 1 : 0); ( ((src[pos])) && (offset < (len-1)) ); pos++)
    {
-      if ( (quote != '"') && (force_expansion != BNDL_YES) )
+      if ( (quote != '"') && (!(opts & BNDL_EXP_FORCE)) )
       {
          dst[offset++] = src[pos];
          continue;

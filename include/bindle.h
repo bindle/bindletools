@@ -157,6 +157,10 @@
 #define BNDL_PCTENC_NOPAD         ( BNDL_NOPAD | BNDL_PCTENC )
 
 
+// string expansion options
+#define BNDL_EXP_FORCE           0x0001
+
+
 // hash options
 #define BNDL_HASH_BERVAL         0x0000
 #define BNDL_HASH_STRING         0x0001
@@ -723,7 +727,7 @@ bindle_strexpand(
          char *                        dst,
          const char * restrict         src,
          size_t                        len,
-         int                           force_expansion );
+         int                           opts );
 
 
 _BINDLE_F size_t

@@ -76,7 +76,8 @@ Allocates memory and copies the specified string to the allocated memory.
 
 .TP 20
 bindle_strexpand(3)
-To be written.
+Expands tokens and keywords into another string and NULL terminates the
+result.
 
 .TP 20
 bindle_strlcpy(3)

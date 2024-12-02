@@ -40,13 +40,15 @@ Bindle Binaries Tools (libbindle, -lbindle)
 \fB#include\fR \fB<bindle.h>\fR
 .sp
 .BI "char * bindle_strexpand( char * " dst ", const char * restrict " src ","
-.BI "           size_t " len ", int " force_expansion " );"
+.BI "           size_t " len ", int " opts " );"
 
 .SH DESCRIPTION
 The \fBbindle_strexpand\fR() function copies to up \fIlen\fR - 1 bytes
-from \fIsrc\fR to \fRdst\fR. If \fIsrc\fR starts and ends with a single quote
-('\'') character or if \fIforce_expansion\fR is not 0, the tokens in the
-\fIstd\fR are expanded.  The following tokens are expanded:
+from \fIsrc\fR to \fRdst\fR. If \fIsrc\fR does not start and end with a single quote
+('\'') character or if \fIBNDL_EXP_FORCE\fR option is set, the tokens in the
+\fIsrc\fR are expanded.
+.sp
+The following tokens are expanded:
 .sp
 .RS 4
 .PD 0
