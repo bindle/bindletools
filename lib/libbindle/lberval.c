@@ -246,7 +246,7 @@ bindle_bvarray_init(
 
 _BINDLE_F size_t
 bindle_bvarray_len(
-         bindle_berval_t **            bva )
+         const bindle_berval_t **      bva )
 {
    size_t   pos;
    BindleDebugTrace();
