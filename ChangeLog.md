@@ -3,6 +3,10 @@ Bindle Binaries Tools
 Copyright (c) 2012, 2022 David M. Syzdek <david@syzdek.net>.  
 All rights reserved.  
 
+#### devel
+   - Adding initial berval functions (syzdek)
+   - Adding initial hash table functions (syzdek)
+
 #### 0.6
    - Changing default behavior to disable 'debug' option (syzdek)
    - Allowing additional warnings to be disabled (syzdek)
