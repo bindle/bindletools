@@ -47,6 +47,14 @@ bindle_array(3)
 Sorted array, stack, and queue management functions.
 
 .TP 20
+bindle_berval(3)
+BER management functions.
+
+.TP 20
+bindle_bvarray(3)
+BER array management functions.
+
+.TP 20
 bindle_decode(3)
 Data encoding and decoding functions.
 

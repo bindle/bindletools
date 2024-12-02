@@ -30,7 +30,7 @@
 .\"
 .TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
 .SH NAME
-bindle_bvarray_init, bindle_bvarray_add, bindle_bvarray_len, and bindle_bvarray_free - Bindle Binary Tools URL parsing routines
+bindle_bvarray_init, bindle_bvarray_add, bindle_bvarray_len, and bindle_bvarray_free - Bindle Binary Tools BER array management routines
 
 .SH LIBRARY
 Bindle Binaries Tools (libbindle, -lbindle)
