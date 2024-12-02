@@ -385,7 +385,7 @@ bindle_bvarray_init(
 
 _BINDLE_F size_t
 bindle_bvarray_len(
-         const bindle_berval_t **      bva );
+         bindle_berval_t **            bva );
 
 
 //------------------//
