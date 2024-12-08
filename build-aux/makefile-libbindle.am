@@ -49,7 +49,7 @@ EXTRA_PROGRAMS				+= tests/bindle-array-queue \
 					   tests/bindle-enc-pctenc-dec \
 					   tests/bindle-enc-pctenc-enc \
 					   tests/bindle-enc-pctenc-val \
-					   tests/bindle-hash-berval \
+					   tests/bindle-hash-binary \
 					   tests/bindle-hash-string \
 					   tests/bindle-str-basename \
 					   tests/bindle-str-chomp \
@@ -105,7 +105,7 @@ if ENABLE_LIBBINDLE_TESTS
    TESTS				+= tests/bindle-enc-pctenc-dec
    TESTS				+= tests/bindle-enc-pctenc-enc
    TESTS				+= tests/bindle-enc-pctenc-val
-   TESTS				+= tests/bindle-hash-berval
+   TESTS				+= tests/bindle-hash-binary
    TESTS				+= tests/bindle-hash-string
    TESTS				+= tests/bindle-str-basename
    TESTS				+= tests/bindle-str-chomp
@@ -403,13 +403,13 @@ tests_bindle_enc_pctenc_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-enc-pctenc-val.c
 
 
-# macros for tests/bindle-hash-berval
-tests_bindle_hash_berval_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
-tests_bindle_hash_berval_LDADD		= $(BINDLE_TESTS_DEPS)
-tests_bindle_hash_berval_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
+# macros for tests/bindle-hash-binary
+tests_bindle_hash_binary_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_binary_LDADD		= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_binary_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
-					  $(bindletools_srcdir)/tests/bindletools/bindle-hash-berval.c
+					  $(bindletools_srcdir)/tests/bindletools/bindle-hash-binary.c
 
 
 # macros for tests/bindle-hash-string
