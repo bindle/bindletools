@@ -80,6 +80,8 @@ bindle_push(3)
 Adds an element to a stack.
 
 .SH SEE ALSO
+.BR bindletools (3),
+.BR bindle_hash (3),
 .BR bindle_strings (3)
 
 .SH AUTHOR

@@ -1,0 +1,152 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2024 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_hash_initialize, bindle_hash_len, bindle_hash_opts, bindle_hash_free - Bindle Binary Tools hash table management routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_hash_initialize( bindle_hash_t ** " bhp ", int " opts " );"
+.sp
+.BI "size_t bindle_hash_len( bindle_hash_t * " bh " );"
+.sp
+.BI "int bindle_hash_opts( bindle_hash_t * " bh " );"
+.sp
+.BI "void bindle_hash_free( bindle_hash_t * " bh " );"
+.fi
+
+.SH DESCRIPTION
+The \fBbindle_hash_initialize\fR() function allocates and initializes a hash
+table which uses \fBbindle_berval_t\fR for the keys and values.  The
+\fIbv_len\fR for keys must be greater than 0 and less then
+(\fBBNDL_HASH_KEY_LIMIT\fR +1). The refererence to the initialized
+\fBbindle_hash_t\fR reference will be stored to \fIbhp\fR. \fIopts\fR defines
+the behavior of the hash table using bit flags. The following options are
+supported:
+.RS 6
+.TP 15                         
+.B BNDL_HASH_REPLACE
+causes duplicate keys to replace the value of existing values. If not,
+specified attempting to create a duplicate key will result in an error.
+.TP 15
+.B BNDL_HASH_CASE  
+causes keys to be case insensitive if the hash table is also initialized with
+\fBBNDL_HKEY_STRING\fR.
+.RE
+.PP
+The following options specify the type of data used for the hash keys. Only
+one of the following options may be specified.
+.RS 6
+.TP 15                         
+.B BNDL_HKEY_BERVAL
+specifies that the hash keys are binary data and must be accessed using
+methods supporting \fBbindle_berval_t\fR keys.  This is the default
+option.
+.TP 15
+.B BNDL_HKEY_STRING  
+specifies that the hash keys are ASCII compatible strings and must be NULL
+terminated. Attempting to specify a hash key with a \fBbindle_berval_t|fR
+value which is not NULL terminated will result in an error.  If
+\fBBNDL_HASH_CASE\fR is also specified, they has keys will be case
+insensitive.
+.RE
+.PP
+The following options specify the type of data used for the hash values. Only
+one of the following options may be specified.
+.RS 6
+.TP 15                         
+.B BNDL_HVAL_BERVAL
+specifies that the hash keys are binary data.  This is the default option.
+.TP 15
+.B BNDL_HVAL_STRING  
+specifies that the hash values are ASCII compatible strings and must be NULL
+terminated. Attempting to specify a hash value with a \fBbindle_berval_t|fR
+value which is not NULL terminated will result in an error.
+.TP 15
+.B BNDL_HVAL_INT  
+specifies that the hash values are of type \fBint\fR. Attempting to specify a
+hash value with a \fBbindle_berval_t\fR value which is not exactly
+\fBsizeof\fR(\fIint\fR) will result in an error.
+.TP 15
+.B BNDL_HVAL_UNSIGNED  
+specifies that the hash values are of type \fBunsigned\fR. Attempting to
+specify a hash value with a \fBbindle_berval_t\fR value which is not exactly
+\fBsizeof\fR(\fIunsigned\fR) will result in an error.
+.TP 15
+.B BNDL_HVAL_DOUBLE  
+specifies that the hash values are of type \fBdouble\fR. Attempting to
+specify a hash value with a \fBbindle_berval_t\fR value which is not exactly
+\fBsizeof\fR(\fIdouble\fR) will result in an error.
+.RE
+.PP
+The \fBbindle_hash_free\fR() function frees the hash elements and hash
+table referenced by \bIbh\fR.
+.sp
+The \fBbindle_hash_len\fR() function returns the number of elements contained
+within the hash table referenced by \fIbh\fR.
+.sp
+The \fBbindle_hash_opts\fR() function returns the \fIopts\fR used to
+initialize the hash table referenced by \fIbh\fR.
+
+.SH RETURN VALUES
+The \fBbindle_hash_initialize\fR() functions assign the allocated hash table
+to the reference specified by \fIbhp\fR and returns 0 if successful. If an
+error was encountered, \fIerrno\fR will be set, \fIbhp\fR will be unchanged,
+and the function will return -1.
+.sp
+The \fBbindle_hash_len\fR() function returns the number of elements contained
+within the hash table referenced by \fIbh\fR.
+.sp
+The \fBbindle_hash_opts\fR() function returns the \fIopts\fR used to
+initialize the hash table referenced by \fIbh\fR.
+
+.SH SEE ALSO
+.BR bindletools (3),
+.BR bindle_hash_del (3),
+.BR bindle_hash_get (3),
+.BR bindle_hash_keys (3),
+.BR bindle_hash_set (3),
+.BR bindle_array (3),
+.BR bindle_berval (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

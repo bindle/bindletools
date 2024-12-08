@@ -59,6 +59,10 @@ bindle_decode(3)
 Data encoding and decoding functions.
 
 .TP 20
+bindle_hash(3)
+Hash table management functions.
+
+.TP 20
 bindle_string(3)
 String manipulation functions.
 
