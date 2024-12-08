@@ -398,7 +398,7 @@ bindle_hash_initialize(
    // check key and value types
    switch(bh->h_key_type)
    {
-      case BNDL_HASH_BERVAL:
+      case BNDL_HASH_BINARY:
       bh->cmp = bindle_element_cmp;
       break;
 
@@ -415,7 +415,7 @@ bindle_hash_initialize(
    };
    switch(bh->h_val_type)
    {
-      case BNDL_HASH_BERVAL:
+      case BNDL_HASH_BINARY:
       case BNDL_HASH_STRING:
       case BNDL_HASH_INT:
       case BNDL_HASH_UNSIGNED:
@@ -750,7 +750,7 @@ bindle_hash_validate(
    };
    switch(type)
    {
-      case BNDL_HASH_BERVAL:     tsize = len;               break;
+      case BNDL_HASH_BINARY:     tsize = len;               break;
       case BNDL_HASH_STRING:     tsize = len;               break;
       case BNDL_HASH_INT:        tsize = sizeof(int);       break;
       case BNDL_HASH_UNSIGNED:   tsize = sizeof(unsigned);  break;

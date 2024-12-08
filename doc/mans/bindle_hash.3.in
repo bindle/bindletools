@@ -50,8 +50,8 @@ Bindle Binaries Tools (libbindle, -lbindle)
 
 .SH DESCRIPTION
 The \fBbindle_hash_initialize\fR() function allocates and initializes a hash
-table which uses \fBbindle_berval_t\fR for the keys and values.  The
-\fIbv_len\fR for keys must be greater than 0 and less then
+table which allows arbitrary data to be used as keys and values.  The
+length of keys must be greater than 0 and less then
 (\fBBNDL_HASH_KEY_LIMIT\fR +1). The refererence to the initialized
 \fBbindle_hash_t\fR reference will be stored to \fIbhp\fR. \fIopts\fR defines
 the behavior of the hash table using bit flags. The following options are
@@ -71,24 +71,23 @@ The following options specify the type of data used for the hash keys. Only
 one of the following options may be specified.
 .RS 6
 .TP 15                         
-.B BNDL_HKEY_BERVAL
+.B BNDL_HKEY_BINARY
 specifies that the hash keys are binary data and must be accessed using
-methods supporting \fBbindle_berval_t\fR keys.  This is the default
+methods supporting explicity key length and values.  This is the default
 option.
 .TP 15
 .B BNDL_HKEY_STRING  
 specifies that the hash keys are ASCII compatible strings and must be NULL
-terminated. Attempting to specify a hash key with a \fBbindle_berval_t|fR
-value which is not NULL terminated will result in an error.  If
-\fBBNDL_HASH_CASE\fR is also specified, they has keys will be case
-insensitive.
+terminated. Attempting to specify a hash key with a binary value which is not
+\fBNULL\fR terminated will result in an error.  If \fBBNDL_HASH_CASE\fR is
+also specified, they has keys will be case insensitive.
 .RE
 .PP
 The following options specify the type of data used for the hash values. Only
 one of the following options may be specified.
 .RS 6
 .TP 15                         
-.B BNDL_HVAL_BERVAL
+.B BNDL_HVAL_BINARY
 specifies that the hash keys are binary data.  This is the default option.
 .TP 15
 .B BNDL_HVAL_STRING  

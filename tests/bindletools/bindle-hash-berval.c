@@ -268,7 +268,7 @@ int main( int argc, char * argv[] )
 
    // initialize test data
    bindle_tests_verbose(opts, "initializing test data ...");
-   if (bindle_hash_initialize(&bh, (BNDL_HASH_REPLACE|BNDL_HKEY_BERVAL|BNDL_HVAL_STRING)) == -1)
+   if (bindle_hash_initialize(&bh, (BNDL_HASH_REPLACE|BNDL_HKEY_BINARY|BNDL_HVAL_STRING)) == -1)
    {
       bindle_tests_error(opts, NULL, "bindle_hash_initialize(): %s", strerror(errno));
       return(1);
