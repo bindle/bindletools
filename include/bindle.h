@@ -507,6 +507,12 @@ bindle_hash_func_cmp(
 
 
 _BINDLE_F int
+bindle_hash_func_ptr_free(
+         bindle_hash_t *               bh,
+         void (*ptr_free)(void *) );
+
+
+_BINDLE_F int
 bindle_hash_get(
          bindle_hash_t *               bh,
          const void *                  key,

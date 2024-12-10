@@ -61,8 +61,10 @@ struct _bindle_hash
    int                     h_opts;
    int                     h_intpad;
    size_t                  h_len;
+   size_t                  h_func_ptr_free;
    bindle_element_t **     h_elements;
    int (*cmp)(const void *, const void *);
+   void (*ptr_free)(void *);
 };
 
 #endif /* end of header */

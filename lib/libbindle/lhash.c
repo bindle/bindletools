@@ -341,6 +341,27 @@ bindle_hash_func_cmp(
 
 
 int
+bindle_hash_func_ptr_free(
+         bindle_hash_t *               bh,
+         void (*ptr_free)(void *) )
+{
+   assert(bh       != NULL);
+   assert(ptr_free != NULL);
+
+   if (bh->h_val_type != BNDL_HASH_PTR)
+   {
+      errno = ENOTSUP;
+      return(-1);
+   };
+
+   bh->ptr_free         = ptr_free;
+   bh->h_func_ptr_free  = 1;
+
+   return(0);
+}
+
+
+int
 bindle_hash_gen_key(
          bindle_hash_key_t *           k,
          const void *                  key,
