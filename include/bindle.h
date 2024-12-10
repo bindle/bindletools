@@ -481,6 +481,11 @@ bindle_hash_cmp_len(
          const void *                  ele );
 
 
+_BINDLE_F const void *
+bindle_hash_cmp_val(
+         const void *                  ele );
+
+
 _BINDLE_F int
 bindle_hash_del(
          bindle_hash_t *               bh,

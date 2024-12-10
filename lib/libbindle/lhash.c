@@ -262,6 +262,17 @@ bindle_hash_cmp_len(
 }
 
 
+const void *
+bindle_hash_cmp_val(
+         const void *                  ele )
+{
+   BindleDebugTrace();
+   assert( ele != NULL );
+   assert( *((bindle_element_t * const *)ele) != NULL);
+   return((*((const bindle_element_t * const *)ele))->e_key->bv_val);
+}
+
+
 int
 bindle_hash_del(
          bindle_hash_t *               bh,
