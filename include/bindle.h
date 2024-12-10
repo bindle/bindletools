@@ -167,6 +167,7 @@
 #define BNDL_HASH_INT            0x0002
 #define BNDL_HASH_UNSIGNED       0x0003
 #define BNDL_HASH_DOUBLE         0x0004
+#define BNDL_HASH_PTR            0x0005
 #define BNDL_HKEY_TYPE           0x000f
 #define BNDL_HKEY_BINARY         (BNDL_HASH_BINARY   << 0)
 #define BNDL_HKEY_STRING         (BNDL_HASH_STRING   << 0)
@@ -176,6 +177,7 @@
 #define BNDL_HVAL_INT            (BNDL_HASH_INT      << 4)
 #define BNDL_HVAL_UNSIGNED       (BNDL_HASH_UNSIGNED << 4)
 #define BNDL_HVAL_DOUBLE         (BNDL_HASH_DOUBLE   << 4)
+#define BNDL_HVAL_PTR            (BNDL_HASH_PTR      << 4)
 #define BNDL_HASH_CASE           0x0100
 #define BNDL_HASH_REPLACE        0x0200
 

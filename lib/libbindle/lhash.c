@@ -477,6 +477,7 @@ bindle_hash_initialize(
       case BNDL_HASH_INT:
       case BNDL_HASH_UNSIGNED:
       case BNDL_HASH_DOUBLE:
+      case BNDL_HASH_PTR:
       break;
 
       default:
@@ -790,6 +791,7 @@ bindle_hash_validate(
       case BNDL_HASH_INT:        tsize = sizeof(int);       break;
       case BNDL_HASH_UNSIGNED:   tsize = sizeof(unsigned);  break;
       case BNDL_HASH_DOUBLE:     tsize = sizeof(double);    break;
+      case BNDL_HASH_PTR:        tsize = sizeof(void *);    break;
 
       default:
       errno = EINVAL;
