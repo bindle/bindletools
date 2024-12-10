@@ -76,6 +76,7 @@ bindle_hash_cmp_len
 bindle_hash_cmp_val
 bindle_hash_del
 bindle_hash_free
+bindle_hash_func_cmp
 bindle_hash_get
 bindle_hash_get_r
 bindle_hash_initialize

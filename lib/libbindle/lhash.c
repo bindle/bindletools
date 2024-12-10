@@ -328,6 +328,19 @@ bindle_hash_free(
 
 
 int
+bindle_hash_func_cmp(
+         bindle_hash_t *               bh,
+         int (*cmp)(const void *, const void *) )
+{
+   assert(bh != NULL);
+
+   bh->cmp = cmp;
+
+   return(0);
+}
+
+
+int
 bindle_hash_gen_key(
          bindle_hash_key_t *           k,
          const void *                  key,

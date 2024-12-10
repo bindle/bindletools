@@ -499,6 +499,12 @@ bindle_hash_free(
 
 
 _BINDLE_F int
+bindle_hash_func_cmp(
+         bindle_hash_t *               bh,
+         int (*cmp)(const void *, const void *) );
+
+
+_BINDLE_F int
 bindle_hash_get(
          bindle_hash_t *               bh,
          const void *                  key,
