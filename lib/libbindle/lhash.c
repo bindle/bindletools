@@ -111,7 +111,7 @@ bindle_element_init(
 // MARK: hash table prototypes
 
 static int
-bindle_hash_key(
+bindle_hash_gen_key(
          bindle_hash_key_t *           k,
          const void *                  key,
          size_t                        key_len );
@@ -289,7 +289,7 @@ bindle_hash_del(
    assert( key_len != 0 );
 
    // find index of key
-   bindle_hash_key(&k, key, key_len);
+   bindle_hash_gen_key(&k, key, key_len);
    idx = bindle_bindex(&k.bf_elep, bh->h_elements, bh->h_len, sizeof(bindle_element_t *), BNDL_BREPLACE, NULL, bh->cmp);
    if (idx == -1)
       return(0);
@@ -328,6 +328,28 @@ bindle_hash_free(
 
 
 int
+bindle_hash_gen_key(
+         bindle_hash_key_t *           k,
+         const void *                  key,
+         size_t                        key_len )
+{
+   BindleDebugTrace();
+   assert( k       != NULL );
+   assert( key     != NULL );
+   assert( (key_len > 0) &&  (key_len <= BNDL_HASH_KEY_LIMIT));
+
+   memcpy(k->bf_key_bv_val, key, key_len);
+   k->bf_key_bv.bv_val = k->bf_key_bv_val;
+   k->bf_key_bv.bv_len = key_len;
+   memset(&k->bf_ele, 0, sizeof(bindle_element_t));
+   k->bf_ele.e_key = &k->bf_key_bv;
+   k->bf_elep      = &k->bf_ele;
+
+   return(0);
+}
+
+
+int
 bindle_hash_get(
          bindle_hash_t *               bh,
          const void *                  key,
@@ -347,7 +369,7 @@ bindle_hash_get(
       return(-1);
 
    // find vale value if exists
-   bindle_hash_key(&k, key, key_len);
+   bindle_hash_gen_key(&k, key, key_len);
    if ((elep = bindle_bsearch(&k.bf_elep, bh->h_elements, bh->h_len, sizeof(bindle_element_t *), BNDL_BREPLACE, bh->cmp)) == NULL)
    {
       errno = ENODATA;
@@ -464,28 +486,6 @@ bindle_hash_initialize(
 
 
 int
-bindle_hash_key(
-         bindle_hash_key_t *           k,
-         const void *                  key,
-         size_t                        key_len )
-{
-   BindleDebugTrace();
-   assert( k       != NULL );
-   assert( key     != NULL );
-   assert( (key_len > 0) &&  (key_len <= BNDL_HASH_KEY_LIMIT));
-
-   memcpy(k->bf_key_bv_val, key, key_len);
-   k->bf_key_bv.bv_val = k->bf_key_bv_val;
-   k->bf_key_bv.bv_len = key_len;
-   memset(&k->bf_ele, 0, sizeof(bindle_element_t));
-   k->bf_ele.e_key = &k->bf_key_bv;
-   k->bf_elep      = &k->bf_ele;
-
-   return(0);
-}
-
-
-int
 bindle_hash_keys(
          bindle_hash_t *               bh,
          bindle_berval_t ***           bvap )
@@ -590,7 +590,7 @@ bindle_hash_set(
    };
 
    // check for existing key and update value if exists
-   bindle_hash_key(&k, key, key_len);
+   bindle_hash_gen_key(&k, key, key_len);
    if ((elep = bindle_bsearch(&k.bf_elep, bh->h_elements, bh->h_len, sizeof(bindle_element_t *), BNDL_BREPLACE, bh->cmp)) != NULL)
    {
       if (!(bh->h_opts & BNDL_HASH_REPLACE))
