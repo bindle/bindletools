@@ -476,6 +476,11 @@ bindle_readline(
 //----------------------//
 // MARK: hash table prototypes
 
+_BINDLE_F size_t
+bindle_hash_cmp_len(
+         const void *                  ele );
+
+
 _BINDLE_F int
 bindle_hash_del(
          bindle_hash_t *               bh,
