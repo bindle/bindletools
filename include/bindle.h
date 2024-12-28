@@ -569,6 +569,14 @@ bindle_hash_set(
 
 
 _BINDLE_F int
+bindle_hash_set_str(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len,
+         const char *                  val );
+
+
+_BINDLE_F int
 bindle_hash_sget(
          bindle_hash_t *               bh,
          const char *                  key,

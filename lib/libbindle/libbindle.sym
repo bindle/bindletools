@@ -86,6 +86,7 @@ bindle_hash_len
 bindle_hash_opts
 bindle_hash_sdel
 bindle_hash_set
+bindle_hash_set_str
 bindle_hash_sget
 bindle_hash_sget_r
 bindle_hash_skeys

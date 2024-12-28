@@ -657,6 +657,26 @@ bindle_hash_set(
 
 
 int
+bindle_hash_set_str(
+         bindle_hash_t *               bh,
+         const void *                  key,
+         size_t                        key_len,
+         const char *                  val )
+{
+   size_t   val_len;
+
+   BindleDebugTrace();
+   assert( bh      != NULL );
+   assert( key     != NULL );
+   assert( key_len != 0 );
+
+   val_len = ((val)) ? strlen(val) : 0;
+
+   return(bindle_hash_set(bh, key, key_len, val, val_len));
+}
+
+
+int
 bindle_hash_sget(
          bindle_hash_t *               bh,
          const char *                  key,
