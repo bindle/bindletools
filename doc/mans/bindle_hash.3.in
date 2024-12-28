@@ -109,6 +109,12 @@ specify a hash value with a \fBbindle_berval_t\fR value which is not exactly
 specifies that the hash values are of type \fBdouble\fR. Attempting to
 specify a hash value with a \fBbindle_berval_t\fR value which is not exactly
 \fBsizeof\fR(\fIdouble\fR) will result in an error.
+.TP 15
+.B BNDL_HVAL_PTR
+specifies that the hash values are a complex data structure referenced as a
+pointer.  The referenced memory address will be stored in the hash. The
+function to free the complex data structure can be specified with
+\fBbindle_hash_func_ptr_free\fR().
 .RE
 .PP
 The \fBbindle_hash_free\fR() function frees the hash elements and hash
@@ -138,6 +144,7 @@ initialize the hash table referenced by \fIbh\fR.
 .BR bindle_hash_get (3),
 .BR bindle_hash_keys (3),
 .BR bindle_hash_set (3),
+.BR bindle_hash_funcs (3),
 .BR bindle_array (3),
 .BR bindle_berval (3)
 

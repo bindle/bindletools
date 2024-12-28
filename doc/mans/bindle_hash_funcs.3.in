@@ -30,7 +30,7 @@
 .\"
 .TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
 .SH NAME
-bindle_hash_del, bindle_hash_sdel - Bindle Binary Tools hash table deletion routines
+bindle_hash_func_cmp, bindle_hash_func_ptr_free - Bindle Binary Tools hash table management routines
 
 .SH LIBRARY
 Bindle Binaries Tools (libbindle, -lbindle)
@@ -39,33 +39,36 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .nf
 \fB#include\fR \fB<bindle.h>\fR
 .sp
-.BI "int bindle_hash_del( bindle_hash_t * " bh ", const void * " key ", size_t " key_len " );"
+.BI "int bindle_hash_func_cmp( bindle_hash_t * " bh ,
+.BI "                          int (*" cmp ")(const void *, const void *) );"
 .sp
-.BI "int bindle_hash_sdel( bindle_hash_t * " bh ", const char * " key " );"
+.BI "int bindle_hash_func_ptr_free( bindle_hash_t * " bh ,
+.BI "                               void (*" ptr_free ")(void *) );"
 .fi
 
 .SH DESCRIPTION
-The \fBbindle_hash_del\fR() function modifies the hash table referenced by
-\fIbh\fR by deleting the hash element specified by \fIkey\fR of \fIkey_len\fR
-bytes in length.
+The \fBbindle_hash_func_cmp\fR() function sets the function used to compare
+hash element keys.
 .sp
-The \fBbindle_hash_sdel\fR() function modifies the hash table referenced by
-\fIbh\fR by deleting the hash element specified by NULL terminated string
-referenced by \fIkey\fR.  If the hash table was not initialized with the
-\fBBNDL_HKEY_STRING\fR option, and hash elements were added with binary keys
-without a NULL termination, \fBbindle_hash_sdel\fR() will be unable to match
-against the key.
+The \fBbindle_hash_func_ptr_free\fR() function sets the function used to
+free the complex data value if the hash was initialized with
+\fBBNDL_HVAL_PTR\fR.
 
 .SH RETURN VALUES
-Both \fBbindle_hash_del\fR and \fBbindle_hash_sdel\fR always return 0.
+The \fBbindle_hash_func_cmp\fR() function always returns 0.
+.sp
+The \fBbindle_hash_func_ptr_free\fR() function returns 0 if successful. If an
+error was encountered, \fIerrno\fR will be set and the function will return
+-1.
 
 .SH SEE ALSO
 .BR bindletools (3),
-.BR bindle_hash_initialize (3),
+.BR bindle_hash_del (3),
 .BR bindle_hash_get (3),
 .BR bindle_hash_keys (3),
 .BR bindle_hash_set (3),
-.BR bindle_hash_funcs (3)
+.BR bindle_array (3),
+.BR bindle_berval (3)
 
 .SH AUTHOR
 David M. Syzdek <david@syzdek.net>
