@@ -39,7 +39,8 @@ Bindle Binaries Tools (libbindle, -lbindle)
 .nf
 \fB#include\fR \fB<bindle.h>\fR
 .sp
-.BI "int bindle_hash_del( bindle_hash_t * " bh ", const void * " key ", size_t " key_len " );"
+.BI "int bindle_hash_del( bindle_hash_t * " bh ", const void * " key ,
+.BI "                     size_t " key_len " );"
 .sp
 .BI "int bindle_hash_sdel( bindle_hash_t * " bh ", const char * " key " );"
 .fi
