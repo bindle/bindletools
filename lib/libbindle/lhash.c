@@ -670,7 +670,7 @@ bindle_hash_set_str(
    assert( key     != NULL );
    assert( key_len != 0 );
 
-   val_len = ((val)) ? strlen(val) : 0;
+   val_len = ((val)) ? (strlen(val)+1) : 0;
 
    return(bindle_hash_set(bh, key, key_len, val, val_len));
 }
