@@ -607,6 +607,12 @@ bindle_hash_sset(
          size_t                        val_len );
 
 
+_BINDLE_F int
+bindle_hash_sset_str(
+         bindle_hash_t *               bh,
+         const char *                  key,
+         const char *                  val );
+
 //----------------//
 // map prototypes //
 //----------------//

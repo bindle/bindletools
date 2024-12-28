@@ -91,6 +91,7 @@ bindle_hash_sget
 bindle_hash_sget_r
 bindle_hash_skeys
 bindle_hash_sset
+bindle_hash_sset_str
 #
 # map functions
 bindle_map_lookup
