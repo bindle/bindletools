@@ -61,6 +61,115 @@ The \fBbindle_hash_func_ptr_free\fR() function returns 0 if successful. If an
 error was encountered, \fIerrno\fR will be set and the function will return
 -1.
 
+.SH EXAMPLE
+The example below adds elements to a hash.  The hash is sorted using
+the function provided to \fBhash_ele_cmp\fR() and the element values are freed
+using function provided to \fBhash_val_free\fR().
+.nf
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <bindle.h>
+
+struct
+{  const char *   name;
+   const char *   party;
+} test_data[] =
+{  {  "George Washington",       "Unaffiliated" },
+   {  "John Adams",              "Federalist" },
+   {  "Thomas Jefferson",        "Democratic-Republican" },
+   {  "James Madison",           "Democratic-Republican" },
+   {  "James Monroe",            "Democratic-Republican" },
+   {  "John Quincy Adams",       "Democratic-Republican / National Republican" },
+   {  "Andrew Jackson",          "Democratic" },
+   {  "Martin Van Buren",        "Democratic" },
+   {  "William Henry Harrison",  "Whig" },
+   {  "John Tyler",              "Whig" },
+   {  "James K. Polk",           "Democratic" },
+   {  "Zachary Taylor",          "Whig" },
+   {  "Millard Fillmore",        "Whig" },
+   {  "Franklin Pierce",         "Democratic" },
+   {  "James Buchanan",          "Democratic" },
+   {  "Abraham Lincoln",         "Republican / National Union" },
+   {  NULL,                      NULL }
+};
+
+static int
+hash_ele_cmp( const void * v1, const void * v2 )
+{
+   return(strcasecmp(bindle_hash_cmp_val(v1), bindle_hash_cmp_val(v2)));
+}
+
+void
+hash_val_free( char * val )
+{
+   free(val);
+   return;
+}
+
+int
+main( void )
+{
+   int                        opts;
+   size_t                     pos;
+   bindle_hash_t *            bh;
+   const char *               name;
+   const char *               party;
+   const char *               val;
+   char **                    keys;
+
+   opts = BNDL_HKEY_STRING | BNDL_HVAL_STRING;
+   if (bindle_hash_initialize(&bh, opts) == -1)
+   {  perror("bindle_hash_initialize()");
+      return(1);
+   };
+
+   bindle_hash_func_cmp(bh, hash_ele_cmp);
+   bindle_hash_func_ptr_free(bh, (void(*)(void *))hash_val_free);
+
+   // populate hash
+   for(pos = 0; ((test_data[pos].name)); pos++)
+   {  name  = test_data[pos].name;
+      party = test_data[pos].party;
+      if (bindle_hash_sset_str(bh, name, party) == -1)
+      {  perror("bindle_hash_sset_str()");
+         bindle_hash_free(bh);
+         return(1);
+      };
+   };
+
+   // retrieve list of keys
+   if (bindle_hash_skeys(bh, &keys) == -1)
+   {  perror("bindle_hash_skeys()");
+      bindle_hash_free(bh);
+      return(1);
+   };
+
+   // retrieve value for each key
+   for(pos = 0; ((keys[pos])); pos++)
+   {  if (bindle_hash_sget(bh, keys[pos], (const void **)&val, NULL) == -1)
+      {  perror("bindle_hash_sget()");
+         bindle_hash_free(bh);
+         for(pos = 0; ((keys[pos])); pos++)
+            free(keys[pos]);
+         free(keys);
+         return(1);
+      };
+      printf("%-25s (%s)\n", keys[pos], val);
+   };
+
+   // frees memory
+   for(pos = 0; ((keys[pos])); pos++)
+      free(keys[pos]);
+   free(keys);
+   bindle_hash_free(bh);
+
+   return(0);
+}
+.fi
+
 .SH SEE ALSO
 .BR bindletools (3),
 .BR bindle_hash_del (3),
