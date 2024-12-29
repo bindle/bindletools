@@ -1,0 +1,85 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2024 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_hash_keys, bindle_hash_skeys - Bindle Binary Tools hash table key routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_hash_keys( bindle_hash_t * " bh ", bindle_berval_t *** " bvap " );"
+.sp
+.BI "int bindle_hash_skeys( bindle_hash_t * " bh ", char *** " keysp " );"
+.fi
+
+.SH DESCRIPTION
+The \fBbindle_hash_keys\fR() retrieves the keys of the hash referenced by
+\fIbh\fR.  The function allocates a \fBNULL\fR terminated array of key values
+stored as \fBbindle_berval_t\fR members.  The result will be stored to
+\fI*bvap\fR.  The array and values stored to \fI*bvap\fR must be freed either
+manually or using \fBbindle_bvarray_free\fR().
+.sp
+The \fBbindle_hash_skeys\fR() retrieves the keys of the hash referenced by
+\fIbh\fR.  The function allocates a \fBNULL\fR terminated array of key values.
+The result will be stored to \fI*keysp\fR.  The array and values stored to
+\fI*keysp\fR must be freed either manually or using \fBbindle_strsfree\fR().
+
+.SH RETURN VALUES
+The \fBbindle_hash_keys\fR() and \fBbindle_hash_skeys\fR() functions return 0
+if successful. If an error was encountered, \fIerrno\fR will be set and the
+functions will return -1.
+.sp
+The result of \fBbindle_hash_keys\fR() must be
+freed manually or using \fBbindle_bvarray_free\fR().  The result of
+\fBbindle_hash_skeys\fR() must be freed manually or using
+\fBbindle_strsfree\fR().
+
+.SH SEE ALSO
+.BR bindletools (3),
+.BR bindle_hash_initialize (3),
+.BR bindle_hash_del (3),
+.BR bindle_hash_get (3),
+.BR bindle_hash_set (3),
+.BR bindle_berval (3),
+.BR bindle_hash_funcs (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page

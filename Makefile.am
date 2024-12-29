@@ -98,6 +98,7 @@ man_MANS				= doc/mans/bindletools.1 \
 					  doc/mans/bindle_hash_del.3 \
 					  doc/mans/bindle_hash_funcs.3 \
 					  doc/mans/bindle_hash_get.3 \
+					  doc/mans/bindle_hash_keys.3 \
 					  doc/mans/bindle_peek.3 \
 					  doc/mans/bindle_push.3 \
 					  doc/mans/bindle_refcount.3 \
@@ -173,6 +174,7 @@ EXTRA_DIST				= $(doc_DATA) \
 					  doc/mans/bindle_hash_del.3.in \
 					  doc/mans/bindle_hash_funcs.3.in \
 					  doc/mans/bindle_hash_get.3.in \
+					  doc/mans/bindle_hash_keys.3.in \
 					  doc/mans/bindle_peek.3.in \
 					  doc/mans/bindle_push.3.in \
 					  doc/mans/bindle_readline.3.in \
@@ -413,6 +415,9 @@ doc/mans/bindle_hash_funcs.3: Makefile $(srcdir)/doc/mans/bindle_hash_funcs.3.in
 doc/mans/bindle_hash_get.3: Makefile $(srcdir)/doc/mans/bindle_hash_get.3.in
 	@$(do_subst_dt)
 
+doc/mans/bindle_hash_keys.3: Makefile $(srcdir)/doc/mans/bindle_hash_keys.3.in
+	@$(do_subst_dt)
+
 doc/mans/bindle_peek.3: Makefile $(srcdir)/doc/mans/bindle_peek.3.in
 	@$(do_subst_dt)
 
@@ -547,6 +552,10 @@ install-data-local: install-man
 	   ln -fs bindle_hash_del.3 bindle_hash_get_r.3 && \
 	   ln -fs bindle_hash_del.3 bindle_hash_sget.3 && \
 	   ln -fs bindle_hash_del.3 bindle_hash_sget_r.3; \
+	fi;
+	if test -f $(DESTDIR)/$(mandir)/man3/bindle_hash_keys.3;then\
+	   cd $(DESTDIR)/$(mandir)/man3 && \
+	   ln -fs bindle_hash_keys.3 bindle_hash_skeys.3; \
 	fi;
 	if test -f $(DESTDIR)/$(mandir)/man3/bindle_push.3;then\
 	   cd $(DESTDIR)/$(mandir)/man3 && \
