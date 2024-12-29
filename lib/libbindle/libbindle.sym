@@ -130,6 +130,8 @@ bindle_strtoargs
 bindle_strtobool
 bindle_strtolower
 bindle_strtolower_r
+bindle_strtoupper
+bindle_strtoupper_r
 bindle_strtrim
 #
 # string list functions

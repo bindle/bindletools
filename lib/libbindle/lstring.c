@@ -730,6 +730,33 @@ bindle_strtolower_r(
 
 
 char *
+bindle_strtoupper(
+         const char *                  str )
+{
+   char        buff[BNDL_LINE_MAX_LEN];
+   assert(str != NULL);
+   return(bindle_strtoupper_r(str, buff, sizeof(buff)));
+}
+
+
+char *
+bindle_strtoupper_r(
+         const char *                  str,
+         char * restrict               buf,
+         size_t                        buflen )
+{
+   size_t   pos;
+   assert(str != NULL);
+   assert(buf != NULL);
+   buflen--;
+   for(pos = 0; ( ((str[pos])) && (pos < buflen) ); pos++)
+      buf[pos] = toupper((unsigned char)str[pos]);
+   buf[pos] = '\0';
+   return(buf);
+}
+
+
+char *
 bindle_strtrim(
          char *                        str )
 {

@@ -813,6 +813,18 @@ bindle_strtolower_r(
 
 
 _BINDLE_F char *
+bindle_strtoupper(
+         const char *                  str );
+
+
+_BINDLE_F char *
+bindle_strtoupper_r(
+         const char *                  str,
+         char * restrict               buf,
+         size_t                        buflen );
+
+
+_BINDLE_F char *
 bindle_strtrim(
          char *                        str );
 
