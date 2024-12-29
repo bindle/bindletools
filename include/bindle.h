@@ -801,6 +801,18 @@ bindle_strtobool(
 
 
 _BINDLE_F char *
+bindle_strtolower(
+         const char *                  str );
+
+
+_BINDLE_F char *
+bindle_strtolower_r(
+         const char *                  str,
+         char * restrict               buf,
+         size_t                        buflen );
+
+
+_BINDLE_F char *
 bindle_strtrim(
          char *                        str );
 

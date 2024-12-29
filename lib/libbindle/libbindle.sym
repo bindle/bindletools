@@ -128,6 +128,8 @@ bindle_strlcat
 bindle_strndup
 bindle_strtoargs
 bindle_strtobool
+bindle_strtolower
+bindle_strtolower_r
 bindle_strtrim
 #
 # string list functions
