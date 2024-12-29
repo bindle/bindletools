@@ -125,6 +125,7 @@ sbin_SCRIPTS				=
 EXTRA_PROGRAMS				= examples/example-bsearch \
 					  examples/example-decode \
 					  examples/example-encode \
+					  examples/example-hash-berval \
 					  examples/example-hash-ptr \
 					  examples/example-queue \
 					  examples/example-refcount \
@@ -239,6 +240,7 @@ if ENABLE_EXAMPLES
    noinst_PROGRAMS			+= examples/example-bsearch
    noinst_PROGRAMS			+= examples/example-decode
    noinst_PROGRAMS			+= examples/example-encode
+   noinst_PROGRAMS			+= examples/example-hash-berval
    noinst_PROGRAMS			+= examples/example-hash-ptr
    noinst_PROGRAMS			+= examples/example-queue
    noinst_PROGRAMS			+= examples/example-refcount
@@ -247,6 +249,7 @@ if ENABLE_EXAMPLES
    examples_DATA			+= examples/example-bsearch.c
    examples_DATA			+= examples/example-decode.c
    examples_DATA			+= examples/example-encode.c
+   examples_DATA			+= examples/example-hash-berval.c
    examples_DATA			+= examples/example-hash-ptr.c
    examples_DATA			+= examples/example-queue.c
    examples_DATA			+= examples/example-refcount.c
@@ -270,6 +273,12 @@ examples_example_decode_SOURCES		= examples/example-decode.c
 examples_example_encode_DEPENDENCIES	= lib/libbindle.la
 examples_example_encode_LDADD		= lib/libbindle.la
 examples_example_encode_SOURCES		= examples/example-encode.c
+
+
+# macros for examples/example-hash-berval
+examples_example_hash_berval_DEPENDENCIES = lib/libbindle.la
+examples_example_hash_berval_LDADD	= lib/libbindle.la
+examples_example_hash_berval_SOURCES	= examples/example-hash-berval.c
 
 
 # macros for examples/example-hash-ptr
