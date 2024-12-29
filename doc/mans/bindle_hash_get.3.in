@@ -1,0 +1,101 @@
+.\"
+.\" Bindle Binaries Tools
+.\" Copyright (C) 2024 David M. Syzdek <david@syzdek.net>.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions are
+.\" met:
+.\"
+.\"    * Redistributions of source code must retain the above copyright
+.\"      notice, this list of conditions and the following disclaimer.
+.\"    * Redistributions in binary form must reproduce the above copyright
+.\"      notice, this list of conditions and the following disclaimer in the
+.\"      documentation and/or other materials provided with the distribution.
+.\"    * Neither the name of David M. Syzdek nor the
+.\"      names of its contributors may be used to endorse or promote products
+.\"      derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+.\" IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+.\" THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVID M. SYZDEK BE LIABLE FOR
+.\" ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+.\" CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH "BINDLE_URLDESC" "3" "@RELEASE_MONTH@" "@PACKAGE_NAME@" "Library Functions Manual"
+.SH NAME
+bindle_hash_get, bindle_hash_get_r, bindle_hash_sget, bindle_hash_sget_r - Bindle Binary Tools hash table query routines
+
+.SH LIBRARY
+Bindle Binaries Tools (libbindle, -lbindle)
+
+.SH SYNOPSIS
+.nf
+\fB#include\fR \fB<bindle.h>\fR
+.sp
+.BI "int bindle_hash_get( bindle_hash_t * " bh ", const void * " key ,
+.BI "                     size_t " key_len ", const void ** " valp ,
+.BI "                     size_t * " val_lenp " );"
+.sp
+.BI "int bindle_hash_get_r( bindle_hash_t * " bh ", const void * " key ,
+.BI "                       size_t " key_len ", void * " dst ", size_t " n ,
+.BI "                       size_t * " val_lenp " );"
+.sp
+.BI "int bindle_hash_sget( bindle_hash_t * " bh ", const char * " key ,
+.BI "                      const void ** " valp ", size_t * " val_lenp " );"
+.sp
+.BI "int bindle_hash_sget_r( bindle_hash_t * " bh ", const char * " key ,
+.BI "                        void * " dst ", size_t " n ", size_t * " val_lenp " );"
+.fi
+
+.SH DESCRIPTION
+The \fBbindle_hash_get\fR() queries the hash referenced by \fIbh\fR for the
+binary key referenced by \fIkey\fR with a length of \fIkey_len\fR bytes.  If
+\fIvalp\fR is not \fBNULL\fR, the memory address of the value will be set in
+\fI*valp\fR. If \fIval_lenp\fR is not \fBNULL\fR, the length of the value will
+be set to \fI*val_lenp\fR.
+.sp
+The \fBbindle_hash_get_r\fR() queries the hash referenced by \fIbh\fR for the
+binary key referenced by \fIkey\fR with a length of \fIkey_len\fR bytes.  Up
+to \fIn\fR bytes of the value will be copied to the memory referenced by
+\fIdst\fR. If \fIval_lenp\fR is not \fBNULL\fR, the number of bytes copied
+will be set to \fI*val_lenp\fR.
+.sp
+The \fBbindle_hash_sget\fR() queries the hash referenced by \fIbh\fR for the
+string key referenced by \fIkey\fR.  If \fIvalp\fR is not \fBNULL\fR, the
+memory address of the value will be set in \fI*valp\fR. If \fIval_lenp\fR is
+not \fBNULL\fR, the length of the value will be set to \fI*val_lenp\fR.
+.sp
+The \fBbindle_hash_sget_r\fR() queries the hash referenced by \fIbh\fR for the
+string key referenced by \fIkey\fR.  Up to \fIn\fR bytes of the value will be
+copied to the memory referenced by \fIdst\fR. If \fIval_lenp\fR is not
+\fBNULL\fR, the number of bytes copied will be set to \fI*val_lenp\fR.
+
+.SH RETURN VALUES
+The \fBbindle_hash_get\fR(), \fBbindle_hash_get_r\fR(),
+\fBbindle_hash_sget\fR(), and \fBbindle_hash_sget\fR() functions return 0 if
+successful. If an error was encountered, \fIerrno\fR will be set
+and the functions will return -1.
+
+.SH SEE ALSO
+.BR bindletools (3),
+.BR bindle_hash_initialize (3),
+.BR bindle_hash_del (3),
+.BR bindle_hash_keys (3),
+.BR bindle_hash_set (3),
+.BR bindle_hash_funcs (3)
+
+.SH AUTHOR
+David M. Syzdek <david@syzdek.net>
+
+.SH ACKNOWLEDGEMENTS
+\fB@PACKAGE_NAME@\fR is developed and maintained by David M. Syzdek
+<david@syzdek.net>.
+
+.\" end of man page
