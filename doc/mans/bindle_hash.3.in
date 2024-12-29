@@ -138,6 +138,112 @@ within the hash table referenced by \fIbh\fR.
 The \fBbindle_hash_opts\fR() function returns the \fIopts\fR used to
 initialize the hash table referenced by \fIbh\fR.
 
+.SH EXAMPLE
+The example below adds elements to a hash, queries a hash, and deletes
+elements from a hash.
+.nf
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <bindle.h>
+
+struct
+{  const char *   name;
+   const char *   party;
+} test_data[] =
+{  {  "George Washington",       "Unaffiliated" },
+   {  "John Adams",              "Federalist" },
+   {  "Thomas Jefferson",        "Democratic-Republican" },
+   {  "James Madison",           "Democratic-Republican" },
+   {  "James Monroe",            "Democratic-Republican" },
+   {  "John Quincy Adams",       "Democratic-Republican / National Republican" },
+   {  "Andrew Jackson",          "Democratic" },
+   {  "Martin Van Buren",        "Democratic" },
+   {  "William Henry Harrison",  "Whig" },
+   {  "John Tyler",              "Whig" },
+   {  "James K. Polk",           "Democratic" },
+   {  "Zachary Taylor",          "Whig" },
+   {  "Millard Fillmore",        "Whig" },
+   {  "Franklin Pierce",         "Democratic" },
+   {  "James Buchanan",          "Democratic" },
+   {  "Abraham Lincoln",         "Republican / National Union" },
+   {  NULL,                      NULL }
+};
+
+int
+main( void )
+{
+   int                        opts;
+   size_t                     pos;
+   size_t                     namelen;
+   size_t                     partylen;
+   bindle_hash_t *            bh;
+   const char *               name;
+   const char *               party;
+   const void *               val;
+   size_t                     vallen;
+   bindle_berval_t *          key;
+   bindle_berval_t **         keys;
+
+   opts = BNDL_HKEY_STRING | BNDL_HVAL_STRING;
+   if (bindle_hash_initialize(&bh, opts) == -1)
+   {  perror("bindle_hash_initialize()");
+      return(1);
+   };
+
+   // populate hash
+   for(pos = 0; ((test_data[pos].name)); pos++)
+   {  name     = test_data[pos].name;
+      namelen  = strlen(name)+1;
+      party    = test_data[pos].party;
+      partylen = strlen(party)+1;
+      if (bindle_hash_set(bh, name, namelen, party, partylen))
+      {  perror("bindle_hash_set()");
+         bindle_hash_free(bh);
+         return(1);
+      };
+   };
+
+   // retrieve list of keys
+   if (bindle_hash_keys(bh, &keys) == -1)
+   {  perror("bindle_hash_keys()");
+      bindle_hash_free(bh);
+      return(1);
+   };
+
+   // retrieve value for each key
+   for(pos = 0; ((keys[pos])); pos++)
+   {  key = keys[pos];
+      if (bindle_hash_get(bh, key->bv_val, key->bv_len, &val, &vallen) == -1)
+      {  perror("bindle_hash_get()");
+         bindle_bvarray_free(keys);
+         bindle_hash_free(bh);
+         return(1);
+      };
+      printf("%-25s (%s)\n", (char *)key->bv_val, (const char *)val);
+   };
+
+   // delete elements from hash
+   for(pos = 0; ((keys[pos])); pos++)
+   {  key = keys[pos];
+      if (bindle_hash_del(bh, key->bv_val, key->bv_len) == -1)
+      {  perror("bindle_hash_del()");
+         bindle_bvarray_free(keys);
+         bindle_hash_free(bh);
+         return(1);
+      };
+   };
+
+   // frees memory
+   bindle_bvarray_free(keys);
+   bindle_hash_free(bh);
+
+   return(0);
+}
+.fi
+
 .SH SEE ALSO
 .BR bindletools (3),
 .BR bindle_hash_del (3),
