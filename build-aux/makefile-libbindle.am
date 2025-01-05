@@ -406,6 +406,7 @@ tests_bindle_enc_pctenc_val_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 # macros for tests/bindle-hash-binary
 tests_bindle_hash_binary_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
 tests_bindle_hash_binary_LDADD		= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_binary_CFLAGS		= $(AM_CFLAGS) -I$(top_srcdir)/$(bindletools_srcdir)
 tests_bindle_hash_binary_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \
@@ -415,6 +416,7 @@ tests_bindle_hash_binary_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 # macros for tests/bindle-hash-string
 tests_bindle_hash_string_DEPENDENCIES	= $(BINDLE_TESTS_DEPS)
 tests_bindle_hash_string_LDADD		= $(BINDLE_TESTS_DEPS)
+tests_bindle_hash_string_CFLAGS		= $(AM_CFLAGS) -I$(top_srcdir)/$(bindletools_srcdir)
 tests_bindle_hash_string_SOURCES	= $(bindletools_srcdir)/include/bindle.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.h \
 					  $(bindletools_srcdir)/tests/bindletools/bindle-tests.c \

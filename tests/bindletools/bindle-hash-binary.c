@@ -51,7 +51,7 @@
 #include <errno.h>
 #include <inttypes.h>
 
-#include "../lib/libbindle/lhash.h"
+#include <lib/libbindle/lhash.h>
 
 
 ///////////////////
